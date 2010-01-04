@@ -1,0 +1,18 @@
+﻿{% extends "base.html" %}
+
+{% block title %}Список файлов{% endblock %}
+{% block content %}
+    {% if file_list %}
+        <ul>
+            {% for file in file_list %}
+                <li>
+                    <a href="/media/{{ file.content.name }}">{{ file.content.name }}</a> ({{ file.content.size }})
+                    [<a href="http://fornever.no-ip.org/media/{{ file.content.name }}">ссылка</a>]
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Загруженных файлов нет.</p>
+    {% endif %}
+    <p><a href="upload/">Загрузить файл</a></p>
+{% endblock %}

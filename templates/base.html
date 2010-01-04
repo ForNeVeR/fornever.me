@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="google-site-verification" content="N5ExiiHlnreCnSXqpUpTr0bVUnZUbuWIr28BVQUc3_k" />
+    <meta name='yandex-verification' content='5f9491cc0ddc5cc6' />
+    <link rel="stylesheet" type="text/css" href="/media/style_main.css" />
+    <title>forNEVERmind</title>
+</head>
+<body>
+    <h1>forNEVERmind / {% block title %}{% endblock %}</h1>
+    {% if username %}
+        <p>Вы зашли как {{ username }}.</p>
+    {% endif %}
+    {% block content %}{% endblock %}
+    <div class="menu">
+        <p><a href="/">Главная страница</a></p>
+        <p><a href="/about.html">Контакты</a></p>
+        <p><a href="/programming.html">Программирование</a></p>
+        <p><a href="/robocode/">RoboCode</a></p>
+        <p><a href="/files/">Файлы</a></p>
+        {% if not username %}
+            <p><a href="/login/">Логин</a></p>
+        {% else %}
+            <p><a href="/logout/">Выход</a></p>
+        {% endif %}
+    </div>
+    <div style="text-align: center">
+        <a href="http://validator.w3.org/check?uri=referer">
+        <img src="/media/valid-xhtml10-blue.png"
+            alt="Valid XHTML 1.0 Strict" height="31" width="88" />
+        </a>
+
+        <a href="http://jigsaw.w3.org/css-validator/check/referer">
+        <img style="border:0;width:88px;height:31px" src="/media/vcss-blue.gif"
+            alt="Правильный CSS!" />
+        </a>
+        
+        <a href="http://www.python.org/">
+        <img style="border:0;width:88px;height:31px"
+            src="/media/python-powered-w.svg" alt="Python powered" />
+        </a>
+    </div>
+</body>
+</html>

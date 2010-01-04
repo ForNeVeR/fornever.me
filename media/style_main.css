@@ -1,0 +1,12 @@
+﻿body { background: #000000; color: #009900; font-family: monospace; }
+p:before { content: ">>"; color: #00AA00; margin-right: 1em; font-weight: bold; }
+a { color: #DDDDDD; text-decoration: none; }
+.menu p { margin-bottom: 0; margin-top: 0; }
+ul li:before { content: "->"; margin-right: 1em; font-weight: bold; }
+ul { list-style-type: none; }
+#directory_name { color: #00FF00; }
+
+.code { color: #FFFFFF; }
+
+.login {  }
+.password {  }

@@ -1,0 +1,25 @@
+﻿{% extends "base.html" %}
+
+{% block title %}Programming{% endblock %}
+{% block content %}
+    <h2>Проекты полезные или хорошие</h2>
+    <ul>
+        <li><a href="http://sourceforge.net/projects/cthulhu-bot/">Cthulhu bot</a></li>
+        <li><a href="http://spark.ms/malco">malco</a></li>
+        <li><a href="http://leechcraft.org">leechcraft</a></li>
+    </ul>
+    
+    <h2>Вопросы на засыпку</h1>
+    
+    <ol>
+        <li>Что означает конструкция языка C: <span class="code">int *(* const * name[3])();</span></li>
+        <li>Что означает конструкция <span class="code">int F(void (*)(), double(*)[4]);</span></li>
+        <li>Что такое <span class="code">void * (*(*fp1)(int))[10];</span></li>
+        <li>Кому и зачем, чёрт возьми, может такое понадобиться?!</li>
+    </ol>
+    <p>Ответы можете отправлять прямиком в /dev/null или лично при встрече, желательно в денежном эквиваленте.</p>
+    <h2>Эпический код</h2>
+    <p>Code of the day (взято из последней версии cthulhu-bot):</p>
+    <p class="code">const wregex quoted_arg(L"^\"(.*?[^\\\\])\".*");</p>
+    <p>Да, регулярные выражения в C++-коде выглядят очень страшно.</p>
+{% endblock %}
