@@ -7,5 +7,7 @@ def sitemap_robocode_xml(request):
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
    <url>
       <loc>http://fornever.no-ip.org/robocode/sniper/</loc>
+      <changefreq>weekly</changefreq>
+      <priority>1.0</priority>
    </url>
 </urlset>''')
