@@ -5,7 +5,7 @@ from django.http import HttpResponse
 def robots_txt(request):
     from django.http import HttpResponse
     return HttpResponse('''User-agent: *
-Disallow:
+Disallow: /admin
 Allow: *
 Sitemap: http://fornever.no-ip.org/sitemap.xml''')
 
