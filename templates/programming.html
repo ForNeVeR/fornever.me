@@ -1,5 +1,10 @@
 ﻿{% extends "base.html" %}
 
+{% block meta %}
+    <meta name="description" content="О программировании" />
+    <meta name="keywords" content="программирование, C++, WTF" />
+{% endblock %}
+
 {% block title %}Programming{% endblock %}
 {% block content %}
     <h2>Проекты полезные или хорошие</h2>
@@ -10,7 +15,6 @@
     </ul>
     
     <h2>Вопросы на засыпку</h2>
-    
     <ol>
         <li>Что означает конструкция языка C: <span class="code">int *(* const * name[3])();</span></li>
         <li>Что означает конструкция <span class="code">int F(void (*)(), double(*)[4]);</span></li>
