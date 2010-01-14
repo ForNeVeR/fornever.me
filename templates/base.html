@@ -12,20 +12,19 @@
 </head>
 <body>
     <h1>forNEVERmind / {% block title %}{% endblock %}</h1>
-    {% if username %}
-        <p>Вы зашли как {{ username }}.</p>
-    {% endif %}
     {% block content %}{% endblock %}
     <div class="menu">
         <p><a href="/">Главная страница</a></p>
-        <p><a href="/about.html">Контакты</a></p>
-        <p><a href="/programming.html">Программирование</a></p>
+        <p><a href="/contact/">Контакты</a></p>
+        <p><a href="/programming/">Программирование</a></p>
         <p><a href="/robocode/">RoboCode</a></p>
         <p><a href="/files/">Файлы</a></p>
         {% if not username %}
-            <p><a href="/login/">Логин</a></p>
+            <p><a href="/login/">Вход</a></p>
         {% else %}
             <p><a href="/logout/">Выход</a></p>
+
+            <p>Вы зашли как {{ username }}.</p>
         {% endif %}
     </div>
     <div style="text-align: center">

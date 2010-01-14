@@ -1,6 +1,20 @@
 ﻿# -*- coding: utf-8 -*-
 
+from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
+
+def meta_render(request, template, context={}):
+    context.update({'username': request.user.username})
+    return render_to_response(template, context)
+
+def index(request):
+    return meta_render(request, 'index.html')
+    
+def contact(request):
+    return meta_render(request, 'contact.html')
+    
+def programming(request):
+    return meta_render(request, 'programming.html')
 
 def login(request):
     from django.contrib.auth import authenticate, login
@@ -9,29 +23,23 @@ def login(request):
         username = request.POST['login']
         password = request.POST['password']
     except:
-        return render_to_response('login.html')
+        return  meta_render(request, 'login.html')
 
     user = authenticate(username=username, password=password)
     if user is not None:
         login(request, user)
-        return current_datetime(request)
+        return HttpResponseRedirect('/')
     
-    return render_to_response('login.html')
+    return  meta_render(request, 'login.html')
     
 def logout(request):
     from django.contrib.auth import logout
     
     logout(request)
-    return current_datetime(request)
-        
+    return HttpResponseRedirect('/')
+    
 def error_404(request):
-    return render_to_response("404.html")
+    return  meta_render(request, '404.html')
     
 def error_500(request):
-    return render_to_response("500.html")
-    
-def index(request):
-    return render_to_response('index.html')
-    
-def html(request, filename):
-    return render_to_response(filename)
+    return  meta_render(request, '500.html')

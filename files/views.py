@@ -5,10 +5,12 @@ from django.http import HttpResponseRedirect
 from fornever.files.models import File
 from fornever.files.forms import UploadFileForm
 from fornever.settings import MEDIA_ROOT
+from fornever.views import meta_render
 
 def list(request):
     file_list = File.objects.all().order_by('date')
-    return render_to_response('files/file_list.html', {'file_list': file_list})
+    return meta_render(request, 'files/file_list.html',
+        {'file_list': file_list})
     
 def upload(request):
     if request.method == 'POST':
@@ -18,4 +20,4 @@ def upload(request):
             return HttpResponseRedirect('/files/')
     else:
         form = UploadFileForm()
-    return render_to_response('files/file_upload.html', {'form': form})
+    return meta_render(request, 'files/file_upload.html', {'form': form})
