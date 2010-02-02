@@ -1,6 +1,9 @@
 ﻿{% extends "base.html" %}
 
 {% block title %}Загрузка файла{% endblock %}
+
+{% block header %}Загрузка файла{% endblock %}
+
 {% block content %}
     <form action="/files/upload/" enctype="multipart/form-data" method="post">
         {{ form.as_p }}
