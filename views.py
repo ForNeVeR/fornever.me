@@ -16,6 +16,9 @@ def contact(request):
 def programming(request):
     return meta_render(request, 'programming.html')
 
+def services(request):
+    return meta_render(request, 'services.html')
+
 def login(request):
     from django.contrib.auth import authenticate, login
     

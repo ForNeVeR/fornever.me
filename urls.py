@@ -1,8 +1,8 @@
 ﻿# -*- coding: utf-8 -*-
 
 from django.conf.urls.defaults import *
-from fornever.views import (index, programming, contact, login, logout,
-    error_404, error_500)
+from fornever.views import (index, programming, contact, services, login,
+    logout, error_404, error_500)
 from fornever.robots import *
 
 # Uncomment the next two lines to enable the admin:
@@ -21,6 +21,7 @@ urlpatterns = patterns('',
     (r'^$', index),
     (r'^programming/$', programming),
     (r'^contact/$', contact),
+    (r'^services/$', services),
     
     (r'^login/$', login),
     (r'^logout/$', logout),

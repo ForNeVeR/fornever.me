@@ -45,6 +45,11 @@ def sitemap_main_xml(request):
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
+    <url>
+        <loc>http://fornever.no-ip.org/services/</loc>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
 </urlset>''')
     response['Content-Type'] = 'application/xml; charset=utf-8'
     return response
