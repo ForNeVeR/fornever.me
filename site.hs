@@ -5,6 +5,15 @@ import           Hakyll
 
 
 --------------------------------------------------------------------------------
+feedConfiguration :: FeedConfiguration
+feedConfiguration = FeedConfiguration {
+                      feedTitle = "Friedrich von Never blog",
+                      feedDescription = "Friedrich von Never - engineer, programmer, and a gentleman.",
+                      feedAuthorName = "Friedrich von Never",
+                      feedAuthorEmail = "fvnever@gmail.com",
+                      feedRoot = "http://fornever.me"
+                    }
+
 main :: IO ()
 main = hakyll $ do
     match "images/*" $ do
@@ -58,6 +67,14 @@ main = hakyll $ do
                 >>= relativizeUrls
 
     match "templates/*" $ compile templateCompiler
+
+    create ["rss.xml"] $ do
+        route idRoute
+        compile $ do
+            let feedCtx = postCtx `mappend`
+                  constField "description" "This is the post description"
+            posts <- fmap (take 10) . recentFirst =<< loadAll "posts/*"
+            renderRss feedConfiguration feedCtx posts
 
 
 --------------------------------------------------------------------------------
