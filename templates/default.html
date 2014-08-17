@@ -1,33 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+		  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>F. von Never - $title$</title>
-        <link rel="stylesheet" type="text/css" href="/css/main.css" />
-    </head>
-    <body>
-        <div id="header">
-            <div id="logo">
-                <a href="/">Инженер, программист, джентльмен</a>
-            </div>
-            <div id="navigation">
-                <a href="/archive.html">Посты</a>
-                <a href="/contact.html">Контакты</a>
-				<a href="//archiva.fornever.me">Archiva</a>
-				<a href="//horta.fornever.me">Horta</a>
-            </div>
-        </div>
-
-        <div id="content">
-            <h1>$title$</h1>
-
-            $body$
-        </div>
-        <div id="footer">
-          Сайт сгенерирован при помощи
-          <a href="http://jaspervdj.be/hakyll">Hakyll</a>
-        </div>
-    </body>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>F. von Never - $title$</title>
+	<link rel="alternate" type="application/rss+xml" href="/rss.xml" title="RSS Feed"/>
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+  </head>
+  <body>
+    <div id="header">
+      <div id="logo">
+        <a href="/">Инженер, программист, джентльмен</a>
+      </div>
+      <div id="navigation">
+        <a href="/archive.html">Посты</a>
+        <a href="/contact.html">Контакты</a>
+		<a href="//archiva.fornever.me">Archiva</a>
+		<a href="//horta.fornever.me">Horta</a>
+      </div>
+    </div>
+	
+    <div id="content">
+      <h1>$title$</h1>
+	  
+      $body$
+    </div>
+    <footer>
+	  <div><a href="/rss.xml">RSS</a></div>
+	  <div>
+		Сайт сгенерирован при помощи
+		<a href="http://jaspervdj.be/hakyll">Hakyll</a>
+	  </div>
+    </footer>
+  </body>
 </html>
