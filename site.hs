@@ -16,13 +16,20 @@ feedConfiguration = FeedConfiguration {
 
 main :: IO ()
 main = hakyll $ do
-    match "images/*" $ do
+    match ("images/*" .||. "fonts/*") $ do
         route   idRoute
         compile copyFileCompiler
 
-    match "css/*" $ do
-        route   idRoute
-        compile compressCssCompiler
+    match "css/*.less" $ do
+        compile getResourceBody
+
+    d <- makePatternDependency "css/*.less"
+    rulesExtraDependencies [d] $ create ["css/main.css"] $ do
+        route idRoute
+        compile $ loadBody "css/main.less"
+            >>= makeItem
+            >>= withItemBody 
+              (unixFilter "lessc" ["--include-path=css", "-", "-O2"])
 
     match (fromList ["about.rst", "contact.markdown"]) $ do
         route   $ setExtension "html"
