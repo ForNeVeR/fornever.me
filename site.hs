@@ -78,8 +78,7 @@ main = hakyll $ do
     create ["rss.xml"] $ do
         route idRoute
         compile $ do
-            let feedCtx = postCtx `mappend`
-                  constField "description" "This is the post description"
+            let feedCtx = postCtx
             posts <- fmap (take 10) . recentFirst =<< loadAll "posts/*"
             renderRss feedConfiguration feedCtx posts
 
