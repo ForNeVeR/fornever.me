@@ -25,6 +25,8 @@ Then use the Hakyll-compiled binary to build rest of the site:
 
 It will generate a static HTML in the `_site` directory. Feel free to deploy this code, but please don't forget to notify me if you're using my post materials!
 
+*Note for Windows users:* sometimes Hakyll have problems with Unicode on this platform. This is a known issue and it has been documented in [Hakyll FAQ](http://jaspervdj.be/hakyll/tutorials/faq.html). I'll repeat it here: if you have any problems mentioning `commitBuffer: invalid argument (invalid character)`, just enable `chcp 65001` in console before running the `./site` executable.
+
 Other components
 ----------------
 
