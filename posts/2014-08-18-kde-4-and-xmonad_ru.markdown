@@ -96,6 +96,7 @@ main = xmonad $ standardConfig {
 myManageHook = composeAll . concat $
     [ [ className   =? c --> doFloat           | c <- myFloats]
     , [ title       =? t --> doFloat           | t <- myOtherFloats]
+    ]
   where myFloats      = ["MPlayer", "Gimp", "Yakuake", "krunner", "Plasma-desktop"]
         myOtherFloats = ["alsamixer"]
 ```
