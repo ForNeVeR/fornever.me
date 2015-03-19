@@ -114,3 +114,7 @@ sudo -u postgres psql -c "create database \"codingteam-site_test\" owner \"codin
 mkdir /opt/jenkins
 chown vagrant /opt/jenkins
 ```
+
+## Настройка Jenkins
+Наконец-то переходим к самому главному - к настройке Jenkins. Jenkins сам по себе умеет работать в режиме кластера -
+когда есть один главный узел, управляющий группой дочерних slave'ов.
