@@ -87,7 +87,7 @@ end
 А вот скрипт provision.sh, который отвечает за установку пакетов и настройку окружения виртуальной машины (обратите
 внимание, этот скрипт будет запущен от имени `root`):
 
-```sh
+```bash
 # Копируем ssh-ключи и настраиваем known hosts, чтобы работал git:
 cp /vagrant/id_rsa /home/vagrant/.ssh/
 cp /vagrant/id_rsa.pub /home/vagrant/.ssh/
