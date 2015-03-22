@@ -29,8 +29,12 @@ var desktop = AutomationElement.RootElement;
 var window = desktop.FindFirst(
 	TreeScope.Children,
 	new PropertyCondition(AutomationElement.NameProperty, "█████████████████████████"));
-var pageControl = window.FindFirst(TreeScope.Children, new PropertyCondition(AutomationElement.ClassNameProperty, "TPageControl"));
-var settingsTab = pageControl.FindFirst(TreeScope.Children, new PropertyCondition(AutomationElement.ClassNameProperty, "TTabSheet"));
+var pageControl = window.FindFirst(
+	TreeScope.Children,
+	new PropertyCondition(AutomationElement.ClassNameProperty, "TPageControl"));
+var settingsTab = pageControl.FindFirst(
+	TreeScope.Children,
+	new PropertyCondition(AutomationElement.ClassNameProperty, "TTabSheet"));
 ```
 
 Пока всё работает - это код выполняется и возвращает `settingsTab`. Однако у этого объекта свойство
@@ -113,7 +117,9 @@ var desktop = AutomationElement.RootElement;
 var window = desktop.FindFirst(
 	TreeScope.Children,
 	new PropertyCondition(AutomationElement.NameProperty, "█████████████████████████"));
-var pageControl = window.FindFirst(TreeScope.Children, new PropertyCondition(AutomationElement.ClassNameProperty, "TPageControl"));
+var pageControl = window.FindFirst(
+	TreeScope.Children,
+	new PropertyCondition(AutomationElement.ClassNameProperty, "TPageControl"));
 var settingsTab = AutomationHelper.GetPageControlTab(pageControl, "Установки");
 ```
 
