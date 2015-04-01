@@ -1,0 +1,13 @@
+language: haskell
+ghc: 7.8
+before_install:
+  - |
+    cabal install hakyll
+    export PATH=$HOME/.cabal/bin:$PATH
+script:
+  - |
+    ghc --make -threaded site
+    ./site build
+notifications:
+  email:
+    - friedrich@fornever.me
