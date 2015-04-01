@@ -23,7 +23,7 @@ description: Описание настройки frege-gradle-plugin и осно
 плагина `frege-gradle-plugin` к определению проекта, а также настройка компиляции получившегося кода на Java (т.к. Frege
 транслируется в Java). Вот шаблон `build.gradle`:
 
-```groovy
+```
 buildscript {
   repositories {
     mavenCentral()
@@ -99,7 +99,7 @@ greetingTest = property $ \f -> greeting f == "Hello, " ++ f ++ "!"
 Поскольку я люблю CI вообще и сервис [Travis](https://travis-ci.org/) в частности, то сразу приведу пример `.travis.yml`
 для автоматизации запуска таких тестов на сервере интеграции:
 
-```yml
+```yaml
 language: java
 jdk: oraclejdk8
 script: gradle quickcheck
@@ -124,7 +124,7 @@ greetingTestIO = return greetingTest
 знает. Следующее, что мы сделаем - это дадим возможность передавать `mainClassName` из командной строки (чтобы можно
 было запускать не только приложение, но и исполняющую среду для тестов), заменив последнюю строку в `build.gradle`:
 
-```groovy
+```
 mainClassName = System.getProperty("mainClass") ?: 'me.fornever.example.Application'
 ```
 
@@ -165,7 +165,7 @@ main _ = do
 
 Это же можно легко закодировать в `.travis.yml` (и тогда Travis будет корректно отслеживать состояние тестов):
 
-```yml
+```yaml
 language: java
 jdk: oraclejdk8
 script: gradle run -DmainClass=me.fornever.example.TestApplication
