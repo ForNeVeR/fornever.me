@@ -3,12 +3,11 @@ ghc: 7.8
 sudo: required
 before_install:
   - sudo apt-get update -qq
-  - sudo apt-get install -qq npm
+  - sudo apt-get install -qq lessc
 install:
   - |
     cabal install hakyll
     export PATH=$HOME/.cabal/bin:$PATH
-  - sudo npm install -g less
 script:
   - |
     ghc --make -threaded site
