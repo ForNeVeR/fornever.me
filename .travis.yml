@@ -1,0 +1,20 @@
+language: haskell
+ghc: 7.8
+before_install:
+  - |
+    nvm install 0.12
+    nvm use 0.12
+install:
+  - |
+    npm install less
+    export PATH=./node_modules/less/bin:$PATH
+  - |
+    cabal install hakyll
+    export PATH=$HOME/.cabal/bin:$PATH
+script:
+  - |
+    ghc --make -threaded site
+    ./site build
+notifications:
+  email:
+    - friedrich@fornever.me
