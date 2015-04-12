@@ -29,7 +29,7 @@ main = hakyll $ do
         compile $ loadBody "css/main.less"
             >>= makeItem
             >>= withItemBody 
-              (unixFilter "lessc" ["--include-path=css", "-", "-O2"])
+              (unixFilter "lessc" ["--include-path=css", "-"])
 
     match (fromList ["about.rst", "contact.markdown"]) $ do
         route   $ setExtension "html"
