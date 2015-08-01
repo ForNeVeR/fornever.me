@@ -30,4 +30,4 @@ description: Описание настроек задач Jenkins и вспом�
 
 Если кто-то пропустил, то вот ссылка на скрипты ещё раз: [jincremental-packer][].
 
-[jincremental-packer]: 
+[jincremental-packer]: https://github.com/ForNeVeR/jincremental-packer
