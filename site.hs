@@ -1,8 +1,8 @@
 --------------------------------------------------------------------------------
 {-# LANGUAGE OverloadedStrings #-}
 import           Data.Monoid (mappend)
+import           Text.Pandoc.Options
 import           Hakyll
-
 
 --------------------------------------------------------------------------------
 feedConfiguration :: FeedConfiguration
@@ -14,13 +14,19 @@ feedConfiguration = FeedConfiguration {
                       feedRoot = "http://fornever.me"
                     }
 
+pandoc :: Compiler (Item String)
+pandoc = pandocCompilerWith readerOptions writerOptions
+    where
+        readerOptions = (def ReaderOptions) { readerSmart = True }
+        writerOptions = def WriterOptions
+
 main :: IO ()
 main = hakyll $ do
     match ("images/*" .||. "fonts/*") $ do
         route   idRoute
         compile copyFileCompiler
 
-    match "css/*.less" $ do
+    match "css/*.less" $
         compile getResourceBody
 
     d <- makePatternDependency "css/*.less"
@@ -28,18 +34,18 @@ main = hakyll $ do
         route idRoute
         compile $ loadBody "css/main.less"
             >>= makeItem
-            >>= withItemBody 
+            >>= withItemBody
               (unixFilter "lessc" ["--include-path=css", "-"])
 
     match (fromList ["about.rst", "contact.markdown"]) $ do
         route   $ setExtension "html"
-        compile $ pandocCompiler
+        compile $ pandoc
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
             >>= relativizeUrls
 
     match "posts/*" $ do
         route $ setExtension "html"
-        compile $ pandocCompiler
+        compile $ pandoc
             >>= loadAndApplyTemplate "templates/post.html"    postCtx
             >>= loadAndApplyTemplate "templates/default.html" postCtx
             >>= relativizeUrls

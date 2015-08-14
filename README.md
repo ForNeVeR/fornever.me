@@ -1,8 +1,9 @@
 fornever.me: Engineer, Programmer, Gentleman [![Build Status](https://travis-ci.org/ForNeVeR/fornever.me.svg?branch=master)](https://travis-ci.org/ForNeVeR/fornever.me)
 ============================================
 
-This is the [fornever.me](http://fornever.me) site source code. It is mainly written using
-[Hakyll](http://jaspervdj.be/hakyll/) - a Haskell tool for static site development.
+This is the [fornever.me](http://fornever.me) site source code. It is mainly
+written using [Hakyll](http://jaspervdj.be/hakyll/) — a Haskell tool for static
+site development.
 
 Prerequisites
 -------------
