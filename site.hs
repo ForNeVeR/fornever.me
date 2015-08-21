@@ -8,10 +8,10 @@ import           Hakyll
 feedConfiguration :: FeedConfiguration
 feedConfiguration = FeedConfiguration {
                       feedTitle = "Friedrich von Never blog",
-                      feedDescription = "Friedrich von Never - engineer, programmer, and a gentleman.",
+                      feedDescription = "Friedrich von Never: Engineer, Programmer, Gentleman.",
                       feedAuthorName = "Friedrich von Never",
-                      feedAuthorEmail = "fvnever@gmail.com",
-                      feedRoot = "http://fornever.me"
+                      feedAuthorEmail = "friedrich@fornever.me",
+                      feedRoot = "https://fornever.me"
                     }
 
 pandoc :: Compiler (Item String)
