@@ -13,6 +13,7 @@ before_install:
     nvm install 0.12
     nvm use 0.12
 install:
+  - stack setup
   - |
     npm install less
     export PATH=./node_modules/less/bin:$PATH
