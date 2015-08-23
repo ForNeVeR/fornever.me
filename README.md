@@ -10,32 +10,45 @@ Prerequisites
 
 For building this source code you'll need the following components:
 
-1. [Glasgow Haskell Compiler](http://www.haskell.org/ghc/) with the
-   [Cabal packaging system](http://www.haskell.org/cabal/). I'd recommend you to use
-   [Haskell Platform](https://www.haskell.org/platform/) that contains both.
-2. Valid [Hakyll](http://jaspervdj.be/hakyll/) installation.
-3. [Less CSS pre-processor](http://lesscss.org/).
+1. [The Haskell Tool Stack][stack].
+2. [Less CSS pre-processor][less].
 
-Building
---------
+Make sure all the tools are installed and placed in your `PATH` environment
+variable before you begin.
 
-First, build the Hakyll site:
+Build
+-----
 
-    $ ghc --make -threaded site
+First of all, you may need to setup stack if you haven't been done that already:
 
-Then use the Hakyll-compiled binary to build rest of the site:
+    $ stack setup
 
-    $ ./site build
+After that, build the site executable:
 
-It will generate a static HTML in the `_site` directory. Feel free to deploy this code, but please don't forget to
-notify me if you're using my post materials!
+    $ stack build
 
-*Note for Windows users:* sometimes Hakyll have problems with Unicode on this platform. This is a known issue and it has
-been documented in [Hakyll FAQ](http://jaspervdj.be/hakyll/tutorials/faq.html). I'll repeat it here: if you have any
-problems mentioning `commitBuffer: invalid argument (invalid character)`, just enable `chcp 65001` in console before
-running the `./site` executable.
+Then use the executable to build rest of the site:
+
+    $ stack exec forneverme build
+
+It will generate a static HTML in the `_site` directory. Feel free to deploy
+this content, but please don't forget to notify me if you're using my post
+materials!
+
+*Note for Windows users:* sometimes Hakyll have problems with Unicode on this
+platform. This is a known issue and it has been documented in the
+[Hakyll FAQ][hakyll-faq]. I'll repeat it here: if you have any
+problems mentioning `commitBuffer: invalid argument (invalid character)`, just
+enable `chcp 65001` in console before running the `./forneverme` executable.
+
+There's a `Build.ps1` file usable for Windows users that will build the whole
+site.
 
 Other components
 ----------------
 
 [fornever.me](http://fornever.me) uses a great and easy-to-install [Disqus](https://disqus.com/) comment system.
+
+[hakyll-faq]: http://jaspervdj.be/hakyll/tutorials/faq.html
+[less]: http://lesscss.org/
+[stack]: https://github.com/commercialhaskell/stack

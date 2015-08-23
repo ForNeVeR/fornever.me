@@ -1,5 +1,4 @@
+/dist/
 /_cache/
 /_site/
-/site.exe
-/site.hi
-/site.o
+/.stack-work/
