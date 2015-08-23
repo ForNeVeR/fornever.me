@@ -35,12 +35,6 @@ It will generate a static HTML in the `_site` directory. Feel free to deploy
 this content, but please don't forget to notify me if you're using my post
 materials!
 
-*Note for Windows users:* sometimes Hakyll have problems with Unicode on this
-platform. This is a known issue and it has been documented in the
-[Hakyll FAQ][hakyll-faq]. I'll repeat it here: if you have any
-problems mentioning `commitBuffer: invalid argument (invalid character)`, just
-enable `chcp 65001` in console before running the `./forneverme` executable.
-
 There's a `Build.ps1` file usable for Windows users that will build the whole
 site.
 
