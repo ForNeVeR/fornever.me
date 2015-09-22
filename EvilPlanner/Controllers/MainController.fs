@@ -10,7 +10,16 @@ open EvilPlanner.Data
 
 type HomeController() =
     inherit Controller()
-    member this.Index () = 
+    member this.Index() = 
         use context = new EvilPlannerContext()
-        this.View("Quotation")
+        let count = query { for q in context.Quotations do count }
+        let toSkip = Random().Next count
+        let quotation =
+            query { 
+                for q in context.Quotations do
+                sortBy q.Id
+                skip toSkip
+                head
+            }
+        this.View("Quotation", quotation)
 

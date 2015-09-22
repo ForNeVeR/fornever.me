@@ -105,6 +105,7 @@
   </ProjectExtensions>
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
+    <Content Include="Content\quotations.css" />
     <Content Include="Content\main.css" />
     <None Include="fonts\glyphicons-halflings-regular.woff" />
     <None Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -146,6 +147,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions.dll" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting">

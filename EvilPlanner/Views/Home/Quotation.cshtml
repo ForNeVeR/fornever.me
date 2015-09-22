@@ -1,1 +1,8 @@
-<div class="quotation">Here goes the quote text.</div>
+@model EvilPlanner.Data.Entities.Quotation
+
+@{ 
+    ViewBag.Title = "Quote of the Day";
+}
+
+<blockquote>@Model.Text</blockquote>
+<a class="source-link" href="@Model.SourceUrl">@Model.Source</a>
