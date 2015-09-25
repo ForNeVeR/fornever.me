@@ -8,6 +8,8 @@ open System.Web.Mvc
 open System.Web.Routing
 open System.Web.Optimization
 
+open EvilPlanner.Data
+
 type BundleConfig() =
     static member RegisterBundles (bundles:BundleCollection) =
         bundles.Add(StyleBundle("~/Content/css").Include(
@@ -54,6 +56,7 @@ type Global() =
         ) |> ignore
 
     member x.Application_Start() =
+        Migrations.Configuration.EnableAutoMigration()
         AreaRegistration.RegisterAllAreas()
         GlobalConfiguration.Configure(Action<_> Global.RegisterWebApi)
         Global.RegisterFilters(GlobalFilters.Filters)

@@ -1,10 +1,16 @@
+using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using EvilPlanner.Data.Entities;
 
 namespace EvilPlanner.Data.Migrations
 {
-    internal sealed class Configuration : DbMigrationsConfiguration<EvilPlannerContext>
+    public sealed class Configuration : DbMigrationsConfiguration<EvilPlannerContext>
     {
+        public static void EnableAutoMigration()
+        {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<EvilPlannerContext, Configuration>());
+        }
+
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
