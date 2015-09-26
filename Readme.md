@@ -1,8 +1,6 @@
-EvilPlanner
+EvilPlanner [![Status Umbra](https://img.shields.io/badge/status-umbra-red.svg)](https://github.com/ForNeVeR/andivionian-status-classifier)
 ===========
 EvilPlanner is a nice statistical application.
-
-Project status: Umbra.
 
 Features
 --------
