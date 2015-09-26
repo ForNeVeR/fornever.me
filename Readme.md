@@ -1,9 +1,8 @@
 fornever.me: Engineer, Programmer, Gentleman [![Build Status](https://travis-ci.org/ForNeVeR/fornever.me.svg?branch=master)](https://travis-ci.org/ForNeVeR/fornever.me)
 ============================================
 
-This is the [fornever.me](http://fornever.me) site source code. It is mainly
-written using [Hakyll](http://jaspervdj.be/hakyll/) — a Haskell tool for static
-site development.
+This is the [fornever.me][] site source code. It is mainly written using
+[Hakyll][hakyll] — a Haskell tool for static site development.
 
 Prerequisites
 -------------
@@ -41,8 +40,14 @@ site.
 Other components
 ----------------
 
-[fornever.me](http://fornever.me) uses a great and easy-to-install [Disqus](https://disqus.com/) comment system.
+1.  [EvilPlanner][evil-planner] meant to be an integral part of the site, but it
+    need to be installed separately.
+2.  [fornever.me][] uses an easy-to-install [Disqus][disqus] comment system.
 
+[disqus]: https://disqus.com/
+[evil-planner]: https://github.com/ForNeVeR/EvilPlanner
+[fornever.me]: https://fornever.me/
+[hakyll]: http://jaspervdj.be/hakyll/
 [hakyll-faq]: http://jaspervdj.be/hakyll/tutorials/faq.html
 [less]: http://lesscss.org/
 [stack]: https://github.com/commercialhaskell/stack
