@@ -124,7 +124,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Content Include="packages.config" />
-    <Content Include="readme.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Antlr3.Runtime">
@@ -214,6 +213,11 @@
     <ProjectReference Include="..\EvilPlanner.Data\EvilPlanner.Data.csproj">
       <Name>EvilPlanner.Data</Name>
       <Project>{885368a3-1091-4c5f-9d85-f6e0149f6087}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\EvilPlanner.Logic\EvilPlanner.Logic.fsproj">
+      <Name>EvilPlanner.Logic</Name>
+      <Project>{81067a65-f9f8-4ed0-91a6-1d9b4ccfe19e}</Project>
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>

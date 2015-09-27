@@ -7,19 +7,12 @@ open System.Web
 open System.Web.Mvc
 open System.Web.Mvc.Ajax
 open EvilPlanner.Data
+open EvilPlanner.Logic
 
 type HomeController() =
     inherit Controller()
     member this.Index() = 
         use context = new EvilPlannerContext()
-        let count = query { for q in context.Quotations do count }
-        let toSkip = Random().Next count
-        let quotation =
-            query { 
-                for q in context.Quotations do
-                sortBy q.Id
-                skip toSkip
-                head
-            }
+        let quotation = Quotations.getTodayQuote context
         this.View("Quotation", quotation)
 
