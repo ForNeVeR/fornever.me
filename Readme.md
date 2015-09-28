@@ -23,6 +23,21 @@ database on LocalDB instance (and it will create and migrate that if necessary)
 and that it was deployed to https://fornever.me/plans/ (all these settings may
 be changed in the `Web.config` file).
 
+### Database setup
+It is recommended to use shared LocalDB instance as a database. To create the
+instance and share it with an IIS user, first create the instance and make it
+shared (from the administrative shell session):
+
+    sqllocaldb create EvilPlanner
+    sqllocaldb share EvilPlanner EvilPlanner
+
+After that connect to the `(localdb)\.\EvilPlanner` SQL Server instance with
+any compatible tool and execute the following script that will grant IIS user
+the full access to the database:
+
+    create login [IIS APPPOOL\EvilPlanner] from windows
+    exec sp_addsrvrolemember N'IIS APPPOOL\EvilPlanner', sysadmin
+
 ### IIS Tuning
 If you want to use LocalDB on IIS, you may need to have its configuration tuned
 as [Krzysztof Kozielczyk explains in SQL Server Express WebLog][iis-localdb].
