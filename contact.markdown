@@ -2,6 +2,13 @@
 title: Контакты
 ---
 
+<a class="so-badge" href="http://stackoverflow.com/users/2684760/fornever">
+    <img src="http://stackoverflow.com/users/flair/2684760.png"
+         width="208"
+         height="58"
+         alt="profile for ForNeVeR at Stack Overflow, Q&amp;A for professional and enthusiast programmers" title="profile for ForNeVeR at Stack Overflow, Q&amp;A for professional and enthusiast programmers"/>
+</a>
+
 Я в "социальных" сетях:
 
 * [github](https://github.com/ForNeVeR)
