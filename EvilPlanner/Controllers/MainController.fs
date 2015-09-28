@@ -11,8 +11,13 @@ open EvilPlanner.Logic
 
 type HomeController() =
     inherit Controller()
-    member this.Index() = 
-        use context = new EvilPlannerContext()
-        let quotation = Quotations.getTodayQuote context
-        this.View("Quotation", quotation)
 
+    member this.Index() =
+        async {
+            use context = new EvilPlannerContext()
+            let! quotation = Quotations.getTodayQuote context
+            return this.view "Quotation" quotation
+        } |> Async.StartAsTask
+
+    member private this.view (viewName : string) (model : obj) =
+        this.View(viewName, model)
