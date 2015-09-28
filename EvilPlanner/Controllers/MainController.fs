@@ -6,13 +6,20 @@ open System.Linq
 open System.Web
 open System.Web.Mvc
 open System.Web.Mvc.Ajax
+
 open EvilPlanner.Data
+open EvilPlanner.Data.Entities
 open EvilPlanner.Logic
 
 type HomeController() =
     inherit Controller()
-    member this.Index() = 
-        use context = new EvilPlannerContext()
-        let quotation = Quotations.getTodayQuote context
-        this.View("Quotation", quotation)
 
+    member this.Index() =
+        async {
+            use context = new EvilPlannerContext()
+            let! quotation = Quotations.getTodayQuote context
+            return this.quotationView  quotation
+        } |> Async.StartAsTask
+
+    member private this.quotationView (model : Quotation) =
+        this.View("Quotation", model)
