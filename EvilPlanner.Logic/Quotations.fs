@@ -14,7 +14,7 @@ let private getDailyQuote (context : EvilPlannerContext) date =
         for q in context.DailyQuotes do
         where (q.Date = date)
         select q.Quotation
-    } |> Ext.singleOrDefaultAsync
+    } |> singleOrDefaultAsync
 
 let private getDailyQuoteUpdlock (context : EvilPlannerContext) (date : DateTime) =
     context.Database.SqlQuery<Quotation>("
@@ -22,7 +22,7 @@ select q.* with (updlock)
 from DailyQuote dq
 join Quotation q on q.Id = dq.Quotation_Id
 ", SqlParameter("date", date))
-    |> Ext.singleOrDefaultAsync    
+    |> singleOrDefaultAsync    
 
 let private createQuote (context : EvilPlannerContext) (transaction : DbContextTransaction) date =
     async {

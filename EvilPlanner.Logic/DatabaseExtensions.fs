@@ -12,8 +12,8 @@ let headAsync query =
     |> QueryableExtensions.FirstAsync
     |> Async.AwaitTask
 
-type Ext =
-    static member singleOrDefaultAsync query =
+type SingleOrDefaultAsync = SingleOrDefaultAsync with
+    static member ($) (SingleOrDefaultAsync, query) =
         async {
             let! result =
                 query
@@ -22,13 +22,15 @@ type Ext =
             return Option.ofObj result
         }
 
-    static member singleOrDefaultAsync (query : DbRawSqlQuery<'a>) =
+    static member ($) (SingleOrDefaultAsync, query : DbRawSqlQuery<'a>) =
         async {
             let! result =
                 query.SingleOrDefaultAsync()
                 |> Async.AwaitTask
             return Option.ofObj result
         }
+
+let inline singleOrDefaultAsync x = SingleOrDefaultAsync $ x
 
 let countAsync query =
     query
