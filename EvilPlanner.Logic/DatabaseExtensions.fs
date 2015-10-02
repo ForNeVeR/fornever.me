@@ -1,21 +1,34 @@
 ﻿module EvilPlanner.Logic.DatabaseExtensions
 
 open System.Data.Entity
+open System.Data.Entity.Infrastructure
 open System.Linq
+
+open EvilPlanner.Data
+open EvilPlanner.Data.Entities
 
 let headAsync query =
     query
     |> QueryableExtensions.FirstAsync
     |> Async.AwaitTask
 
-let headOrDefaultAsync query =
-    async {
-        let! result =
-            query
-            |> QueryableExtensions.FirstOrDefaultAsync
-            |> Async.AwaitTask
-        return Option.ofObj result
-    }
+type Ext =
+    static member singleOrDefaultAsync query =
+        async {
+            let! result =
+                query
+                |> QueryableExtensions.SingleOrDefaultAsync
+                |> Async.AwaitTask
+            return Option.ofObj result
+        }
+
+    static member singleOrDefaultAsync (query : DbRawSqlQuery<'a>) =
+        async {
+            let! result =
+                query.SingleOrDefaultAsync()
+                |> Async.AwaitTask
+            return Option.ofObj result
+        }
 
 let countAsync query =
     query
