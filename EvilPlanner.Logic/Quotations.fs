@@ -16,18 +16,18 @@ let private getDailyQuote (context : EvilPlannerContext) date =
         select q.Quotation
     } |> singleOrDefaultAsync
 
-let private getDailyQuoteUpdlock (context : EvilPlannerContext) (date : DateTime) =
+let private getDailyQuoteTablockx (context : EvilPlannerContext) (date : DateTime) =
     context.Database.SqlQuery<Quotation>("
-select q.* with (updlock)
-from DailyQuote dq
-join Quotation q on q.Id = dq.Quotation_Id
+select q.*
+from DailyQuotes dq with (tablockx)
+join Quotations q on q.Id = dq.Quotation_Id
 ", SqlParameter("date", date))
     |> singleOrDefaultAsync    
 
 let private createQuote (context : EvilPlannerContext) (transaction : DbContextTransaction) date =
     async {
-        // Retry the query with updlock in case concurrent request has already created the quote
-        let! dailyQuote = getDailyQuoteUpdlock context date
+        // Retry the query with exclusive table lock in case concurrent request has already created the quote
+        let! dailyQuote = getDailyQuoteTablockx context date
         match dailyQuote with
         | Some(q) -> return q
         | None ->
