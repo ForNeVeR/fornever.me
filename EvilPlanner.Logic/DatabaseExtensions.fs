@@ -1,6 +1,7 @@
 ﻿module EvilPlanner.Logic.DatabaseExtensions
 
 open System.Data.Entity
+open System.Linq
 
 let headAsync query =
     query
@@ -15,6 +16,16 @@ let headOrDefaultAsync query =
             |> Async.AwaitTask
         return Option.ofObj result
     }
+
+let countAsync query =
+    query
+    |> QueryableExtensions.CountAsync
+    |> Async.AwaitTask
+
+let toListAsync query =
+    query
+    |> QueryableExtensions.ToListAsync
+    |> Async.AwaitTask
 
 let saveChangesAsync (context : DbContext) =
     async {

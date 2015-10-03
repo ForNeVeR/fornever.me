@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvilPlanner.Data", "EvilPla
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "EvilPlanner.Logic", "EvilPlanner.Logic\EvilPlanner.Logic.fsproj", "{81067A65-F9F8-4ED0-91A6-1D9B4CCFE19E}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "EvilPlanner.Tests", "EvilPlanner.Tests\EvilPlanner.Tests.fsproj", "{B2876968-4E06-4FA0-A10A-9EFC9CFF5064}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{81067A65-F9F8-4ED0-91A6-1D9B4CCFE19E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81067A65-F9F8-4ED0-91A6-1D9B4CCFE19E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81067A65-F9F8-4ED0-91A6-1D9B4CCFE19E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2876968-4E06-4FA0-A10A-9EFC9CFF5064}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2876968-4E06-4FA0-A10A-9EFC9CFF5064}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2876968-4E06-4FA0-A10A-9EFC9CFF5064}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2876968-4E06-4FA0-A10A-9EFC9CFF5064}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
