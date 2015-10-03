@@ -3,6 +3,7 @@
 open System
 open System.Data
 open System.Data.Entity
+open System.Data.SqlClient
 
 open EvilPlanner.Logic.DatabaseExtensions
 open EvilPlanner.Data
@@ -13,12 +14,20 @@ let private getDailyQuote (context : EvilPlannerContext) date =
         for q in context.DailyQuotes do
         where (q.Date = date)
         select q.Quotation
-    } |> headOrDefaultAsync
+    } |> singleOrDefaultAsync
+
+let private getDailyQuoteTablockx (context : EvilPlannerContext) (date : DateTime) =
+    context.Database.SqlQuery<Quotation>("
+select q.*
+from DailyQuotes dq with (tablockx)
+join Quotations q on q.Id = dq.Quotation_Id
+", SqlParameter("date", date))
+    |> singleOrDefaultAsync    
 
 let private createQuote (context : EvilPlannerContext) (transaction : DbContextTransaction) date =
     async {
-        // Retry the query in a serializable transaction in case concurrent request has already created the quote
-        let! dailyQuote = getDailyQuote context date
+        // Retry the query with exclusive table lock in case concurrent request has already created the quote
+        let! dailyQuote = getDailyQuoteTablockx context date
         match dailyQuote with
         | Some(q) -> return q
         | None ->
@@ -49,6 +58,6 @@ let getTodayQuote (context : EvilPlannerContext) : Async<Quotation> =
         match currentQuote with
         | Some(q) -> return q
         | None    ->
-            use transaction = context.Database.BeginTransaction(IsolationLevel.Serializable)
+            use transaction = context.Database.BeginTransaction()
             return! createQuote context transaction today
     }
