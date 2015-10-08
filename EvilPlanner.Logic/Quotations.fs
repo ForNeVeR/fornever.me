@@ -21,8 +21,9 @@ let private getDailyQuoteTablockx (context : EvilPlannerContext) (date : DateTim
 select q.*
 from DailyQuotes dq with (tablockx)
 join Quotations q on q.Id = dq.Quotation_Id
+where dq.Date = @date
 ", SqlParameter("date", date))
-    |> singleOrDefaultAsync    
+    |> singleOrDefaultAsync
 
 let private createQuote (context : EvilPlannerContext) (transaction : DbContextTransaction) date =
     async {
@@ -33,14 +34,14 @@ let private createQuote (context : EvilPlannerContext) (transaction : DbContextT
         | None ->
             // TODO: Optimize this randomization
             let count = query { for q in context.Quotations do count }
-            let toSkip = Random().Next count    
+            let toSkip = Random().Next count
             let! quotation =
-                query { 
+                query {
                     for q in context.Quotations do
                     sortBy q.Id
                     skip toSkip
                 } |> headAsync
-        
+
             let dailyQuote = DailyQuote(Date = date, Quotation = quotation)
             context.DailyQuotes.Add dailyQuote |> ignore
 
@@ -53,7 +54,7 @@ let private createQuote (context : EvilPlannerContext) (transaction : DbContextT
 let getTodayQuote (context : EvilPlannerContext) : Async<Quotation> =
     async {
         let today = DateTime.UtcNow.Date
-        let! currentQuote = getDailyQuote context today        
+        let! currentQuote = getDailyQuote context today
 
         match currentQuote with
         | Some(q) -> return q
