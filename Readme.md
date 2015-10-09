@@ -16,12 +16,19 @@ You may use publising from Visual Studio, or from msbuild (assuming that you
 have both `nuget` and `msbuild` in your `PATH` environment variable):
 
     nuget restore
-    msbuild EvilPlanner.sln /p:Platform="Any CPU" /p:DeployOnBuild=true /p:PublishProfile="Production"
+    msbuild EvilPlanner.sln /p:Platform="Any CPU" /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile="Production"
 
-By default, EvilPlanner assumes that it will have access to `EvilPlanner`
-database on LocalDB instance (and it will create and migrate that if necessary)
-and that it was deployed to https://fornever.me/plans/ (all these settings may
-be changed in the `Web.config` file).
+By default, EvilPlanner uses two databases on the LocalDB server:
+- `EvilPlanner` for production
+- `EvilPlannerStaging` for migration preparations and debug
+
+Both of them will be created and migrated automatically if necessary.
+
+EvilPlanner assumes that it will be deployed to https://fornever.me/plans/ in
+production.
+
+Change any settings through `Web.config` and `Web.Release.config` configuration
+files.
 
 ### Database setup
 It is recommended to use shared LocalDB instance as a database. To create the

@@ -119,6 +119,9 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Web.config" />
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
     <Content Include="Global.asax" />
     <Compile Include="Global.asax.fs">
       <DependentUpon>Global.asax</DependentUpon>
