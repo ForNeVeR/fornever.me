@@ -7,47 +7,77 @@ Features
 Currently it will only output the random quote from Evil Overlord List (see
 quotation source for every quote near the quote itself).
 
-Installation
-------------
-Prepare [LocalDB instance of Microsoft SQL Server 2014][mssql-localdb] (may get
-preinstalled with Visual Studio).
+Database Setup
+--------------
+EvilPlanner uses MS SQL for data storage. It will migrate its databases
+automatically if necessary.
 
-You may use publising from Visual Studio, or from msbuild (assuming that you
-have both `nuget` and `msbuild` in your `PATH` environment variable):
+### Development
+[LocalDB instance of Microsoft SQL Server 2014][mssql-localdb] is recommended
+for the development purposes (and it even may be already installed on your
+machine with Visual Studio).
+
+By default EvilPlanner will use the default shared instance named
+`MSSQLLocalDB`. It will create `EvilPlannerStaging` database there for
+debug and development purposes.
+
+### Production
+It's recommended to use [MS SQL 2014 Express][mssql-express] for production. By
+default EvilPlanner will use `EvilPlanner` database on the `.\SQLEXPRESS`
+server.
+
+Connect to the target MS SQL Server instance with any compatible tool and
+execute the following script to create the database:
+
+    create database EvilPlanner
+    go
+
+If you're going to deploy application on IIS (as recommended), you could grant
+IIS user the access to the database with the following script:
+
+    use EvilPlanner
+    create login [IIS APPPOOL\EvilPlanner] from windows
+    exec sp_addsrvrolemember N'IIS APPPOOL\EvilPlanner', sysadmin
+
+Configuration
+-------------
+EvilPlanner uses [Web.config transformations][web-config-transform], so there
+is a basic `Web.config` file used for debug and `Web.Release.config` used for
+publishing. Be sure to make changes to an appropriate file!
+
+Most likely, you'll want to change `connectionStrings` section to match your
+local database installation, or `BaseUrl` key of the `appSettings`section to
+change the application base URL (you may omit `BaseUrl` entirely, then
+EvilPlanner will not make assumptions about its deploy location and will use
+ASP.NET defaults).
+
+By default production version of EvilPlanner assumes that it will be deployed
+to https://fornever.me/plans/.
+
+Build and Deploy
+------------
+You may compile and publish the code from Visual Studio, or using `msbuild`
+(assuming that you have both `nuget` and `msbuild` in your `PATH` environment
+variable):
 
     nuget restore
     msbuild EvilPlanner.sln /p:Platform="Any CPU" /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile="Production"
 
-By default, EvilPlanner uses two databases on the LocalDB server:
-- `EvilPlanner` for production
-- `EvilPlannerStaging` for migration preparations and debug
+Creating Database Migration
+---------------------------
+When developing, you'll often want to migrate your staging database.
+Unfortunately, there's a bug in Visual Studio that could prevent you from doing
+that in the standard way. So, if you want to create new migration, follow this
+procedure:
 
-Both of them will be created and migrated automatically if necessary.
+1. Set current project in Visual Studio to `EvilPlanner.Data`.
+2. Open Package Manager Console.
+3. Select `EvilPlanner.Data` as current project in Package Manager Console.
+4. As usual: `Add-Migration ...`, `Update-Database` etc.
 
-EvilPlanner assumes that it will be deployed to https://fornever.me/plans/ in
-production.
+Note that it will use the connection string from an `App.config` file from the
+`EvilPlanner.Data`, not from the `Web.config` file.
 
-Change any settings through `Web.config` and `Web.Release.config` configuration
-files.
-
-### Database setup
-It is recommended to use shared LocalDB instance as a database. To create the
-instance and share it with an IIS user, first create the instance and make it
-shared (from the administrative shell session):
-
-    sqllocaldb create EvilPlanner
-    sqllocaldb share EvilPlanner EvilPlanner
-
-After that connect to the `(localdb)\.\EvilPlanner` SQL Server instance with
-any compatible tool and execute the following script that will grant IIS user
-the full access to the database:
-
-    create login [IIS APPPOOL\EvilPlanner] from windows
-    exec sp_addsrvrolemember N'IIS APPPOOL\EvilPlanner', sysadmin
-
-### IIS Tuning
-If you want to use LocalDB on IIS, you may need to have its configuration tuned
-as [Krzysztof Kozielczyk explains in SQL Server Express WebLog][iis-localdb].
-
-[iis-localdb]: http://blogs.msdn.com/b/sqlexpress/archive/2011/12/09/using-localdb-with-full-iis-part-1-user-profile.aspx
+[mssql-express]: https://www.microsoft.com/en-US/download/details.aspx?id=42299
 [mssql-localdb]: https://msdn.microsoft.com/ru-ru/library/hh510202(v=sql.120).aspx
+[web-config-transform]: http://www.asp.net/mvc/overview/deployment/visual-studio-web-deployment/web-config-transformations
