@@ -27,7 +27,7 @@ class QuotationBlock extends React.Component<{}, QuotationBlockState>{
             <h1>Quote of the Day</h1>
 
             <blockquote>{this.state.text}</blockquote>
-            <a classID="source-link" href="{this.state.sourceUrl}">{this.state.source}</a>
+            <a className="source-link" href="{this.state.sourceUrl}">{this.state.source}</a>
         </div>;
     }
 
