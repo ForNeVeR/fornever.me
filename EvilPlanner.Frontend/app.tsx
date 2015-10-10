@@ -4,7 +4,7 @@ declare var require: any;
 import React = require('react');
 var ReactDOM = require('react-dom'); // TODO: Get rid of ReactDOM type errors
 
-import QuotationBlock = require('./quotation-block');
+import QuotationBlock = require('./quotation-block.tsx');
 
 ReactDOM.render(
     <QuotationBlock />,
