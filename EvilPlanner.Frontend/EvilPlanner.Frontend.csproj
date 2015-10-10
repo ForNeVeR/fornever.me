@@ -27,7 +27,7 @@
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="app.ts" />
+    <None Include="app.tsx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="package.json" />
