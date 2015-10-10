@@ -39,20 +39,32 @@ let private date =
         return DateTime.ParseExact (Option.get value, isoDateFormat, CultureInfo.InvariantCulture)
     }
 
-let private getQuoteByDate _ =
+let private findQuoteByDate =
     freya {
         let! date = date
         let! dbQuote = (Freya.fromAsync QuoteLogic.getQuote) date
-        let quote = Quote <| Option.get dbQuote // TODO: Return 404 if not found
+        return dbQuote |> Option.map Quote
+    } |> Freya.memo
+
+let private checkQuoteByDateExists =
+    freya {
+        let! quote = findQuoteByDate
+        return Option.isSome quote
+    }
+
+let private handleQuoteFound _ =
+    freya {
+        let! quote = findQuoteByDate
         return Common.resource quote
     }
 
 let private quoteByDate =
     freyaMachine {
         including Common.machine
+        exists checkQuoteByDateExists
         corsMethodsSupported Common.get
         methodsSupported Common.get
-        handleOk getQuoteByDate
+        handleOk handleQuoteFound
     } |> FreyaMachine.toPipeline
 
 let router =
