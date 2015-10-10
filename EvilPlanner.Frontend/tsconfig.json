@@ -20,9 +20,12 @@
         "!./node_modules/**/*"
     ],
     "files": [
+        "./config.ts",
+        "./typings/es6-promise/es6-promise.d.ts",
         "./typings/react-dom/react-dom.d.ts",
         "./typings/react/react.d.ts",
         "./typings/tsd.d.ts",
+        "./typings/whatwg-fetch/whatwg-fetch.d.ts",
         "./app.tsx"
     ]
 }

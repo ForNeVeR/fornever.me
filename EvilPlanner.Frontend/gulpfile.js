@@ -32,11 +32,7 @@ function bundle(def, watch) {
                 throw error;
             }
         })
-        .pipe(fs.createWriteStream('./app.js'));
-}
-
-function write(bundle) {
-    return bundle.pipe(fs.createWriteStream('./app.js'));
+        .pipe(fs.createWriteStream('./bundle.js'));
 }
 
 gulp.task('build', function () {
