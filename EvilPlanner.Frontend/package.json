@@ -3,9 +3,11 @@
   "version": "0.0.1",
   "description": "EvilPlanner Frontend",
   "scripts": {
+    "install": "tsd reinstall -s",
+    "clean": "gulp clean",
     "build": "gulp build",
     "watch": "gulp watch",
-    "browserify": "browserify app.ts -p tsify > bundle.js"
+    "deploy": "gulp deploy"
   },
   "repository": {
     "type": "git",
@@ -23,7 +25,13 @@
   "devDependencies": {
     "browserify": "^11.2.0",
     "gulp": "^3.9.0",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0",
+    "rimraf": "^2.4.3",
+    "tsd": "^0.6.5",
     "tsify": "^0.12.2",
-    "watchify": "^3.4.0"
+    "typescript": "^1.6.2",
+    "watchify": "^3.4.0",
+    "whatwg-fetch": "^0.9.0"
   }
 }

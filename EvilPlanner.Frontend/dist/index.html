@@ -1,11 +1,10 @@
-﻿@using System.Web.Configuration
 <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>F. von Never — @ViewBag.Title</title>
-    <base href="@WebConfigurationManager.AppSettings["BaseUrl"]"/>
-    <link rel="stylesheet" type="text/css" href="Content/css"/>
+    <title>F. von Never — Quote of the Day</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="css/quotations.css"/>
 </head>
 <body>
     <div id="header">
@@ -19,19 +18,19 @@
         </div>
     </div>
 
-    <div id="content">
-        <h1>@ViewBag.Title</h1>
+    <div id="content"></div>
+    <script src="bundle.js"></script>
 
-        @RenderBody()
-    </div>
     <footer>
         <div>
             <a class="tag" href="https://fornever.me/rss.xml">RSS</a>
-            <a class="tag" href="https://github.com/ForNeVeR/fornever.me">GitHub</a>
+            <a class="tag" href="https://github.com/ForNeVeR/EvilPlanner">GitHub</a>
         </div>
         <div>
-            Сайт сгенерирован при помощи
-            <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            Сайт функционирует при помощи
+            <a href="http://docs.freya.io/en/latest/">Freya</a>
+            и
+            <a href="https://facebook.github.io/react/index.html">React</a>
         </div>
     </footer>
 </body>

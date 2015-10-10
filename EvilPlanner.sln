@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "EvilPlanner", "EvilPlanner\EvilPlanner.fsproj", "{2BAD717B-C4C1-409E-94B7-B849089B33F0}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{88C7ABC1-B4AA-4519-B55E-A12C2938C636}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
@@ -29,10 +27,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2BAD717B-C4C1-409E-94B7-B849089B33F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2BAD717B-C4C1-409E-94B7-B849089B33F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2BAD717B-C4C1-409E-94B7-B849089B33F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2BAD717B-C4C1-409E-94B7-B849089B33F0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{885368A3-1091-4C5F-9D85-F6E0149F6087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{885368A3-1091-4C5F-9D85-F6E0149F6087}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{885368A3-1091-4C5F-9D85-F6E0149F6087}.Release|Any CPU.ActiveCfg = Release|Any CPU
