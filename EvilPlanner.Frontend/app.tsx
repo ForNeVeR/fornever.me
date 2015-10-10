@@ -1,21 +1,11 @@
 /// <reference path="typings/tsd.d.ts"/>
 
-import React = require('react');
-import ReactDOM = require('react-dom');
-
-import config = require('./config');
-
 declare var require: any;
-require('whatwg-fetch');
+import React = require('react');
+var ReactDOM = require('react-dom'); // TODO: Get rid of ReactDOM type errors
 
-var HelloMessage = React.createClass({
-  render: function() {
-    return <div>Hello World</div>;
-  }
-});
+import QuotationBlock = require('./quotation-block');
 
-React.render(<HelloMessage />, document.getElementById('content'));
-
-window.fetch(`${config.api}/quote/2015-10-10`).then((data) => {
-    window.alert(data);
-})
+ReactDOM.render(
+    <QuotationBlock />,
+    document.getElementById('content'));

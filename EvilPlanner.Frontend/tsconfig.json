@@ -26,6 +26,7 @@
         "./typings/react/react.d.ts",
         "./typings/tsd.d.ts",
         "./typings/whatwg-fetch/whatwg-fetch.d.ts",
-        "./app.tsx"
+        "./app.tsx",
+        "./quotation-block.tsx"
     ]
 }
