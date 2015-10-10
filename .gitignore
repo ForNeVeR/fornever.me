@@ -6,6 +6,7 @@
 /EvilPlanner.Frontend/*.js
 !/EvilPlanner.Frontend/gulpfile.js
 /EvilPlanner.Frontend/*.js.map
+/EvilPlanner.Frontend/dist/
 
 bin/
 obj/
