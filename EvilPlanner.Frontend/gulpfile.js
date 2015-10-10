@@ -51,7 +51,7 @@ gulp.task('clean', function (cb) {
 gulp.task('deploy', ['build'], function () {
     return gulp.src([
         '*.html',
-        'app.js',
+        'bundle.js',
         'css/*.css'
     ], {
         base: '.'

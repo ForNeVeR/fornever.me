@@ -25,6 +25,7 @@
   <ItemGroup>
     <Content Include="css\main.css" />
     <Content Include="css\quotations.css" />
+    <Content Include="gulpfile.js" />
     <Content Include="index.html" />
     <Content Include="web.config" />
   </ItemGroup>
