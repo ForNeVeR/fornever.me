@@ -17,7 +17,7 @@ type HomeController() =
     member this.Index() =
         async {
             use context = new EvilPlannerContext()
-            let! quotation = Quotations.getTodayQuote context
+            let! quotation = QuoteLogic.getTodayQuote context
             return this.quotationView  quotation
         } |> Async.StartAsTask
 
