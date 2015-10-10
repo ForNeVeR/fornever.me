@@ -15,6 +15,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Name>EvilPlanner.Backend</Name>
     <UseIISExpress>true</UseIISExpress>
+      <NameOfLastUsedPublishProfile>Production</NameOfLastUsedPublishProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -51,6 +52,8 @@
     </Otherwise>
   </Choose>
   <Import Project="$(FSharpTargetsPath)" />
+    <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+    <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <ProjectExtensions>
     <VisualStudio>
       <FlavorProperties Guid="{349c5851-65df-11da-9384-00065b846f21}">

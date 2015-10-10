@@ -4,8 +4,10 @@
   "description": "EvilPlanner Frontend",
   "scripts": {
     "install": "tsd reinstall -s",
+    "clean": "gulp clean",
     "build": "gulp build",
-    "watch": "gulp watch"
+    "watch": "gulp watch",
+    "deploy": "gulp deploy"
   },
   "repository": {
     "type": "git",
@@ -25,6 +27,7 @@
     "gulp": "^3.9.0",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
+    "rimraf": "^2.4.3",
     "tsd": "^0.6.5",
     "tsify": "^0.12.2",
     "typescript": "^1.6.2",

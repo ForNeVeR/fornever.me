@@ -10,8 +10,8 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <LastUsedPlatform>Any CPU</LastUsedPlatform>
     <SiteUrlToLaunchAfterPublish />
     <LaunchSiteAfterPublish>True</LaunchSiteAfterPublish>
-    <ExcludeApp_Data>True</ExcludeApp_Data>
-    <publishUrl>e:\Sites\EvilPlanner\</publishUrl>
+    <ExcludeApp_Data>False</ExcludeApp_Data>
+    <publishUrl>E:\Sites\EvilPlanner</publishUrl>
     <DeleteExistingFiles>False</DeleteExistingFiles>
   </PropertyGroup>
 </Project>

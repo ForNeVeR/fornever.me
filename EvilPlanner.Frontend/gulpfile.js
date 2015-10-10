@@ -4,6 +4,7 @@
 var browserify = require('browserify');
 var fs = require('fs');
 var gulp = require('gulp');
+var rimraf = require('rimraf');
 var watchify = require('watchify');
 
 function definition(watch) {
@@ -41,4 +42,16 @@ gulp.task('build', function () {
 
 gulp.task('watch', function (cb) {
     definition(true);
+});
+
+gulp.task('clean', function (cb) {
+    rimraf('./dist', cb);
+});
+
+gulp.task('deploy', ['build'], function () {
+    return gulp.src([
+        '*.html',
+        'app.js',
+        'css/*.css'
+    ]).pipe(gulp.dest('./dist'));
 });

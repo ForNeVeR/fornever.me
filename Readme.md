@@ -54,6 +54,10 @@ ASP.NET defaults).
 By default production version of EvilPlanner assumes that it will be deployed
 to https://fornever.me/plans/.
 
+Frontend project configuration is stored inside of the `config.ts` file. It
+should point to an API endpoint and it will be applied on TypeScript
+compilation.
+
 Build and Deploy
 ----------------
 EvilPlanner consists of independent backend and frontend parts. They should be
@@ -85,6 +89,14 @@ will start it automatically; you also have an option to start it from the
 terminal:
 
     npm run watch
+
+For production, you should use the following commands:
+
+    npm run clean
+    npm run deploy
+    cp ./dist /some/server/path
+
+Frontend project may be deployed to any server.
 
 Creating Database Migration
 ---------------------------
