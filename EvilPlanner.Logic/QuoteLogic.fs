@@ -68,10 +68,3 @@ let getQuote (date : DateTime) : Async<Quotation option> =
                 let! quote = createQuote context transaction today
                 return Some quote
     }
-
-let getTodayQuote () : Async<Quotation> =
-    let today = DateTime.UtcNow.Date
-    async {
-        let! quote = getQuote today
-        return Option.get quote
-    }

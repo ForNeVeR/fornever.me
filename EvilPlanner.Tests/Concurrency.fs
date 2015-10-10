@@ -1,5 +1,7 @@
 ﻿module EvilPlanner.Tests.Concurrency
 
+open System
+
 open EvilPlanner.Data
 open EvilPlanner.Logic.DatabaseExtensions
 open EvilPlanner.Logic.QuoteLogic
@@ -19,7 +21,8 @@ let private clearDailyQuotes () =
 
 let private executeTransaction () =
     async {
-        let! quote = getTodayQuote ()
+        let today = DateTime.UtcNow.Date
+        let! quote = getQuote today
         ignore quote
     }
 
