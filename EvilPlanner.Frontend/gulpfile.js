@@ -1,4 +1,4 @@
-/// <binding AfterBuild='build' />
+/// <binding AfterBuild='build' ProjectOpened='watch' />
 'use strict';
 
 var browserify = require('browserify');
