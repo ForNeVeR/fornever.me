@@ -94,7 +94,7 @@ For production, you should use the following commands:
 
     npm run clean
     npm run deploy
-    cp -r ./dist /some/server/path
+    cp -r ./dist/* $TargetPath
 
 Frontend project may be deployed to any server.
 
