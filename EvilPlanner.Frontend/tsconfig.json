@@ -1,0 +1,32 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "isolatedModules": false,
+        "jsx": "react",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "declaration": false,
+        "noImplicitAny": false,
+        "removeComments": true,
+        "noLib": false,
+        "preserveConstEnums": true,
+        "suppressImplicitAnyIndexErrors": true
+    },
+    "filesGlob": [
+        "./**/*.ts",
+        "./**/*.tsx",
+        "!./node_modules/**/*"
+    ],
+    "files": [
+        "./config.ts",
+        "./typings/es6-promise/es6-promise.d.ts",
+        "./typings/react-dom/react-dom.d.ts",
+        "./typings/react/react.d.ts",
+        "./typings/tsd.d.ts",
+        "./typings/whatwg-fetch/whatwg-fetch.d.ts",
+        "./app.tsx",
+        "./quotation-block.tsx"
+    ]
+}
