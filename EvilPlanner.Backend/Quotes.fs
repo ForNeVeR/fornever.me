@@ -42,9 +42,8 @@ let private date =
 let private getQuoteByDate _ =
     freya {
         let! date = date
-        use context = new EvilPlannerContext ()
-        let! dbQuote = (Freya.fromAsync QuoteLogic.getQuote) (context, date)
-        let quote = Quote <| Option.get dbQuote
+        let! dbQuote = (Freya.fromAsync QuoteLogic.getQuote) date
+        let quote = Quote <| Option.get dbQuote // TODO: Return 404 if not found
         return Common.resource quote
     }
 

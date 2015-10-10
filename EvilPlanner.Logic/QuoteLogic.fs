@@ -51,12 +51,14 @@ let private createQuote (context : EvilPlannerContext) (transaction : DbContextT
             return quotation
         }
 
-let getQuote (context : EvilPlannerContext, date : DateTime) : Async<Quotation option> =
+let getQuote (date : DateTime) : Async<Quotation option> =
     let today = DateTime.UtcNow.Date
-    if today = date
-    then getDailyQuote context date
-    else
-        async {
+    async {
+        use context = new EvilPlannerContext ()
+        if today <> date
+        then
+            return! getDailyQuote context date
+        else
             let! currentQuote = getDailyQuote context today
 
             match currentQuote with
@@ -65,11 +67,11 @@ let getQuote (context : EvilPlannerContext, date : DateTime) : Async<Quotation o
                 use transaction = context.Database.BeginTransaction()
                 let! quote = createQuote context transaction today
                 return Some quote
-        }
+    }
 
-let getTodayQuote (context : EvilPlannerContext) : Async<Quotation> =
+let getTodayQuote () : Async<Quotation> =
     let today = DateTime.UtcNow.Date
     async {
-        let! quote = getQuote (context, today)
+        let! quote = getQuote today
         return Option.get quote
     }

@@ -19,8 +19,7 @@ let private clearDailyQuotes () =
 
 let private executeTransaction () =
     async {
-        use context = new EvilPlannerContext ()
-        let! quote = getTodayQuote context
+        let! quote = getTodayQuote ()
         ignore quote
     }
 
