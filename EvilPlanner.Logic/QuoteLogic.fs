@@ -1,4 +1,4 @@
-﻿module EvilPlanner.Logic.Quotations
+﻿module EvilPlanner.Logic.QuoteLogic
 
 open System
 open System.Data
@@ -51,14 +51,27 @@ let private createQuote (context : EvilPlannerContext) (transaction : DbContextT
             return quotation
         }
 
-let getTodayQuote (context : EvilPlannerContext) : Async<Quotation> =
+let getQuote (date : DateTime) : Async<Quotation option> =
+    let today = DateTime.UtcNow.Date
     async {
-        let today = DateTime.UtcNow.Date
-        let! currentQuote = getDailyQuote context today
+        use context = new EvilPlannerContext ()
+        if today <> date
+        then
+            return! getDailyQuote context date
+        else
+            let! currentQuote = getDailyQuote context today
 
-        match currentQuote with
-        | Some(q) -> return q
-        | None    ->
-            use transaction = context.Database.BeginTransaction()
-            return! createQuote context transaction today
+            match currentQuote with
+            | Some(q) -> return Some q
+            | None    ->
+                use transaction = context.Database.BeginTransaction()
+                let! quote = createQuote context transaction today
+                return Some quote
+    }
+
+let getTodayQuote () : Async<Quotation> =
+    let today = DateTime.UtcNow.Date
+    async {
+        let! quote = getQuote today
+        return Option.get quote
     }

@@ -52,7 +52,7 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="DatabaseExtensions.fs" />
-    <Compile Include="Quotations.fs" />
+    <Compile Include="QuoteLogic.fs" />
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

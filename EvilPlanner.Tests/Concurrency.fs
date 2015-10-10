@@ -2,7 +2,7 @@
 
 open EvilPlanner.Data
 open EvilPlanner.Logic.DatabaseExtensions
-open EvilPlanner.Logic.Quotations
+open EvilPlanner.Logic.QuoteLogic
 
 let private getDailyQuotes (context : EvilPlannerContext) =
     toListAsync context.DailyQuotes
@@ -11,16 +11,15 @@ let private clearDailyQuotes () =
     async {
         use context = new EvilPlannerContext ()
         let! quotes = getDailyQuotes context
-        
+
         ignore <| context.DailyQuotes.RemoveRange quotes
-        
+
         do! saveChangesAsync context
     }
 
 let private executeTransaction () =
     async {
-        use context = new EvilPlannerContext ()
-        let! quote = getTodayQuote context
+        let! quote = getTodayQuote ()
         ignore quote
     }
 
