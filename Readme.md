@@ -69,7 +69,7 @@ You may compile and publish the code from Visual Studio, or using `msbuild`
 variable):
 
     nuget restore
-    msbuild EvilPlanner.sln /p:Platform="Any CPU" /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile="Production"
+    msbuild EvilPlanner.sln /p:Platform="Any CPU" /p:Configuration=Release /p:ProductionDeploy=true /p:PublishProfile=Production
 
 ### Frontend
 To compile frontend, you'll need a local npm installation. First of all,
@@ -94,7 +94,7 @@ For production, you should use the following commands:
 
     npm run clean
     npm run deploy
-    cp ./dist /some/server/path
+    cp -r ./dist /some/server/path
 
 Frontend project may be deployed to any server.
 

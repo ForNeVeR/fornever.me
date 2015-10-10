@@ -19,6 +19,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "EvilPlanner.Tests", "EvilPl
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "EvilPlanner.Backend", "EvilPlanner.Backend\EvilPlanner.Backend.fsproj", "{67FDBABF-7E9D-4CDA-BFBD-5B1FBEADFB1B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvilPlanner.Frontend", "EvilPlanner.Frontend\EvilPlanner.Frontend.csproj", "{17D1661D-128F-4AD4-AE89-2A93D3D033AB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{67FDBABF-7E9D-4CDA-BFBD-5B1FBEADFB1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67FDBABF-7E9D-4CDA-BFBD-5B1FBEADFB1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67FDBABF-7E9D-4CDA-BFBD-5B1FBEADFB1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17D1661D-128F-4AD4-AE89-2A93D3D033AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17D1661D-128F-4AD4-AE89-2A93D3D033AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17D1661D-128F-4AD4-AE89-2A93D3D033AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17D1661D-128F-4AD4-AE89-2A93D3D033AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

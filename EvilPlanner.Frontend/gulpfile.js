@@ -53,5 +53,7 @@ gulp.task('deploy', ['build'], function () {
         '*.html',
         'app.js',
         'css/*.css'
-    ]).pipe(gulp.dest('./dist'));
+    ], {
+        base: '.'
+    }).pipe(gulp.dest('./dist'));
 });
