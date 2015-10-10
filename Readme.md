@@ -55,13 +55,36 @@ By default production version of EvilPlanner assumes that it will be deployed
 to https://fornever.me/plans/.
 
 Build and Deploy
-------------
+----------------
+EvilPlanner consists of independent backend and frontend parts. They should be
+compiled and deployed separately.
+
+### Backend
 You may compile and publish the code from Visual Studio, or using `msbuild`
 (assuming that you have both `nuget` and `msbuild` in your `PATH` environment
 variable):
 
     nuget restore
     msbuild EvilPlanner.sln /p:Platform="Any CPU" /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile="Production"
+
+### Frontend
+To compile frontend, you'll need a local npm installation. First of all,
+install used packages:
+
+    cd EvilPlanner.Frontend
+    npm install
+
+After that, you can compile code with Visual Studio (it will use the prodived
+`Gulpfile.js`) or from the command line:
+
+    npm run build
+
+#### Watch
+The `watch` task has been provided for the development purposes. Visual Studio
+will start it automatically; you also have an option to start it from the
+terminal:
+
+    npm run watch
 
 Creating Database Migration
 ---------------------------

@@ -1,0 +1,29 @@
+{
+  "name": "evil-planner",
+  "version": "0.0.1",
+  "description": "EvilPlanner Frontend",
+  "scripts": {
+    "build": "gulp build",
+    "watch": "gulp watch",
+    "browserify": "browserify app.ts -p tsify > bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ForNeVeR/EvilPlanner.git"
+  },
+  "keywords": [
+    "frontend"
+  ],
+  "author": "F. von Never",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ForNeVeR/EvilPlanner/issues"
+  },
+  "homepage": "https://github.com/ForNeVeR/EvilPlanner#readme",
+  "devDependencies": {
+    "browserify": "^11.2.0",
+    "gulp": "^3.9.0",
+    "tsify": "^0.12.2",
+    "watchify": "^3.4.0"
+  }
+}

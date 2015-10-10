@@ -1,9 +1,11 @@
 /packages/
 /.vs/
 
+/EvilPlanner.Frontend/node_modules/
+/EvilPlanner.Frontend/*.js
+/EvilPlanner.Frontend/*.js.map
+
 bin/
 obj/
-
-App_Data/
 
 *.user
