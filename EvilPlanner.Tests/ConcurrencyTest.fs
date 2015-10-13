@@ -1,14 +1,14 @@
 ﻿namespace EvilPlanner.Tests
 
 open System
+open System.Threading.Tasks
 
-open NUnit.Framework
+open Xunit
 
 open EvilPlanner.Data
 open EvilPlanner.Logic.DatabaseExtensions
 open EvilPlanner.Logic.QuoteLogic
 
-[<TestFixture>]
 type public ConcurrencyTest () =
     do Migrations.Configuration.EnableAutoMigration ()
 
@@ -37,8 +37,8 @@ type public ConcurrencyTest () =
             return! countAsync context.DailyQuotes
         }
 
-    [<Test>]
-    member __.ConcurrencyTest () : unit =
+    [<Fact>]
+    member __.ConcurrencyTest () : Task<unit> =
         let concurrencyLevel = 20
         async {
             do! clearDailyQuotes ()
@@ -49,11 +49,11 @@ type public ConcurrencyTest () =
             let! quotes = Async.Parallel tasks
 
             let! count = countDailyQuotes ()
-            Assert.IsTrue ((count = 1))
+            Assert.Equal (1, count)
 
             let successCount =
                 quotes
-                |> Seq.filter (fun q -> Option.isSome q)
+                |> Seq.filter Option.isSome
                 |> Seq.length
-            Assert.AreEqual (concurrencyLevel, successCount)
-        } |> Async.RunSynchronously |> ignore
+            Assert.Equal (concurrencyLevel, successCount)
+        } |> Async.StartAsTask
