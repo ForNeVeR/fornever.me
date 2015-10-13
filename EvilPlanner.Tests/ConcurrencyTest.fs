@@ -28,8 +28,7 @@ type public ConcurrencyTest () =
     let executeTransaction () =
         async {
             let today = DateTime.UtcNow.Date
-            let! quote = getQuote today
-            ignore quote
+            return! getQuote today
         }
 
     let countDailyQuotes () =
@@ -40,14 +39,21 @@ type public ConcurrencyTest () =
 
     [<Test>]
     member __.ConcurrencyTest () : unit =
+        let concurrencyLevel = 20
         async {
             do! clearDailyQuotes ()
 
             let tasks =
-                seq { 1 .. 20 }
+                seq { 1 .. concurrencyLevel }
                 |> Seq.map (fun _ -> executeTransaction ())
-            do! Async.Ignore <| Async.Parallel tasks
+            let! quotes = Async.Parallel tasks
 
             let! count = countDailyQuotes ()
-            return count = 1
+            Assert.IsTrue ((count = 1))
+
+            let successCount =
+                quotes
+                |> Seq.filter (fun q -> Option.isSome q)
+                |> Seq.length
+            Assert.AreEqual (concurrencyLevel, successCount)
         } |> Async.RunSynchronously |> ignore
