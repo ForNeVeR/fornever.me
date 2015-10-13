@@ -10,6 +10,8 @@ open EvilPlanner.Logic.QuoteLogic
 
 [<TestFixture>]
 type public ConcurrencyTest () =
+    do Migrations.Configuration.EnableAutoMigration ()
+
     let getDailyQuotes (context : EvilPlannerContext) =
         toListAsync context.DailyQuotes
 
