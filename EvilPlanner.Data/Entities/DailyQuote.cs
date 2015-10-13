@@ -7,7 +7,7 @@ namespace EvilPlanner.Data.Entities
     {
         public long Id { get; set; }
 
-        [Index]
+        [Index(IsUnique = true)]
         public DateTime Date { get; set; }
 
         public Quotation Quotation { get; set; }
