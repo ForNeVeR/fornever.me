@@ -12,4 +12,6 @@ before_build:
 
     $doc.SelectSingleNode('//connectionStrings/add[@name="EvilPlannerContext"]').connectionString = "Server=$sqlInstance; Database=EvilPlannerTests; Trusted_connection=true"
 
-    $doc.Save($config)- nuget restore
+    $doc.Save($config)
+
+- nuget restore
