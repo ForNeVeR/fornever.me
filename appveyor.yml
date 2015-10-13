@@ -1,0 +1,17 @@
+services:
+    - mssql2014
+before_build:
+- ps: >-
+    $sqlInstance = '(local)\SQL2014'
+
+    sqlcmd -S $sqlInstance -Q "create database EvilPlannerTests"
+
+    $config = "$env:appveyor_build_folder\EvilPlanner.Tests\App.config"
+
+    [xml] $doc = Get-Content $config
+
+    $doc.SelectSingleNode('//connectionStrings/add[@name="EvilPlannerContext"]').connectionString = "Server=$sqlInstance; Database=EvilPlannerTests; Trusted_connection=true"
+
+    $doc.Save($config)
+
+- nuget restore
