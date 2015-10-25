@@ -1,8 +1,9 @@
+/.stack-work/
+/.vs/
+/packages/
+
 /dist/
 /_cache/
 /_site/
-/.stack-work/
-/.vs/
-
 bin/
 obj/
