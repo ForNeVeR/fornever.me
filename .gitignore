@@ -2,3 +2,7 @@
 /_cache/
 /_site/
 /.stack-work/
+/.vs/
+
+bin/
+obj/
