@@ -17,6 +17,7 @@ open Freya.Router.Lenses
 
 let private handleIndex _ =
     freya {
+        let! index = Freya.fromAsync (Templates.execute<string> "Index") ""
         return
             {
                 Description =
@@ -26,7 +27,7 @@ let private handleIndex _ =
                         MediaType = Some MediaType.Html
                         Languages = None
                     }
-                Data = "<h1>Hello World</h1>"B
+                Data = Encoding.UTF8.GetBytes index
             }
     }
 

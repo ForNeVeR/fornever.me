@@ -1,5 +1,7 @@
 ﻿module ForneverMind.Common
 
+open System.IO
+open System.Reflection
 open System.Text
 
 open Arachne.Http
@@ -18,3 +20,6 @@ let machine =
         charsetsSupported utf8
         mediaTypesSupported json
     }
+
+let applicationPath = Assembly.GetExecutingAssembly().CodeBase
+let viewsDirectory = Path.Combine (applicationPath, "Views")
