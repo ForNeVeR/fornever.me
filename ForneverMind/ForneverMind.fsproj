@@ -105,6 +105,7 @@
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Config.fs" />
     <Compile Include="Common.fs" />
+    <Compile Include="Less.fs" />
     <Compile Include="Templates.fs" />
     <Compile Include="Pages.fs" />
     <Compile Include="Routes.fs" />
@@ -139,6 +140,10 @@
     </Reference>
     <Reference Include="Arachne.Uri.Template">
       <HintPath>..\packages\Arachne.Uri.Template.2.3.25\lib\net45\Arachne.Uri.Template.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="dotless.Core">
+      <HintPath>..\packages\dotless.1.5.1\lib\dotless.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="FParsec">
