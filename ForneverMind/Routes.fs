@@ -17,7 +17,7 @@ open Freya.Router.Lenses
 
 let private handleIndex _ =
     freya {
-        let! index = Freya.fromAsync (Templates.execute<string> "Index") ""
+        let! index = Freya.fromAsync (Templates.render "Index") ""
         return
             {
                 Description =

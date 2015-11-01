@@ -2,24 +2,16 @@
 
 open System.IO
 
-open RazorEngine
+open RazorEngine.Configuration
 open RazorEngine.Templating
 
-let private readFile path =
+let private razor =
+    let templateManager = ResolvePathTemplateManager <| Seq.singleton Config.viewsDirectory
+    let config = TemplateServiceConfiguration (DisableTempFileLocking = true, TemplateManager = templateManager)
+    RazorEngineService.Create config
+
+let render<'a> (name : string) (model : 'a) : Async<string> =
     async {
-        use stream = File.OpenText path
-        return! Async.AwaitTask <| stream.ReadToEndAsync ()
-    }
-
-let private getViewPath name =
-    let path = Path.Combine (Common.viewsDirectory, name + ".cshtml")
-    assert (Path.GetDirectoryName path = Common.viewsDirectory)
-    path
-
-let execute<'a> name (model : 'a) =
-    async {
-        let path = getViewPath name
-        let! template = readFile path
-
-        return (Engine.Razor.RunCompile (template, name, typeof<'a>, model))
+        do! Async.SwitchToThreadPool ()
+        return razor.RunCompile (name, typeof<'a>, model)
     }
