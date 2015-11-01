@@ -1,4 +1,4 @@
-fornever.me: Engineer, Programmer, Gentleman [![Build status](https://ci.appveyor.com/api/projects/status/dh7qx27hrjs8chp3/branch/develop?svg=true)](https://ci.appveyor.com/project/ForNeVeR/fornever-me/branch/develop)
+fornever.me: Engineer, Programmer, Gentleman [![Status Enfer](https://img.shields.io/badge/status-enfer-orange.svg)](https://github.com/ForNeVeR/andivionian-status-classifier) [![Build status](https://ci.appveyor.com/api/projects/status/dh7qx27hrjs8chp3/branch/develop?svg=true)](https://ci.appveyor.com/project/ForNeVeR/fornever-me/branch/develop)
 ============================================
 
 This is the [fornever.me][] site source code. It is mainly written using
