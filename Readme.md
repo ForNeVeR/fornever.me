@@ -1,4 +1,4 @@
-fornever.me: Engineer, Programmer, Gentleman [![Build Status](https://travis-ci.org/ForNeVeR/fornever.me.svg?branch=master)](https://travis-ci.org/ForNeVeR/fornever.me)
+fornever.me: Engineer, Programmer, Gentleman [![Build status](https://ci.appveyor.com/api/projects/status/dh7qx27hrjs8chp3/branch/develop?svg=true)](https://ci.appveyor.com/project/ForNeVeR/fornever-me/branch/develop)
 ============================================
 
 This is the [fornever.me][] site source code. It is mainly written using

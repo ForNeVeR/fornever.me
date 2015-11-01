@@ -1,4 +1,11 @@
+/.stack-work/
+/.vs/
+/packages/
+
 /dist/
 /_cache/
 /_site/
-/.stack-work/
+bin/
+obj/
+
+*.user

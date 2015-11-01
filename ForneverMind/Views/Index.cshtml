@@ -1,6 +1,10 @@
----
-title: int 20h
----
+@using RazorEngine.Templating
+@inherits TemplateBase<string>
+
+@{
+    Layout = "_Layout.cshtml";
+    ViewBag.Title = "int 20h";
+}
 
 <p>Привет!</p>
 
