@@ -93,6 +93,13 @@
   <ItemGroup>
     <Content Include="images\2013-09-01-exception-diagram.png" />
     <Content Include="images\2015-03-22-spyxx-tree.png" />
+    <Content Include="less\contact.less" />
+    <Content Include="less\fonts.less" />
+    <Content Include="less\layout.less" />
+    <Content Include="less\main.less" />
+    <Content Include="less\pt_mono.less" />
+    <Content Include="less\styles.less" />
+    <Content Include="less\syntax.less" />
     <Content Include="Views\_Layout.cshtml" />
     <Content Include="Views\Index.cshtml" />
     <Compile Include="AssemblyInfo.fs" />
