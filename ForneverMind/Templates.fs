@@ -10,8 +10,8 @@ let private razor =
     let config = TemplateServiceConfiguration (DisableTempFileLocking = true, TemplateManager = templateManager)
     RazorEngineService.Create config
 
-let render<'a> (name : string) (model : 'a) : Async<string> =
+let render<'a when 'a : null> (name : string) (model : 'a option) : Async<string> =
     async {
         do! Async.SwitchToThreadPool ()
-        return razor.RunCompile (name, typeof<'a>, model)
+        return razor.RunCompile (name, typeof<'a>, Option.toObj model)
     }

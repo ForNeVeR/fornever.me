@@ -98,6 +98,7 @@
     <Compile Include="Config.fs" />
     <Compile Include="Common.fs" />
     <Compile Include="Templates.fs" />
+    <Compile Include="Pages.fs" />
     <Compile Include="Routes.fs" />
     <Compile Include="Application.fs" />
     <Content Include="Web.config" />
