@@ -159,6 +159,10 @@
       <HintPath>..\packages\Arachne.Uri.Template.2.3.25\lib\net45\Arachne.Uri.Template.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="CommonMark">
+      <HintPath>..\packages\CommonMark.NET.0.10.0\lib\net45\CommonMark.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="dotless.Core">
       <HintPath>..\packages\dotless.1.5.1\lib\dotless.Core.dll</HintPath>
       <Private>True</Private>

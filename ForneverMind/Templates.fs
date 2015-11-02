@@ -1,7 +1,5 @@
 ﻿module ForneverMind.Templates
 
-open System.IO
-
 open RazorEngine.Configuration
 open RazorEngine.Templating
 
