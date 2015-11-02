@@ -6,7 +6,7 @@ import config = require('./config');
 declare var require: any;
 require('whatwg-fetch');
 
-function padWithZeros(text, length): string {
+function padWithZeros(text: string, length: number): string {
     while (text.length < length) {
         text = '0' + text;
     }
@@ -15,7 +15,7 @@ function padWithZeros(text, length): string {
 }
 
 function formatDate(date: Date): string {
-    return `${date.getUTCFullYear()}-${padWithZeros(date.getUTCMonth() + 1, 2)}-${padWithZeros(date.getUTCDate(), 2)}`
+    return `${date.getUTCFullYear()}-${padWithZeros((date.getUTCMonth() + 1).toString(), 2)}-${padWithZeros(date.getUTCDate().toString(), 2)}`
 }
 
 interface QuotationBlockState {
