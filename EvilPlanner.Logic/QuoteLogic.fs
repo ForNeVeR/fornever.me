@@ -20,7 +20,7 @@ let private getDailyQuote (context : EvilPlannerContext) date =
 
 /// Creates quote for the current date. Can throw an UpdateException in case when the quote was
 /// already created by the concurrent query.
-let private createQuote (context : EvilPlannerContext) (transaction : DbContextTransaction) date =
+let private createQuote (context : EvilPlannerContext) date =
     async {
         // TODO: Optimize this randomization
         let count = query { for q in context.Quotations do count }
@@ -36,7 +36,6 @@ let private createQuote (context : EvilPlannerContext) (transaction : DbContextT
         context.DailyQuotes.Add dailyQuote |> ignore
 
         do! saveChangesAsync context
-        transaction.Commit()
 
         return quotation
     }
@@ -45,17 +44,15 @@ let getQuote (date : DateTime) : Async<Quotation option> =
     let today = DateTime.UtcNow.Date
     async {
         use context = new EvilPlannerContext ()
+        let! existingQuote = getDailyQuote context date
         if today <> date
         then
-            return! getDailyQuote context date
+            return existingQuote
         else
-            let! currentQuote = getDailyQuote context today
-
-            match currentQuote with
+            match existingQuote with
             | Some(q) -> return Some q
             | None    ->
-                use transaction = context.Database.BeginTransaction()
-                let! quoteOrError = Async.Catch <| createQuote context transaction today
+                let! quoteOrError = Async.Catch <| createQuote context today
                 let quote =
                     match quoteOrError with
                     | Choice1Of2 q -> async { return Some q }

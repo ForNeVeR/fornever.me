@@ -6,6 +6,18 @@ import config = require('./config');
 declare var require: any;
 require('whatwg-fetch');
 
+function padWithZeros(text: string, length: number): string {
+    while (text.length < length) {
+        text = '0' + text;
+    }
+
+    return text;
+}
+
+function formatDate(date: Date): string {
+    return `${date.getUTCFullYear()}-${padWithZeros((date.getUTCMonth() + 1).toString(), 2)}-${padWithZeros(date.getUTCDate().toString(), 2)}`
+}
+
 interface QuotationBlockState {
     text: string;
     sourceUrl: string;
@@ -32,8 +44,7 @@ class QuotationBlock extends React.Component<{}, QuotationBlockState>{
     }
 
     componentDidMount() {
-        var date = new Date();
-        var param = `${date.getUTCFullYear()}-${date.getUTCMonth() + 1}-${date.getUTCDate()}`;
+        var param = formatDate(new Date());
         window.fetch(`${config.api}/quote/${param}`).then((response) => {
             return response.json();
         }).then((message) => {

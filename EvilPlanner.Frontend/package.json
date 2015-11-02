@@ -1,6 +1,6 @@
 {
   "name": "evil-planner",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "EvilPlanner Frontend",
   "scripts": {
     "install": "tsd reinstall -s",
