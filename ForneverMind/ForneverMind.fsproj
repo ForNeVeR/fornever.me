@@ -93,11 +93,19 @@
   <ItemGroup>
     <Content Include="images\2013-09-01-exception-diagram.png" />
     <Content Include="images\2015-03-22-spyxx-tree.png" />
+    <Content Include="less\contact.less" />
+    <Content Include="less\fonts.less" />
+    <Content Include="less\layout.less" />
+    <Content Include="less\main.less" />
+    <Content Include="less\pt_mono.less" />
+    <Content Include="less\styles.less" />
+    <Content Include="less\syntax.less" />
     <Content Include="Views\_Layout.cshtml" />
     <Content Include="Views\Index.cshtml" />
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Config.fs" />
     <Compile Include="Common.fs" />
+    <Compile Include="Less.fs" />
     <Compile Include="Templates.fs" />
     <Compile Include="Pages.fs" />
     <Compile Include="Routes.fs" />
@@ -132,6 +140,10 @@
     </Reference>
     <Reference Include="Arachne.Uri.Template">
       <HintPath>..\packages\Arachne.Uri.Template.2.3.25\lib\net45\Arachne.Uri.Template.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="dotless.Core">
+      <HintPath>..\packages\dotless.1.5.1\lib\dotless.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="FParsec">
