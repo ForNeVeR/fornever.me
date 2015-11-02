@@ -12,9 +12,10 @@ open dotless.Core.configuration
 
 let private mainCss =
     let path = Config.lessDirectory
-    let config = DotlessConfiguration(RootPath = path, ImportAllFilesAsLess = true, InlineCssFiles = true, Web = false)
+    let config = DotlessConfiguration()
     let locator = ContainerFactory().GetContainer(config)
     let engine = (locator.GetService (typeof<ILessEngine>)) :?> ILessEngine
+    engine.CurrentDirectory <- path
 
     let fileName = Path.Combine (path, "main.less")
     let content = File.ReadAllText fileName
