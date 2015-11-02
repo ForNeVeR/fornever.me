@@ -121,8 +121,10 @@
     <Compile Include="Config.fs" />
     <Compile Include="Common.fs" />
     <Compile Include="Less.fs" />
+    <Compile Include="Markdown.fs" />
     <Compile Include="Templates.fs" />
     <Compile Include="Pages.fs" />
+    <Compile Include="Posts.fs" />
     <Compile Include="Routes.fs" />
     <Compile Include="Application.fs" />
     <Content Include="packages.config" />
