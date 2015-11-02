@@ -13,7 +13,7 @@ let private postFileName =
     freya {
         let! maybeName = Route.Atom_ "name" |> Freya.Lens.getPartial
         let name = maybeName |> Option.orElse ""
-        let fileName = Path.Combine (Config.postsDirectory, name + ".markdown") // TODO: Strip any special chars such as dots and especially slashes
+        let fileName = Path.Combine (Config.postsDirectory, name + ".markdown") // TODO: Validate any special chars such as dots and especially slashes
         return fileName
     } |> Freya.memo
 
@@ -23,22 +23,11 @@ let private checkPostExists =
         return File.Exists fileName
     }
 
-let private handlePost _ =
+let private handlePost state =
     freya {
         let! fileName = postFileName
         let! content = Freya.fromAsync Markdown.render fileName
-        let! page = Freya.fromAsync (Templates.render "Post") <| Some content // TODO: Add this template
-        return
-            {
-                Description =
-                    {
-                        Charset = Some Charset.Utf8
-                        Encodings = None
-                        MediaType = Some MediaType.Html
-                        Languages = None
-                    }
-                Data = Encoding.UTF8.GetBytes page
-            }
+        return! Pages.handlePage "Post" (Some content) state // TODO: Add this template
     }
 
 let post =
@@ -46,6 +35,6 @@ let post =
         including Common.machine
         methodsSupported Common.get
         exists checkPostExists
-        handleOk (handlePost)
+        handleOk handlePost
     } |> FreyaMachine.toPipeline
 

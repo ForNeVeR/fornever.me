@@ -7,9 +7,9 @@ open Freya.Core
 open Freya.Machine
 open Freya.Machine.Extensions.Http
 
-let private handlePage name _ =
+let handlePage templateName model _ =
     freya {
-        let! index = Freya.fromAsync (Templates.render name) None
+        let! content = Freya.fromAsync (Templates.render templateName) model
         return
             {
                 Description =
@@ -19,15 +19,15 @@ let private handlePage name _ =
                         MediaType = Some MediaType.Html
                         Languages = None
                     }
-                Data = Encoding.UTF8.GetBytes index
+                Data = Encoding.UTF8.GetBytes content
             }
     }
 
-let private page name =
+let private page templateName =
     freyaMachine {
         including Common.machine
         methodsSupported Common.get
-        handleOk (handlePage name)
+        handleOk (handlePage templateName None)
     } |> FreyaMachine.toPipeline
 
 let index = page "Index"
