@@ -1,7 +1,5 @@
 ﻿module ForneverMind.Common
 
-open System.Text
-
 open Arachne.Http
 open Freya.Core
 open Freya.Machine
