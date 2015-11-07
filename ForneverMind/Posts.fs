@@ -30,8 +30,8 @@ let private checkPostExists =
 let private handlePost state =
     freya {
         let! fileName = postFileName
-        let! content = Freya.fromAsync Markdown.render fileName
-        return! Pages.handlePage "Post" (Some content) state // TODO: Add this template
+        let! post = Freya.fromAsync Markdown.render fileName
+        return! Pages.handlePage "Post" (Some post) state
     }
 
 let post =

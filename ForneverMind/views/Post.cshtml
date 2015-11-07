@@ -1,0 +1,24 @@
+@using RazorEngine.Templating
+@inherits TemplateBase<ForneverMind.Models.PostModel>
+
+@{
+    Layout = "_Layout.cshtml";
+    ViewBag.Title = Model.Title;
+}
+
+<div class="info">
+    Дата публикации: Model.Date
+</div>
+
+@Model.HtmlContent
+
+<div id="disqus_thread"></div>
+
+@section scripts {
+    <script>
+        window.disqus_config = function () {
+            this.page.identifier = '@Model.CommentThreadId';
+        };
+    </script>
+    <script src="//fornever.disqus.com/embed.js"></script>
+}

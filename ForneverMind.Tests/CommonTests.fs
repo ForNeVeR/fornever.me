@@ -4,7 +4,7 @@ open Xunit
 
 open ForneverMind
 
-type public CommonTests() =
+type public CommonTests () =
     [<Fact>]
     member __.PathCheckTests () =
         Assert.True (Common.pathIsInsideDirectory "aaa" "aaa\\bbb\\ccc")
