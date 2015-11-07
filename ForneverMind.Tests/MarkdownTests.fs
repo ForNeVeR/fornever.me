@@ -10,18 +10,38 @@ open ForneverMind.Models
 
 type public MarkdownTests() =
 
-    let compareResult input expected =
+    let compareResult fileName input expected =
         use reader = new StringReader (input)
-        let actual = Markdown.processReader reader
+        let actual = Markdown.processReader fileName reader
 
         Assert.Equal (expected, actual)
 
     [<Fact>]
     member __.EmptyDocument () =
-        compareResult ""
+        compareResult "0001-01-01"
+            "
+---
+"
             {
                 Title = ""
                 CommentThreadId = ""
-                DateTime = DateTime.MinValue
-                HtmlContent = Environment.NewLine
+                Date = DateTime.MinValue
+                HtmlContent = ""
+            }
+
+    [<Fact>]
+    member __.SimpleMetadata () =
+        compareResult "2015-01-01"
+            "
+    title: Фильтры исключений в CLR
+    id: /posts/2013-09-01-clr-exception-filters_ru.html
+    description: Описание механизма фильтров исключений, доступного для некоторых языков CLR.
+---
+content
+"
+            {
+                Title = "Фильтры исключений в CLR"
+                CommentThreadId = "/posts/2013-09-01-clr-exception-filters_ru.html"
+                Date = DateTime(2015, 1, 1)
+                HtmlContent = "<p>content</p>" + Environment.NewLine
             }
