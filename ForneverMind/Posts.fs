@@ -1,7 +1,6 @@
 ﻿module ForneverMind.Posts
 
 open System.IO
-open System.Text
 
 open Arachne.Http
 open Freya.Core
@@ -10,11 +9,16 @@ open Freya.Machine.Extensions.Http
 open Freya.Router.Lenses
 
 let private postFileName =
+    let htmlExtension = ".html"
     freya {
         let! maybeName = Route.Atom_ "name" |> Freya.Lens.getPartial
-        let name = maybeName |> Option.orElse ""
-        let fileName = Path.Combine (Config.postsDirectory, name + ".markdown") // TODO: Validate any special chars such as dots and especially slashes
-        return fileName
+        let fileName = maybeName |> Option.orElse ""
+        let name = Path.GetFileNameWithoutExtension fileName
+        let extension = Path.GetExtension name
+        let templateName = if extension = htmlExtension then name else name + extension
+        let filePath = Path.Combine (Config.postsDirectory, templateName + ".markdown")
+        if not <| Common.pathIsInsideDirectory Config.postsDirectory filePath then failwith "Invalid file name"
+        return filePath
     } |> Freya.memo
 
 let private checkPostExists =
@@ -35,6 +39,7 @@ let post =
         including Common.machine
         methodsSupported Common.get
         exists checkPostExists
+
         handleOk handlePost
     } |> FreyaMachine.toPipeline
 
