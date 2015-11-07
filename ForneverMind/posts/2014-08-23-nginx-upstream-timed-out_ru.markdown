@@ -1,6 +1,5 @@
----
-title: Исправление ошибки upstream timed out в nginx
-description: Описание возможного исправления ошибки upstream timed out (110: Connection timed out) в nginx под Windows
+    title: Исправление ошибки upstream timed out в nginx
+    description: Описание возможного исправления ошибки upstream timed out (110: Connection timed out) в nginx под Windows
 ---
 
 Мне много приходится работать под разными операционными системами, и как-то раз дошла очередь и до настройки всем известного сервера nginx под Windows.

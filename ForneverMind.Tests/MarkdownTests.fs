@@ -24,7 +24,7 @@ type public MarkdownTests() =
 "
             {
                 Title = ""
-                CommentThreadId = ""
+                CommentThreadId = "/posts/0001-01-01.html"
                 Date = DateTime.MinValue
                 HtmlContent = ""
             }
@@ -44,4 +44,17 @@ content
                 CommentThreadId = "/posts/2013-09-01-clr-exception-filters_ru.html"
                 Date = DateTime(2015, 1, 1)
                 HtmlContent = "<p>content</p>" + Environment.NewLine
+            }
+
+    [<Fact>]
+    member __.LegacyCommentId () =
+        compareResult "0001-01-01_File_Name"
+            "
+---
+"
+            {
+                Title = ""
+                CommentThreadId = "/posts/0001-01-01_File_Name.html"
+                Date = DateTime.MinValue
+                HtmlContent = ""
             }

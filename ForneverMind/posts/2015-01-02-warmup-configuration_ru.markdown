@@ -1,6 +1,5 @@
----
-title: Настройка пути к шаблонам в WarmuP
-description: Конфигурирование WarmuP с настройкой путей к шаблонам.
+    title: Настройка пути к шаблонам в WarmuP
+    description: Конфигурирование WarmuP с настройкой путей к шаблонам.
 ---
 
 При подготовке пакета для [Chocolatey](http://chocolatey.org/) столкнулся с инструментом [WarmuP](https://github.com/chucknorris/warmup). Это интересный инструмент для шаблонизации наборов файлов, в Chocolatey рекомендуют использовать его для разворачивания [шаблонных пакетов](https://github.com/chocolatey/chocolateytemplates/).

@@ -1,7 +1,6 @@
 ﻿module ForneverMind.Markdown
 
 open System
-open System.Collections.Generic
 open System.Globalization
 open System.IO
 open System.Text
@@ -12,12 +11,22 @@ open CommonMark.Syntax
 
 open ForneverMind.Models
 
-type Formatter (target, settings, ignoredBlocks : HashSet<Block>) =
-    inherit HtmlFormatter (target, settings) with
+type Formatter (target, settings) =
+    inherit HtmlFormatter (target, settings)
+    let skippedCode = ref false
+    let skippedRuler = ref false
+
     override __.WriteBlock (block, isOpening, isClosing, ignoreChildNodes) =
-        if not <| ignoredBlocks.Contains block
-        then base.WriteBlock (block, isOpening, isClosing, ref ignoreChildNodes)
-        else ()
+        let skipCode = not (!skippedCode) && block.Tag = BlockTag.IndentedCode
+        let skipRuler = not (!skippedRuler) && block.Tag = BlockTag.HorizontalRuler
+        match skipCode, skipRuler with
+        | (true, _) -> skippedCode := true; ()
+        | (_, true) -> skippedRuler := true; ()
+        | _ ->
+            ignoreChildNodes <- false
+            base.WriteBlock (block, isOpening, isClosing, ref ignoreChildNodes)
+
+
 
 let private getMetadata (block : EnumeratorEntry option) =
     match block with
@@ -33,7 +42,10 @@ let private getMetadata (block : EnumeratorEntry option) =
             | _ -> failwithf "Cannot parse metadata line %A" s)
         |> Map.ofSeq
 
-let private readMetadata dateString documentNodes =
+let private legacyCommentId fileName =
+    sprintf "/posts/%s.html" fileName
+
+let private readMetadata (fileName : string) documentNodes =
     let takeUntil cond seq =
         let found = ref false
         seq
@@ -53,36 +65,31 @@ let private readMetadata dateString documentNodes =
         |> Seq.tryHead
 
     let metadata = getMetadata metadataBlock
-    let getMeta key =
+    let getMeta key def =
         match Map.tryFind key metadata with
         | Some v -> v
-        | None -> ""
+        | None -> def
 
+    let dateString = fileName.Substring (0, "yyyy-MM-dd".Length)
     let date = DateTime.ParseExact (dateString, "yyyy-MM-dd", CultureInfo.InvariantCulture)
 
     {
-        Title = getMeta "title"
-        CommentThreadId = getMeta "id"
+        Title = getMeta "title" ""
+        CommentThreadId = getMeta "id" <| legacyCommentId fileName
         Date = date
         HtmlContent = ""
-    }, metadataNodes
+    }
 
-let getParseSettings metadataNodes =
+let getParseSettings =
     let settings = CommonMarkSettings.Default.Clone ()
-    settings.OutputDelegate <- fun doc output settings -> Formatter(output, settings, metadataNodes).WriteDocument(doc)
+    settings.OutputDelegate <- fun doc output settings -> Formatter(output, settings).WriteDocument(doc)
     settings
 
 let processReader (fileName : string) (reader : TextReader)  =
     use target = new StringWriter ()
     let document = CommonMarkConverter.Parse reader
-    let dateString = fileName.Substring (0, "yyyy-MM-dd".Length)
-    let post, metadataNodes = readMetadata dateString <| document.AsEnumerable ()
-    let metadataBlocks =
-        metadataNodes
-        |> Seq.map (fun n -> n.Block)
-        |> HashSet
-    let settings = getParseSettings metadataBlocks
-
+    let post = readMetadata (Path.GetFileNameWithoutExtension fileName) <| document.AsEnumerable ()
+    let settings = getParseSettings
 
     CommonMarkConverter.ProcessStage3 (document, target, settings)
 

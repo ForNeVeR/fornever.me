@@ -7,16 +7,17 @@
 }
 
 <div class="info">
-    Дата публикации: Model.Date
+    Дата публикации: @Model.Date.ToString("yyyy.MM.dd")
 </div>
 
-@Model.HtmlContent
+@Raw(Model.HtmlContent)
 
 <div id="disqus_thread"></div>
 
 @section scripts {
     <script>
         window.disqus_config = function () {
+            this.page.url = window.location.toString();
             this.page.identifier = '@Model.CommentThreadId';
         };
     </script>
