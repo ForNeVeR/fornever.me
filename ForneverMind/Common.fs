@@ -1,6 +1,6 @@
 ﻿module ForneverMind.Common
 
-open System.Text
+open System.IO
 
 open Arachne.Http
 open Freya.Core
@@ -18,3 +18,8 @@ let machine =
         charsetsSupported utf8
         mediaTypesSupported json
     }
+
+let pathIsInsideDirectory directory path =
+    let fullDirectory = Path.GetFullPath directory
+    let fullPath = Path.GetFullPath path
+    fullPath.StartsWith fullDirectory

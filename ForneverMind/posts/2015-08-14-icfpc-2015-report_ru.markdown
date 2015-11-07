@@ -1,6 +1,5 @@
----
-title: Отчёт об ICFP Contest 2015
-description: Мой отчёт о прошедшем соревновании.
+    title: Отчёт об ICFP Contest 2015
+    description: Мой отчёт о прошедшем соревновании.
 ---
 
 Настало время отчитаться по результатам [ICFP Contest][icfp-contest] 2015.

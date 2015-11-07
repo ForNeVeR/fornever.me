@@ -1,6 +1,5 @@
----
-title: UI Automation и TPageControl из библиотеки VCL
-description: Работа со страницами VCL TPageControl с помощью .NET UI Automation.
+    title: UI Automation и TPageControl из библиотеки VCL
+    description: Работа со страницами VCL TPageControl с помощью .NET UI Automation.
 ---
 
 [UI Automation](https://msdn.microsoft.com/en-us/library/ms753107(v=vs.110).aspx) --- это механизм, который может быть
