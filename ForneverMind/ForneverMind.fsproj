@@ -98,6 +98,12 @@
     </VisualStudio>
   </ProjectExtensions>
   <ItemGroup>
+    <Content Include="fonts\ptm55f_w.eot" />
+    <Content Include="fonts\ptm55f_w.ttf" />
+    <Content Include="fonts\ptm55f_w.woff" />
+    <Content Include="fonts\ptm75f_w.eot" />
+    <Content Include="fonts\ptm75f_w.ttf" />
+    <Content Include="fonts\ptm75f_w.woff" />
     <Content Include="images\2013-09-01-exception-diagram.png" />
     <Content Include="images\2015-03-22-spyxx-tree.png" />
     <Content Include="less\contact.less" />
