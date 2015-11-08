@@ -17,8 +17,8 @@ type Formatter (target, settings) =
     let skippedRuler = ref false
 
     override __.WriteBlock (block, isOpening, isClosing, ignoreChildNodes) =
-        let skipCode = not (!skippedCode) && block.Tag = BlockTag.IndentedCode
-        let skipRuler = not (!skippedRuler) && block.Tag = BlockTag.HorizontalRuler
+        let skipCode = not !skippedCode && block.Tag = BlockTag.IndentedCode
+        let skipRuler = not !skippedRuler && block.Tag = BlockTag.HorizontalRuler
         match skipCode, skipRuler with
         | (true, _) -> skippedCode := true; ()
         | (_, true) -> skippedRuler := true; ()
@@ -31,12 +31,12 @@ let private getMetadata (block : EnumeratorEntry option) =
     | None -> Map.empty
     | Some (b) ->
         let meta = b.Block.StringContent.ToString ()
-        meta.Split('\n')
-        |> Seq.map (fun s -> s.Trim())
+        meta.Split '\n'
+        |> Seq.map (fun s -> s.Trim ())
         |> Seq.filter (not << String.IsNullOrEmpty)
         |> Seq.map (fun s ->
-            match s.Split(':') with
-            | [| key; value |] -> key.Trim(), value.Trim()
+            match s.Split ':' with
+            | [| key; value |] -> key.Trim (), value.Trim ()
             | _ -> failwithf "Cannot parse metadata line %A" s)
         |> Map.ofSeq
 
@@ -79,7 +79,7 @@ let private readMetadata (fileName : string) documentNodes =
 
 let getParseSettings =
     let settings = CommonMarkSettings.Default.Clone ()
-    settings.OutputDelegate <- fun doc output settings -> Formatter(output, settings).WriteDocument(doc)
+    settings.OutputDelegate <- fun doc output settings -> Formatter(output, settings).WriteDocument doc
     settings
 
 let processReader (fileName : string) (reader : TextReader)  =
