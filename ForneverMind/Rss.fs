@@ -14,7 +14,8 @@ open Freya.Machine.Extensions.Http
 open ForneverMind.Models
 
 let private sindicationItem (post : PostMetadata) : SyndicationItem =
-    SyndicationItem(post.Title, post.Description, Uri post.Url, post.Url, DateTimeOffset post.Date)
+    let url = Config.baseUrl + post.Url
+    SyndicationItem(post.Title, post.Description, Uri url, url, DateTimeOffset post.Date)
 
 let private feedContent =
     let items = Seq.map sindicationItem Posts.allPosts

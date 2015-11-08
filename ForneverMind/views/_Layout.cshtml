@@ -8,19 +8,20 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>F. von Never — @ViewBag.Title</title>
-    <link rel="alternate" type="application/rss+xml" href="/rss.xml" title="RSS Feed"/>
-    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
+    <base href="@System.Configuration.ConfigurationManager.AppSettings["BaseUrl"]"/>
+    <link rel="alternate" type="application/rss+xml" href="./rss.xml" title="RSS Feed"/>
+    <link rel="stylesheet" type="text/css" href="./css/main.css"/>
 </head>
 <body>
 
 <div id="header">
     <div id="logo">
-        <a href="/">Инженер, программист, джентльмен</a>
+        <a href="./">Инженер, программист, джентльмен</a>
     </div>
     <div id="navigation">
-        <a href="/archive.html">Посты</a>
-        <a href="/contact.html">Контакты</a>
-        <a href="/plans/index.html">Планы</a>
+        <a href="./archive.html">Посты</a>
+        <a href="./contact.html">Контакты</a>
+        <a href="./plans/index.html">Планы</a>
     </div>
 </div>
 
@@ -31,7 +32,7 @@
 </div>
 <footer>
     <div>
-        <a class="tag" href="/rss.xml">RSS</a>
+        <a class="tag" href="./rss.xml">RSS</a>
         <a class="tag" href="https://github.com/ForNeVeR/fornever.me">GitHub</a>
     </div>
     <div>

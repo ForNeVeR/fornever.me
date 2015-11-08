@@ -10,7 +10,7 @@
     @foreach (var post in Model.Posts)
     {
         <li>
-            <a href="@post.Url">@post.Title</a> — @post.Date.ToString("yyyy.MM.dd")
+            <a href=".@post.Url">@post.Title</a> — @post.Date.ToString("yyyy.MM.dd")
         </li>
     }
 </ul>

@@ -12,7 +12,7 @@ type public MarkdownTests() =
 
     let compareResult fileName input expected =
         use reader = new StringReader (input)
-        let actual = Markdown.processReader "https://fornever.me" fileName reader
+        let actual = Markdown.processReader fileName reader
 
         Assert.Equal (expected, actual)
 
@@ -25,7 +25,7 @@ type public MarkdownTests() =
             {
                 Meta =
                     {
-                        Url = "https://fornever.me/posts/0001-01-01"
+                        Url = "/posts/0001-01-01"
                         Title = ""
                         Description = ""
                         CommentThreadId = "/posts/0001-01-01.html"
@@ -47,7 +47,7 @@ content
             {
                 Meta =
                     {
-                        Url = "https://fornever.me/posts/2015-01-01"
+                        Url = "/posts/2015-01-01"
                         Date = DateTime(2015, 1, 1)
                         Title = "Фильтры исключений в CLR"
                         Description = "Описание механизма фильтров исключений, доступного для некоторых языков CLR."
@@ -65,7 +65,7 @@ content
             {
                 Meta =
                     {
-                        Url = "https://fornever.me/posts/0001-01-01_File_Name"
+                        Url = "/posts/0001-01-01_File_Name"
                         Date = DateTime.MinValue
                         Title = ""
                         Description = ""

@@ -142,6 +142,7 @@
     <Compile Include="Application.fs" />
     <Content Include="packages.config" />
     <Content Include="Web.config" />
+    <None Include="Web.Release.config" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Aether">

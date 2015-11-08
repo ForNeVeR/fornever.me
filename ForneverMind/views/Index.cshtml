@@ -18,9 +18,9 @@
     @foreach (var post in Model.Posts)
     {
         <li>
-            <a href="@post.Url">@post.Title</a> — @post.Date.ToString("yyyy.MM.dd")
+            <a href=".@post.Url">@post.Title</a> — @post.Date.ToString("yyyy.MM.dd")
         </li>
     }
 </ul>
 
-<p>Список всех постов можно найти в разделе <a href="/archive.html">Архив</a>.</p>
+<p>Список всех постов можно найти в разделе <a href="./archive.html">Архив</a>.</p>
