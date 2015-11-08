@@ -35,7 +35,7 @@ let private getMetadata (block : EnumeratorEntry option) =
         |> Seq.map (fun s -> s.Trim ())
         |> Seq.filter (not << String.IsNullOrEmpty)
         |> Seq.map (fun s ->
-            match s.Split ':' with
+            match s.Split ([| ':' |], 2) with
             | [| key; value |] -> key.Trim (), value.Trim ()
             | _ -> failwithf "Cannot parse metadata line %A" s)
         |> Map.ofSeq
@@ -77,16 +77,20 @@ let private readMetadata (fileName : string) documentNodes =
         Date = date
     }
 
-let getParseSettings =
+let private getParseSettings () =
     let settings = CommonMarkSettings.Default.Clone ()
     settings.OutputDelegate <- fun doc output settings -> Formatter(output, settings).WriteDocument doc
     settings
 
-let processReader (fileName : string) (reader : TextReader)  =
+let processMetadata filePath (reader : TextReader) =
+    let document = CommonMarkConverter.Parse reader
+    readMetadata (Path.GetFileNameWithoutExtension filePath) <| document.AsEnumerable ()
+
+let processReader filePath (reader : TextReader)  =
     use target = new StringWriter ()
     let document = CommonMarkConverter.Parse reader
-    let metadata = readMetadata (Path.GetFileNameWithoutExtension fileName) <| document.AsEnumerable ()
-    let settings = getParseSettings
+    let metadata = readMetadata (Path.GetFileNameWithoutExtension filePath) <| document.AsEnumerable ()
+    let settings = getParseSettings ()
 
     CommonMarkConverter.ProcessStage3 (document, target, settings)
 
@@ -95,11 +99,10 @@ let processReader (fileName : string) (reader : TextReader)  =
         HtmlContent = target.ToString ()
     }
 
-
-let render (fileName : string): Async<PostModel> =
+let render (filePath : string): Async<PostModel> =
     async {
         do! Async.SwitchToThreadPool ()
 
-        use reader = new StreamReader (fileName, Encoding.UTF8)
-        return processReader fileName reader
+        use reader = new StreamReader (filePath, Encoding.UTF8)
+        return processReader filePath reader
     }
