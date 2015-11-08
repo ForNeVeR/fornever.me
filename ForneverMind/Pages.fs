@@ -23,11 +23,32 @@ let handlePage templateName model _ =
             }
     }
 
-let private page templateName =
+let private page templateName model =
     freyaMachine {
         including Common.machine
         methodsSupported Common.get
-        handleOk (handlePage templateName None)
+        handleOk (handlePage templateName model)
     } |> FreyaMachine.toPipeline
 
-let index = page "Index"
+let handlePost state =
+    freya {
+        let! fileName = Posts.postFileName
+        let! post = Freya.fromAsync Markdown.render fileName
+        return! handlePage "Post" (Some post) state
+    }
+
+let indexPostCount = 20
+
+let index =
+    let posts = Posts.allPosts |> Seq.truncate indexPostCount
+    page "Index" <| Some posts
+
+let post =
+    freyaMachine {
+        including Common.machine
+        methodsSupported Common.get
+        exists Posts.checkPostExists
+
+        handleOk handlePost
+    } |> FreyaMachine.toPipeline
+

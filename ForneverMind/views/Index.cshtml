@@ -1,5 +1,5 @@
 @using RazorEngine.Templating
-@inherits TemplateBase<string>
+@inherits TemplateBase<IEnumerable<ForneverMind.Models.PostMetadata>>
 
 @{
     Layout = "_Layout.cshtml";
@@ -14,6 +14,13 @@
 <p>Это мой сайт, совмещённый с блогом. В основном здесь публикуются различные технические заметки, так или иначе связанные с моей основной деятельностью — программированием.</p>
 
 <h2>Последние посты</h2>
-$partial("templates/post-list.html")$
+<ul>
+    @foreach (var post in Model)
+    {
+        <li>
+            <a href="@post.Url">@post.Title</a> — @post.Date.ToString("yyyy.MM.dd")
+        </li>
+    }
+</ul>
 
 <p>Список всех постов можно найти в разделе <a href="/archive.html">Архив</a>.</p>
