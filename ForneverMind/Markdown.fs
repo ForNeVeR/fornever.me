@@ -26,8 +26,6 @@ type Formatter (target, settings) =
             ignoreChildNodes <- false
             base.WriteBlock (block, isOpening, isClosing, ref ignoreChildNodes)
 
-
-
 let private getMetadata (block : EnumeratorEntry option) =
     match block with
     | None -> Map.empty
@@ -77,7 +75,6 @@ let private readMetadata (fileName : string) documentNodes =
         Title = getMeta "title" ""
         CommentThreadId = getMeta "id" <| legacyCommentId fileName
         Date = date
-        HtmlContent = ""
     }
 
 let getParseSettings =
@@ -88,12 +85,15 @@ let getParseSettings =
 let processReader (fileName : string) (reader : TextReader)  =
     use target = new StringWriter ()
     let document = CommonMarkConverter.Parse reader
-    let post = readMetadata (Path.GetFileNameWithoutExtension fileName) <| document.AsEnumerable ()
+    let metadata = readMetadata (Path.GetFileNameWithoutExtension fileName) <| document.AsEnumerable ()
     let settings = getParseSettings
 
     CommonMarkConverter.ProcessStage3 (document, target, settings)
 
-    { post with HtmlContent = target.ToString () }
+    {
+        Meta = metadata
+        HtmlContent = target.ToString ()
+    }
 
 
 let render (fileName : string): Async<PostModel> =

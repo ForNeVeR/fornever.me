@@ -3,11 +3,11 @@
 
 @{
     Layout = "_Layout.cshtml";
-    ViewBag.Title = Model.Title;
+    ViewBag.Title = Model.Meta.Title;
 }
 
 <div class="info">
-    Дата публикации: @Model.Date.ToString("yyyy.MM.dd")
+    Дата публикации: @Model.Meta.Date.ToString("yyyy.MM.dd")
 </div>
 
 @Raw(Model.HtmlContent)
@@ -18,7 +18,7 @@
     <script>
         window.disqus_config = function () {
             this.page.url = window.location.toString();
-            this.page.identifier = '@Model.CommentThreadId';
+            this.page.identifier = '@Model.Meta.CommentThreadId';
         };
     </script>
     <script src="//fornever.disqus.com/embed.js"></script>

@@ -23,9 +23,12 @@ type public MarkdownTests() =
 ---
 "
             {
-                Title = ""
-                CommentThreadId = "/posts/0001-01-01.html"
-                Date = DateTime.MinValue
+                Meta =
+                    {
+                        Title = ""
+                        CommentThreadId = "/posts/0001-01-01.html"
+                        Date = DateTime.MinValue
+                    }
                 HtmlContent = ""
             }
 
@@ -40,9 +43,12 @@ type public MarkdownTests() =
 content
 "
             {
-                Title = "Фильтры исключений в CLR"
-                CommentThreadId = "/posts/2013-09-01-clr-exception-filters_ru.html"
-                Date = DateTime(2015, 1, 1)
+                Meta =
+                    {
+                        Title = "Фильтры исключений в CLR"
+                        CommentThreadId = "/posts/2013-09-01-clr-exception-filters_ru.html"
+                        Date = DateTime(2015, 1, 1)
+                    }
                 HtmlContent = "<p>content</p>" + Environment.NewLine
             }
 
@@ -53,8 +59,11 @@ content
 ---
 "
             {
-                Title = ""
-                CommentThreadId = "/posts/0001-01-01_File_Name.html"
-                Date = DateTime.MinValue
+                Meta =
+                    {
+                        Title = ""
+                        CommentThreadId = "/posts/0001-01-01_File_Name.html"
+                        Date = DateTime.MinValue
+                    }
                 HtmlContent = ""
             }
