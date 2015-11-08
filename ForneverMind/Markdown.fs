@@ -43,7 +43,7 @@ let private getMetadata (block : EnumeratorEntry option) =
 let private legacyCommentId fileName =
     sprintf "/posts/%s.html" fileName
 
-let private readMetadata (fileName : string) documentNodes =
+let private readMetadata baseUrl (fileName : string) documentNodes =
     let takeUntil cond seq =
         let found = ref false
         seq
@@ -72,9 +72,11 @@ let private readMetadata (fileName : string) documentNodes =
     let date = DateTime.ParseExact (dateString, "yyyy-MM-dd", CultureInfo.InvariantCulture)
 
     {
-        Title = getMeta "title" ""
-        CommentThreadId = getMeta "id" <| legacyCommentId fileName
+        Url = sprintf "%s/posts/%s" baseUrl fileName
         Date = date
+        Title = getMeta "title" ""
+        Description = getMeta "description" ""
+        CommentThreadId = getMeta "id" <| legacyCommentId fileName
     }
 
 let private getParseSettings () =
@@ -82,14 +84,14 @@ let private getParseSettings () =
     settings.OutputDelegate <- fun doc output settings -> Formatter(output, settings).WriteDocument doc
     settings
 
-let processMetadata filePath (reader : TextReader) =
+let processMetadata baseUrl filePath (reader : TextReader) =
     let document = CommonMarkConverter.Parse reader
-    readMetadata (Path.GetFileNameWithoutExtension filePath) <| document.AsEnumerable ()
+    readMetadata baseUrl (Path.GetFileNameWithoutExtension filePath) <| document.AsEnumerable ()
 
-let processReader filePath (reader : TextReader)  =
+let processReader baseUrl filePath (reader : TextReader)  =
     use target = new StringWriter ()
     let document = CommonMarkConverter.Parse reader
-    let metadata = readMetadata (Path.GetFileNameWithoutExtension filePath) <| document.AsEnumerable ()
+    let metadata = readMetadata baseUrl (Path.GetFileNameWithoutExtension filePath) <| document.AsEnumerable ()
     let settings = getParseSettings ()
 
     CommonMarkConverter.ProcessStage3 (document, target, settings)
@@ -104,5 +106,5 @@ let render (filePath : string): Async<PostModel> =
         do! Async.SwitchToThreadPool ()
 
         use reader = new StreamReader (filePath, Encoding.UTF8)
-        return processReader filePath reader
+        return processReader Config.baseUrl filePath reader
     }

@@ -40,7 +40,7 @@ let allPosts =
     Directory.GetFiles Config.postsDirectory
     |> Seq.map (fun filePath ->
         use reader = new StreamReader (filePath)
-        Markdown.processMetadata filePath reader)
+        Markdown.processMetadata Config.baseUrl filePath reader)
     |> Seq.sortBy (fun x -> x.Date)
     |> Seq.toArray
 

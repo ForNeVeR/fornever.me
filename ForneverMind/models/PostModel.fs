@@ -4,8 +4,10 @@ open System
 
 type PostMetadata =
     {
+        Url : string
         CommentThreadId : string
         Title : string
+        Description : string
         Date : DateTime
     }
 

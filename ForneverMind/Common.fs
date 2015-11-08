@@ -10,6 +10,8 @@ open Freya.Machine.Extensions.Http
 let private utf8 = Freya.init [ Charset.Utf8 ]
 let private json = Freya.init [ MediaType.Html ]
 
+let rss = MediaType (Type "application", SubType "rss+xml", Parameters Map.empty)
+
 let get = Freya.init [ GET ]
 
 let machine =
