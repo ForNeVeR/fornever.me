@@ -101,7 +101,7 @@
     <Content Include="less\styles.less" />
     <Content Include="less\syntax.less" />
     <Compile Include="models\PostModel.fs" />
-    <Compile Include="models\IndexModel.fs" />
+    <Compile Include="models\PostArchiveModel.fs" />
     <Content Include="posts\2013-09-01-clr-exception-filters_ru.markdown" />
     <Content Include="posts\2014-05-27-scala-macros-and-quasiquotes_ru.markdown" />
     <Content Include="posts\2014-08-18-kde-4-and-xmonad_ru.markdown" />
@@ -118,6 +118,7 @@
     <Content Include="posts\2015-10-12-atom-build-on-windows_ru.markdown" />
     <Content Include="posts\2015-11-01-installing-nixos-on-uefi-machine_ru.markdown" />
     <Content Include="views\_Layout.cshtml" />
+    <Content Include="views\Archive.cshtml" />
     <Content Include="views\Index.cshtml" />
     <Content Include="views\Post.cshtml" />
     <Compile Include="AssemblyInfo.fs" />
