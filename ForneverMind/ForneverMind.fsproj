@@ -101,6 +101,7 @@
     <Content Include="less\styles.less" />
     <Content Include="less\syntax.less" />
     <Compile Include="models\PostModel.fs" />
+    <Compile Include="models\IndexModel.fs" />
     <Content Include="posts\2013-09-01-clr-exception-filters_ru.markdown" />
     <Content Include="posts\2014-05-27-scala-macros-and-quasiquotes_ru.markdown" />
     <Content Include="posts\2014-08-18-kde-4-and-xmonad_ru.markdown" />
@@ -125,8 +126,8 @@
     <Compile Include="Less.fs" />
     <Compile Include="Markdown.fs" />
     <Compile Include="Templates.fs" />
-    <Compile Include="Pages.fs" />
     <Compile Include="Posts.fs" />
+    <Compile Include="Pages.fs" />
     <Compile Include="Rss.fs" />
     <Compile Include="Routes.fs" />
     <Compile Include="Application.fs" />

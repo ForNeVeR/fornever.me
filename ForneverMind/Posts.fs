@@ -10,7 +10,7 @@ open Freya.Router.Lenses
 
 open ForneverMind.Models
 
-let private postFileName =
+let postFileName =
     let htmlExtension = ".html"
     freya {
         let! maybeName = Route.Atom_ "name" |> Freya.Lens.getPartial
@@ -23,17 +23,10 @@ let private postFileName =
         return filePath
     } |> Freya.memo
 
-let private checkPostExists =
+let checkPostExists =
     freya {
         let! fileName = postFileName
         return File.Exists fileName
-    }
-
-let private handlePost state =
-    freya {
-        let! fileName = postFileName
-        let! post = Freya.fromAsync Markdown.render fileName
-        return! Pages.handlePage "Post" (Some post) state
     }
 
 let allPosts =
@@ -41,15 +34,5 @@ let allPosts =
     |> Seq.map (fun filePath ->
         use reader = new StreamReader (filePath)
         Markdown.processMetadata Config.baseUrl filePath reader)
-    |> Seq.sortBy (fun x -> x.Date)
+    |> Seq.sortByDescending (fun x -> x.Date)
     |> Seq.toArray
-
-let post =
-    freyaMachine {
-        including Common.machine
-        methodsSupported Common.get
-        exists checkPostExists
-
-        handleOk handlePost
-    } |> FreyaMachine.toPipeline
-
