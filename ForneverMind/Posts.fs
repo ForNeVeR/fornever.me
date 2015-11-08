@@ -2,10 +2,7 @@
 
 open System.IO
 
-open Arachne.Http
 open Freya.Core
-open Freya.Machine
-open Freya.Machine.Extensions.Http
 open Freya.Router.Lenses
 
 open ForneverMind.Models
@@ -33,6 +30,6 @@ let allPosts =
     Directory.GetFiles Config.postsDirectory
     |> Seq.map (fun filePath ->
         use reader = new StreamReader (filePath)
-        Markdown.processMetadata Config.baseUrl filePath reader)
+        Markdown.processMetadata filePath reader)
     |> Seq.sortByDescending (fun x -> x.Date)
     |> Seq.toArray

@@ -43,7 +43,7 @@ let private getMetadata (block : EnumeratorEntry option) =
 let private legacyCommentId fileName =
     sprintf "/posts/%s.html" fileName
 
-let private readMetadata baseUrl (fileName : string) documentNodes =
+let private readMetadata (fileName : string) documentNodes =
     let takeUntil cond seq =
         let found = ref false
         seq
@@ -72,7 +72,7 @@ let private readMetadata baseUrl (fileName : string) documentNodes =
     let date = DateTime.ParseExact (dateString, "yyyy-MM-dd", CultureInfo.InvariantCulture)
 
     {
-        Url = sprintf "%s/posts/%s" baseUrl fileName
+        Url = sprintf "/posts/%s" fileName
         Date = date
         Title = getMeta "title" ""
         Description = getMeta "description" ""
@@ -84,14 +84,14 @@ let private getParseSettings () =
     settings.OutputDelegate <- fun doc output settings -> Formatter(output, settings).WriteDocument doc
     settings
 
-let processMetadata baseUrl filePath (reader : TextReader) =
+let processMetadata filePath (reader : TextReader) =
     let document = CommonMarkConverter.Parse reader
-    readMetadata baseUrl (Path.GetFileNameWithoutExtension filePath) <| document.AsEnumerable ()
+    readMetadata (Path.GetFileNameWithoutExtension filePath) <| document.AsEnumerable ()
 
-let processReader baseUrl filePath (reader : TextReader)  =
+let processReader filePath (reader : TextReader)  =
     use target = new StringWriter ()
     let document = CommonMarkConverter.Parse reader
-    let metadata = readMetadata baseUrl (Path.GetFileNameWithoutExtension filePath) <| document.AsEnumerable ()
+    let metadata = readMetadata (Path.GetFileNameWithoutExtension filePath) <| document.AsEnumerable ()
     let settings = getParseSettings ()
 
     CommonMarkConverter.ProcessStage3 (document, target, settings)
@@ -106,5 +106,5 @@ let render (filePath : string): Async<PostModel> =
         do! Async.SwitchToThreadPool ()
 
         use reader = new StreamReader (filePath, Encoding.UTF8)
-        return processReader Config.baseUrl filePath reader
+        return processReader filePath reader
     }
