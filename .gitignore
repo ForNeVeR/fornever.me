@@ -1,4 +1,7 @@
-/dist/
-/_cache/
-/_site/
-/.stack-work/
+/.vs/
+/packages/
+
+bin/
+obj/
+
+*.user

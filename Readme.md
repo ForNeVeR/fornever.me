@@ -1,41 +1,23 @@
-fornever.me: Engineer, Programmer, Gentleman [![Build Status](https://travis-ci.org/ForNeVeR/fornever.me.svg?branch=master)](https://travis-ci.org/ForNeVeR/fornever.me)
+fornever.me: Engineer, Programmer, Gentleman [![Status Enfer](https://img.shields.io/badge/status-enfer-orange.svg)](https://github.com/ForNeVeR/andivionian-status-classifier) [![Build status](https://ci.appveyor.com/api/projects/status/dh7qx27hrjs8chp3/branch/develop?svg=true)](https://ci.appveyor.com/project/ForNeVeR/fornever-me/branch/develop)
 ============================================
 
-This is the [fornever.me][] site source code. It is mainly written using
-[Hakyll][hakyll] — a Haskell tool for static site development.
-
-Prerequisites
--------------
-
-For building this source code you'll need the following components:
-
-1. [The Haskell Tool Stack][stack].
-2. [Less CSS pre-processor][less].
-
-Make sure all the tools are installed and placed in your `PATH` environment
-variable before you begin.
+This is the [fornever.me][] site source code. It uses ForneverMind — a simple
+homemade blog engine mainly written in F# programming language.
 
 Build
 -----
 
-First of all, you may need to setup stack if you haven't been done that already:
+To compile the site, you'll need [NuGet][nuget] and [MSBuild][msbuild] or a
+compatible build engine.
 
-    $ stack setup
+Here's a simple build script:
 
-After that, build the site executable:
+    $ nuget restore
+    $ msbuild /p:Platform="Any CPU" /p:Configuration=Release ForneverMind.sln
 
-    $ stack build
-
-Then use the executable to build rest of the site:
-
-    $ stack exec forneverme build
-
-It will generate a static HTML in the `_site` directory. Feel free to deploy
-this content, but please don't forget to notify me if you're using my post
-materials!
-
-There's a `Build.ps1` file usable for Windows users that will build the whole
-site.
+There's a PowerShell build script `Scripts/Deploy.ps1` that will build and
+deploy the site to the directory configured in
+`ForneverMind/__profiles/Production.pubxml`.
 
 Other components
 ----------------
@@ -45,9 +27,6 @@ Other components
 2.  [fornever.me][] uses an easy-to-install [Disqus][disqus] comment system.
 
 [disqus]: https://disqus.com/
-[evil-planner]: https://github.com/ForNeVeR/EvilPlanner
 [fornever.me]: https://fornever.me/
-[hakyll]: http://jaspervdj.be/hakyll/
-[hakyll-faq]: http://jaspervdj.be/hakyll/tutorials/faq.html
-[less]: http://lesscss.org/
-[stack]: https://github.com/commercialhaskell/stack
+[msbuild]: https://msdn.microsoft.com/en-us/library/dd393574.aspx
+[nuget]: https://www.nuget.org/
