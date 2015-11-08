@@ -1,6 +1,6 @@
 ﻿namespace ForneverMind.Models
 
-type IndexModel =
+type PostArchiveModel =
     {
         Posts : PostMetadata[]
     }

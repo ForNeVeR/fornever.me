@@ -39,7 +39,11 @@ let handlePost state =
         return! handlePage "Post" (Some post) state
     }
 
-let indexPostCount = 20
+let private indexPostCount = 20
+
+let archive =
+    let model = { Posts = Posts.allPosts }
+    page "Archive" <| Some model
 
 let index =
     let posts = Posts.allPosts |> Seq.truncate indexPostCount |> Seq.toArray
