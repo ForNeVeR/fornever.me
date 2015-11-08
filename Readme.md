@@ -1,4 +1,4 @@
-fornever.me: Engineer, Programmer, Gentleman [![Status Enfer](https://img.shields.io/badge/status-enfer-orange.svg)](https://github.com/ForNeVeR/andivionian-status-classifier) [![Build status](https://ci.appveyor.com/api/projects/status/dh7qx27hrjs8chp3/branch/develop?svg=true)](https://ci.appveyor.com/project/ForNeVeR/fornever-me/branch/develop)
+fornever.me: Engineer, Programmer, Gentleman [![Status Ventis](https://img.shields.io/badge/status-ventis-yellow.svg)](https://github.com/ForNeVeR/andivionian-status-classifier) [![Build status](https://ci.appveyor.com/api/projects/status/dh7qx27hrjs8chp3/branch/develop?svg=true)](https://ci.appveyor.com/project/ForNeVeR/fornever-me/branch/develop)
 ============================================
 
 This is the [fornever.me][] site source code. It uses ForneverMind — a simple
@@ -27,6 +27,7 @@ Other components
 2.  [fornever.me][] uses an easy-to-install [Disqus][disqus] comment system.
 
 [disqus]: https://disqus.com/
+[evil-planner]: https://github.com/ForNeVeR/EvilPlanner
 [fornever.me]: https://fornever.me/
 [msbuild]: https://msdn.microsoft.com/en-us/library/dd393574.aspx
 [nuget]: https://www.nuget.org/
