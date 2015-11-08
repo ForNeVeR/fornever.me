@@ -13,9 +13,11 @@ let postFileName =
         let! maybeName = Route.Atom_ "name" |> Freya.Lens.getPartial
         let fileName = maybeName |> Option.orElse ""
         let name = Path.GetFileNameWithoutExtension fileName
-        let extension = Path.GetExtension name
-        let templateName = if extension = htmlExtension then name else name + extension
-        let filePath = Path.Combine (Config.postsDirectory, templateName + ".markdown")
+        let extension = Path.GetExtension fileName
+        let filePath =
+            if extension = htmlExtension
+            then Path.Combine (Config.postsDirectory, name + ".markdown")
+            else "not-found.markdown"
         if not <| Common.pathIsInsideDirectory Config.postsDirectory filePath then failwith "Invalid file name"
         return filePath
     } |> Freya.memo

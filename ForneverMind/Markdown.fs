@@ -72,7 +72,7 @@ let private readMetadata (fileName : string) documentNodes =
     let date = DateTime.ParseExact (dateString, "yyyy-MM-dd", CultureInfo.InvariantCulture)
 
     {
-        Url = sprintf "/posts/%s" fileName
+        Url = sprintf "/posts/%s.html" fileName
         Date = date
         Title = getMeta "title" ""
         Description = getMeta "description" ""

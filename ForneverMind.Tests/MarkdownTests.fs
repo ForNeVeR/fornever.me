@@ -25,7 +25,7 @@ type public MarkdownTests() =
             {
                 Meta =
                     {
-                        Url = "/posts/0001-01-01"
+                        Url = "/posts/0001-01-01.html"
                         Title = ""
                         Description = ""
                         CommentThreadId = "/posts/0001-01-01.html"
@@ -47,7 +47,7 @@ content
             {
                 Meta =
                     {
-                        Url = "/posts/2015-01-01"
+                        Url = "/posts/2015-01-01.html"
                         Date = DateTime(2015, 1, 1)
                         Title = "Фильтры исключений в CLR"
                         Description = "Описание механизма фильтров исключений, доступного для некоторых языков CLR."
@@ -65,7 +65,7 @@ content
             {
                 Meta =
                     {
-                        Url = "/posts/0001-01-01_File_Name"
+                        Url = "/posts/0001-01-01_File_Name.html"
                         Date = DateTime.MinValue
                         Title = ""
                         Description = ""
