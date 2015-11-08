@@ -45,6 +45,8 @@ let archive =
     let model = { Posts = Posts.allPosts }
     page "Archive" <| Some model
 
+let contact = page "Contact" None
+
 let index =
     let posts = Posts.allPosts |> Seq.truncate indexPostCount |> Seq.toArray
     let model = { Posts = posts }

@@ -121,6 +121,7 @@
     <Content Include="views\Archive.cshtml" />
     <Content Include="views\Index.cshtml" />
     <Content Include="views\Post.cshtml" />
+    <Content Include="views\Contact.cshtml" />
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Config.fs" />
     <Compile Include="Common.fs" />

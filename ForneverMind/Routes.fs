@@ -11,5 +11,6 @@ let router =
         resource (UriTemplate.Parse "/posts/{name}") Pages.post
         resource (UriTemplate.Parse "/") Pages.index
         resource (UriTemplate.Parse "/archive.html") Pages.archive
+        resource (UriTemplate.Parse "/contact.html") Pages.contact
         resource (UriTemplate.Parse "/rss.xml") Rss.feed
      } |> FreyaRouter.toPipeline
