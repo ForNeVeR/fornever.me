@@ -1,5 +1,5 @@
 @using RazorEngine.Templating
-@inherits TemplateBase<IEnumerable<ForneverMind.Models.PostMetadata>>
+@inherits TemplateBase<ForneverMind.Models.IndexModel>
 
 @{
     Layout = "_Layout.cshtml";
@@ -15,7 +15,7 @@
 
 <h2>Последние посты</h2>
 <ul>
-    @foreach (var post in Model)
+    @foreach (var post in Model.Posts)
     {
         <li>
             <a href="@post.Url">@post.Title</a> — @post.Date.ToString("yyyy.MM.dd")

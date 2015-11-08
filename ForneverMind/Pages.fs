@@ -7,6 +7,8 @@ open Freya.Core
 open Freya.Machine
 open Freya.Machine.Extensions.Http
 
+open ForneverMind.Models
+
 let handlePage templateName model _ =
     freya {
         let! content = Freya.fromAsync (Templates.render templateName) model
@@ -40,8 +42,9 @@ let handlePost state =
 let indexPostCount = 20
 
 let index =
-    let posts = Posts.allPosts |> Seq.truncate indexPostCount
-    page "Index" <| Some posts
+    let posts = Posts.allPosts |> Seq.truncate indexPostCount |> Seq.toArray
+    let model = { Posts = posts }
+    page "Index" <| Some model
 
 let post =
     freyaMachine {

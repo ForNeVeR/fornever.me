@@ -101,6 +101,7 @@
     <Content Include="less\styles.less" />
     <Content Include="less\syntax.less" />
     <Compile Include="models\PostModel.fs" />
+    <Compile Include="models\IndexModel.fs" />
     <Content Include="posts\2013-09-01-clr-exception-filters_ru.markdown" />
     <Content Include="posts\2014-05-27-scala-macros-and-quasiquotes_ru.markdown" />
     <Content Include="posts\2014-08-18-kde-4-and-xmonad_ru.markdown" />
