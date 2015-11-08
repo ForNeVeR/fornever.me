@@ -27,6 +27,7 @@ Other components
 2.  [fornever.me][] uses an easy-to-install [Disqus][disqus] comment system.
 
 [disqus]: https://disqus.com/
+[evil-planner]: https://github.com/ForNeVeR/EvilPlanner
 [fornever.me]: https://fornever.me/
 [msbuild]: https://msdn.microsoft.com/en-us/library/dd393574.aspx
 [nuget]: https://www.nuget.org/
