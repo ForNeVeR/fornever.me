@@ -8,6 +8,8 @@ open Freya.Machine
 open Freya.Machine.Extensions.Http
 open Freya.Router.Lenses
 
+open ForneverMind.Models
+
 let private postFileName =
     let htmlExtension = ".html"
     freya {
@@ -33,6 +35,14 @@ let private handlePost state =
         let! post = Freya.fromAsync Markdown.render fileName
         return! Pages.handlePage "Post" (Some post) state
     }
+
+let allPosts =
+    Directory.GetFiles Config.postsDirectory
+    |> Seq.map (fun filePath ->
+        use reader = new StreamReader (filePath)
+        Markdown.processMetadata Config.baseUrl filePath reader)
+    |> Seq.sortBy (fun x -> x.Date)
+    |> Seq.toArray
 
 let post =
     freyaMachine {

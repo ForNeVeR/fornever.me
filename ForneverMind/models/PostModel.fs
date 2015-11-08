@@ -2,10 +2,17 @@
 
 open System
 
-type PostModel =
+type PostMetadata =
     {
+        Url : string
         CommentThreadId : string
         Title : string
-        Date: DateTime
-        HtmlContent: string
+        Description : string
+        Date : DateTime
+    }
+
+type PostModel =
+    {
+        Meta : PostMetadata
+        HtmlContent : string
     }

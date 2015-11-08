@@ -17,8 +17,8 @@ type Formatter (target, settings) =
     let skippedRuler = ref false
 
     override __.WriteBlock (block, isOpening, isClosing, ignoreChildNodes) =
-        let skipCode = not (!skippedCode) && block.Tag = BlockTag.IndentedCode
-        let skipRuler = not (!skippedRuler) && block.Tag = BlockTag.HorizontalRuler
+        let skipCode = not !skippedCode && block.Tag = BlockTag.IndentedCode
+        let skipRuler = not !skippedRuler && block.Tag = BlockTag.HorizontalRuler
         match skipCode, skipRuler with
         | (true, _) -> skippedCode := true; ()
         | (_, true) -> skippedRuler := true; ()
@@ -26,26 +26,24 @@ type Formatter (target, settings) =
             ignoreChildNodes <- false
             base.WriteBlock (block, isOpening, isClosing, ref ignoreChildNodes)
 
-
-
 let private getMetadata (block : EnumeratorEntry option) =
     match block with
     | None -> Map.empty
     | Some (b) ->
         let meta = b.Block.StringContent.ToString ()
-        meta.Split('\n')
-        |> Seq.map (fun s -> s.Trim())
+        meta.Split '\n'
+        |> Seq.map (fun s -> s.Trim ())
         |> Seq.filter (not << String.IsNullOrEmpty)
         |> Seq.map (fun s ->
-            match s.Split(':') with
-            | [| key; value |] -> key.Trim(), value.Trim()
+            match s.Split ([| ':' |], 2) with
+            | [| key; value |] -> key.Trim (), value.Trim ()
             | _ -> failwithf "Cannot parse metadata line %A" s)
         |> Map.ofSeq
 
 let private legacyCommentId fileName =
     sprintf "/posts/%s.html" fileName
 
-let private readMetadata (fileName : string) documentNodes =
+let private readMetadata baseUrl (fileName : string) documentNodes =
     let takeUntil cond seq =
         let found = ref false
         seq
@@ -74,32 +72,39 @@ let private readMetadata (fileName : string) documentNodes =
     let date = DateTime.ParseExact (dateString, "yyyy-MM-dd", CultureInfo.InvariantCulture)
 
     {
-        Title = getMeta "title" ""
-        CommentThreadId = getMeta "id" <| legacyCommentId fileName
+        Url = sprintf "%s/posts/%s" baseUrl fileName
         Date = date
-        HtmlContent = ""
+        Title = getMeta "title" ""
+        Description = getMeta "description" ""
+        CommentThreadId = getMeta "id" <| legacyCommentId fileName
     }
 
-let getParseSettings =
+let private getParseSettings () =
     let settings = CommonMarkSettings.Default.Clone ()
-    settings.OutputDelegate <- fun doc output settings -> Formatter(output, settings).WriteDocument(doc)
+    settings.OutputDelegate <- fun doc output settings -> Formatter(output, settings).WriteDocument doc
     settings
 
-let processReader (fileName : string) (reader : TextReader)  =
+let processMetadata baseUrl filePath (reader : TextReader) =
+    let document = CommonMarkConverter.Parse reader
+    readMetadata baseUrl (Path.GetFileNameWithoutExtension filePath) <| document.AsEnumerable ()
+
+let processReader baseUrl filePath (reader : TextReader)  =
     use target = new StringWriter ()
     let document = CommonMarkConverter.Parse reader
-    let post = readMetadata (Path.GetFileNameWithoutExtension fileName) <| document.AsEnumerable ()
-    let settings = getParseSettings
+    let metadata = readMetadata baseUrl (Path.GetFileNameWithoutExtension filePath) <| document.AsEnumerable ()
+    let settings = getParseSettings ()
 
     CommonMarkConverter.ProcessStage3 (document, target, settings)
 
-    { post with HtmlContent = target.ToString () }
+    {
+        Meta = metadata
+        HtmlContent = target.ToString ()
+    }
 
-
-let render (fileName : string): Async<PostModel> =
+let render (filePath : string): Async<PostModel> =
     async {
         do! Async.SwitchToThreadPool ()
 
-        use reader = new StreamReader (fileName, Encoding.UTF8)
-        return processReader fileName reader
+        use reader = new StreamReader (filePath, Encoding.UTF8)
+        return processReader Config.baseUrl filePath reader
     }
