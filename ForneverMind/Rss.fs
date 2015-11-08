@@ -16,7 +16,7 @@ open ForneverMind.Models
 let private sindicationItem (post : PostMetadata) : SyndicationItem =
     SyndicationItem(post.Title, post.Description, Uri post.Url, post.Url, DateTimeOffset post.Date)
 
-let feedContent =
+let private feedContent =
     let items = Seq.map sindicationItem Posts.allPosts
     let feed =
         SyndicationFeed (
