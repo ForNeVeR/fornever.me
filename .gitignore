@@ -1,10 +1,6 @@
-/.stack-work/
 /.vs/
 /packages/
 
-/dist/
-/_cache/
-/_site/
 bin/
 obj/
 
