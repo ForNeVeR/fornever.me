@@ -28,7 +28,6 @@ type public MarkdownTests() =
                         Url = "/posts/0001-01-01.html"
                         Title = ""
                         Description = ""
-                        CommentThreadId = "/posts/0001-01-01.html"
                         Date = DateTime.MinValue
                     }
                 HtmlContent = ""
@@ -51,7 +50,6 @@ content
                         Date = DateTime(2015, 1, 1)
                         Title = "Фильтры исключений в CLR"
                         Description = "Описание механизма фильтров исключений, доступного для некоторых языков CLR."
-                        CommentThreadId = "/posts/2013-09-01-clr-exception-filters_ru.html"
                     }
                 HtmlContent = "<p>content</p>" + Environment.NewLine
             }
@@ -69,7 +67,6 @@ content
                         Date = DateTime.MinValue
                         Title = ""
                         Description = ""
-                        CommentThreadId = "/posts/0001-01-01_File_Name.html"
                     }
                 HtmlContent = ""
             }
