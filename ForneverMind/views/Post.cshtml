@@ -15,11 +15,5 @@
 <div id="disqus_thread"></div>
 
 @section scripts {
-    <script>
-        window.disqus_config = function () {
-            this.page.url = window.location.toString();
-            this.page.identifier = '@Model.Meta.CommentThreadId';
-        };
-    </script>
     <script src="//fornever.disqus.com/embed.js"></script>
 }

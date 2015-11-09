@@ -40,9 +40,6 @@ let private getMetadata (block : EnumeratorEntry option) =
             | _ -> failwithf "Cannot parse metadata line %A" s)
         |> Map.ofSeq
 
-let private legacyCommentId fileName =
-    sprintf "/posts/%s.html" fileName
-
 let private readMetadata (fileName : string) documentNodes =
     let takeUntil cond seq =
         let found = ref false
@@ -76,7 +73,6 @@ let private readMetadata (fileName : string) documentNodes =
         Date = date
         Title = getMeta "title" ""
         Description = getMeta "description" ""
-        CommentThreadId = getMeta "id" <| legacyCommentId fileName
     }
 
 let private getParseSettings () =
