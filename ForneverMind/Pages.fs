@@ -34,7 +34,7 @@ let private page templateName model =
 
 let handlePost state =
     freya {
-        let! fileName = Posts.postFileName
+        let! fileName = Posts.postFilePath
         let! post = Freya.fromAsync Markdown.render fileName
         return! handlePage "Post" (Some post) state
     }
@@ -57,7 +57,7 @@ let post =
         including Common.machine
         methodsSupported Common.get
         exists Posts.checkPostExists
+        lastModified Posts.lastModified
 
         handleOk handlePost
     } |> FreyaMachine.toPipeline
-
