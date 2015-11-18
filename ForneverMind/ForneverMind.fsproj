@@ -131,6 +131,7 @@
     <Content Include="posts\2015-10-12-atom-build-on-windows_ru.markdown" />
     <Content Include="posts\2015-11-01-installing-nixos-on-uefi-machine_ru.markdown" />
     <Content Include="posts\2015-11-08-using-dotless-api_ru.markdown" />
+    <Content Include="posts\2015-11-19-getting-started-with-perspex-with-monodevelop_ru.markdown" />
     <Content Include="views\_Layout.cshtml" />
     <Content Include="views\Archive.cshtml" />
     <Content Include="views\Index.cshtml" />
