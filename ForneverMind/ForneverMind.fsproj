@@ -106,6 +106,10 @@
     <Content Include="fonts\ptm75f_w.woff" />
     <Content Include="images\2013-09-01-exception-diagram.png" />
     <Content Include="images\2015-03-22-spyxx-tree.png" />
+    <Content Include="images\2015-11-22-monodevelop-add-in-manager.png" />
+    <Content Include="images\2015-11-22-monodevelop-add-packages.png" />
+    <Content Include="images\2015-11-22-monodevelop-resource-properties.png" />
+    <Content Include="images\2015-11-22-perspex-application.png" />
     <Content Include="less\contact.less" />
     <Content Include="less\fonts.less" />
     <Content Include="less\layout.less" />
@@ -150,10 +154,6 @@
     <Compile Include="Application.fs" />
     <Content Include="packages.config" />
     <Content Include="Web.config" />
-    <Content Include="images\2015-11-22-monodevelop-add-in-manager.png" />
-    <Content Include="images\2015-11-22-monodevelop-add-packages.png" />
-    <Content Include="images\2015-11-22-monodevelop-resource-properties.png" />
-    <Content Include="images\2015-11-22-perspex-application.png" />
     <None Include="Web.Release.config" />
   </ItemGroup>
   <ItemGroup>
