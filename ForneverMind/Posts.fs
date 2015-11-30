@@ -3,7 +3,7 @@
 open System.IO
 
 open Freya.Core
-open Freya.Router.Lenses
+open Freya.Router
 
 open ForneverMind.Models
 
