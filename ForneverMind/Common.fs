@@ -1,5 +1,6 @@
 ﻿module ForneverMind.Common
 
+open System
 open System.IO
 
 open Arachne.Http
@@ -25,3 +26,15 @@ let pathIsInsideDirectory directory path =
     let fullDirectory = Path.GetFullPath directory
     let fullPath = Path.GetFullPath path
     fullPath.StartsWith fullDirectory
+
+let dateTimeToSeconds (date : DateTime) =
+    let d = date.ToUniversalTime ()
+    DateTime(d.Year,
+             d.Month,
+             d.Day,
+             d.Hour,
+             d.Minute,
+             d.Second,
+             DateTimeKind.Utc)
+
+let initLastModified = dateTimeToSeconds >> Freya.init

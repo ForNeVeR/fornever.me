@@ -32,6 +32,11 @@ let private feedContent =
     formatter.WriteTo xmlWriter
     Encoding.UTF8.GetBytes (writer.ToString ())
 
+let private lastModificationDate =
+    defaultArg (Posts.allPosts
+                |> Seq.tryHead
+                |> Option.map (fun p -> p.Date)) DateTime.UtcNow
+
 let private handleFeed _ =
     freya {
         return
@@ -51,5 +56,6 @@ let feed =
     freyaMachine {
         including Common.machine
         methodsSupported Common.get
+        lastModified (Common.initLastModified lastModificationDate)
         handleOk handleFeed
     } |> FreyaMachine.toPipeline

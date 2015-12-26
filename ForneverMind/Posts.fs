@@ -3,11 +3,11 @@
 open System.IO
 
 open Freya.Core
-open Freya.Router.Lenses
+open Freya.Router
 
 open ForneverMind.Models
 
-let postFileName =
+let postFilePath =
     let htmlExtension = ".html"
     freya {
         let! maybeName = Route.Atom_ "name" |> Freya.Lens.getPartial
@@ -16,16 +16,22 @@ let postFileName =
         let extension = Path.GetExtension fileName
         let filePath =
             if extension = htmlExtension
-            then Path.Combine (Config.postsDirectory, name + ".markdown")
-            else "not-found.markdown"
+            then Path.Combine (Config.postsDirectory, name + ".md")
+            else "not-found.md"
         if not <| Common.pathIsInsideDirectory Config.postsDirectory filePath then failwith "Invalid file name"
         return filePath
     } |> Freya.memo
 
 let checkPostExists =
     freya {
-        let! fileName = postFileName
-        return File.Exists fileName
+        let! filePath = postFilePath
+        return File.Exists filePath
+    }
+
+let lastModified =
+    freya {
+        let! filePath = postFilePath
+        return Common.dateTimeToSeconds (File.GetLastWriteTimeUtc filePath)
     }
 
 let allPosts =
