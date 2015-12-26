@@ -31,7 +31,7 @@ let checkPostExists =
 let lastModified =
     freya {
         let! filePath = postFilePath
-        return Some <| File.GetLastWriteTime filePath
+        return Common.dateTimeToSeconds (File.GetLastWriteTimeUtc filePath)
     }
 
 let allPosts =

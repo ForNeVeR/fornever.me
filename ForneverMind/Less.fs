@@ -34,9 +34,15 @@ let private representation =
         Data = Encoding.UTF8.GetBytes mainCss
     } |> Freya.init
 
+let private lastModifiedDate =
+    Directory.GetFileSystemEntries Config.lessDirectory
+    |> Seq.map File.GetLastWriteTimeUtc
+    |> Seq.max
+
 let main =
     freyaMachine {
         including Common.machine
         methodsSupported Common.get
+        lastModified (Common.initLastModified lastModifiedDate)
         handleOk (fun _ -> representation)
     } |> FreyaMachine.toPipeline
