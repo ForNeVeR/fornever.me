@@ -7,7 +7,7 @@ open Freya.Router
 
 open ForneverMind.Models
 
-let postFileName =
+let postFilePath =
     let htmlExtension = ".html"
     freya {
         let! maybeName = Route.Atom_ "name" |> Freya.Lens.getPartial
@@ -24,8 +24,14 @@ let postFileName =
 
 let checkPostExists =
     freya {
-        let! fileName = postFileName
-        return File.Exists fileName
+        let! filePath = postFilePath
+        return File.Exists filePath
+    }
+
+let lastModified =
+    freya {
+        let! filePath = postFilePath
+        return Common.dateTimeToSeconds (File.GetLastWriteTimeUtc filePath)
     }
 
 let allPosts =
