@@ -197,39 +197,39 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Freya.Core">
-      <HintPath>..\packages\Freya.Core.2.0.200\lib\net45\Freya.Core.dll</HintPath>
+      <HintPath>..\packages\Freya.Core.2.0.203\lib\net45\Freya.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Freya.Lenses.Http">
-      <HintPath>..\packages\Freya.Lenses.Http.2.0.200\lib\net45\Freya.Lenses.Http.dll</HintPath>
+      <HintPath>..\packages\Freya.Lenses.Http.2.0.203\lib\net45\Freya.Lenses.Http.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Freya.Lenses.Http.Cors">
-      <HintPath>..\packages\Freya.Lenses.Http.Cors.2.0.200\lib\net45\Freya.Lenses.Http.Cors.dll</HintPath>
+      <HintPath>..\packages\Freya.Lenses.Http.Cors.2.0.203\lib\net45\Freya.Lenses.Http.Cors.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Freya.Machine">
-      <HintPath>..\packages\Freya.Machine.2.0.200\lib\net45\Freya.Machine.dll</HintPath>
+      <HintPath>..\packages\Freya.Machine.2.0.203\lib\net45\Freya.Machine.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Freya.Machine.Extensions.Http">
-      <HintPath>..\packages\Freya.Machine.Extensions.Http.2.0.200\lib\net45\Freya.Machine.Extensions.Http.dll</HintPath>
+      <HintPath>..\packages\Freya.Machine.Extensions.Http.2.0.203\lib\net45\Freya.Machine.Extensions.Http.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Freya.Machine.Extensions.Http.Cors">
-      <HintPath>..\packages\Freya.Machine.Extensions.Http.Cors.2.0.200\lib\net45\Freya.Machine.Extensions.Http.Cors.dll</HintPath>
+      <HintPath>..\packages\Freya.Machine.Extensions.Http.Cors.2.0.203\lib\net45\Freya.Machine.Extensions.Http.Cors.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Freya.Machine.Router">
-      <HintPath>..\packages\Freya.Machine.Router.2.0.200\lib\net45\Freya.Machine.Router.dll</HintPath>
+      <HintPath>..\packages\Freya.Machine.Router.2.0.203\lib\net45\Freya.Machine.Router.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Freya.Recorder">
-      <HintPath>..\packages\Freya.Recorder.2.0.200\lib\net45\Freya.Recorder.dll</HintPath>
+      <HintPath>..\packages\Freya.Recorder.2.0.203\lib\net45\Freya.Recorder.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Freya.Router">
-      <HintPath>..\packages\Freya.Router.2.0.200\lib\net45\Freya.Router.dll</HintPath>
+      <HintPath>..\packages\Freya.Router.2.0.203\lib\net45\Freya.Router.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Hekate">
