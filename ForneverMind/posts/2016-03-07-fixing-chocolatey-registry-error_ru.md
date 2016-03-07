@@ -67,16 +67,18 @@ foreach ($item in $items) {
 В моём случае ошибку содержал раздел
 `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\nbi-glassfish-mod-3.1.2.23.2`.
 Просмотрев этот ключ с помощью `regedit`, я обнаружил, что параметр `NoModify`
-содержит "некорректное значение DWORD". Я пока не выяснил, что же могло
-повредить этот ключ — возможно, какие-то недавние апдейты на Windows 10
-(поскольку о проблеме начали сообщать только недавно; самое старое сообщение
-встречалось около 2 месяцев назад). Удаление ключа `NoModify` исправило
+содержит "некорректное значение DWORD". Удаление ключа `NoModify` исправило
 проблему, и нет оснований полагать, что оно может существенно испортить процесс
 деинсталляции вовлечённой программы, так что я рекомендую такой способ решения.
+
+Как оказалось, это [известная проблема][netbeans-bugzilla] некоего
+инсталляционного пакета от NetBeans, которая также затронула и дистрибутив
+GlassFish — в реестре действительно создаётся некорректное значение.
 
 После удаления этого испорченного ключа проблема была исправлена и я смог
 установить пакет через Chocolatey.
 
 [chocolatey-copyq-error]: https://chocolatey.org/packages/copyq#comment-2438623396
 [chocolatey-pandoc]: https://chocolatey.org/packages/pandoc
+[netbeans-bugzilla]: https://netbeans.org/bugzilla/show_bug.cgi?id=251538
 [statement-about-template]: https://chocolatey.org/packages/copyq#comment-2440908951
