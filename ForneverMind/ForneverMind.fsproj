@@ -138,6 +138,7 @@
     <Content Include="posts\2015-11-22-getting-started-with-perspex-with-monodevelop_ru.md" />
     <Content Include="posts\2015-12-12-portable-com-usage_ru.md" />
     <Content Include="posts\2016-02-23-environment-management_ru.md" />
+    <Content Include="posts\2016-03-07-setting-up-letsencrypt-with-nixos_ru.md" />
     <Content Include="views\_Layout.cshtml" />
     <Content Include="views\Archive.cshtml" />
     <Content Include="views\Index.cshtml" />
