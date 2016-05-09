@@ -1,0 +1,28 @@
+@using RazorEngine.Templating
+@inherits TemplateBase<ForneverMind.Models.PostArchiveModel>
+
+@{
+    Layout = "_Layout.cshtml";
+    ViewBag.Title = "int 20h";
+}
+
+<p>Hello!</p>
+
+<p>
+    My name is <a class="secret-link" href="http://www.scp-wiki.net/scp-579">[DATA EXPUNGED]</a>, I'm also known as
+    Friedrich von Növer.
+</p>
+
+<p>This is my website. I'm publising my technical and programming notes here.</p>
+
+<h2>Latest posts</h2>
+<ul>
+    @foreach (var post in Model.Posts)
+    {
+        <li>
+            <a href=".@post.Url">@post.Title</a> — @post.Date.ToString("yyyy-MM-dd")
+        </li>
+    }
+</ul>
+
+<p>You can view a list of all the posts in the <a href="./archive.html">Archive</a>.</p>

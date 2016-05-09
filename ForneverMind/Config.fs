@@ -9,4 +9,4 @@ let baseUrl = ConfigurationManager.AppSettings.["BaseUrl"]
 let applicationPath = AppDomain.CurrentDomain.BaseDirectory
 let lessDirectory = Path.Combine (applicationPath, "less")
 let postsDirectory = Path.Combine (applicationPath, "posts")
-let viewsDirectory = Path.Combine (applicationPath, "views")
+let viewsDirectory = Path.Combine (applicationPath, "views", "en")
