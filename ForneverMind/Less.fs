@@ -43,6 +43,6 @@ let main =
     freyaMachine {
         including Common.machine
         methodsSupported Common.get
-        lastModified (Common.initLastModified lastModifiedDate)
+        lastModified (Freya.init <| Common.dateTimeToSeconds lastModifiedDate)
         handleOk (fun _ -> representation)
     } |> FreyaMachine.toPipeline

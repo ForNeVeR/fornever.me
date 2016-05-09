@@ -1,5 +1,6 @@
 ﻿module ForneverMind.Pages
 
+open System
 open System.Text
 
 open Arachne.Http
@@ -9,9 +10,11 @@ open Freya.Machine.Extensions.Http
 
 open ForneverMind.Models
 
-let handlePage templateName model _ =
+let handlePage templateName freyaModel _ =
     freya {
-        let! content = Freya.fromAsync (Templates.render templateName) model
+        let! model = freyaModel
+        let! language = Common.routeLanguage
+        let! content = Freya.fromAsync (Templates.render language templateName) model
         return
             {
                 Description =
@@ -25,14 +28,22 @@ let handlePage templateName model _ =
             }
     }
 
-let private lastModificationDate = Templates.lastModificationDate
+let private lastModificationDate templateName =
+    freya {
+        let! language = Common.routeLanguage
+        let date = Templates.lastModificationDate language templateName
+        return Common.dateTimeToSeconds date
+    }
 
-let private page templateName model modificationDate =
-    let lastModificationDate = defaultArg modificationDate (lastModificationDate templateName)
+let private page templateName model additionalModificationDate =
     freyaMachine {
         including Common.machine
         methodsSupported Common.get
-        lastModified (Common.initLastModified lastModificationDate)
+        lastModified (freya {
+                          let! modificationDate = additionalModificationDate
+                          let! templateModificationDate = lastModificationDate templateName
+                          return max templateModificationDate (Option.orElse DateTime.MinValue modificationDate)
+                      })
         handleOk (handlePage templateName model)
     } |> FreyaMachine.toPipeline
 
@@ -40,31 +51,37 @@ let handlePost state =
     freya {
         let! fileName = Posts.postFilePath
         let! post = Freya.fromAsync Markdown.render fileName
-        return! handlePage "Post" (Some post) state
+        return! handlePage "Post" (Freya.init <| Some post) state
     }
 
 let private indexPostCount = 20
 
-let private pageWithPostsModificationDate pageName posts =
-    let pageLastModified = lastModificationDate pageName
-    let lastPostAdded =
-        posts
-        |> Seq.tryHead
-        |> Option.map (fun p -> p.Date)
-    Some (match lastPostAdded with
-          | Some date when date > pageLastModified -> date
-          | _ -> pageLastModified)
+let private postsModificationDate posts =
+    posts
+    |> Freya.map (Seq.tryHead >> Option.map (fun p -> p.Date))
 
-let pageWithPosts pageName posts =
-    let model = { Posts = posts }
-    page pageName (Some model) (pageWithPostsModificationDate pageName posts)
+let private pageWithPosts pageName freyaPosts =
+    let model = Freya.map (fun posts -> Some { Posts = posts }) freyaPosts
+    page pageName model (postsModificationDate freyaPosts)
+
+let private getPosts =
+    freya {
+        let! language = Common.routeLanguage
+        return Posts.allPosts language
+    }
+
+let private latestPosts count =
+    freya {
+        let! posts = getPosts
+        return posts |> Seq.truncate count |> Seq.toArray
+    }
 
 let index =
-    let posts = Posts.allPosts |> Seq.truncate indexPostCount |> Seq.toArray
+    let posts = latestPosts indexPostCount
     pageWithPosts "Index" posts
 
-let archive = pageWithPosts "Archive" Posts.allPosts
-let contact = page "Contact" None None
+let archive = pageWithPosts "Archive" getPosts
+let contact = page "Contact" (Freya.init None) (Freya.init None)
 
 let post =
     freyaMachine {

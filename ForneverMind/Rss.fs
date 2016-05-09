@@ -17,8 +17,8 @@ let private sindicationItem (post : PostMetadata) : SyndicationItem =
     let url = Config.baseUrl + post.Url
     SyndicationItem(post.Title, post.Description, Uri url, url, DateTimeOffset post.Date)
 
-let private feedContent =
-    let items = Seq.map sindicationItem Posts.allPosts
+let private feedContent language =
+    let items = Posts.allPosts language |> Seq.map sindicationItem
     let feed =
         SyndicationFeed (
             "Engineer, programmer, gentleman",
@@ -32,13 +32,18 @@ let private feedContent =
     formatter.WriteTo xmlWriter
     Encoding.UTF8.GetBytes (writer.ToString ())
 
-let private lastModificationDate =
-    defaultArg (Posts.allPosts
-                |> Seq.tryHead
-                |> Option.map (fun p -> p.Date)) DateTime.UtcNow
+let private lastModificationDateTime =
+    freya {
+        let! language = Common.routeLanguage
+        return defaultArg (Posts.allPosts language
+                           |> Seq.tryHead
+                           |> Option.map (fun p -> p.Date)) DateTime.UtcNow
+    }
 
 let private handleFeed _ =
     freya {
+        let! language = Common.routeLanguage
+        let content = feedContent language
         return
             {
                 Description =
@@ -48,7 +53,7 @@ let private handleFeed _ =
                         MediaType = Some Common.rss
                         Languages = None
                     }
-                Data = feedContent
+                Data = content
             }
     }
 
@@ -56,6 +61,6 @@ let feed =
     freyaMachine {
         including Common.machine
         methodsSupported Common.get
-        lastModified (Common.initLastModified lastModificationDate)
+        lastModified lastModificationDateTime
         handleOk handleFeed
     } |> FreyaMachine.toPipeline

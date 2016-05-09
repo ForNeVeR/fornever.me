@@ -10,13 +10,14 @@ open ForneverMind.Models
 let postFilePath =
     let htmlExtension = ".html"
     freya {
+        let! language = Common.routeLanguage
         let! maybeName = Route.Atom_ "name" |> Freya.Lens.getPartial
         let fileName = maybeName |> Option.orElse ""
         let name = Path.GetFileNameWithoutExtension fileName
         let extension = Path.GetExtension fileName
         let filePath =
             if extension = htmlExtension
-            then Path.Combine (Config.postsDirectory, name + ".md")
+            then Path.Combine (Config.postsDirectory, language, name + ".md")
             else "not-found.md"
         if not <| Common.pathIsInsideDirectory Config.postsDirectory filePath then failwith "Invalid file name"
         return filePath
@@ -34,8 +35,10 @@ let lastModified =
         return Common.dateTimeToSeconds (File.GetLastWriteTimeUtc filePath)
     }
 
-let allPosts =
-    Directory.GetFiles Config.postsDirectory
+let allPosts language =
+    let directory = Path.Combine (Config.postsDirectory, language)
+    if not <| Common.pathIsInsideDirectory Config.postsDirectory directory then failwithf "Access error"
+    Directory.GetFiles directory
     |> Seq.map (fun filePath ->
         use reader = new StreamReader (filePath)
         Markdown.processMetadata filePath reader)

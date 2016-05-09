@@ -7,6 +7,7 @@ open Arachne.Http
 open Freya.Core
 open Freya.Machine
 open Freya.Machine.Extensions.Http
+open Freya.Router
 
 let private utf8 = Freya.init [ Charset.Utf8 ]
 let private json = Freya.init [ MediaType.Html ]
@@ -14,6 +15,8 @@ let private json = Freya.init [ MediaType.Html ]
 let rss = MediaType (Type "application", SubType "rss+xml", Parameters Map.empty)
 
 let get = Freya.init [ GET ]
+
+let routeLanguage = Route.Atom_ "language" |> Freya.Lens.getPartial |> Freya.map Option.get |> Freya.memo
 
 let machine =
     freyaMachine {
@@ -36,5 +39,3 @@ let dateTimeToSeconds (date : DateTime) =
              d.Minute,
              d.Second,
              DateTimeKind.Utc)
-
-let initLastModified = dateTimeToSeconds >> Freya.init
