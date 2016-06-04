@@ -16,7 +16,13 @@ $dateFormatted = $Date.ToString('yyyy-MM-dd')
 $partialPath = "posts\$dateFormatted-$FileName.md"
 $path = "$PSScriptRoot/../ForneverMind/$partialPath"
 
-New-Item $path
+$content = @"
+    title: $Title
+    description: $Description
+---
+"@
+[IO.File]::WriteAllLines($path, $content)
+
 [xml]$project = Get-Content $ProjectPath
 $contentGroup = $project.Project.ItemGroup | ? { $_.Content }
 $latestPost = $contentGroup.ChildNodes | ? { $_.Include -and $_.Include.StartsWith('posts\') } | Select-Object -Last 1
