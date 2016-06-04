@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ForneverMind", "ForneverMind\ForneverMind.fsproj", "{2CAC3278-465E-432E-9434-09FEB4A6D98D}"
 EndProject
@@ -19,6 +19,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{D993AAA4-2B0E-4390-B6AB-61DD78732E56}"
 	ProjectSection(SolutionItems) = preProject
 		Scripts\Deploy.ps1 = Scripts\Deploy.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{C34834FA-3210-44F6-BB82-5424596676EA}"
+	ProjectSection(SolutionItems) = preProject
+		Tools\New-Post.ps1 = Tools\New-Post.ps1
 	EndProjectSection
 EndProject
 Global
@@ -41,5 +46,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D993AAA4-2B0E-4390-B6AB-61DD78732E56} = {89A0A63A-0C34-48DE-89AB-8FA26292A190}
+		{C34834FA-3210-44F6-BB82-5424596676EA} = {89A0A63A-0C34-48DE-89AB-8FA26292A190}
 	EndGlobalSection
 EndGlobal
