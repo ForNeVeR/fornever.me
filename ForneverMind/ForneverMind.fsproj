@@ -110,6 +110,8 @@
     <Content Include="images\2015-11-22-monodevelop-add-packages.png" />
     <Content Include="images\2015-11-22-monodevelop-resource-properties.png" />
     <Content Include="images\2015-11-22-perspex-application.png" />
+    <Content Include="images\2016-06-04-publish-settings.png" />
+    <Content Include="images\2016-06-04-web-deploy-package.png" />
     <Content Include="less\contact.less" />
     <Content Include="less\fonts.less" />
     <Content Include="less\layout.less" />
@@ -140,6 +142,7 @@
     <Content Include="posts\2016-02-23-environment-management_ru.md" />
     <Content Include="posts\2016-03-07-setting-up-letsencrypt-with-nixos_ru.md" />
     <Content Include="posts\2016-03-07-fixing-chocolatey-registry-error_ru.md" />
+    <Content Include="posts\2016-06-04-msdeploy-web-site-deployment.md" />
     <Content Include="views\_Layout.cshtml" />
     <Content Include="views\Archive.cshtml" />
     <Content Include="views\Index.cshtml" />
