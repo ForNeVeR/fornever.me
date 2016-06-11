@@ -8,11 +8,15 @@ open Xunit
 open ForneverMind
 open ForneverMind.Models
 
-let compareResult fileName input expected =
-    use reader = new StringReader (input)
+let private normalizeLineEndings (s : string) = s.Replace(Environment.NewLine, "\n")
+let private normalizeHtmlContent ({ HtmlContent = content } as item) =
+    { item with HtmlContent = normalizeLineEndings content }
+
+let compareResult fileName (input : string) expected =
+    use reader = new StringReader (normalizeLineEndings input)
     let actual = Markdown.processReader fileName reader
 
-    Assert.Equal (expected, actual)
+    Assert.Equal (normalizeHtmlContent expected, normalizeHtmlContent actual)
 
 [<Fact>]
 let ``Empty document should be parsed`` () =
@@ -75,8 +79,7 @@ let ``Code block should be rendered with microlight class`` () =
         "
 ---
     test
-    code
-"
+    code"
         {
             Meta =
                 {
