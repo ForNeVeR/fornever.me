@@ -28,10 +28,12 @@ let checkPostExists =
         return File.Exists filePath
     }
 
-let lastModified =
+let postLastModified templateModificationDate =
     freya {
         let! filePath = postFilePath
-        return Common.dateTimeToSeconds (File.GetLastWriteTimeUtc filePath)
+        let postModificationDate = File.GetLastWriteTimeUtc filePath
+        let lastModificationDate = max postModificationDate templateModificationDate
+        return Common.dateTimeToSeconds lastModificationDate
     }
 
 let allPosts =

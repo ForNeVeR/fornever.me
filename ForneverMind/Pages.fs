@@ -71,7 +71,7 @@ let post =
         including Common.machine
         methodsSupported Common.get
         exists Posts.checkPostExists
-        lastModified Posts.lastModified
+        lastModified (Posts.postLastModified <| lastModificationDate "Post")
 
         handleOk handlePost
     } |> FreyaMachine.toPipeline

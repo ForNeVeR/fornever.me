@@ -16,15 +16,23 @@ type Formatter (target, settings) =
     let skippedCode = ref false
     let skippedRuler = ref false
 
-    override __.WriteBlock (block, isOpening, isClosing, ignoreChildNodes) =
+    override this.WriteBlock (block, isOpening, isClosing, ignoreChildNodes) =
         let skipCode = not !skippedCode && block.Tag = BlockTag.IndentedCode
-        let skipRuler = not !skippedRuler && block.Tag = BlockTag.HorizontalRuler
+        let skipRuler = not !skippedRuler && block.Tag = BlockTag.ThematicBreak
         match skipCode, skipRuler with
         | (true, _) -> skippedCode := true; ()
-        | (_, true) -> skippedRuler := true; ()
+        | (_, true) -> skippedCode := true; skippedRuler := true; ()
         | _ ->
-            ignoreChildNodes <- false
-            base.WriteBlock (block, isOpening, isClosing, ref ignoreChildNodes)
+            match block.Tag with
+            | BlockTag.FencedCode | BlockTag.IndentedCode ->
+                ignoreChildNodes <- true
+                this.EnsureNewLine ()
+                this.Write "<pre><code class=\"microlight\">"
+                this.WriteEncodedHtml block.StringContent
+                this.WriteLine "</code></pre>"
+            | _ ->
+                ignoreChildNodes <- false
+                base.WriteBlock (block, isOpening, isClosing, ref ignoreChildNodes)
 
 let private getMetadata (block : EnumeratorEntry option) =
     match block with
@@ -50,7 +58,7 @@ let private readMetadata (fileName : string) documentNodes =
             ret)
 
     let isBlockOfType tag (b : EnumeratorEntry) = (not << isNull) b.Block && b.Block.Tag = tag
-    let isHorizontalRuler = isBlockOfType BlockTag.HorizontalRuler
+    let isHorizontalRuler = isBlockOfType BlockTag.ThematicBreak
     let isIndentedCode = isBlockOfType BlockTag.IndentedCode
 
     let metadataNodes = takeUntil (not << isHorizontalRuler) documentNodes

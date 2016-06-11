@@ -10,9 +10,13 @@ let private razor =
     let config = TemplateServiceConfiguration (DisableTempFileLocking = true, TemplateManager = templateManager)
     RazorEngineService.Create config
 
+let private templatePath name = Path.Combine (Config.viewsDirectory, name + ".cshtml")
+let private layoutPath = templatePath "_Layout"
+
 let lastModificationDate name =
-    let filePath = Path.Combine (Config.viewsDirectory, name + ".cshtml")
-    File.GetLastWriteTimeUtc filePath
+    let templateModificationDate = File.GetLastWriteTimeUtc <| templatePath name
+    let layoutModificationDate = File.GetLastWriteTimeUtc layoutPath
+    max templateModificationDate layoutModificationDate
 
 let render<'a> (name : string) (model : 'a option) : Async<string> =
     async {
