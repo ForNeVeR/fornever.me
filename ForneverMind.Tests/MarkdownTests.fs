@@ -90,22 +90,3 @@ code
 </code></pre>
 "
         }
-
-[<Fact>]
-let ``Inline code should be rendered with microlight class`` () =
-    compareResult "0001-01-01"
-        "
----
-`test\`
-"
-        {
-            Meta =
-                {
-                    Url = "/posts/0001-01-01.html"
-                    Title = ""
-                    Description = ""
-                    Date = DateTime.MinValue
-                }
-            HtmlContent = "<p><code class=\"microlight\">test\</code></p>
-"
-        }
