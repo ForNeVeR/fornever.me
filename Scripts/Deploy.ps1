@@ -1,12 +1,32 @@
 param (
+    $Frontend = "$PSScriptRoot/../ForneverMind.Frontend",
+
+    $npm = 'npm',
     $nuget = 'NuGet',
     $msbuild = 'msbuild'
 )
 
-& $nuget restore
-if (-not $?) {
-    return $LASTEXITCODE
+$ErrorActionPreference = 'Stop'
+
+Push-Location $Frontend
+try {
+    & $npm install
+    if (-not $?) {
+        exit $LASTEXITCODE
+    }
+
+    & $npm run optimize
+    if (-not $?) {
+        exit $LASTEXITCODE
+    }
+} finally {
+    Pop-Location
 }
 
-& $msbuild /p:Platform="Any CPU" /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=Production ForneverMind.sln
-return $LASTEXITCODE
+& $nuget restore
+if (-not $?) {
+    exit $LASTEXITCODE
+}
+
+& $msbuild /p:Platform="Any CPU" /p:Configuration=Release /p:DeployBackend=true /p:PublishProfile=Production ForneverMind.sln
+exit $LASTEXITCODE

@@ -1,0 +1,24 @@
+{
+  "name": "fornever.me",
+  "version": "1.2.1",
+  "private": true,
+  "scripts": {
+    "optimize": "webpack -p",
+    "watch": "webpack -d --watch",
+    "webpack": "webpack -d"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ForNeVeR/fornever.me.git"
+  },
+  "author": "Friedrich von Never <friedrich@fornever.me>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ForNeVeR/fornever.me/issues"
+  },
+  "homepage": "https://github.com/ForNeVeR/fornever.me#readme",
+  "devDependencies": {
+    "microlight": "0.0.2",
+    "webpack": "^1.13.1"
+  }
+}

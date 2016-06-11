@@ -26,6 +26,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{C34834FA
 		Tools\New-Post.ps1 = Tools\New-Post.ps1
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForneverMind.Frontend", "ForneverMind.Frontend\ForneverMind.Frontend.csproj", "{D96D3D8B-B311-49B1-8EB0-F1AA9F7F6F31}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{F66CD922-9216-401E-96DE-36263DF07726}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F66CD922-9216-401E-96DE-36263DF07726}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F66CD922-9216-401E-96DE-36263DF07726}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D96D3D8B-B311-49B1-8EB0-F1AA9F7F6F31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D96D3D8B-B311-49B1-8EB0-F1AA9F7F6F31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D96D3D8B-B311-49B1-8EB0-F1AA9F7F6F31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D96D3D8B-B311-49B1-8EB0-F1AA9F7F6F31}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

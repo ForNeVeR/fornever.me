@@ -7,7 +7,16 @@ homemade blog engine mainly written in F# programming language.
 Build
 -----
 
-To compile the site, you'll need [NuGet][nuget] and [MSBuild][msbuild] or a
+To compile frontend part, you'll need a recent (4.4.5+) [Node.js][node-js]
+installation. Then execute the following script inside of
+`ForneverMind.Frontend` directory:
+
+    $ npm install
+    $ npm run webpack # or `npm run optimize` for optimized build
+
+_(You may alternatively use Webpack-compatible task runner for your IDE.)_
+
+To compile the backend, you'll need [NuGet][nuget] and [MSBuild][msbuild] or a
 compatible build engine.
 
 Here's a simple build script:
@@ -30,4 +39,5 @@ Other components
 [evil-planner]: https://github.com/ForNeVeR/EvilPlanner
 [fornever.me]: https://fornever.me/
 [msbuild]: https://msdn.microsoft.com/en-us/library/dd393574.aspx
+[node-js]: https://nodejs.org/
 [nuget]: https://www.nuget.org/
