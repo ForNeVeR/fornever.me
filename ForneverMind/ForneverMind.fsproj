@@ -98,12 +98,6 @@
     </VisualStudio>
   </ProjectExtensions>
   <ItemGroup>
-    <Content Include="fonts\ptm55f_w.eot" />
-    <Content Include="fonts\ptm55f_w.ttf" />
-    <Content Include="fonts\ptm55f_w.woff" />
-    <Content Include="fonts\ptm75f_w.eot" />
-    <Content Include="fonts\ptm75f_w.ttf" />
-    <Content Include="fonts\ptm75f_w.woff" />
     <Content Include="images\2013-09-01-exception-diagram.png" />
     <Content Include="images\2015-03-22-spyxx-tree.png" />
     <Content Include="images\2015-11-22-monodevelop-add-in-manager.png" />
@@ -116,7 +110,6 @@
     <Content Include="less\fonts.less" />
     <Content Include="less\layout.less" />
     <Content Include="less\main.less" />
-    <Content Include="less\pt_mono.less" />
     <Content Include="less\styles.less" />
     <Content Include="less\syntax.less" />
     <Compile Include="models\PostModel.fs" />
