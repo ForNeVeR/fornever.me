@@ -1,9 +1,14 @@
-@import url(https://fonts.googleapis.com/css?family=Cuprum:400,700,700italic,400italic&subset=latin,cyrillic);
+.so-badge {
+  float: right;
+}
 body {
   color: black;
   font-size: 16px;
   margin: 0px auto 0px auto;
   width: 720px;
+}
+body img {
+  max-width: 100%;
 }
 div#header {
   border-bottom: 2px solid black;
@@ -30,7 +35,7 @@ div#logo a {
 }
 footer {
   border-top: solid 2px black;
-  color: #555;
+  color: #555555;
   font-size: 12px;
   margin-top: 30px;
   padding: 12px 0px 12px 0px;
@@ -44,7 +49,7 @@ h2 {
   font-size: 20px;
 }
 div.info {
-  color: #555;
+  color: #555555;
   font-size: 14px;
   font-style: italic;
 }
@@ -54,7 +59,7 @@ a.secret-link {
   text-decoration: inherit;
 }
 .tag {
-  background: #000;
+  background: black;
   color: white;
   padding: 1px 3px;
   border-radius: 5px;
@@ -62,10 +67,11 @@ a.secret-link {
   transition: 0.25s;
 }
 .tag:hover {
-  background: #555;
+  background: #555555;
 }
 pre {
-  background: antiquewhite;
+  background-color: #c4e4e8;
+  color: #052c36;
   border-radius: 5px;
   padding: 5px;
   overflow-x: auto;
@@ -73,91 +79,17 @@ pre {
 }
 code {
   display: inline-block;
-  background: antiquewhite;
+  background-color: #c4e4e8;
+  color: #052c36;
   border-radius: 4.5px;
   padding: 2.5px;
   margin: -2.5px;
 }
-table.sourceCode,
-tr.sourceCode,
-td.lineNumbers,
-td.sourceCode,
-table.sourceCode pre {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  vertical-align: baseline;
-  border: none;
-}
-td.lineNumbers {
-  border-right: 1px solid #AAAAAA;
-  text-align: right;
-  color: #AAAAAA;
-  padding-right: 5px;
-  padding-left: 5px;
-}
-td.sourceCode {
-  padding-left: 5px;
-}
-.sourceCode span.kw {
-  color: #007020;
-  font-weight: bold;
-}
-.sourceCode span.dt {
-  color: #902000;
-}
-.sourceCode span.dv {
-  color: #40a070;
-}
-.sourceCode span.bn {
-  color: #40a070;
-}
-.sourceCode span.fl {
-  color: #40a070;
-}
-.sourceCode span.ch {
-  color: #4070a0;
-}
-.sourceCode span.st {
-  color: #4070a0;
-}
-.sourceCode span.co {
-  color: #60a0b0;
-  font-style: italic;
-}
-.sourceCode span.ot {
-  color: #007020;
-}
-.sourceCode span.al {
-  color: red;
-  font-weight: bold;
-}
-.sourceCode span.fu {
-  color: #06287e;
-}
-.sourceCode span.er {
-  color: red;
-  font-weight: bold;
-}
-@font-face {
-  font-family: 'pt_monoregular';
-  src: url('https://fornever.me/fonts/ptm55f_w.eot');
-  src: url('https://fornever.me/fonts/ptm55f_w.eot?#iefix') format('embedded-opentype'), url('https://fornever.me/fonts/ptm55f_w.woff') format('woff'), url('https://fornever.me/fonts/ptm55f_w.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'pt_monobold';
-  src: url('https://fornever.me/fonts/ptm75f_w.eot');
-  src: url('https://fornever.me/fonts/ptm75f_w.eot?#iefix') format('embedded-opentype'), url('https://fornever.me/fonts/ptm75f_w.woff') format('woff'), url('https://fornever.me/fonts/ptm75f_w.ttf') format('truetype');
-  font-weight: bold;
-  font-style: normal;
-}
 body {
-  font-family: 'Cuprum', sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 pre,
 code {
-  font-family: 'pt_monoregular', monospace;
+  font-family: 'Liberation Mono', 'Lucida Console', 'Andale Mono', 'DejaVu Sans Mono', monospace;
   font-size: 14px;
 }
