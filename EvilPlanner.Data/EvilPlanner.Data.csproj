@@ -68,6 +68,10 @@
     <Compile Include="Migrations\201510131411490_UniqueDailyQuotes.Designer.cs">
       <DependentUpon>201510131411490_UniqueDailyQuotes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606250320295_FixQuoteLists.cs" />
+    <Compile Include="Migrations\201606250320295_FixQuoteLists.Designer.cs">
+      <DependentUpon>201606250320295_FixQuoteLists.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -87,6 +91,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510131411490_UniqueDailyQuotes.resx">
       <DependentUpon>201510131411490_UniqueDailyQuotes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606250320295_FixQuoteLists.resx">
+      <DependentUpon>201606250320295_FixQuoteLists.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
