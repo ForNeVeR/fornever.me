@@ -9,6 +9,6 @@ open System.Runtime.InteropServices
 [<assembly: AssemblyCopyright("Copyright © F. von Never 2015")>]
 [<assembly: ComVisible(false)>]
 [<assembly: Guid("b2876968-4e06-4fa0-a10a-9efc9cff5064")>]
-[<assembly: AssemblyVersion("0.1.8.0")>]
+[<assembly: AssemblyVersion("0.1.9.0")>]
 
 ()
