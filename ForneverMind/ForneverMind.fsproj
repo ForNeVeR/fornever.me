@@ -142,7 +142,9 @@
     <Content Include="posts\2016-07-09-calling-ms-word-from-windows-service.md" />
     <Content Include="posts\2016-08-08-icfpc-2016-report_ru.md" />
     <Content Include="views\_Layout.cshtml" />
+    <Content Include="views\404.cshtml" />
     <Content Include="views\Archive.cshtml" />
+    <Content Include="views\Error.cshtml" />
     <Content Include="views\Index.cshtml" />
     <Content Include="views\Post.cshtml" />
     <Content Include="views\Contact.cshtml" />

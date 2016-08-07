@@ -65,6 +65,8 @@ let index =
 
 let archive = pageWithPosts "Archive" Posts.allPosts
 let contact = page "Contact" None None
+let error = page "Error" None None
+let notFound = page "404" None None
 
 let post =
     freyaMachine {
