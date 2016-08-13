@@ -35,7 +35,7 @@ let private page templateName model modificationDate =
         methodsSupported Common.get
         lastModified (Common.initLastModified lastModificationDate)
         handleOk (handlePage templateName model)
-    } |> FreyaMachine.toPipeline
+    }
 
 let handlePost state =
     freya {
@@ -95,4 +95,4 @@ let post =
 
         handleOk handlePost
         handleNotFound notFoundHandler
-    } |> FreyaMachine.toPipeline
+    }

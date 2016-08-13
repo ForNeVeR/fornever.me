@@ -58,4 +58,4 @@ let feed =
         methodsSupported Common.get
         lastModified (Common.initLastModified lastModificationDate)
         handleOk handleFeed
-    } |> FreyaMachine.toPipeline
+    }

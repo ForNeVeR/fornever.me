@@ -45,4 +45,4 @@ let main =
         methodsSupported Common.get
         lastModified (Common.initLastModified lastModifiedDate)
         handleOk (fun _ -> representation)
-    } |> FreyaMachine.toPipeline
+    }

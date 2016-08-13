@@ -10,7 +10,7 @@ open ForneverMind.Models
 let postFilePath =
     let htmlExtension = ".html"
     freya {
-        let! maybeName = Route.Atom_ "name" |> Freya.Lens.getPartial
+        let! maybeName = Route.atom_ "name" |> Freya.Optic.get
         let fileName = maybeName |> Option.orElse ""
         let name = Path.GetFileNameWithoutExtension fileName
         let extension = Path.GetExtension fileName
