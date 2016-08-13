@@ -17,7 +17,7 @@ let postFilePath =
         let filePath =
             if extension = htmlExtension
             then Path.Combine (Config.postsDirectory, name + ".md")
-            else "not-found.md"
+            else Path.Combine (Config.postsDirectory, "not-found.md")
         if not <| Common.pathIsInsideDirectory Config.postsDirectory filePath then failwith "Invalid file name"
         return filePath
     } |> Freya.memo

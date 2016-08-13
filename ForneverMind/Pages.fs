@@ -4,6 +4,7 @@ open System.Text
 
 open Arachne.Http
 open Freya.Core
+open Freya.Lenses.Http.Lenses
 open Freya.Machine
 open Freya.Machine.Extensions.Http
 
@@ -55,7 +56,7 @@ let private pageWithPostsModificationDate pageName posts =
           | Some date when date > pageLastModified -> date
           | _ -> pageLastModified)
 
-let pageWithPosts pageName posts =
+let private pageWithPosts pageName posts =
     let model = { Posts = posts }
     page pageName (Some model) (pageWithPostsModificationDate pageName posts)
 
@@ -65,8 +66,25 @@ let index =
 
 let archive = pageWithPosts "Archive" Posts.allPosts
 let contact = page "Contact" None None
+
+let private shouldReturn404 =
+    freya {
+        let! url = Request.path_ |> Freya.Optic.get
+        return url = "/404.html"
+    }
+
+let private notFoundHandler = handlePage "404" None
+
+let notFound =
+    freyaMachine {
+        including Common.machine
+        methodsSupported Common.get
+        exists shouldReturn404
+        handleNotFound notFoundHandler
+        handleNotFound notFoundHandler
+    }
+
 let error = page "Error" None None
-let notFound = page "404" None None
 
 let post =
     freyaMachine {
@@ -76,4 +94,5 @@ let post =
         lastModified (Posts.postLastModified <| lastModificationDate "Post")
 
         handleOk handlePost
+        handleNotFound notFoundHandler
     } |> FreyaMachine.toPipeline
