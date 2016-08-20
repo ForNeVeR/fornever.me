@@ -21,7 +21,8 @@ Studio справится!"_ — решил в своё время я. Ах, к�
 так — можете дальше не читать и спокойно использовать встроенные в Visual Studio
 инструменты публикации.
 
-<img src="./images/2016-06-04-publish-settings.png"/>
+![Вкладка Settings окна публикации Visual
+Studio](./images/2016-06-04-publish-settings.png)
 
 В настройках публикации есть две вот таких интересных галочки: "Remove
 additional files at destination" и "Exclude files from the App_Data folder". К
@@ -36,7 +37,8 @@ additional files at destination" и "Exclude files from the App_Data folder". К
 Для начала настроим в Visual Studio разворачивание не напрямую с помощью Web
 Deploy, а в Web Deploy Package:
 
-<img src="./images/2016-06-04-web-deploy-package.png"/>
+![Вкладка Connection окна публикации Visual
+Studio](./images/2016-06-04-web-deploy-package.png)
 
 Теперь на билдсервере можно подготовить пакет такой командой:
 

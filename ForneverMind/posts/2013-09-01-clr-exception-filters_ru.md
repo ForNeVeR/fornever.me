@@ -15,7 +15,8 @@
 ## Откуда есть пошли фильтры исключений
 Фильтры исключений встроены в среду CLR и являются одним из механизмов, который среда использует при обработке исключения. Последовательность выглядит следующим образом:
 
-<img src="./images/2013-09-01-exception-diagram.png"/>
+![Бросание исключения, поиск подходящего блока catch, выполнение блоков catch и
+finally](./images/2013-09-01-exception-diagram.png)
 
 На этапе поиска подходящего блока `catch` CLR выполняет обход своего внутреннего стека обработчиков исключений, а также  выполняет фильтры исключений. Обратите внимание — это происходит **до** выполнения кода в блоке `finally`. Мы обсудим этот момент позже.
 
@@ -24,23 +25,23 @@
 
 ```monobasic
 Sub FilterException()
-	Try
-		Dim exception As New Exception
-		exception.Data.Add("foo", "bar1")
+    Try
+        Dim exception As New Exception
+        exception.Data.Add("foo", "bar1")
 
-		Console.WriteLine("Throwing")
-		Throw exception
-	Catch ex As Exception When Filter(ex) ' здесь фильтр
-		Console.WriteLine("Caught")
-	Finally
-		Console.WriteLine("Finally")
-	End Try
+        Console.WriteLine("Throwing")
+        Throw exception
+    Catch ex As Exception When Filter(ex) ' здесь фильтр
+        Console.WriteLine("Caught")
+    Finally
+        Console.WriteLine("Finally")
+    End Try
 
 End Sub
 
 Function Filter(exception As Exception) As Boolean
-	Console.WriteLine("Filtering")
-	Return exception.Data.Item("foo").Equals("bar")
+    Console.WriteLine("Filtering")
+    Return exception.Data.Item("foo").Equals("bar")
 End Function
 ```
 
@@ -252,27 +253,27 @@ End Sub
 ```cs
 static void FilterException()
 {
-	try
-	{
-		var exception = new Exception();
-		exception.Data["foo"] = "bar";
-		Console.WriteLine("Throwing");
-		throw exception;
-	}
-	catch (Exception exception)
-	{
-		if (!Filter(exception))
-		{
-			throw;
-		}
+    try
+    {
+        var exception = new Exception();
+        exception.Data["foo"] = "bar";
+        Console.WriteLine("Throwing");
+        throw exception;
+    }
+    catch (Exception exception)
+    {
+        if (!Filter(exception))
+        {
+            throw;
+        }
 
-		Console.WriteLine("Caught");
-	}
+        Console.WriteLine("Caught");
+    }
 }
 
 static bool Filter(Exception exception)
 {
-	return exception.Data["foo"].Equals("bar");
+    return exception.Data["foo"].Equals("bar");
 }
 ```
 

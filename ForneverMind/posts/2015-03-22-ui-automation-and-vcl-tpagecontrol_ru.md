@@ -18,7 +18,7 @@ Windows. Что ж, случается всякое, и такие сценар�
 
 Сначала посмотрим на окно программы с помощью [Spy++](https://msdn.microsoft.com/en-us/library/vstudio/dd460760.aspx).
 
-<img src="./images/2015-03-22-spyxx-tree.png"/>
+![Дерево окон в Spy++](./images/2015-03-22-spyxx-tree.png)
 
 Вроде как по скриншоту видно, что у `TPageControl` есть дочернее окно класса `TTabSheet` (напоминаю, что в WinAPI все
 элементы управления называются "окнами"). Ну что ж, попробуем получить эти дочерние элементы:
@@ -26,14 +26,14 @@ Windows. Что ж, случается всякое, и такие сценар�
 ```cs
 var desktop = AutomationElement.RootElement;
 var window = desktop.FindFirst(
-	TreeScope.Children,
-	new PropertyCondition(AutomationElement.NameProperty, "█████████████████████████"));
+    TreeScope.Children,
+    new PropertyCondition(AutomationElement.NameProperty, "█████████████████████████"));
 var pageControl = window.FindFirst(
-	TreeScope.Children,
-	new PropertyCondition(AutomationElement.ClassNameProperty, "TPageControl"));
+    TreeScope.Children,
+    new PropertyCondition(AutomationElement.ClassNameProperty, "TPageControl"));
 var settingsTab = pageControl.FindFirst(
-	TreeScope.Children,
-	new PropertyCondition(AutomationElement.ClassNameProperty, "TTabSheet"));
+    TreeScope.Children,
+    new PropertyCondition(AutomationElement.ClassNameProperty, "TTabSheet"));
 ```
 
 Пока всё работает — это код выполняется и возвращает `settingsTab`. Однако у этого объекта свойство
@@ -54,25 +54,25 @@ var settingsTab = pageControl.FindFirst(
 ```cs
 public static AutomationElement GetPageControlTab(AutomationElement pageControl, string name)
 {
-	var handle = (IntPtr)pageControl.Current.NativeWindowHandle;
-	var results = new List<IntPtr>();
-	NativeHelper.EnumWindowsProc callback = (hwnd, lparam) =>
-	{
-		var className = NativeHelper.GetWindowClassName(hwnd);
-		var tabName = NativeHelper.GetWindowText(hwnd);
-		if (className == "TTabSheet" && tabName == name)
-		{
-			results.Add(hwnd);
-		}
+    var handle = (IntPtr)pageControl.Current.NativeWindowHandle;
+    var results = new List<IntPtr>();
+    NativeHelper.EnumWindowsProc callback = (hwnd, lparam) =>
+    {
+        var className = NativeHelper.GetWindowClassName(hwnd);
+        var tabName = NativeHelper.GetWindowText(hwnd);
+        if (className == "TTabSheet" && tabName == name)
+        {
+            results.Add(hwnd);
+        }
 
-		return false;
-	};
+        return false;
+    };
 
-	NativeHelper.EnumChildWindows(handle, callback, IntPtr.Zero);
-	GC.KeepAlive(callback);
+    NativeHelper.EnumChildWindows(handle, callback, IntPtr.Zero);
+    GC.KeepAlive(callback);
 
-	var tabHandle = results.Single();
-	return AutomationElement.FromHandle(tabHandle);
+    var tabHandle = results.Single();
+    return AutomationElement.FromHandle(tabHandle);
 }
 ```
 
@@ -81,31 +81,31 @@ public static AutomationElement GetPageControlTab(AutomationElement pageControl,
 ```cs
 internal class NativeHelper
 {
-	public delegate bool EnumWindowsProc(IntPtr hWnd, IntPtr lParam);
+    public delegate bool EnumWindowsProc(IntPtr hWnd, IntPtr lParam);
 
-	[DllImport("user32.dll")]
-	[return: MarshalAs(UnmanagedType.Bool)]
-	public static extern bool EnumChildWindows(IntPtr hwndParent, EnumWindowsProc lpEnumFunc, IntPtr lParam);
+    [DllImport("user32.dll")]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    public static extern bool EnumChildWindows(IntPtr hwndParent, EnumWindowsProc lpEnumFunc, IntPtr lParam);
 
-	[DllImport("user32.dll", CharSet = CharSet.Auto)]
-	public static extern int GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
+    [DllImport("user32.dll", CharSet = CharSet.Auto)]
+    public static extern int GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
 
-	[DllImport("user32", CharSet = CharSet.Auto, SetLastError = true)]
-	internal static extern int GetWindowText(IntPtr hWnd, [Out, MarshalAs(UnmanagedType.LPTStr)] StringBuilder lpString, int nMaxCount);
+    [DllImport("user32", CharSet = CharSet.Auto, SetLastError = true)]
+    internal static extern int GetWindowText(IntPtr hWnd, [Out, MarshalAs(UnmanagedType.LPTStr)] StringBuilder lpString, int nMaxCount);
 
-	public static string GetWindowClassName(IntPtr hwnd)
-	{
-		var buffer = new StringBuilder(128);
-		GetClassName(hwnd, buffer, buffer.Capacity);
-		return buffer.ToString();
-	}
+    public static string GetWindowClassName(IntPtr hwnd)
+    {
+        var buffer = new StringBuilder(128);
+        GetClassName(hwnd, buffer, buffer.Capacity);
+        return buffer.ToString();
+    }
 
-	public static string GetWindowText(IntPtr hwnd)
-	{
-		var buffer = new StringBuilder(128);
-		GetWindowText(hwnd, buffer, buffer.Capacity);
-		return buffer.ToString();
-	}
+    public static string GetWindowText(IntPtr hwnd)
+    {
+        var buffer = new StringBuilder(128);
+        GetWindowText(hwnd, buffer, buffer.Capacity);
+        return buffer.ToString();
+    }
 }
 ```
 
@@ -114,11 +114,11 @@ internal class NativeHelper
 ```cs
 var desktop = AutomationElement.RootElement;
 var window = desktop.FindFirst(
-	TreeScope.Children,
-	new PropertyCondition(AutomationElement.NameProperty, "█████████████████████████"));
+    TreeScope.Children,
+    new PropertyCondition(AutomationElement.NameProperty, "█████████████████████████"));
 var pageControl = window.FindFirst(
-	TreeScope.Children,
-	new PropertyCondition(AutomationElement.ClassNameProperty, "TPageControl"));
+    TreeScope.Children,
+    new PropertyCondition(AutomationElement.ClassNameProperty, "TPageControl"));
 var settingsTab = AutomationHelper.GetPageControlTab(pageControl, "Установки");
 ```
 
