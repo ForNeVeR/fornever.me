@@ -141,6 +141,7 @@
     <Content Include="posts\2016-06-04-msdeploy-web-site-deployment.md" />
     <Content Include="posts\2016-07-09-calling-ms-word-from-windows-service.md" />
     <Content Include="posts\2016-08-08-icfpc-2016-report_ru.md" />
+    <Content Include="posts\2016-09-12-dotless-usage-and-quirks.md" />
     <Content Include="views\_Layout.cshtml" />
     <Content Include="views\404.cshtml" />
     <Content Include="views\Archive.cshtml" />

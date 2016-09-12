@@ -65,6 +65,10 @@ C#, просто напишите мне в комментариях):
 так уж это оказалось и сложно. При этом мы используем только публично доступный
 API dotless без использования reflection или каких-то дополнительных трюков.
 
+**Продолжение**: [Использование dotless из C# и особенности компиляции под
+CLI][dotless-usage].
+
 [dotless]: http://www.dotlesscss.org/
+[dotless-usage]: posts/2016-09-12-dotless-usage-and-quirks.html
 [less]: http://lesscss.org/
 [owin]: http://owin.org/
