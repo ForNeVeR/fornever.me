@@ -59,4 +59,7 @@ TypeScript полагается на низлежащий JavaScript: на ег�
 
 > &lt;ForNeVeR> Я закончил.
 
+Оригинальный вариант монолога доступен [по ссылке][original].
+
 [codingteam]: xmpp:codingteam@conference.jabber.ru
+[original]: https://gist.github.com/Minoru/1f20725edc35da1aa5cb55d5f89ff756
