@@ -7,7 +7,7 @@ homemade blog engine mainly written in F# programming language.
 Build
 -----
 
-To compile frontend part, you'll need a recent (4.4.5+) [Node.js][node-js]
+To compile frontend part, you'll need a recent (6.9.1+) [Node.js][node-js]
 installation. Then execute the following script inside of
 `ForneverMind.Frontend` directory:
 
