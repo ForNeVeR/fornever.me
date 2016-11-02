@@ -18,7 +18,10 @@
   },
   "homepage": "https://github.com/ForNeVeR/fornever.me#readme",
   "devDependencies": {
+    "less": "^2.7.1",
+    "less-loader": "^2.2.3",
     "microlight": "0.0.2",
     "webpack": "^1.13.1"
-  }
+  },
+  "dependencies": {}
 }

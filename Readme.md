@@ -8,11 +8,11 @@ Build
 -----
 
 To compile frontend part, you'll need a recent (6.9.1+) [Node.js][node-js]
-installation. Then execute the following script inside of
-`ForneverMind.Frontend` directory:
+installation and [Yarn package manager][yarn] (version 0.16.1+). Then execute
+the following script inside of the `ForneverMind.Frontend` directory:
 
-    $ npm install
-    $ npm run webpack # or `npm run optimize` for optimized build
+    $ yarn install
+    $ yarn run webpack # or `yarn run optimize` for optimized build
 
 _(You may alternatively use Webpack-compatible task runner for your IDE.)_
 
@@ -41,3 +41,4 @@ Other components
 [msbuild]: https://msdn.microsoft.com/en-us/library/dd393574.aspx
 [node-js]: https://nodejs.org/
 [nuget]: https://www.nuget.org/
+[yarn]: https://yarnpkg.com/
