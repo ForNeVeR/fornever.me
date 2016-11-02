@@ -68,8 +68,6 @@ Microsoft Office). Эти рекомендации хоть и решили пр
 
 1. [Automating MS Word in Server 2012 R2][so-0].
 2. [Task Scheduler doesn't execute batch file properly][so-1].
-3. [Automating MS Word in Server 2012 R2][so-2].
 
 [so-0]: http://stackoverflow.com/a/34720474
 [so-1]: http://stackoverflow.com/a/25210194
-[so-2]: http://stackoverflow.com/a/34720474
