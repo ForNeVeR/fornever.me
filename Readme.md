@@ -7,26 +7,43 @@ homemade blog engine mainly written in F# programming language.
 Build
 -----
 
+### Frontend
+
 To compile frontend part, you'll need a recent (6.9.1+) [Node.js][node-js]
 installation and [Yarn package manager][yarn] (version 0.16.1+). Then execute
 the following script inside of the `ForneverMind.Frontend` directory:
 
-    $ yarn install
-    $ yarn run webpack # or `yarn run optimize` for optimized build
+```console
+$ yarn install
+$ yarn run webpack # or `yarn run optimize` for optimized build
+```
 
 _(You may alternatively use Webpack-compatible task runner for your IDE.)_
+
+You don't have to install yarn globally. Here's an instruction how to install it
+locally for the project (from the solution root directory):
+
+```console
+$ npm install yarn@0.16.1
+$ cd ForneverMind.Frontend
+$ ../node_modules/.bin/yarn install
+$ ../node_modules/.bin/yarn run optimize
+```
+
+### Backend
 
 To compile the backend, you'll need [NuGet][nuget] and [MSBuild][msbuild] or a
 compatible build engine.
 
 Here's a simple build script:
 
-    $ nuget restore
-    $ msbuild /p:Platform="Any CPU" /p:Configuration=Release ForneverMind.sln
+```console
+$ nuget restore
+$ msbuild /p:Platform="Any CPU" /p:Configuration=Release ForneverMind.sln
+```
 
-There's a PowerShell build script `Scripts/Deploy.ps1` that will build and
-deploy the site to the directory configured in
-`ForneverMind/__profiles/Production.pubxml`.
+There's an MSBuild property `/p:DeployBackend=true` that will deploy the site to
+the directory configured in `ForneverMind/__profiles/Production.pubxml`.
 
 Other components
 ----------------
