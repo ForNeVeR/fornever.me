@@ -1,0 +1,34 @@
+// This script will build and deploy ForneverMind to the target directory.
+// Required properties:
+// - GIT_BRANCH: name of the branch to deploy
+// - GIT_CREDENTIALS: credentials to download the source code
+// - MAINTAINERS: space-separated email list
+// - NUGET: path to NuGet executable
+// - MSBUILD: path to MSBuild executable
+node {
+    stage 'Checkout'
+    git branch: GIT_BRANCH,
+            credentialsId: GIT_CREDENTIALS,
+            url: 'git@github.com:ForNeVeR/fornever.me.git'
+
+    stage 'Frontend'
+    bat 'npm install yarn@0.16.1'
+
+    dir ('ForneverMind.Frontend') {
+        def yarn = '..\\node_modules\\.bin\\yarn'
+        bat "$yarn install"
+        bat "$yarn run optimize"
+    }
+
+    stage 'Backend'
+    bat "$NUGET restore"
+    bat "$MSBUILD /p:Platform=\"Any CPU\" /p:Configuration=Release /p:DeployBackend=true /p:PublishProfile=Production ForneverMind.sln"
+
+    stage 'Notify'
+    def isSuccess = currentBuild.result == null
+    def buildStatus = isSuccess ? 'SUCCESS' : currentBuild.result
+
+    mail to: MAINTAINERS, subject: "${env.JOB_NAME}#${env.BUILD_NUMBER}: ${buildStatus}", body: """Build #${env.BUILD_NUMBER} of Jenkins job ${env.JOB_NAME} finished with status ${buildStatus}.
+
+Check ${env.BUILD_URL} for details."""
+}
