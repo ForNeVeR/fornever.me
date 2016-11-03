@@ -22,8 +22,20 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app.js" />
     <Content Include="package.json" />
     <Content Include="webpack.config.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="style\contact.less" />
+    <Content Include="style\fonts.less" />
+    <Content Include="style\layout.less" />
+    <Content Include="style\main.less" />
+    <Content Include="style\styles.less" />
+    <Content Include="style\syntax.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="yarn.lock" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>

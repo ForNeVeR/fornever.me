@@ -109,12 +109,6 @@
     <Content Include="images\2015-11-22-perspex-application.png" />
     <Content Include="images\2016-06-04-publish-settings.png" />
     <Content Include="images\2016-06-04-web-deploy-package.png" />
-    <Content Include="less\contact.less" />
-    <Content Include="less\fonts.less" />
-    <Content Include="less\layout.less" />
-    <Content Include="less\main.less" />
-    <Content Include="less\styles.less" />
-    <Content Include="less\syntax.less" />
     <Compile Include="models\PostModel.fs" />
     <Compile Include="models\PostArchiveModel.fs" />
     <Content Include="posts\2013-09-01-clr-exception-filters_ru.md" />
