@@ -1,2 +1,8 @@
-before_build:
-- nuget restore
+version: 1.4.7.{build}
+install:
+    - npm install -g yarn@0.16.1
+    - cd ForneverMind.Frontend && yarn install
+    - cd ForneverMind.Frontend && yarn run optimize
+    - nuget restore
+build_script:
+    - msbuild /p:Platform="Any CPU" /p:Configuration=Release ForneverMind.sln
