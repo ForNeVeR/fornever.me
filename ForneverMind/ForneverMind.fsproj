@@ -147,7 +147,6 @@
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Config.fs" />
     <Compile Include="Common.fs" />
-    <Compile Include="Less.fs" />
     <Compile Include="Markdown.fs" />
     <Compile Include="Templates.fs" />
     <Compile Include="Posts.fs" />
@@ -190,10 +189,6 @@
     </Reference>
     <Reference Include="CommonMark">
       <HintPath>..\packages\CommonMark.NET.0.12.0\lib\net45\CommonMark.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="dotless.Core">
-      <HintPath>..\packages\dotless.1.5.1\lib\dotless.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="FParsec">

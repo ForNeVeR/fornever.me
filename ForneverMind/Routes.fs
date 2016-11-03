@@ -7,7 +7,6 @@ open Freya.Router
 
 let router =
      freyaRouter {
-        resource (UriTemplate.parse "/css/main.css") Less.main
         resource (UriTemplate.parse "/posts/{name}") Pages.post
         resource (UriTemplate.parse "/") Pages.index
         resource (UriTemplate.parse "/archive.html") Pages.archive
