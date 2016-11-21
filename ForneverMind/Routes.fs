@@ -13,5 +13,6 @@ let router =
         resource (UriTemplate.parse "/contact.html") Pages.contact
         resource (UriTemplate.parse "/error.html") Pages.error
         resource (UriTemplate.parse "/rss.xml") Rss.feed
+        resource (UriTemplate.parse "/talks.html") Pages.talks
         resource (UriTemplate.parse "/{q*}") Pages.notFound
      }

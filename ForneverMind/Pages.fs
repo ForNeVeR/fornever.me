@@ -66,6 +66,7 @@ let index =
 
 let archive = pageWithPosts "Archive" Posts.allPosts
 let contact = page "Contact" None None
+let talks = page "Talks" None None
 
 let private shouldReturn404 =
     freya {
