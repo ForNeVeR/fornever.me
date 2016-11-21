@@ -30,6 +30,12 @@ $ ../node_modules/.bin/yarn install
 $ ../node_modules/.bin/yarn run optimize
 ```
 
+### Talks
+
+There's an additional talks archive included as git submodule in this
+repository. To prepare tasks for build, use the `Scripts/Prepare-Talks.ps1`
+script.
+
 ### Backend
 
 To compile the backend, you'll need [NuGet][nuget] and [MSBuild][msbuild] or a

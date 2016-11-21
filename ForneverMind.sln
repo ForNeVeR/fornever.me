@@ -19,6 +19,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{D993AAA4-2B0E-4390-B6AB-61DD78732E56}"
 	ProjectSection(SolutionItems) = preProject
 		Scripts\Jenkinsfile.deploy = Scripts\Jenkinsfile.deploy
+		Scripts\Prepare-Talks.ps1 = Scripts\Prepare-Talks.ps1
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{C34834FA-3210-44F6-BB82-5424596676EA}"

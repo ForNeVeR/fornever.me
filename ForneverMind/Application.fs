@@ -6,8 +6,9 @@ open Owin
 
 type Application () =
     member __.Configuration (app : IAppBuilder) =
-        app.UseStaticFiles "/app" |> ignore
-        app.UseStaticFiles "/images" |> ignore
+        ignore<| app.UseStaticFiles("/app")
+            .UseStaticFiles("/images")
+            .UseStaticFiles("/talks")
         let router = OwinAppFunc.ofFreya Routes.router
         app.Run (fun c -> router.Invoke c.Environment)
 

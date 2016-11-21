@@ -1,0 +1,3 @@
+[submodule "ForneverMind/talks/modern-programming"]
+	path = ForneverMind/talks/modern-programming
+	url = https://github.com/ForNeVeR/modern-programming.git

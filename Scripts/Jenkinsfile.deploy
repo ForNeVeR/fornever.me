@@ -24,6 +24,9 @@ node {
     bat "$NUGET restore"
     bat "$MSBUILD /p:Platform=\"Any CPU\" /p:Configuration=Release /p:DeployBackend=true /p:PublishProfile=Production ForneverMind.sln"
 
+    stage 'Talks'
+    bat 'powershell Scripts/Prepare-Talks.ps1'
+
     stage 'Notify'
     def isSuccess = currentBuild.result == null
     def buildStatus = isSuccess ? 'SUCCESS' : currentBuild.result
