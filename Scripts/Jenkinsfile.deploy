@@ -10,6 +10,7 @@ node {
     git branch: GIT_BRANCH,
             credentialsId: GIT_CREDENTIALS,
             url: 'git@github.com:ForNeVeR/fornever.me.git'
+    bat 'git submodule update --init'
 
     stage 'Frontend'
     bat 'npm install yarn@0.16.1'
