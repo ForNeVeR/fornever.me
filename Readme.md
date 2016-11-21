@@ -48,8 +48,9 @@ $ nuget restore
 $ msbuild /p:Platform="Any CPU" /p:Configuration=Release ForneverMind.sln
 ```
 
-There's an MSBuild property `/p:DeployBackend=true` that will deploy the site to
-the directory configured in `ForneverMind/__profiles/Production.pubxml`.
+There're MSBuild properties `/p:DeployBackend=true /p:PublishProfile=Production`
+that will deploy the site to the directory configured in
+`ForneverMind/__profiles/Production.pubxml`.
 
 Other components
 ----------------
