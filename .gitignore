@@ -4,7 +4,7 @@
 /EvilPlanner.Frontend/node_modules/
 /EvilPlanner.Frontend/typings/
 /EvilPlanner.Frontend/*.js
-!/EvilPlanner.Frontend/gulpfile.js
+!/EvilPlanner.Frontend/webpack.config.js
 /EvilPlanner.Frontend/*.js.map
 /EvilPlanner.Frontend/dist/
 
