@@ -3,11 +3,9 @@
   "version": "0.1.12",
   "description": "EvilPlanner Frontend",
   "scripts": {
-    "install": "tsd reinstall -s",
-    "clean": "gulp clean",
-    "build": "gulp build",
-    "watch": "gulp watch",
-    "deploy": "gulp deploy"
+    "build": "webpack -d",
+    "watch": "webpack -d --watch",
+    "deploy": "webpack -p"
   },
   "repository": {
     "type": "git",
@@ -23,15 +21,17 @@
   },
   "homepage": "https://github.com/ForNeVeR/EvilPlanner#readme",
   "devDependencies": {
-    "browserify": "^11.2.0",
-    "gulp": "^3.9.0",
+    "@types/es6-promise": "0.0.32",
+    "@types/react": "^0.14.51",
+    "@types/react-dom": "^0.14.19",
+    "@types/whatwg-fetch": "0.0.32",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.9.0",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
-    "rimraf": "^2.4.3",
-    "tsd": "^0.6.5",
-    "tsify": "^0.12.2",
-    "typescript": "^1.6.2",
-    "watchify": "^3.4.0",
+    "ts-loader": "^1.2.2",
+    "typescript": "^2.0.10",
+    "webpack": "^1.13.3",
     "whatwg-fetch": "^0.9.0"
   }
 }

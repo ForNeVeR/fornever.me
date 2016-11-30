@@ -1,10 +1,12 @@
-/// <reference path="typings/tsd.d.ts"/>
-
-declare var require: any;
 import React = require('react');
-var ReactDOM = require('react-dom'); // TODO: Get rid of ReactDOM type errors
+import ReactDOM = require('react-dom');
 
 import QuotationBlock = require('./quotation-block.tsx');
+
+declare var require: (string) => void;
+require('./index');
+require('./css/main');
+require('./css/quotations');
 
 ReactDOM.render(
     <QuotationBlock />,

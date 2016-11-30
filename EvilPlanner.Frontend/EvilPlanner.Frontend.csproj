@@ -25,9 +25,9 @@
   <ItemGroup>
     <Content Include="css\main.css" />
     <Content Include="css\quotations.css" />
-    <Content Include="gulpfile.js" />
     <Content Include="index.html" />
     <Content Include="web.config" />
+    <Content Include="webpack.config.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="quotation-block.tsx" />
@@ -35,6 +35,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="package.json" />
+    <Content Include="tsconfig.json" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -44,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="config.ts" />
+    <TypeScriptCompile Include="typings.d.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
@@ -57,7 +59,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>52439</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

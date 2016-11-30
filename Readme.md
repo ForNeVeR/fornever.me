@@ -29,15 +29,19 @@ server.
 Connect to the target MS SQL Server instance with any compatible tool and
 execute the following script to create the database:
 
-    create database EvilPlanner
-    go
+```sql
+create database EvilPlanner
+go
+```
 
 If you're going to deploy application on IIS (as recommended), you could grant
 IIS user the access to the database with the following script:
 
-    use EvilPlanner
-    create login [IIS APPPOOL\EvilPlanner] from windows
-    exec sp_addsrvrolemember N'IIS APPPOOL\EvilPlanner', sysadmin
+```sql
+use EvilPlanner
+create login [IIS APPPOOL\EvilPlanner] from windows
+exec sp_addsrvrolemember N'IIS APPPOOL\EvilPlanner', sysadmin
+```
 
 Configuration
 -------------
@@ -68,33 +72,43 @@ You may compile and publish the code from Visual Studio, or using `msbuild`
 (assuming that you have both `nuget` and `msbuild` in your `PATH` environment
 variable):
 
-    nuget restore
-    msbuild EvilPlanner.sln /p:Platform="Any CPU" /p:Configuration=Release /p:ProductionDeploy=true /p:PublishProfile=Production
+```console
+$ nuget restore
+$ msbuild EvilPlanner.sln /p:Platform="Any CPU" /p:Configuration=Release /p:ProductionDeploy=true /p:PublishProfile=Production
+```
 
 ### Frontend
 To compile frontend, you'll need a local npm installation. First of all,
 install used packages:
 
-    cd EvilPlanner.Frontend
-    npm install
+```console
+cd EvilPlanner.Frontend
+npm install
+```
 
 After that, you can compile code with Visual Studio (it will use the prodived
 `Gulpfile.js`) or from the command line:
 
-    npm run build
+```console
+npm run build
+```
 
 #### Watch
 The `watch` task has been provided for the development purposes. Visual Studio
 will start it automatically; you also have an option to start it from the
 terminal:
 
-    npm run watch
+```console
+npm run watch
+```
 
 For production, you should use the following commands:
 
-    npm run clean
-    npm run deploy
-    cp -r -force ./dist/* $TargetPath
+```console
+rm ./dist/*
+npm run deploy
+cp -r -force ./dist/* $TargetPath
+```
 
 Frontend project may be deployed to any server.
 

@@ -1,10 +1,6 @@
-/// <reference path="typings/tsd.d.ts"/>
-
 import React = require('react');
 import config = require('./config');
-
-declare var require: any;
-require('whatwg-fetch');
+import 'whatwg-fetch';
 
 function padWithZeros(text: string, length: number): string {
     while (text.length < length) {
