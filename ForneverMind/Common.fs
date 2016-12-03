@@ -13,7 +13,7 @@ let private json = Freya.init [ MediaType.Html ]
 
 let rss = MediaType (Type "application", SubType "rss+xml", Parameters Map.empty)
 
-let get = Freya.init [ GET ]
+let methods = Freya.init [ GET; HEAD ]
 
 let machine =
     freyaMachine {

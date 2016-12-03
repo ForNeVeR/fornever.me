@@ -32,7 +32,7 @@ let private page templateName model modificationDate =
     let lastModificationDate = defaultArg modificationDate (lastModificationDate templateName)
     freyaMachine {
         including Common.machine
-        methodsSupported Common.get
+        methodsSupported Common.methods
         lastModified (Common.initLastModified lastModificationDate)
         handleOk (handlePage templateName model)
     }
@@ -79,7 +79,7 @@ let private notFoundHandler = handlePage "404" None
 let notFound =
     freyaMachine {
         including Common.machine
-        methodsSupported Common.get
+        methodsSupported Common.methods
         exists shouldReturn404
         handleNotFound notFoundHandler
         handleNotFound notFoundHandler
@@ -90,7 +90,7 @@ let error = page "Error" None None
 let post =
     freyaMachine {
         including Common.machine
-        methodsSupported Common.get
+        methodsSupported Common.methods
         exists Posts.checkPostExists
         lastModified (Posts.postLastModified <| lastModificationDate "Post")
 

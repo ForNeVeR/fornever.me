@@ -55,7 +55,7 @@ let private handleFeed _ =
 let feed =
     freyaMachine {
         including Common.machine
-        methodsSupported Common.get
+        methodsSupported Common.methods
         lastModified (Common.initLastModified lastModificationDate)
         handleOk handleFeed
     }
