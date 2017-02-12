@@ -24,7 +24,7 @@ node {
     bat "$MSBUILD /p:Platform=\"Any CPU\" /p:Configuration=Release /p:DeployBackend=true /p:PublishProfile=Production ForneverMind.sln"
 
     stage 'Talks'
-    bat "powershell Scripts/Prepare-Talks.ps1 $YARN"
+    bat "powershell -File Scripts/Prepare-Talks.ps1 $YARN"
 
     stage 'Notify'
     def isSuccess = currentBuild.result == null
