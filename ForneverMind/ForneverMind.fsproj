@@ -137,6 +137,7 @@
     <Content Include="posts\2016-08-08-icfpc-2016-report_ru.md" />
     <Content Include="posts\2016-09-12-dotless-usage-and-quirks.md" />
     <Content Include="posts\2016-10-02-thoughts-on-modern-platforms_ru.md" />
+    <Content Include="posts\2017-02-12-runtimebinder-memory-leak.md" />
     <Content Include="views\_Layout.cshtml" />
     <Content Include="views\404.cshtml" />
     <Content Include="views\Archive.cshtml" />
