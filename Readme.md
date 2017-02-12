@@ -20,16 +20,6 @@ $ yarn run webpack # or `yarn run optimize` for optimized build
 
 _(You may alternatively use Webpack-compatible task runner for your IDE.)_
 
-You don't have to install yarn globally. Here's an instruction how to install it
-locally for the project (from the solution root directory):
-
-```console
-$ npm install yarn@0.16.1
-$ cd ForneverMind.Frontend
-$ ../node_modules/.bin/yarn install
-$ ../node_modules/.bin/yarn run optimize
-```
-
 ### Talks
 
 There's an additional talks archive included as git submodule in this

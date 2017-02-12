@@ -1,5 +1,5 @@
 param (
-    [string] $yarn = "$PSScriptRoot/../node_modules/.bin/yarn.cmd",
+    [string] $yarn = 'yarn',
     [string] $TargetPath = "$PSScriptRoot/../ForneverMind/talks"
 )
 
