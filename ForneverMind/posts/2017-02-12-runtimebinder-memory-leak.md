@@ -113,7 +113,7 @@ namespace ConsoleApplication3
 
 [dotmemory]: images/2017-02-12-dotmemory.png
 
-[com-post]: 2015-12-12-portable-com-usage_ru.html
+[com-post]: posts/2015-12-12-portable-com-usage_ru.html
 [pro.net]: https://telegram.me/joinchat/BYlFbD6uHawWMCImmbPIDw
 [roslyn-bug]: https://github.com/dotnet/roslyn/issues/2887
 [so-1]: http://stackoverflow.com/q/33080252/2684760
