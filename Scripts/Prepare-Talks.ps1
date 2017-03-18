@@ -1,6 +1,7 @@
 ﻿param (
     [string] $yarn = 'yarn',
-    [string] $TargetPath = "$PSScriptRoot/../ForneverMind/talks"
+    [string] $RepoPath = "$PSScriptRoot/../ForneverMind/talks"
+    [string] $TargetPath
 )
 
 $ErrorActionPreference = 'Stop'
@@ -21,7 +22,7 @@ function exec($command) {
 }
 
 function yarnInstall($name, $flags) {
-    $output = "$TargetPath/$name"
+    $output = "$RepoPath/$name"
     Push-Location $output
     try {
         log "Installing $name"
@@ -33,3 +34,5 @@ function yarnInstall($name, $flags) {
 
 yarnInstall modern-programming --ignore-engines 
 yarnInstall net-core-slides
+
+Copy-Item -Recurse $RepoPath $TargetPath

@@ -1,10 +1,11 @@
-// This script will build and deploy ForneverMind to the target directory.
+﻿// This script will build and deploy ForneverMind to the target directory.
 // Required properties:
 // - GIT_BRANCH: name of the branch to deploy
 // - GIT_CREDENTIALS: credentials to download the source code
 // - MAINTAINERS: space-separated email list
 // - NUGET: path to NuGet executable
 // - MSBUILD: path to MSBuild executable
+// - TARGET_TALKS_PATH: path to deploy talks
 // - YARN: path to Yarn executable
 node {
     stage 'Checkout'
@@ -24,7 +25,7 @@ node {
     bat "$MSBUILD /p:Platform=\"Any CPU\" /p:Configuration=Release /p:DeployBackend=true /p:PublishProfile=Production ForneverMind.sln"
 
     stage 'Talks'
-    bat "powershell -File Scripts/Prepare-Talks.ps1 $YARN"
+    bat "powershell -File Scripts/Prepare-Talks.ps1 $YARN $TARGET_TALKS_PATH"
 
     stage 'Notify'
     def isSuccess = currentBuild.result == null
