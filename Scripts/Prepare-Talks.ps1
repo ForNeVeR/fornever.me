@@ -1,6 +1,6 @@
 ﻿param (
     [string] $yarn = 'yarn',
-    [string] $RepoPath = "$PSScriptRoot/../ForneverMind/talks"
+    [string] $RepoPath = "$PSScriptRoot/../ForneverMind/talks",
     [string] $TargetPath
 )
 
