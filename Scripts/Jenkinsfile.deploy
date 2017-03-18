@@ -1,4 +1,4 @@
-﻿// This script will build and deploy ForneverMind to the target directory.
+// This script will build and deploy ForneverMind to the target directory.
 // Required properties:
 // - GIT_BRANCH: name of the branch to deploy
 // - GIT_CREDENTIALS: credentials to download the source code
