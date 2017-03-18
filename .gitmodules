@@ -1,3 +1,6 @@
 [submodule "ForneverMind/talks/modern-programming"]
 	path = ForneverMind/talks/modern-programming
 	url = https://github.com/ForNeVeR/modern-programming.git
+[submodule "ForneverMind/talks/net-core-slides"]
+	path = ForneverMind/talks/net-core-slides
+	url = https://github.com/ForNeVeR/net-core-slides.git
