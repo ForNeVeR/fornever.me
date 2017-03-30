@@ -1,17 +1,15 @@
-pre {
-    background-color: #c4e4e8;
-    color: #052c36;
-    border-radius: 5px;
-    padding: 5px;
-    overflow-x: auto;
-    tab-size: 4;
+@import "~highlight.js/styles/agate.css";
+
+p > code {
+    font-weight: bold;
 }
 
-code {
-    display: inline-block;
-    background-color: #c4e4e8;
-    color: #052c36;
-    border-radius: 4.5px;
-    padding: 2.5px;
-    margin: -2.5px;
+pre {
+    padding: 2px;
+}
+
+pre, pre > code {
+    border-radius: 5px;
+    background: #333;
+    color: #fff;
 }

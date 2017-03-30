@@ -17,6 +17,10 @@ type Formatter (target, settings) =
     let skippedRuler = ref false
 
     override this.WriteBlock (block, isOpening, isClosing, ignoreChildNodes) =
+        let prepareClass () =
+            Option.ofObj block.FencedCodeData
+            |> Option.map (fun data -> data.Info)
+
         let skipCode = not !skippedCode && block.Tag = BlockTag.IndentedCode
         let skipRuler = not !skippedRuler && block.Tag = BlockTag.ThematicBreak
         match skipCode, skipRuler with
@@ -27,7 +31,12 @@ type Formatter (target, settings) =
             | BlockTag.FencedCode | BlockTag.IndentedCode ->
                 ignoreChildNodes <- true
                 this.EnsureNewLine ()
-                this.Write "<pre><code class=\"microlight\">"
+                let html =
+                    match prepareClass () with
+                    | Some codeClass -> sprintf "<pre><code class=\"%s\">" codeClass
+                    | None -> "<pre><code>"
+                
+                this.Write(html)
                 this.WriteEncodedHtml block.StringContent
                 this.WriteLine "</code></pre>"
             | _ ->

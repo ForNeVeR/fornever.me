@@ -88,8 +88,29 @@ let ``Code block should be rendered with microlight class`` () =
                     Description = ""
                     Date = DateTime.MinValue
                 }
-            HtmlContent = "<pre><code class=\"microlight\">test
+            HtmlContent = "<pre><code>test
 code
+</code></pre>
+"
+        }
+
+[<Fact>]
+let ``Code language should be included as class`` () =
+    compareResult "0001-01-01"
+        "
+---
+```fsharp
+let x = x
+```"
+        {
+            Meta =
+                {
+                    Url = "/posts/0001-01-01.html"
+                    Title = ""
+                    Description = ""
+                    Date = DateTime.MinValue
+                }
+            HtmlContent = "<pre><code class=\"fsharp\">let x = x
 </code></pre>
 "
         }
