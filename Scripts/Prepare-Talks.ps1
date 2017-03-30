@@ -35,5 +35,4 @@ function yarnInstall($name, $flags) {
 yarnInstall modern-programming --ignore-engines 
 yarnInstall net-core-slides
 
-Remove-Item -Recurse $TargetPath/*
-Copy-Item -Recurse $RepoPath $TargetPath
+Copy-Item -Recurse -Force $RepoPath $TargetPath
