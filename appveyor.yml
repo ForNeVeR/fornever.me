@@ -1,9 +1,8 @@
 version: 1.5.0.{build}
 install:
-    - npm install -g yarn@0.16.1
     - cd ForneverMind.Frontend && yarn install
     - cd ForneverMind.Frontend && yarn run optimize
-    - ps: Scripts/Prepare-Talks.ps1 yarn
+    - ps: Scripts/Prepare-Talks.ps1 yarn -TargetPath talks
     - nuget restore
 build_script:
     - msbuild /p:Platform="Any CPU" /p:Configuration=Release ForneverMind.sln
