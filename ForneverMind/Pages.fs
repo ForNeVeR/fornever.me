@@ -2,17 +2,18 @@
 
 open System.Text
 
-open Arachne.Http
 open Freya.Core
-open Freya.Lenses.Http.Lenses
-open Freya.Machine
-open Freya.Machine.Extensions.Http
+open Freya.Machines.Http
+open Freya.Types.Http
+open Freya.Routers.Uri
+open Freya.Routers.Uri.Template
+open Freya.Optics.Http
 
 open ForneverMind.Models
 
 let handlePage templateName model _ =
     freya {
-        let! content = Freya.fromAsync (Templates.render templateName) model
+        let! content = Freya.fromAsync (Templates.render templateName model)
         return
             {
                 Description =
@@ -40,7 +41,7 @@ let private page templateName model modificationDate =
 let handlePost state =
     freya {
         let! fileName = Posts.postFilePath
-        let! post = Freya.fromAsync Markdown.render fileName
+        let! post = Freya.fromAsync (Markdown.render fileName)
         return! handlePage "Post" (Some post) state
     }
 
@@ -70,7 +71,7 @@ let talks = page "Talks" None None
 
 let private shouldReturn404 =
     freya {
-        let! url = Request.path_ |> Freya.Optic.get
+        let! url =  Request.path_ |> Freya.Optic.get
         return url = "/404.html"
     }
 

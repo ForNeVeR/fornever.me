@@ -3,7 +3,7 @@
 open System.IO
 
 open Freya.Core
-open Freya.Router
+open Freya.Routers.Uri.Template
 
 open ForneverMind.Models
 
@@ -11,7 +11,7 @@ let postFilePath =
     let htmlExtension = ".html"
     freya {
         let! maybeName = Route.atom_ "name" |> Freya.Optic.get
-        let fileName = maybeName |> Option.orElse ""
+        let fileName = maybeName |> Option.defaultValue ""
         let name = Path.GetFileNameWithoutExtension fileName
         let extension = Path.GetExtension fileName
         let filePath =
@@ -39,7 +39,8 @@ let postLastModified templateModificationDate =
 let allPosts =
     Directory.GetFiles Config.postsDirectory
     |> Seq.map (fun filePath ->
-        use reader = new StreamReader (filePath)
+        use stream = new FileStream(filePath, FileMode.Open)
+        use reader = new StreamReader(stream)
         Markdown.processMetadata filePath reader)
     |> Seq.sortByDescending (fun x -> x.Date)
     |> Seq.toArray

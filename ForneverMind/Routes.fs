@@ -1,18 +1,15 @@
 ﻿module ForneverMind.Routes
 
-open Arachne.Uri.Template
-
-open Freya.Machine.Router
-open Freya.Router
+open Freya.Routers.Uri.Template
 
 let router =
      freyaRouter {
-        resource (UriTemplate.parse "/posts/{name}") Pages.post
-        resource (UriTemplate.parse "/") Pages.index
-        resource (UriTemplate.parse "/archive.html") Pages.archive
-        resource (UriTemplate.parse "/contact.html") Pages.contact
-        resource (UriTemplate.parse "/error.html") Pages.error
-        resource (UriTemplate.parse "/rss.xml") Rss.feed
-        resource (UriTemplate.parse "/talks.html") Pages.talks
-        resource (UriTemplate.parse "/{q*}") Pages.notFound
+        resource "/posts/{name}" Pages.post
+        resource "/" Pages.index
+        resource "/archive.html" Pages.archive
+        resource "/contact.html" Pages.contact
+        resource "/error.html" Pages.error
+        resource "/rss.xml" Rss.feed
+        resource "/talks.html" Pages.talks
+        resource "/{q*}" Pages.notFound
      }

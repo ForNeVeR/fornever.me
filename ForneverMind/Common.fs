@@ -3,10 +3,9 @@
 open System
 open System.IO
 
-open Arachne.Http
 open Freya.Core
-open Freya.Machine
-open Freya.Machine.Extensions.Http
+open Freya.Machines.Http
+open Freya.Types.Http
 
 let private utf8 = Freya.init [ Charset.Utf8 ]
 let private json = Freya.init [ MediaType.Html ]
@@ -17,7 +16,6 @@ let methods = Freya.init [ GET; HEAD ]
 
 let machine =
     freyaMachine {
-        using http
         charsetsSupported utf8
         mediaTypesSupported json
     }

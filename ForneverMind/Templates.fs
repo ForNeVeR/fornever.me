@@ -2,13 +2,16 @@
 
 open System.IO
 
-open RazorEngine.Configuration
-open RazorEngine.Templating
+// TODO[F]: Restore Razor
+//open RazorEngine.Configuration
+//open RazorEngine.Templating
 
-let private razor =
-    let templateManager = ResolvePathTemplateManager <| Seq.singleton Config.viewsDirectory
-    let config = TemplateServiceConfiguration (DisableTempFileLocking = true, TemplateManager = templateManager)
-    RazorEngineService.Create config
+let private razor () =
+    // TODO[F]: Restore Razor
+    failwith "Not implemented yet"
+    //let templateManager = ResolvePathTemplateManager <| Seq.singleton Config.viewsDirectory
+    //let config = TemplateServiceConfiguration (DisableTempFileLocking = true, TemplateManager = templateManager)
+    //RazorEngineService.Create config
 
 let private templatePath name = Path.Combine (Config.viewsDirectory, name + ".cshtml")
 let private layoutPath = templatePath "_Layout"
@@ -25,5 +28,7 @@ let render<'a> (name : string) (model : 'a option) : Async<string> =
             match model with
             | Some(v) -> v
             | None -> Unchecked.defaultof<'a>
-        return razor.RunCompile (name, typeof<'a>, value)
+        // TODO[F]: Restore Razor
+        return razor ()
+        //return razor.RunCompile (name, typeof<'a>, value)
     }
