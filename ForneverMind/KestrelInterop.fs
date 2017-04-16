@@ -20,7 +20,8 @@ module ApplicationBuilder =
 
 module WebHost =
     let private root = Directory.GetCurrentDirectory()
-    let create () = WebHostBuilder().UseContentRoot(root).UseKestrel()
+    let private webRoot = Path.Combine(root, "wwwroot")
+    let create () = WebHostBuilder().UseContentRoot(root).UseWebRoot(webRoot).UseKestrel()
     let bindTo urls (b:IWebHostBuilder) = b.UseUrls urls
     let configure ({ application = application; logging = logging }) (b:IWebHostBuilder) =
         b.ConfigureLogging(Action<_> logging)

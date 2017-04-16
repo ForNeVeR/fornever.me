@@ -19,9 +19,7 @@ let private createRouter (builder : IApplicationBuilder) =
     routesModule.Router
 
 let private useStaticFiles (app : IApplicationBuilder) =
-    app.UseStaticFiles("/app")
-        .UseStaticFiles("/images")
-        .UseStaticFiles("/talks")
+    app.UseStaticFiles()
 
 let private configureApplication app =
     let router = createRouter app

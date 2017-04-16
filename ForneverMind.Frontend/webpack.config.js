@@ -1,7 +1,7 @@
 ﻿const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const path = require('path');
 
-const outputPath = path.join(__dirname, '..', 'ForneverMind', 'app');
+const outputPath = path.join(__dirname, '..', 'ForneverMind', 'wwwroot', 'app');
 
 module.exports = {
     resolve: { extensions: ['', '.js', '.less'] },
