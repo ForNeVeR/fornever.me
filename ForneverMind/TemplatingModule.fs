@@ -6,7 +6,6 @@ open System.IO
 open RazorLight
 
 type TemplatingModule (config: ConfigurationModule) =
-    // TODO[F]: Fix weird stuff regarding PreserveCompilationContext
     let razor = EngineFactory.CreatePhysical config.ViewsPath
 
     let templateName name = name + ".cshtml"
