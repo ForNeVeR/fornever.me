@@ -1,6 +1,7 @@
 namespace ForneverMind.KestrelInterop
 
 open System
+open System.IO
 
 open Freya.Core
 open Microsoft.AspNetCore.Builder
@@ -18,7 +19,8 @@ module ApplicationBuilder =
         app.UseOwin(fun p -> p.Invoke owin)
 
 module WebHost =
-    let create () = WebHostBuilder().UseKestrel()
+    let private root = Directory.GetCurrentDirectory()
+    let create () = WebHostBuilder().UseContentRoot(root).UseKestrel()
     let bindTo urls (b:IWebHostBuilder) = b.UseUrls urls
     let configure ({ application = application; logging = logging }) (b:IWebHostBuilder) =
         b.ConfigureLogging(Action<_> logging)

@@ -4,19 +4,20 @@
     <TargetFramework>netcoreapp1.1</TargetFramework>
     <ServerGarbageCollection>true</ServerGarbageCollection>
     <ConcurrentGarbageCollection>false</ConcurrentGarbageCollection>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="models\PostModel.fs" />
     <Compile Include="models\PostArchiveModel.fs" />
     <Compile Include="AssemblyInfo.fs" />
-    <Compile Include="Config.fs" />
+    <Compile Include="ConfigurationModule.fs" />
     <Compile Include="Common.fs" />
     <Compile Include="Markdown.fs" />
-    <Compile Include="Templates.fs" />
-    <Compile Include="Posts.fs" />
-    <Compile Include="Pages.fs" />
+    <Compile Include="TemplatingModule.fs" />
+    <Compile Include="PostsModule.fs" />
+    <Compile Include="PagesModule.fs" />
     <Compile Include="Rss.fs" />
-    <Compile Include="Routes.fs" />
+    <Compile Include="RoutesModule.fs" />
     <Compile Include="KestrelInterop.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
@@ -29,5 +30,6 @@
     <PackageReference Include="Microsoft.AspNetCore.Owin" Version="1.*" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.1" />
+    <PackageReference Include="RazorLight" Version="1.0.1" />
   </ItemGroup>
 </Project>
