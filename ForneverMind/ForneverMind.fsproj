@@ -16,7 +16,7 @@
     <Compile Include="TemplatingModule.fs" />
     <Compile Include="PostsModule.fs" />
     <Compile Include="PagesModule.fs" />
-    <Compile Include="Rss.fs" />
+    <Compile Include="RssModule.fs" />
     <Compile Include="RoutesModule.fs" />
     <Compile Include="KestrelInterop.fs" />
     <Compile Include="Program.fs" />
@@ -29,7 +29,10 @@
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="1.*" />
     <PackageReference Include="Microsoft.AspNetCore.Owin" Version="1.*" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.1" />
     <PackageReference Include="RazorLight" Version="1.0.1" />
+    <PackageReference Include="WilderMinds.RssSyndication" Version="1.0.4" />
   </ItemGroup>
 </Project>
