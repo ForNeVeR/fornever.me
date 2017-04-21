@@ -32,7 +32,8 @@ function yarnInstall($name, $flags) {
     }
 }
 
-yarnInstall modern-programming --ignore-engines 
+yarnInstall modern-programming --ignore-engines
 yarnInstall net-core-slides
+yarnInstall git-basics
 
 Copy-Item -Recurse -Force $RepoPath $TargetPath

@@ -4,3 +4,6 @@
 [submodule "ForneverMind/talks/net-core-slides"]
 	path = ForneverMind/talks/net-core-slides
 	url = https://github.com/ForNeVeR/net-core-slides.git
+[submodule "ForneverMind/talks/git-basics"]
+	path = ForneverMind/talks/git-basics
+	url = https://github.com/ForNeVeR/git-basics.git
