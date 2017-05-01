@@ -3,6 +3,8 @@ install:
     - cd ForneverMind.Frontend && yarn install
     - cd ForneverMind.Frontend && yarn run optimize
     - ps: Scripts/Prepare-Talks.ps1 yarn -TargetPath talks
-    - nuget restore
+    - dotnet restore
 build_script:
-    - msbuild /p:Platform="Any CPU" /p:Configuration=Release ForneverMind.sln
+    - dotnet build
+test_script:
+    - cd ForneverMind.Tests && dotnet xunit
