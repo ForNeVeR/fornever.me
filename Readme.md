@@ -21,19 +21,21 @@ script.
 
 ### Backend
 
-To compile the backend, you'll need [NuGet][nuget] and [MSBuild][msbuild] or a
-compatible build engine.
+To compile the backend, you'll need a [.NET Core][dotnet-core] installation.
 
-Here's a simple build script:
+Here's a sample build script:
 
 ```console
-$ nuget restore
-$ msbuild /p:Platform="Any CPU" /p:Configuration=Release ForneverMind.sln
+$ dotnet restore
+$ dotnet build
+$ cd ForneverMind
+$ dotnet run
 ```
 
-There're MSBuild properties `/p:DeployBackend=true /p:PublishProfile=Production`
-that will deploy the site to the directory configured in
-`ForneverMind/__profiles/Production.pubxml`.
+Publish
+-------
+
+TODO
 
 Other components
 ----------------
@@ -43,9 +45,8 @@ Other components
 2.  [fornever.me][] uses an easy-to-install [Disqus][disqus] comment system.
 
 [disqus]: https://disqus.com/
+[dotnet-core]: https://www.microsoft.com/net/core
 [evil-planner]: https://github.com/ForNeVeR/EvilPlanner
 [fornever.me]: https://fornever.me/
-[msbuild]: https://msdn.microsoft.com/en-us/library/dd393574.aspx
 [node-js]: https://nodejs.org/
-[nuget]: https://www.nuget.org/
 [yarn]: https://yarnpkg.com/
