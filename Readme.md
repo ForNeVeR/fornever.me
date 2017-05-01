@@ -35,7 +35,9 @@ $ dotnet run
 Publish
 -------
 
-TODO
+```console
+$ dotnet publish --configuration Release --output X:\Publish\Path
+```
 
 Other components
 ----------------
