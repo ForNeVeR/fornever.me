@@ -111,7 +111,7 @@
     <Content Include="images\2016-06-04-publish-settings.png" />
     <Content Include="images\2016-06-04-web-deploy-package.png" />
     <Content Include="images\2017-02-12-dotmemory.png" />
-    <Content Include="images\2017-04-28-error-screenshot" />
+    <Content Include="images\2017-04-28-error-screenshot.png" />
     <Compile Include="models\PostModel.fs" />
     <Compile Include="models\PostArchiveModel.fs" />
     <Content Include="posts\2013-09-01-clr-exception-filters_ru.md" />
