@@ -17,7 +17,7 @@ type RssModule(config : ConfigurationModule, posts : PostsModule) =
         Item(Title = post.Title,
              Body = post.Description,
              Link = Uri url,
-             Permalink = url, // TODO[F]: isPermaLink="true"
+             Permalink = url,
              PublishDate = post.Date) // TODO[F]: Check date format used here
 
     let feedContent =
