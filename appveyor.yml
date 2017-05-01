@@ -1,7 +1,5 @@
 version: 1.5.0.{build}
 install:
-    - cd ForneverMind.Frontend && yarn install
-    - cd ForneverMind.Frontend && yarn run optimize
     - ps: Scripts/Prepare-Talks.ps1 yarn -TargetPath talks
     - dotnet restore
 build_script:

@@ -10,15 +10,8 @@ Build
 ### Frontend
 
 To compile frontend part, you'll need a recent (6.9.1+) [Node.js][node-js]
-installation and [Yarn package manager][yarn] (version 0.16.1+). Then execute
-the following script inside of the `ForneverMind.Frontend` directory:
-
-```console
-$ yarn install
-$ yarn run webpack # or `yarn run optimize` for optimized build
-```
-
-_(You may alternatively use Webpack-compatible task runner for your IDE.)_
+installation. The bundled [Yarn][yarn] package manager will be automatically
+executed on build.
 
 ### Talks
 

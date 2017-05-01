@@ -3,9 +3,9 @@
   "version": "1.6.0",
   "private": true,
   "scripts": {
-    "optimize": "webpack -p",
+    "release": "webpack -p",
     "watch": "webpack -d --watch",
-    "webpack": "webpack -d"
+    "debug": "webpack -d"
   },
   "repository": {
     "type": "git",
