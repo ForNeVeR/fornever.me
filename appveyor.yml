@@ -1,6 +1,7 @@
 version: 1.5.0.{build}
 install:
     - ps: Scripts/Prepare-Talks.ps1 yarn -TargetPath talks
+    - dotnet migrate libraries/RssSyndication/src/
     - dotnet restore
 build_script:
     - dotnet build

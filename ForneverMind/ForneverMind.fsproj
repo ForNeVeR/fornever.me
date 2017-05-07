@@ -34,7 +34,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.1" />
     <PackageReference Include="RazorLight" Version="1.0.1" />
-    <PackageReference Include="WilderMinds.RssSyndication" Version="1.0.4" />
     <ProjectReference Include="..\ForneverMind.Frontend\ForneverMind.Frontend.csproj" />
+    <ProjectReference Include="..\libraries\RssSyndication\src\WilderMinds.RssSyndication\WilderMinds.RssSyndication.csproj" /> <!-- TODO[F]: Use the released version -->
   </ItemGroup>
 </Project>
