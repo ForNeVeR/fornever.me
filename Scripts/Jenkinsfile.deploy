@@ -19,6 +19,7 @@ node {
     }
 
     stage('Publish') {
+        bat "$DOTNET migrate libraries/RssSyndication/src/"
         bat "$DOTNET restore"
         bat "$DOTNET publish --configuration Release --output out"
     }
