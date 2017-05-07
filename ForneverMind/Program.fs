@@ -45,7 +45,6 @@ let configuration =
 [<EntryPoint>]
 let main argv =
     WebHost.create ()
-    |> WebHost.bindTo [|"http://localhost:5000"|]
     |> WebHost.configure configuration
     |> WebHost.buildAndRun
 

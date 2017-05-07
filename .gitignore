@@ -1,10 +1,11 @@
 /.vs/
+/ForneverMind/out/
+/ForneverMind/wwwroot/app/
 /packages/
 
 bin/
 node_modules/
 obj/
+out/
 
 *.user
-
-/ForneverMind/wwwroot/app/

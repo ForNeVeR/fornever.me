@@ -15,7 +15,7 @@ executed on build.
 
 ### Talks
 
-There's an additional talks archive included as git submodule in this
+There's an additional talks archive included as a git submodule in this
 repository. To prepare tasks for build, use the `Scripts/Prepare-Talks.ps1`
 script.
 
@@ -35,16 +35,30 @@ $ dotnet run
 Publish
 -------
 
+To prepare the artifact for publishing, run the following:
+
 ```console
-$ dotnet publish --configuration Release --output X:\Publish\Path
+$ dotnet publish --configuration Release --output out
+```
+
+The site is published as a Docker instance, see [Dockerfile][dockerfile].
+There's a [convenience script][compose.ps1] to publish the site via
+docker-compose. Sample publishing script:
+
+```console
+$ dotnet publish --configuration Release --output out
+$ scripts/docker/compose.ps1
 ```
 
 Other components
 ----------------
 
-1.  [EvilPlanner][evil-planner] meant to be an integral part of the site, but it
-    need to be installed separately.
-2.  [fornever.me][] uses an easy-to-install [Disqus][disqus] comment system.
+1. [EvilPlanner][evil-planner] meant to be an integral part of the site, but it
+   need to be installed separately.
+2. [fornever.me][] uses an easy-to-install [Disqus][disqus] comment system.
+
+[dockerfile]: scripts/docker/Dockerfile
+[compose.ps1]: scripts/docker/compose.ps1
 
 [disqus]: https://disqus.com/
 [dotnet-core]: https://www.microsoft.com/net/core
