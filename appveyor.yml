@@ -1,8 +1,10 @@
 version: 1.6.2.{build}
 install:
-    - cd ForneverMind.Frontend && yarn install
-    - cd ForneverMind.Frontend && yarn run optimize
-    - ps: Scripts/Prepare-Talks.ps1 yarn -TargetPath talks
-    - nuget restore
+    - git submodule update --init --recursive
+    - ps: Scripts/Prepare-Talks.ps1 yarn
+    - dotnet migrate libraries/RssSyndication
+    - dotnet restore
 build_script:
-    - msbuild /p:Platform="Any CPU" /p:Configuration=Release ForneverMind.sln
+    - dotnet build
+test_script:
+    - cd ForneverMind.Tests && dotnet xunit

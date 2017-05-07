@@ -1,9 +1,12 @@
 [submodule "ForneverMind/talks/modern-programming"]
-	path = ForneverMind/talks/modern-programming
+	path = ForneverMind/wwwroot/talks/modern-programming
 	url = https://github.com/ForNeVeR/modern-programming.git
 [submodule "ForneverMind/talks/net-core-slides"]
-	path = ForneverMind/talks/net-core-slides
+	path = ForneverMind/wwwroot/talks/net-core-slides
 	url = https://github.com/ForNeVeR/net-core-slides.git
-[submodule "ForneverMind/talks/git-basics"]
-	path = ForneverMind/talks/git-basics
+[submodule "libraries/RssSyndication"]
+	path = libraries/RssSyndication
+	url = https://github.com/shawnwildermuth/RssSyndication.git
+[submodule "ForneverMind/wwwroot/talks/git-basics"]
+	path = ForneverMind/wwwroot/talks/git-basics
 	url = https://github.com/ForNeVeR/git-basics.git

@@ -1,287 +1,40 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="FSharp.NET.Sdk;Microsoft.NET.Sdk.Web">
   <PropertyGroup>
-    <DeployOnBuild Condition=" '$(DeployBackend)'!='' ">$(DeployBackend)</DeployOnBuild>
-    <TargetFrameworkProfile />
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <ServerGarbageCollection>true</ServerGarbageCollection>
+    <ConcurrentGarbageCollection>false</ConcurrentGarbageCollection>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
   </PropertyGroup>
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>2cac3278-465e-432e-9434-09feb4a6d98d</ProjectGuid>
-    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{F2A71F9B-5D33-465A-A702-920D77279786}</ProjectTypeGuids>
-    <OutputType>Library</OutputType>
-    <RootNamespace>ForneverMind</RootNamespace>
-    <AssemblyName>ForneverMind</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
-    <TargetFSharpCoreVersion>4.4.0.0</TargetFSharpCoreVersion>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Name>ForneverMind</Name>
-    <UseIISExpress>true</UseIISExpress>
-    <NameOfLastUsedPublishProfile>Production</NameOfLastUsedPublishProfile>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <Tailcalls>false</Tailcalls>
-    <OutputPath>bin\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <WarningLevel>3</WarningLevel>
-    <DocumentationFile>bin\ForneverMind.XML</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <Tailcalls>true</Tailcalls>
-    <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <WarningLevel>3</WarningLevel>
-    <DocumentationFile>bin\ForneverMind.XML</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup>
-    <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
-  </PropertyGroup>
-  <PropertyGroup>
-    <TargetFSharpCoreVersion>4.4.1.0</TargetFSharpCoreVersion>
-    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
-    <FSharpTargetsPath>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\FSharp\Microsoft.FSharp.Targets</FSharpTargetsPath>
-  </PropertyGroup>
-  <Choose>
-    <When Condition="'$(VisualStudioVersion)' == '11.0'">
-      <PropertyGroup Condition="Exists('$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets')">
-        <FSharpTargetsPath>$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets</FSharpTargetsPath>
-      </PropertyGroup>
-    </When>
-    <Otherwise>
-      <PropertyGroup Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\FSharp\Microsoft.FSharp.Targets')">
-        <FSharpTargetsPath>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\FSharp\Microsoft.FSharp.Targets</FSharpTargetsPath>
-      </PropertyGroup>
-    </Otherwise>
-  </Choose>
-  <Import Project="$(FSharpTargetsPath)" />
-  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
-  <ProjectExtensions>
-    <VisualStudio>
-      <FlavorProperties Guid="{349c5851-65df-11da-9384-00065b846f21}">
-        <WebProjectProperties>
-          <UseIIS>True</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
-          <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:57920/</IISUrl>
-          <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
-          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
-        </WebProjectProperties>
-      </FlavorProperties>
-      <FlavorProperties Guid="{349c5851-65df-11da-9384-00065b846f21}" User="">
-        <WebProjectProperties>
-          <StartPageUrl>
-          </StartPageUrl>
-          <StartAction>CurrentPage</StartAction>
-          <AspNetDebugging>True</AspNetDebugging>
-          <SilverlightDebugging>False</SilverlightDebugging>
-          <NativeDebugging>False</NativeDebugging>
-          <SQLDebugging>False</SQLDebugging>
-          <ExternalProgram>
-          </ExternalProgram>
-          <StartExternalURL>
-          </StartExternalURL>
-          <StartCmdLineArguments>
-          </StartCmdLineArguments>
-          <StartWorkingDirectory>
-          </StartWorkingDirectory>
-          <EnableENC>True</EnableENC>
-          <AlwaysStartWebServerOnDebug>True</AlwaysStartWebServerOnDebug>
-        </WebProjectProperties>
-      </FlavorProperties>
-    </VisualStudio>
-  </ProjectExtensions>
   <ItemGroup>
-    <Content Include="images\2013-09-01-exception-diagram.png" />
-    <Content Include="images\2015-03-22-spyxx-tree.png" />
-    <Content Include="images\2015-11-22-monodevelop-add-in-manager.png" />
-    <Content Include="images\2015-11-22-monodevelop-add-packages.png" />
-    <Content Include="images\2015-11-22-monodevelop-resource-properties.png" />
-    <Content Include="images\2015-11-22-perspex-application.png" />
-    <Content Include="images\2016-06-04-publish-settings.png" />
-    <Content Include="images\2016-06-04-web-deploy-package.png" />
-    <Content Include="images\2017-02-12-dotmemory.png" />
-    <Content Include="images\2017-04-28-error-screenshot.png" />
     <Compile Include="models\PostModel.fs" />
     <Compile Include="models\PostArchiveModel.fs" />
-    <Content Include="posts\2013-09-01-clr-exception-filters_ru.md" />
-    <Content Include="posts\2014-05-27-scala-macros-and-quasiquotes_ru.md" />
-    <Content Include="posts\2014-08-18-kde-4-and-xmonad_ru.md" />
-    <Content Include="posts\2014-08-23-nginx-upstream-timed-out_ru.md" />
-    <Content Include="posts\2014-11-23-play-framework-enumeration_ru.md" />
-    <Content Include="posts\2015-01-02-warmup-configuration_ru.md" />
-    <Content Include="posts\2015-03-21-jenkins-and-vagrant-integration_ru.md" />
-    <Content Include="posts\2015-03-22-ui-automation-and-vcl-tpagecontrol_ru.md" />
-    <Content Include="posts\2015-04-01-starting-with-frege-and-gradle_ru.md" />
-    <Content Include="posts\2015-07-27-jenkins-setup-with-nginx_ru.md" />
-    <Content Include="posts\2015-08-01-incremental-updates-with-jenkins-and-powershell_ru.md" />
-    <Content Include="posts\2015-08-13-minimal-hl7-definition-for-programmer_ru.md" />
-    <Content Include="posts\2015-08-14-icfpc-2015-report_ru.md" />
-    <Content Include="posts\2015-10-12-atom-build-on-windows_ru.md" />
-    <Content Include="posts\2015-11-01-installing-nixos-on-uefi-machine_ru.md" />
-    <Content Include="posts\2015-11-08-using-dotless-api_ru.md" />
-    <Content Include="posts\2015-11-22-getting-started-with-perspex-with-monodevelop_ru.md" />
-    <Content Include="posts\2015-12-12-portable-com-usage_ru.md" />
-    <Content Include="posts\2016-02-23-environment-management_ru.md" />
-    <Content Include="posts\2016-03-07-setting-up-letsencrypt-with-nixos_ru.md" />
-    <Content Include="posts\2016-03-07-fixing-chocolatey-registry-error_ru.md" />
-    <Content Include="posts\2016-06-04-msdeploy-web-site-deployment.md" />
-    <Content Include="posts\2016-07-09-calling-ms-word-from-windows-service.md" />
-    <Content Include="posts\2016-08-08-icfpc-2016-report_ru.md" />
-    <Content Include="posts\2016-09-12-dotless-usage-and-quirks.md" />
-    <Content Include="posts\2016-10-02-thoughts-on-modern-platforms_ru.md" />
-    <Content Include="posts\2017-02-12-runtimebinder-memory-leak.md" />
-    <Content Include="posts\2017-04-28-visual-studio-update-error.md" />
-    <Content Include="views\_Layout.cshtml" />
-    <Content Include="views\404.cshtml" />
-    <Content Include="views\Archive.cshtml" />
-    <Content Include="views\Contact.cshtml" />
-    <Content Include="views\Error.cshtml" />
-    <Content Include="views\Index.cshtml" />
-    <Content Include="views\Post.cshtml" />
-    <Content Include="views\Talks.cshtml" />
     <Compile Include="AssemblyInfo.fs" />
-    <Compile Include="Config.fs" />
+    <Compile Include="ConfigurationModule.fs" />
     <Compile Include="Common.fs" />
     <Compile Include="Markdown.fs" />
-    <Compile Include="Templates.fs" />
-    <Compile Include="Posts.fs" />
-    <Compile Include="Pages.fs" />
-    <Compile Include="Rss.fs" />
-    <Compile Include="Routes.fs" />
-    <Compile Include="Application.fs" />
-    <Content Include="packages.config" />
-    <Content Include="Web.config" />
-    <None Include="Web.Release.config" />
+    <Compile Include="TemplatingModule.fs" />
+    <Compile Include="PostsModule.fs" />
+    <Compile Include="PagesModule.fs" />
+    <Compile Include="RssModule.fs" />
+    <Compile Include="RoutesModule.fs" />
+    <Compile Include="KestrelInterop.fs" />
+    <Compile Include="Program.fs" />
+    <Content Include="posts\**\*" CopyToPublishDirectory="Always" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Aether">
-      <HintPath>..\packages\Aether.8.1.2\lib\net35\Aether.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Arachne.Core">
-      <HintPath>..\packages\Arachne.Core.3.0.0\lib\net40\Arachne.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Arachne.Http">
-      <HintPath>..\packages\Arachne.Http.3.0.0\lib\net40\Arachne.Http.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Arachne.Http.Cors">
-      <HintPath>..\packages\Arachne.Http.Cors.3.0.0\lib\net40\Arachne.Http.Cors.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Arachne.Language">
-      <HintPath>..\packages\Arachne.Language.3.0.0\lib\net40\Arachne.Language.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Arachne.Uri">
-      <HintPath>..\packages\Arachne.Uri.3.0.0\lib\net40\Arachne.Uri.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Arachne.Uri.Template">
-      <HintPath>..\packages\Arachne.Uri.Template.3.0.0\lib\net40\Arachne.Uri.Template.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="CommonMark">
-      <HintPath>..\packages\CommonMark.NET.0.12.0\lib\net45\CommonMark.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="FParsec">
-      <HintPath>..\packages\FParsec.1.0.2\lib\net40-client\FParsec.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="FParsecCS">
-      <HintPath>..\packages\FParsec.1.0.2\lib\net40-client\FParsecCS.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Freya.Core">
-      <HintPath>..\packages\Freya.Core.3.0.0-b300\lib\net45\Freya.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Freya.Lenses.Http">
-      <HintPath>..\packages\Freya.Lenses.Http.3.0.0-b300\lib\net45\Freya.Lenses.Http.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Freya.Lenses.Http.Cors">
-      <HintPath>..\packages\Freya.Lenses.Http.Cors.3.0.0-b300\lib\net45\Freya.Lenses.Http.Cors.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Freya.Machine">
-      <HintPath>..\packages\Freya.Machine.3.0.0-b300\lib\net45\Freya.Machine.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Freya.Machine.Extensions.Http">
-      <HintPath>..\packages\Freya.Machine.Extensions.Http.3.0.0-b300\lib\net45\Freya.Machine.Extensions.Http.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Freya.Machine.Extensions.Http.Cors">
-      <HintPath>..\packages\Freya.Machine.Extensions.Http.Cors.3.0.0-b300\lib\net45\Freya.Machine.Extensions.Http.Cors.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Freya.Machine.Router">
-      <HintPath>..\packages\Freya.Machine.Router.3.0.0-b300\lib\net45\Freya.Machine.Router.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Freya.Recorder">
-      <HintPath>..\packages\Freya.Recorder.3.0.0-b300\lib\net45\Freya.Recorder.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Freya.Router">
-      <HintPath>..\packages\Freya.Router.3.0.0-b300\lib\net45\Freya.Router.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Hekate">
-      <HintPath>..\packages\Hekate.3.2.0\lib\net35\Hekate.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Owin">
-      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Owin.FileSystems">
-      <HintPath>..\packages\Microsoft.Owin.FileSystems.3.0.1\lib\net45\Microsoft.Owin.FileSystems.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Host.SystemWeb">
-      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Owin.StaticFiles">
-      <HintPath>..\packages\Microsoft.Owin.StaticFiles.3.0.1\lib\net45\Microsoft.Owin.StaticFiles.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="mscorlib" />
-    <Reference Include="FSharp.Core, Version=$(TargetFSharpCoreVersion), Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Owin">
-      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="RazorEngine">
-      <HintPath>..\packages\RazorEngine.3.7.3\lib\net45\RazorEngine.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Web.Razor">
-      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Xml" />
+    <PackageReference Include="CommonMark.NET" Version="0.15.1" />
+    <PackageReference Include="FSharp.NET.Sdk" Version="1.*" PrivateAssets="All" />
+    <PackageReference Include="FSharp.Core" Version="4.*" />
+    <PackageReference Include="Freya" Version="4.0.0-alpha-*" />
+    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="1.*" />
+    <PackageReference Include="Microsoft.AspNetCore.Owin" Version="1.*" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.1" />
+    <PackageReference Include="RazorLight" Version="1.0.1" />
+    <ProjectReference Include="..\ForneverMind.Frontend\ForneverMind.Frontend.csproj" />
+    <ProjectReference Include="..\libraries\RssSyndication\src\WilderMinds.RssSyndication\WilderMinds.RssSyndication.csproj" /> <!-- TODO[F]: Use the released version -->
   </ItemGroup>
 </Project>

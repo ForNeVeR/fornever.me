@@ -1,37 +1,37 @@
 // This script will build and deploy ForneverMind to the target directory.
 // Required properties:
+// - DOTNET: path to dotnet executable
 // - GIT_BRANCH: name of the branch to deploy
 // - GIT_CREDENTIALS: credentials to download the source code
 // - MAINTAINERS: space-separated email list
-// - NUGET: path to NuGet executable
-// - MSBUILD: path to MSBuild executable
-// - TARGET_TALKS_PATH: path to deploy talks
+// - POWERSHELL: path to PowerShell executable
 // - YARN: path to Yarn executable
 node {
-    stage 'Checkout'
-    git branch: GIT_BRANCH,
+    stage('Checkout') {
+        git branch: GIT_BRANCH,
             credentialsId: GIT_CREDENTIALS,
             url: 'git@github.com:ForNeVeR/fornever.me.git'
-    bat 'git submodule update --init'
-
-    stage 'Frontend'
-    dir ('ForneverMind.Frontend') {
-        bat "$YARN install"
-        bat "$YARN run optimize"
+        bat 'git submodule update --init'
     }
 
-    stage 'Backend'
-    bat "$NUGET restore"
-    bat "$MSBUILD /p:Platform=\"Any CPU\" /p:Configuration=Release /p:DeployBackend=true /p:PublishProfile=Production ForneverMind.sln"
+    stage('Talks') {
+        bat "$POWERSHELL -File Scripts/Prepare-Talks.ps1 $YARN"
+    }
 
-    stage 'Talks'
-    bat "powershell -File Scripts/Prepare-Talks.ps1 $YARN $TARGET_TALKS_PATH"
+    stage('Publish') {
+        bat "$DOTNET publish --configuration Release --output out"
+    }
 
-    stage 'Notify'
-    def isSuccess = currentBuild.result == null
-    def buildStatus = isSuccess ? 'SUCCESS' : currentBuild.result
+    stage('Docker') {
+        bat "$POWERSHELL -File Scripts/docker/compose.ps1"
+    }
 
-    mail to: MAINTAINERS, subject: "${env.JOB_NAME}#${env.BUILD_NUMBER}: ${buildStatus}", body: """Build #${env.BUILD_NUMBER} of Jenkins job ${env.JOB_NAME} finished with status ${buildStatus}.
+    stage('Notify') {
+        def isSuccess = currentBuild.result == null
+        def buildStatus = isSuccess ? 'SUCCESS' : currentBuild.result
+
+        mail to: MAINTAINERS, subject: "${env.JOB_NAME}#${env.BUILD_NUMBER}: ${buildStatus}", body: """Build #${env.BUILD_NUMBER} of Jenkins job ${env.JOB_NAME} finished with status ${buildStatus}.
 
 Check ${env.BUILD_URL} for details."""
+    }
 }

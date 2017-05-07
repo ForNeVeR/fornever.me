@@ -1,7 +1,6 @@
 ﻿param (
     [string] $yarn = 'yarn',
-    [string] $RepoPath = "$PSScriptRoot/../ForneverMind/talks",
-    [string] $TargetPath
+    [string] $RepoPath = "$PSScriptRoot/../ForneverMind/wwwroot/talks"
 )
 
 $ErrorActionPreference = 'Stop'
@@ -35,5 +34,3 @@ function yarnInstall($name, $flags) {
 yarnInstall modern-programming --ignore-engines
 yarnInstall net-core-slides
 yarnInstall git-basics
-
-Copy-Item -Recurse -Force $RepoPath $TargetPath

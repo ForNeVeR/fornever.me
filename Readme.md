@@ -10,49 +10,66 @@ Build
 ### Frontend
 
 To compile frontend part, you'll need a recent (6.9.1+) [Node.js][node-js]
-installation and [Yarn package manager][yarn] (version 0.16.1+). Then execute
-the following script inside of the `ForneverMind.Frontend` directory:
-
-```console
-$ yarn install
-$ yarn run webpack # or `yarn run optimize` for optimized build
-```
-
-_(You may alternatively use Webpack-compatible task runner for your IDE.)_
+installation. The bundled [Yarn][yarn] package manager will be automatically
+executed on build.
 
 ### Talks
 
-There's an additional talks archive included as git submodule in this
+There's an additional talks archive included as a git submodule in this
 repository. To prepare tasks for build, use the `Scripts/Prepare-Talks.ps1`
 script.
 
 ### Backend
 
-To compile the backend, you'll need [NuGet][nuget] and [MSBuild][msbuild] or a
-compatible build engine.
-
-Here's a simple build script:
+As a temporary workaround before next release of the [RssSyndication] library,
+please migrate its sources before building of the main project:
 
 ```console
-$ nuget restore
-$ msbuild /p:Platform="Any CPU" /p:Configuration=Release ForneverMind.sln
+$ dotnet migrate libraries/RssSyndication/src/
 ```
 
-There're MSBuild properties `/p:DeployBackend=true /p:PublishProfile=Production`
-that will deploy the site to the directory configured in
-`ForneverMind/__profiles/Production.pubxml`.
+To compile the backend, you'll need a [.NET Core][dotnet-core] installation.
+
+Here's a sample build script:
+
+```console
+$ dotnet restore
+$ dotnet build
+$ cd ForneverMind
+$ dotnet run
+```
+
+Publish
+-------
+
+To prepare the artifact for publishing, run the following:
+
+```console
+$ dotnet publish --configuration Release --output out
+```
+
+The site is published as a Docker instance, see [Dockerfile][dockerfile].
+There's a [convenience script][compose.ps1] to publish the site via
+docker-compose. Sample publishing script:
+
+```console
+$ dotnet publish --configuration Release --output out
+$ scripts/docker/compose.ps1
+```
 
 Other components
 ----------------
 
-1.  [EvilPlanner][evil-planner] meant to be an integral part of the site, but it
-    need to be installed separately.
-2.  [fornever.me][] uses an easy-to-install [Disqus][disqus] comment system.
+1. [EvilPlanner][evil-planner] meant to be an integral part of the site, but it
+   need to be installed separately.
+2. [fornever.me][] uses an easy-to-install [Disqus][disqus] comment system.
+
+[dockerfile]: scripts/docker/Dockerfile
+[compose.ps1]: scripts/docker/compose.ps1
 
 [disqus]: https://disqus.com/
+[dotnet-core]: https://www.microsoft.com/net/core
 [evil-planner]: https://github.com/ForNeVeR/EvilPlanner
 [fornever.me]: https://fornever.me/
-[msbuild]: https://msdn.microsoft.com/en-us/library/dd393574.aspx
 [node-js]: https://nodejs.org/
-[nuget]: https://www.nuget.org/
 [yarn]: https://yarnpkg.com/

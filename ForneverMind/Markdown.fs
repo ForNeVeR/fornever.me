@@ -35,7 +35,7 @@ type Formatter (target, settings) =
                     match prepareClass () with
                     | Some codeClass -> sprintf "<pre><code class=\"%s\">" codeClass
                     | None -> "<pre><code>"
-                
+
                 this.Write(html)
                 this.WriteEncodedHtml block.StringContent
                 this.WriteLine "</code></pre>"
@@ -118,6 +118,7 @@ let render (filePath : string): Async<PostModel> =
     async {
         do! Async.SwitchToThreadPool ()
 
-        use reader = new StreamReader (filePath, Encoding.UTF8)
+        use stream = new FileStream(filePath, FileMode.Open)
+        use reader = new StreamReader(stream, Encoding.UTF8)
         return processReader filePath reader
     }
