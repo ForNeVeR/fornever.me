@@ -53,6 +53,7 @@ There's a [convenience script][compose.ps1] to publish the site via
 docker-compose. Sample publishing script:
 
 ```console
+$ dotnet build --configuration Release ForneverMind.Frontend # see issue #57 about that
 $ dotnet publish --configuration Release --output out
 $ scripts/docker/compose.ps1
 ```
