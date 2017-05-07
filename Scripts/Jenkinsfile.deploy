@@ -24,7 +24,7 @@ node {
     }
 
     stage('Docker') {
-        bat "$POWERSHELL -File Scripts/docker/compose.ps1"
+        bat "$POWERSHELL -File Scripts/docker/compose.ps1 -Detach"
     }
 
     stage('Notify') {
