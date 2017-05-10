@@ -20,6 +20,9 @@ try {
 
     Write-Output "=> docker-compose $arguments"
     docker-compose $arguments
+    if (-not $?) {
+        throw "docker-compose returned error exit code"
+    }
 } finally {
     Pop-Location
 }
