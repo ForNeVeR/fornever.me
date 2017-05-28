@@ -1,6 +1,7 @@
 /.vs/
 /ForneverMind/out/
 /ForneverMind/wwwroot/app/
+/ForneverMind/server.js*
 /packages/
 
 bin/

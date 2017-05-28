@@ -37,7 +37,6 @@ type MarkdownModule(highlight : CodeHighlightModule) =
                           this.EnsureNewLine ()
                           this.Write "<pre><code class=\"hljs\">"
                           let code = Async.RunSynchronously <| highlight.Highlight(language, code)
-                          printfn "Code: %s" code
                           this.Write code
                           this.WriteLine "</code></pre>"
                       | _ ->

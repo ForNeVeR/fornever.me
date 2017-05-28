@@ -33,6 +33,7 @@ type PostsModule (config : ConfigurationModule, markdown : MarkdownModule) =
         freya {
             let! filePath = postFilePath
             let postModificationDate = File.GetLastWriteTimeUtc filePath
+            let serverJsModificationDate = File.GetLastWriteTimeUtc config.ServerJsPath
             let lastModificationDate = max postModificationDate templateModificationDate
             return Common.dateTimeToSeconds lastModificationDate
         }

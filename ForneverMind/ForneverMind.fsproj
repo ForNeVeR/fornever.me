@@ -22,6 +22,7 @@
     <Compile Include="KestrelInterop.fs" />
     <Compile Include="Program.fs" />
     <Content Include="posts\**\*" CopyToPublishDirectory="Always" />
+    <Content Include="server.js" CopyToPublishDirectory="Always" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CommonMark.NET" Version="0.15.1" />
