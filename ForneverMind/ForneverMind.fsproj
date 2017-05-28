@@ -12,7 +12,8 @@
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="ConfigurationModule.fs" />
     <Compile Include="Common.fs" />
-    <Compile Include="Markdown.fs" />
+    <Compile Include="CodeHighlightModule.fs" />
+    <Compile Include="MarkdownModule.fs" />
     <Compile Include="TemplatingModule.fs" />
     <Compile Include="PostsModule.fs" />
     <Compile Include="PagesModule.fs" />
@@ -27,6 +28,7 @@
     <PackageReference Include="FSharp.NET.Sdk" Version="1.*" PrivateAssets="All" />
     <PackageReference Include="FSharp.Core" Version="4.*" />
     <PackageReference Include="Freya" Version="4.0.0-alpha-*" />
+    <PackageReference Include="Microsoft.AspNetCore.NodeServices" Version="1.*" />
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="1.*" />
     <PackageReference Include="Microsoft.AspNetCore.Owin" Version="1.*" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.1" />

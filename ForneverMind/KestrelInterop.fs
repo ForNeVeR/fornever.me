@@ -7,11 +7,13 @@ open Freya.Core
 open Microsoft.AspNetCore.Builder
 open Microsoft.AspNetCore.Hosting
 open Microsoft.AspNetCore.Http
+open Microsoft.Extensions.DependencyInjection
 open Microsoft.Extensions.Logging
 
 type ApplicationConfiguration =
     { application : IApplicationBuilder -> unit
-      logging : ILoggerFactory -> unit }
+      logging : ILoggerFactory -> unit
+      services : IServiceCollection -> unit }
 
 module ApplicationBuilder =
     let inline useFreya f (app:IApplicationBuilder)=
@@ -22,8 +24,11 @@ module WebHost =
     let private root = Directory.GetCurrentDirectory()
     let private webRoot = Path.Combine(root, "wwwroot")
     let create () = WebHostBuilder().UseContentRoot(root).UseWebRoot(webRoot).UseKestrel()
-    let configure ({ application = application; logging = logging }) (b:IWebHostBuilder) =
-        b.ConfigureLogging(Action<_> logging)
+    let configure ({ application = application
+                     logging = logging
+                     services = services }) (b:IWebHostBuilder) =
+        b.ConfigureServices(Action<_> services)
+            .ConfigureLogging(Action<_> logging)
             .Configure(Action<_> application)
     let build (b:IWebHostBuilder) = b.Build()
     let run (wh:IWebHost) = wh.Run()

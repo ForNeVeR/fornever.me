@@ -7,7 +7,7 @@ open Freya.Routers.Uri.Template
 
 open ForneverMind.Models
 
-type PostsModule (config : ConfigurationModule) =
+type PostsModule (config : ConfigurationModule, markdown : MarkdownModule) =
     let postFilePath =
         let htmlExtension = ".html"
         freya {
@@ -42,7 +42,7 @@ type PostsModule (config : ConfigurationModule) =
         |> Seq.map (fun filePath ->
             use stream = new FileStream(filePath, FileMode.Open)
             use reader = new StreamReader(stream)
-            Markdown.processMetadata filePath reader)
+            markdown.ProcessMetadata(filePath, reader))
         |> Seq.sortByDescending (fun x -> x.Date)
         |> Seq.toArray
 

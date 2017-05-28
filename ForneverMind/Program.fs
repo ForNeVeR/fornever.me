@@ -4,17 +4,22 @@ open System.IO
 
 open Microsoft.AspNetCore.Builder
 open Microsoft.AspNetCore.Hosting
+open Microsoft.AspNetCore.NodeServices
 open Microsoft.Extensions.Configuration
+open Microsoft.Extensions.DependencyInjection
 open Microsoft.Extensions.Logging
 
 open ForneverMind.KestrelInterop
 
-let private fuseApplication cfg env =
+let private fuseApplication (app : IApplicationBuilder) cfg env =
+    let node = app.ApplicationServices.GetService<INodeServices>()
     let configuration = ConfigurationModule(env, cfg)
-    let posts = PostsModule(configuration)
+    let highlight = CodeHighlightModule(node)
+    let markdown = MarkdownModule(highlight)
+    let posts = PostsModule(configuration, markdown)
     let rss = RssModule(configuration, posts)
     let templates = TemplatingModule(configuration)
-    let pages = PagesModule(posts, templates)
+    let pages = PagesModule(posts, templates, markdown)
     RoutesModule(pages, rss)
 
 let private createRouter (builder : IApplicationBuilder) =
@@ -24,7 +29,8 @@ let private createRouter (builder : IApplicationBuilder) =
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json")
             .Build()
-    let routesModule = fuseApplication cfg env
+
+    let routesModule = fuseApplication builder cfg env
     routesModule.Router
 
 let private useStaticFiles (app : IApplicationBuilder) =
@@ -35,12 +41,16 @@ let private configureApplication app =
     useStaticFiles app
     |> ApplicationBuilder.useFreya router
 
+let private configureServices (services : IServiceCollection) =
+    services.AddNodeServices()
+
 let private configureLogger (logger : ILoggerFactory) =
     logger.AddConsole()
 
 let configuration =
     { application = configureApplication >> ignore
-      logging = configureLogger >> ignore }
+      logging = configureLogger >> ignore
+      services = configureServices >> ignore }
 
 [<EntryPoint>]
 let main argv =

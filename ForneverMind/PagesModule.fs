@@ -11,7 +11,7 @@ open Freya.Optics.Http
 
 open ForneverMind.Models
 
-type PagesModule (posts : PostsModule, templates : TemplatingModule) =
+type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : MarkdownModule) =
     let handlePage templateName model _ =
         freya {
             let! content = Freya.fromAsync (templates.Render templateName model)
@@ -42,7 +42,7 @@ type PagesModule (posts : PostsModule, templates : TemplatingModule) =
     let handlePost state =
         freya {
             let! fileName = posts.PostFilePath
-            let! post = Freya.fromAsync (Markdown.render fileName)
+            let! post = Freya.fromAsync (markdown.Render fileName)
             return! handlePage "Post" (Some post) state
         }
 
@@ -72,7 +72,7 @@ type PagesModule (posts : PostsModule, templates : TemplatingModule) =
 
     let shouldReturn404 =
         freya {
-            let! url =  Request.path_ |> Freya.Optic.get
+            let! url = Request.path_ |> Freya.Optic.get
             return url = "/404.html"
         }
 
