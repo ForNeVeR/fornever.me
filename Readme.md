@@ -4,6 +4,12 @@ fornever.me: Engineer, Programmer, Gentleman [![Status Ventis](https://img.shiel
 This is the [fornever.me][] site source code. It uses ForneverMind — a simple
 homemade blog engine mainly written in F# programming language.
 
+Dependencies
+------------
+
+ForneverMind requires recent [Node.js][node-js] installation both for building
+and for running.
+
 Build
 -----
 
