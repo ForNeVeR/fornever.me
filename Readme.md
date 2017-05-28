@@ -45,6 +45,13 @@ $ cd ForneverMind
 $ dotnet run
 ```
 
+Test
+----
+
+```console
+$ cd ForneverMind.Tests && dotnet xunit
+```
+
 Publish
 -------
 
