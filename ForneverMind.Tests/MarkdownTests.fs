@@ -3,19 +3,28 @@
 open System
 open System.IO
 
+open Microsoft.AspNetCore.NodeServices
+open Microsoft.Extensions.DependencyInjection
 open Xunit
 
 open ForneverMind
 open ForneverMind.Models
 
-(* TODO[F]: Import whole application from Program.fs and test MarkdownModule
+let markdown =
+    let services = ServiceCollection()
+    services.AddNodeServices(fun o -> o.ProjectPath <- Directory.GetCurrentDirectory())
+    let serviceProvider = services.BuildServiceProvider()
+    let node = serviceProvider.GetRequiredService<INodeServices>()
+    let highlight = CodeHighlightModule(node)
+    MarkdownModule(highlight)
+
 let private normalizeLineEndings (s : string) = s.Replace(Environment.NewLine, "\n")
 let private normalizeHtmlContent ({ HtmlContent = content } as item) =
     { item with HtmlContent = normalizeLineEndings content }
 
 let compareResult fileName (input : string) expected =
     use reader = new StringReader (normalizeLineEndings input)
-    let actual = Markdown.processReader fileName reader
+    let actual = markdown.ProcessReader(fileName, reader)
 
     Assert.Equal (normalizeHtmlContent expected, normalizeHtmlContent actual)
 
@@ -89,8 +98,8 @@ let ``Code block should be rendered with microlight class`` () =
                     Description = ""
                     Date = DateTime.MinValue
                 }
-            HtmlContent = "<pre><code>test
-code
+            HtmlContent = "<pre><code class=\"hljs\"><span class=\"hljs-keyword\">test
+</span>code
 </code></pre>
 "
         }
@@ -111,8 +120,7 @@ let x = x
                     Description = ""
                     Date = DateTime.MinValue
                 }
-            HtmlContent = "<pre><code class=\"fsharp\">let x = x
+            HtmlContent = "<pre><code class=\"hljs\"><span class=\"hljs-keyword\">let</span> x = x
 </code></pre>
 "
         }
-*)

@@ -3,6 +3,7 @@
     <TargetFramework>netcoreapp1.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.NodeServices" Version="1.*" />
     <PackageReference Include="FSharp.Core" Version="4.1.*" />
     <PackageReference Include="FSharp.NET.Sdk" Version="1.0.*" PrivateAssets="All" />
     <PackageReference Include="xunit" Version="2.3.0-beta1-build3642" />
@@ -16,5 +17,6 @@
     <Compile Include="MarkdownTests.fs" />
     <Content Include="packages.config" />
     <Compile Include="CommonTests.fs" />
+    <Content Include="..\ForneverMind\server.js" CopyToOutputDirectory="Always" />
   </ItemGroup>
 </Project>
