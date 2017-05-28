@@ -1,16 +1,16 @@
 ﻿const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
 
-const outputPath = path.join(__dirname, '..', 'ForneverMind', 'wwwroot', 'app');
+const outputPath = path.join(__dirname, '..', 'ForneverMind');
 
 const client = {
     resolve: { extensions: ['', '.js', '.less'] },
-    entry: { 'app': './app' },
+    entry: { 'app': './style/main' },
     module: {
         loaders: [{ test: /\.less$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader!less-loader') }]
     },
     plugins: [new ExtractTextPlugin('[name].css')],
-    output: { path: outputPath, filename: '[name].js' }
+    output: { path: path.join(outputPath, 'wwwroot', 'app'), filename: '[name].js' }
 };
 
 const server = {
