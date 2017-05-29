@@ -1,6 +1,7 @@
 param (
-    $HttpPort = 5001,
-    [switch] $Detach
+    [int16] $HttpPort = 5001,
+    [switch] $Detach,
+    [string] $ProjectName = 'fornevermind'
 )
 
 $ErrorActionPreference = 'Stop'
@@ -13,7 +14,7 @@ try {
     $env:fornevermind_web_port = $HttpPort
     Write-Output "fornevermind_web_port = $HttpPort"
 
-    $arguments = @('--project-name', 'fornevermind', 'up', '--build', '--force-recreate')
+    $arguments = @('--project-name', $ProjectName, 'up', '--build', '--force-recreate')
     if ($Detach) {
         $arguments += '-d'
     }
