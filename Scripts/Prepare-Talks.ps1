@@ -31,6 +31,18 @@ function yarnInstall($name, $flags) {
     }
 }
 
+function npmInstall($name) {
+    $output = "$RepoPath/$name"
+    Push-Location $output
+    try {
+        log "Installing $name"
+        exec npm install
+    } finally {
+        Pop-Location
+    }
+}
+
 yarnInstall modern-programming --ignore-engines
 yarnInstall net-core-slides
 yarnInstall git-basics
+npmInstall talk-javascriptservices

@@ -10,3 +10,6 @@
 [submodule "ForneverMind/wwwroot/talks/git-basics"]
 	path = ForneverMind/wwwroot/talks/git-basics
 	url = https://github.com/ForNeVeR/git-basics.git
+[submodule "ForneverMind/wwwroot/talks/talk-javascriptservices"]
+	path = ForneverMind/wwwroot/talks/talk-javascriptservices
+	url = https://github.com/ForNeVeR/talk-javascriptservices
