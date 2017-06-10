@@ -7,7 +7,7 @@ $ErrorActionPreference = 'Stop'
 
 function log($text, $header) {
     if (-not $header) {
-        $header = 'Prepare-Talks.ps1'
+        $header = 'Prepare-Talks'
     }
     Write-Output "[$header] $text"
 }
@@ -15,6 +15,14 @@ function log($text, $header) {
 function exec($command) {
     log "$command $args" 'Prepare-Talks.exec'
     & $command $args
+    if (!$?) {
+        throw "[build error] $command $args = $LASTEXITCODE"
+    }
+}
+
+function execIgnoreStdErr($command) {
+    log "$command $args" 'Prepare-Talks.execIgnoreStdErr'
+    cmd /c "$command $args 2>&1"
     if (!$?) {
         throw "[build error] $command $args = $LASTEXITCODE"
     }
@@ -36,7 +44,7 @@ function npmInstall($name) {
     Push-Location $output
     try {
         log "Installing $name"
-        exec npm install
+        execIgnoreStdErr npm install
     } finally {
         Pop-Location
     }
