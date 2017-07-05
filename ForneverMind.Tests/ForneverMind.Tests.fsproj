@@ -15,7 +15,6 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="MarkdownTests.fs" />
-    <Content Include="packages.config" />
     <Compile Include="CommonTests.fs" />
     <Content Include="..\ForneverMind\server.js" CopyToOutputDirectory="Always" />
   </ItemGroup>
