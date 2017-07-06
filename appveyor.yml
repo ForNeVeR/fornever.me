@@ -2,7 +2,6 @@ version: 2.1.1.{build}
 install:
     - git submodule update --init --recursive
     - ps: Scripts/Prepare-Talks.ps1 yarn
-    - dotnet migrate libraries/RssSyndication
     - dotnet restore
 build_script:
     - dotnet build

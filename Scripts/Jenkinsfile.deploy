@@ -19,7 +19,6 @@ node {
     }
 
     stage('Publish') {
-        bat "$DOTNET migrate libraries/RssSyndication/src/"
         bat "$DOTNET restore"
         bat "$DOTNET build --configuration Release ForneverMind.Frontend" // TODO[F]: #57
         bat "$DOTNET publish --configuration Release --output out"

@@ -27,13 +27,6 @@ script.
 
 ### Backend
 
-As a temporary workaround before next release of the [RssSyndication] library,
-please migrate its sources before building of the main project:
-
-```console
-$ dotnet migrate libraries/RssSyndication/src/
-```
-
 To compile the backend, you'll need a [.NET Core][dotnet-core] installation.
 
 Here's a sample build script:
