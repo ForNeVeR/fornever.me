@@ -248,7 +248,7 @@ type
 end.
 ```
 
-А вот соответствующйй файл ресурса `MainWindowUnit.MainWindow.xaml`:
+А вот соответствующий файл ресурса `MainWindowUnit.MainWindow.xaml`:
 
 ```xml
 <Window xmlns="https://github.com/avaloniaui" MinWidth="500" MinHeight="300">
