@@ -21,8 +21,10 @@
     <Compile Include="RoutesModule.fs" />
     <Compile Include="KestrelInterop.fs" />
     <Compile Include="Program.fs" />
-    <Content Include="posts\**\*" CopyToPublishDirectory="Always" />
+    <Content Include="posts\**" CopyToPublishDirectory="Always" />
     <Content Include="server.js" CopyToPublishDirectory="Always" />
+    <!-- node_modules is ignored by default, so we need to fix that manually -->
+    <Content Include="wwwroot\talks\*\node_modules\**" CopyToPublishDirectory="Always" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CommonMark.NET" Version="0.15.1" />
