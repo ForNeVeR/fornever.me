@@ -27,12 +27,11 @@ script.
 
 ### Backend
 
-To compile the backend, you'll need a [.NET Core][dotnet-core] installation.
+To compile the backend, you'll need a [.NET Core 2.0][dotnet-core] installation.
 
 Here's a sample build script:
 
 ```console
-$ dotnet restore
 $ dotnet build
 $ cd ForneverMind
 $ dotnet run
