@@ -34,7 +34,7 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
         let lastModificationDate = defaultArg modificationDate (lastModificationDate templateName)
         freyaMachine {
             including Common.machine
-            methodsSupported Common.methods
+            methods Common.methods
             lastModified (Common.initLastModified lastModificationDate)
             handleOk (handlePage templateName model)
         }
@@ -81,7 +81,7 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
     let notFound =
         freyaMachine {
             including Common.machine
-            methodsSupported Common.methods
+            methods Common.methods
             exists shouldReturn404
             handleNotFound notFoundHandler
             handleNotFound notFoundHandler
@@ -92,7 +92,7 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
     let post =
         freyaMachine {
             including Common.machine
-            methodsSupported Common.methods
+            methods Common.methods
             exists posts.CheckPostExists
             lastModified (posts.PostLastModified <| lastModificationDate "Post")
 

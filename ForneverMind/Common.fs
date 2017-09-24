@@ -16,8 +16,8 @@ let methods = Freya.init [ GET; HEAD ]
 
 let machine =
     freyaMachine {
-        charsetsSupported utf8
-        mediaTypesSupported json
+        availableCharsets utf8
+        availableMediaTypes json
     }
 
 let pathIsInsideDirectory directory path =

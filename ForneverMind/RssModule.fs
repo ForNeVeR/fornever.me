@@ -18,7 +18,7 @@ type RssModule(config : ConfigurationModule, posts : PostsModule) =
              Body = post.Description,
              Link = Uri url,
              Permalink = url,
-             PublishDate = post.Date) // TODO[F]: Check date format used here
+             PublishDate = post.Date)
 
     let feedContent =
         let items = Seq.map sindicationItem posts.AllPosts
@@ -55,7 +55,7 @@ type RssModule(config : ConfigurationModule, posts : PostsModule) =
     member __.Feed =
         freyaMachine {
            including Common.machine
-           methodsSupported Common.methods
+           methods Common.methods
            lastModified (Common.initLastModified lastModificationDate)
            handleOk handleFeed
         }
