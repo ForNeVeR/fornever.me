@@ -1,6 +1,6 @@
 {
   "name": "fornever.me",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "private": true,
   "scripts": {
     "release": "webpack -p",
