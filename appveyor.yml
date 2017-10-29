@@ -1,4 +1,4 @@
-version: 2.1.5.{build}
+version: 2.1.6.{build}
 install:
     - git submodule update --init --recursive
     - ps: Scripts/Prepare-Talks.ps1 yarn
