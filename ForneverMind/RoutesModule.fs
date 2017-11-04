@@ -5,13 +5,14 @@ open Freya.Routers.Uri.Template
 type RoutesModule(pages : PagesModule, rss : RssModule) =
     let router =
         freyaRouter {
-            resource "/posts/{name}" pages.Post
-            resource "/" pages.Index
-            resource "/archive.html" pages.Archive
-            resource "/contact.html" pages.Contact
-            resource "/error.html" pages.Error
-            resource "/rss.xml" rss.Feed
-            resource "/talks.html" pages.Talks
+            // TODO: Add language-less URL handling here. ~ F
+            resource "/{language}/posts/{name}" pages.Post
+            resource "/{language}/" pages.Index
+            resource "/{language}/archive.html" pages.Archive
+            resource "/{language}/contact.html" pages.Contact
+            resource "/{language}/error.html" pages.Error
+            resource "/{language}/rss.xml" rss.Feed
+            resource "/{language}/talks.html" pages.Talks
             resource "/{q*}" pages.NotFound
         }
 

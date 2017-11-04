@@ -1,5 +1,6 @@
 ﻿namespace ForneverMind
 
+open System
 open System.Text
 
 open Freya.Core
@@ -12,9 +13,11 @@ open Freya.Optics.Http
 open ForneverMind.Models
 
 type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : MarkdownModule) =
-    let handlePage templateName model _ =
+    let handlePage templateName freyaModel _ =
         freya {
-            let! content = Freya.fromAsync (templates.Render templateName model)
+            let! model = freyaModel
+            let! language = Common.routeLanguage
+            let! content = Freya.fromAsync (templates.Render language templateName model)
             return
                 {
                     Description =
@@ -28,14 +31,22 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
                 }
         }
 
-    let lastModificationDate = templates.LastModificationDate
+    let lastModificationDate templateName =
+        freya {
+            let! language = Common.routeLanguage
+            let date = templates.LastModificationDate language templateName
+            return Common.dateTimeToSeconds date
+        }
 
-    let page templateName model modificationDate =
-        let lastModificationDate = defaultArg modificationDate (lastModificationDate templateName)
+    let page templateName model additionalModificationDate =
         freyaMachine {
             including Common.machine
             methods Common.methods
-            lastModified (Common.initLastModified lastModificationDate)
+            lastModified (freya {
+                              let! modificationDate = additionalModificationDate
+                              let! templateModificationDate = lastModificationDate templateName
+                              return max templateModificationDate (Option.defaultValue DateTime.MinValue modificationDate)
+                          })
             handleOk (handlePage templateName model)
         }
 
@@ -43,32 +54,38 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
         freya {
             let! fileName = posts.PostFilePath
             let! post = Freya.fromAsync (markdown.Render fileName)
-            return! handlePage "Post" (Some post) state
+            return! handlePage "Post" (Freya.init <| Some post) state
         }
 
     let indexPostCount = 20
 
-    let pageWithPostsModificationDate pageName posts =
-        let pageLastModified = lastModificationDate pageName
-        let lastPostAdded =
-            posts
-            |> Seq.tryHead
-            |> Option.map (fun p -> p.Date)
-        Some (match lastPostAdded with
-              | Some date when date > pageLastModified -> date
-              | _ -> pageLastModified)
+    let postsModificationDate posts =
+        posts
+        |> Freya.map (Array.tryHead >> Option.map (fun p -> p.Date))
 
-    let pageWithPosts pageName posts =
-        let model = { Posts = posts }
-        page pageName (Some model) (pageWithPostsModificationDate pageName posts)
+    let pageWithPosts pageName freyaPosts =
+        let model = Freya.map (fun posts -> Some { Posts = posts }) freyaPosts
+        page pageName model (postsModificationDate freyaPosts)
+
+    let getPosts =
+        freya {
+            let! language = Common.routeLanguage
+            return posts.AllPosts language
+        }
+
+    let latestPosts count =
+        freya {
+            let! posts = getPosts
+            return posts |> Array.truncate count
+        }
 
     let index =
-        let posts = posts.AllPosts |> Seq.truncate indexPostCount |> Seq.toArray
+        let posts = latestPosts indexPostCount
         pageWithPosts "Index" posts
 
-    let archive = pageWithPosts "Archive" posts.AllPosts
-    let contact = page "Contact" None None
-    let talks = page "Talks" None None
+    let archive = pageWithPosts "Archive" getPosts
+    let contact = page "Contact" (Freya.init None) (Freya.init None)
+    let talks = page "Talks" (Freya.init None) (Freya.init None)
 
     let shouldReturn404 =
         freya {
@@ -76,7 +93,7 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
             return url = "/404.html"
         }
 
-    let notFoundHandler = handlePage "404" None
+    let notFoundHandler = handlePage "404" (Freya.init None)
 
     let notFound =
         freyaMachine {
@@ -87,7 +104,7 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
             handleNotFound notFoundHandler
         }
 
-    let error = page "Error" None None
+    let error = page "Error" (Freya.init None) (Freya.init None)
 
     let post =
         freyaMachine {

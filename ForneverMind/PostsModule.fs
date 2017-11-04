@@ -11,14 +11,15 @@ type PostsModule (config : ConfigurationModule, markdown : MarkdownModule) =
     let postFilePath =
         let htmlExtension = ".html"
         freya {
+            let! language = Common.routeLanguage
             let! maybeName = Route.atom_ "name" |> Freya.Optic.get
             let fileName = maybeName |> Option.defaultValue ""
             let name = Path.GetFileNameWithoutExtension fileName
             let extension = Path.GetExtension fileName
             let filePath =
                 if extension = htmlExtension
-                then Path.Combine(config.PostsPath, name + ".md")
-                else Path.Combine(config.PostsPath, "not-found.md")
+                then Path.Combine(config.PostsPath, language, name + ".md")
+                else Path.Combine(config.PostsPath, language, "not-found.md")
             if not <| Common.pathIsInsideDirectory config.PostsPath filePath then failwith "Invalid file name"
             return filePath
         } |> Freya.memo
@@ -34,12 +35,15 @@ type PostsModule (config : ConfigurationModule, markdown : MarkdownModule) =
             let! filePath = postFilePath
             let postModificationDate = File.GetLastWriteTimeUtc filePath
             let serverJsModificationDate = File.GetLastWriteTimeUtc config.ServerJsPath
+            let! templateModificationDate = templateModificationDate
             let lastModificationDate = max postModificationDate templateModificationDate
             return Common.dateTimeToSeconds lastModificationDate
         }
 
-    let allPosts =
-        Directory.GetFiles config.PostsPath
+    let allPosts language =
+        let directory = Path.Combine (config.PostsPath, language)
+        if not <| Common.pathIsInsideDirectory config.PostsPath directory then failwithf "Access error"
+        Directory.GetFiles directory
         |> Seq.map (fun filePath ->
             use stream = new FileStream(filePath, FileMode.Open)
             use reader = new StreamReader(stream)
