@@ -9,7 +9,7 @@ open Freya.Routers.Uri.Template
 open Freya.Types.Http
 
 let private utf8 = Freya.init [ Charset.Utf8 ]
-let private json = Freya.init [ MediaType.Html ]
+let private html = Freya.init [ MediaType.Html ]
 
 let rss = MediaType (Type "application", SubType "rss+xml", Parameters Map.empty)
 
@@ -20,7 +20,7 @@ let routeLanguage = Route.Atom_ "language" |> Freya.Lens.getPartial |> Freya.map
 let machine =
     freyaMachine {
         availableCharsets utf8
-        availableMediaTypes json
+        availableMediaTypes html
     }
 
 let pathIsInsideDirectory directory path =
