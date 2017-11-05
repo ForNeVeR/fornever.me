@@ -13,10 +13,10 @@ open Freya.Optics.Http
 open ForneverMind.Models
 
 type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : MarkdownModule) =
-    let handlePage templateName freyaModel _ =
+    let handlePage language templateName freyaModel _ =
         freya {
             let! model = freyaModel
-            let! language = Common.routeLanguage
+            let! language = language
             let! content = Freya.fromAsync (templates.Render language templateName model)
             return
                 {
@@ -47,14 +47,14 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
                               let! templateModificationDate = lastModificationDate templateName
                               return max templateModificationDate (Option.defaultValue DateTime.MinValue modificationDate)
                           })
-            handleOk (handlePage templateName model)
+            handleOk (handlePage Common.routeLanguage templateName model)
         }
 
     let handlePost state =
         freya {
             let! fileName = posts.PostFilePath
             let! post = Freya.fromAsync (markdown.Render fileName)
-            return! handlePage "Post" (Freya.init <| Some post) state
+            return! handlePage Common.routeLanguage "Post" (Freya.init <| Some post) state
         }
 
     let indexPostCount = 20
@@ -87,19 +87,27 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
     let contact = page "Contact" (Freya.init None) (Freya.init None)
     let talks = page "Talks" (Freya.init None) (Freya.init None)
 
-    let shouldReturn404 =
-        freya {
-            let! url = Request.path_ |> Freya.Optic.get
-            return url = "/404.html"
-        }
-
-    let notFoundHandler = handlePage "404" (Freya.init None)
+    let notFoundHandler =
+        let language =
+            freya {
+                let! language = Common.routeLanguageOpt
+                return Option.defaultValue Common.defaultLanguage language
+            }
+        handlePage language "404" (Freya.init None)
 
     let notFound =
+        let pageRequestedExplicitly =
+            freya {
+                let supportedUrls =
+                    Common.supportedLanguages
+                    |> Seq.map (sprintf "/%s/404.html")
+                let! url = Request.path_ |> Freya.Optic.get
+                return Seq.contains url supportedUrls
+            }
         freyaMachine {
             including Common.machine
             methods Common.methods
-            exists shouldReturn404
+            exists pageRequestedExplicitly
             handleNotFound notFoundHandler
         }
 

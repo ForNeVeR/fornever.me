@@ -15,7 +15,11 @@ let rss = MediaType (Type "application", SubType "rss+xml", Parameters Map.empty
 
 let methods = Freya.init [ GET; HEAD ]
 
+let defaultLanguage = "en"
+let supportedLanguages = [| "en"; "ru" |]
+
 let routeLanguage = Route.Atom_ "language" |> Freya.Lens.getPartial |> Freya.map Option.get |> Freya.memo
+let routeLanguageOpt = Route.Atom_ "language" |> Freya.Lens.getPartial |> Freya.memo
 
 let machine =
     freyaMachine {

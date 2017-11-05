@@ -12,6 +12,7 @@ type RoutesModule(pages : PagesModule, rss : RssModule) =
             resource "/{language}/error.html" pages.Error
             resource "/{language}/rss.xml" rss.Feed
             resource "/{language}/talks.html" pages.Talks
+            resource "/{language}/{q*}" pages.NotFound
             resource "/{query*}" Language.languageSelector // TODO[F]: It doesn't work
             resource "/{q*}" pages.NotFound
         }

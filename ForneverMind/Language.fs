@@ -12,14 +12,12 @@ open Freya.Types.Language
 open Freya.Types.Uri
 
 let private query = Route.Atom_ "query" |> Freya.Lens.getPartial |> Freya.map Option.get |> Freya.memo
-let private defaultLanguage = "en"
-let private supportedLanguages = [| "en"; "ru" |]
 
 let internal getLanguage (AcceptLanguage languages) : string option =
     let getLanguageFromLocale (str : string) = str.Split('-').[0]
 
     let matchWithSupportedLanguage language =
-        if Array.contains language supportedLanguages
+        if Array.contains language Common.supportedLanguages
         then Some language
         else None
 
@@ -37,7 +35,7 @@ let internal getLanguage (AcceptLanguage languages) : string option =
 
     let extractSupportedLanguage (AcceptableLanguage (range, _)) =
         match range with
-        | Any -> Some defaultLanguage
+        | Any -> Some Common.defaultLanguage
         | Range list -> extractRangeLanguage list
 
     languages
@@ -52,7 +50,7 @@ let private acceptLanguage =
         let! headerLanguage = Freya.Lens.getPartial Request.Headers.acceptLanguage_
         let language =
             Option.bind getLanguage headerLanguage
-            |> Option.defaultValue defaultLanguage
+            |> Option.defaultValue Common.defaultLanguage
         return language
     }
 

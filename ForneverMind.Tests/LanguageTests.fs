@@ -28,4 +28,4 @@ let ``getLanguage ignores the additional locale info``() =
 let ``getLanguage returns default language for Any``() =
     let languages =
         [ AcceptableLanguage(Any, None) ]
-    Assert.Equal(Some "en", Language.getLanguage (AcceptLanguage languages))
+    Assert.Equal(Some Common.defaultLanguage, Language.getLanguage (AcceptLanguage languages))
