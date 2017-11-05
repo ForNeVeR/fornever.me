@@ -57,7 +57,7 @@ type MarkdownModule(highlight : CodeHighlightModule) =
                 | _ -> failwithf "Cannot parse metadata line %A" s)
             |> Map.ofSeq
 
-    let readMetadata (fileName : string) documentNodes =
+    let readMetadata language (fileName : string) documentNodes =
         let takeUntil cond seq =
             let found = ref false
             seq
@@ -86,10 +86,11 @@ type MarkdownModule(highlight : CodeHighlightModule) =
         let date = DateTime.ParseExact (dateString, "yyyy-MM-dd", CultureInfo.InvariantCulture)
 
         {
-            Url = sprintf "/posts/%s.html" fileName
+            Url = sprintf "/%s/posts/%s.html" language fileName
             Date = date
             Title = getMeta "title" ""
             Description = getMeta "description" ""
+            CommentUrl = getMeta "commentUrl" ""
         }
 
     let getParseSettings () =
@@ -99,21 +100,28 @@ type MarkdownModule(highlight : CodeHighlightModule) =
             formatter.WriteDocument doc
         settings
 
+    let getLanguageAndName path =
+        let language = Path.GetFileName (Path.GetDirectoryName path)
+        let name = Path.GetFileNameWithoutExtension path
+        language, name
+
     member __.ProcessMetadata(filePath : string, reader : TextReader): PostMetadata =
         let document = CommonMarkConverter.Parse reader
-        readMetadata (Path.GetFileNameWithoutExtension filePath) <| document.AsEnumerable ()
+        let (language, name) = getLanguageAndName filePath
+        readMetadata language name (document.AsEnumerable())
 
     member __.ProcessReader(filePath : string, reader : TextReader) =
         use target = new StringWriter ()
         let document = CommonMarkConverter.Parse reader
-        let metadata = readMetadata (Path.GetFileNameWithoutExtension filePath) <| document.AsEnumerable ()
+        let (language, name) = getLanguageAndName filePath
+        let metadata = readMetadata language name (document.AsEnumerable())
         let settings = getParseSettings ()
 
         CommonMarkConverter.ProcessStage3 (document, target, settings)
 
         {
             Meta = metadata
-            HtmlContent = target.ToString ()
+            HtmlContent = target.ToString()
         }
 
     member this.Render(filePath : string): Async<PostModel> =

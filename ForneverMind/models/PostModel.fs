@@ -8,6 +8,7 @@ type PostMetadata =
         Title : string
         Description : string
         Date : DateTime
+        CommentUrl : string
     }
 
 type PostModel =

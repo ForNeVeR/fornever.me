@@ -30,27 +30,27 @@ let compareResult fileName (input : string) expected =
 
 [<Fact>]
 let ``Empty document should be parsed`` () =
-    compareResult "0001-01-01"
+    compareResult "ru/0001-01-01"
         "
 ---
 "
         {
             Meta =
                 {
-                    Url = "/posts/0001-01-01.html"
+                    Url = "/ru/posts/0001-01-01.html"
                     Title = ""
                     Description = ""
                     Date = DateTime.MinValue
+                    CommentUrl = ""
                 }
             HtmlContent = ""
         }
 
 [<Fact>]
 let ``Simple metadata should be parsed`` () =
-    compareResult "2015-01-01"
+    compareResult "ru/2015-01-01"
             "
     title: Фильтры исключений в CLR
-    id: /posts/2013-09-01-clr-exception-filters_ru.html
     description: Описание механизма фильтров исключений, доступного для некоторых языков CLR.
 ---
 content
@@ -58,34 +58,36 @@ content
         {
             Meta =
                 {
-                    Url = "/posts/2015-01-01.html"
+                    Url = "/ru/posts/2015-01-01.html"
                     Date = DateTime(2015, 1, 1)
                     Title = "Фильтры исключений в CLR"
                     Description = "Описание механизма фильтров исключений, доступного для некоторых языков CLR."
+                    CommentUrl = ""
                 }
             HtmlContent = "<p>content</p>" + Environment.NewLine
         }
 
 [<Fact>]
 let ``Legacy comment id should be parsed`` () =
-    compareResult "0001-01-01_File_Name"
+    compareResult "ru/0001-01-01_File_Name"
         "
 ---
 "
         {
             Meta =
                 {
-                    Url = "/posts/0001-01-01_File_Name.html"
+                    Url = "/ru/posts/0001-01-01_File_Name.html"
                     Date = DateTime.MinValue
                     Title = ""
                     Description = ""
+                    CommentUrl = ""
                 }
             HtmlContent = ""
         }
 
 [<Fact>]
 let ``Code block should be rendered with microlight class`` () =
-    compareResult "0001-01-01"
+    compareResult "ru/0001-01-01"
         "
 ---
     test
@@ -93,10 +95,11 @@ let ``Code block should be rendered with microlight class`` () =
         {
             Meta =
                 {
-                    Url = "/posts/0001-01-01.html"
+                    Url = "/ru/posts/0001-01-01.html"
                     Title = ""
                     Description = ""
                     Date = DateTime.MinValue
+                    CommentUrl = ""
                 }
             HtmlContent = "<pre><code class=\"hljs\"><span class=\"hljs-keyword\">test
 </span>code
@@ -106,7 +109,7 @@ let ``Code block should be rendered with microlight class`` () =
 
 [<Fact>]
 let ``Code language should be included as class`` () =
-    compareResult "0001-01-01"
+    compareResult "ru/0001-01-01"
         "
 ---
 ```fsharp
@@ -115,12 +118,35 @@ let x = x
         {
             Meta =
                 {
-                    Url = "/posts/0001-01-01.html"
+                    Url = "/ru/posts/0001-01-01.html"
                     Title = ""
                     Description = ""
                     Date = DateTime.MinValue
+                    CommentUrl = ""
                 }
             HtmlContent = "<pre><code class=\"hljs\"><span class=\"hljs-keyword\">let</span> x = x
 </code></pre>
 "
+        }
+
+[<Fact>]
+let ``Identifier is extracted from the metadata`` () =
+    compareResult "/something/en/2017-01-01.html"
+            "
+    title: Фильтры исключений в CLR
+    description: Описание механизма фильтров исключений, доступного для некоторых языков CLR.
+    commentUrl: https://fornever.me/posts/2013-09-01-clr-exception-filters_ru.html
+---
+content
+"
+        {
+            Meta =
+                {
+                    Url = "/en/posts/2017-01-01.html"
+                    Date = DateTime(2017, 1, 1)
+                    Title = "Фильтры исключений в CLR"
+                    Description = "Описание механизма фильтров исключений, доступного для некоторых языков CLR."
+                    CommentUrl = "https://fornever.me/posts/2013-09-01-clr-exception-filters_ru.html"
+                }
+            HtmlContent = "<p>content</p>" + Environment.NewLine
         }
