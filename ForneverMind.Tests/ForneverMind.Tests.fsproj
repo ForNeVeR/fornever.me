@@ -14,8 +14,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
-    <Compile Include="MarkdownTests.fs" />
     <Compile Include="CommonTests.fs" />
+    <Compile Include="LanguageTests.fs" />
+    <Compile Include="MarkdownTests.fs" />
     <Content Include="..\ForneverMind\server.js" CopyToOutputDirectory="Always" />
   </ItemGroup>
 </Project>
