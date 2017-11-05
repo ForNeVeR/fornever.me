@@ -12,7 +12,6 @@
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="ConfigurationModule.fs" />
     <Compile Include="Common.fs" />
-    <Compile Include="Language.fs" />
     <Compile Include="CodeHighlightModule.fs" />
     <Compile Include="MarkdownModule.fs" />
     <Compile Include="TemplatingModule.fs" />
