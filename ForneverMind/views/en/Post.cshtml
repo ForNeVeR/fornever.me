@@ -14,5 +14,13 @@
 <div id="disqus_thread"></div>
 
 @section scripts {
+    @if (!string.IsNullOrEmpty(Model.Meta.CommentUrl))
+    {
+        <script>
+            var disqus_config = function() {
+                this.page.url = '@Model.Meta.CommentUrl';
+            }
+        </script>
+    }
     <script src="//fornever.disqus.com/embed.js"></script>
 }

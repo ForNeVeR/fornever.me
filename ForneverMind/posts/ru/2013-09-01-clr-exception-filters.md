@@ -1,5 +1,6 @@
     title: Фильтры исключений в CLR
     description: Описание механизма фильтров исключений, доступного для некоторых языков CLR.
+    commentUrl: https://fornever.me/posts/2013-09-01-clr-exception-filters_ru.html
 ---
 
 *Это слегка модифицированная версия статьи, опубликованной [на хабрахабре](http://habrahabr.ru/post/192144/).*

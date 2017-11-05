@@ -1,5 +1,6 @@
     title: Использование API dotless
     description: Описание моментов, недостаточно хорошо рассмотренных в документации dotless.
+    commentUrl: https://fornever.me/posts/2015-11-08-using-dotless-api_ru.html
 ---
 
 Сегодня мы рассмотрим пример использования API библиотеки [dotless][]. Эта

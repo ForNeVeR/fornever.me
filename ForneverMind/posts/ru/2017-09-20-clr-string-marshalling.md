@@ -1,5 +1,6 @@
     title: Малоизвестные подробности маршаллинга строк в .NET
     description: Исследуем особенности маршаллинга System.String в качестве полей структуры и напрямую
+    commentUrl: https://fornever.me/posts/2017-09-20-clr-string-marshalling.html
 ---
 
 Сегодня в телеграм-чате [.NET Group][net-group] было обсуждение маршаллинга

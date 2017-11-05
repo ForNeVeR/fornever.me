@@ -1,5 +1,6 @@
     title: Интеграция Jenkins и Vagrant для сборки проектов в виртуальном окружении
     description: Настройка Jenkins таким образом, чтобы он по требованию запускал виртуальное окружение в Vagrant с помощью VirtualBox.
+    commentUrl: https://fornever.me/posts/2015-03-21-jenkins-and-vagrant-integration_ru.html
 ---
 
 Недавно передо мной встала задача автоматизировать сборку

@@ -1,5 +1,6 @@
     title: Утечка объектов Microsoft.CSharp.RuntimeBinder.Semantics при передаче dynamic-аргументов в методы
     description: Обсуждение утечки памяти при использовании dynamic и способов устранения утечки
+    commentUrl: https://fornever.me/posts/2017-02-12-runtimebinder-memory-leak.html
 ---
 
 Недавно в Telegram-чат [pro.net][] обратился человек, у которого в программе
