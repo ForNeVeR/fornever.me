@@ -10,6 +10,14 @@ Dependencies
 ForneverMind requires recent [Node.js][node-js] installation both for building
 and for running.
 
+Configuration
+-------------
+
+Backend reads its settings from the standard `appsettings.json` file. The
+available settings are:
+
+- `baseUrl`: URL to listen when started
+
 Build
 -----
 
