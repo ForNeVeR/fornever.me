@@ -1,12 +1,12 @@
 @model ForneverMind.Models.PostModel
 
 @{
-    Layout = "_Layout.cshtml";
+    Layout = "ru/_Layout.cshtml";
     ViewBag.Title = Model.Meta.Title;
 }
 
 <div class="info">
-    Дата публикации: @Model.Meta.Date.ToString("yyyy.MM.dd")
+    Дата публикации: @Model.Meta.Date.ToString("yyyy-MM-dd")
 </div>
 
 @Raw(Model.HtmlContent)

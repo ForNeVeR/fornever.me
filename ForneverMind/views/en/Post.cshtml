@@ -1,8 +1,7 @@
-@using RazorEngine.Templating
-@inherits TemplateBase<ForneverMind.Models.PostModel>
+@model ForneverMind.Models.PostModel
 
 @{
-    Layout = "_Layout.cshtml";
+    Layout = "en/_Layout.cshtml";
     ViewBag.Title = Model.Meta.Title;
 }
 
