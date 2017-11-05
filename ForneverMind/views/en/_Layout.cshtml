@@ -22,7 +22,23 @@
 </div>
 
 <div id="content">
-    <h1>@ViewBag.Title</h1>
+    <div class="header-group">
+        <h1 class="header">@ViewBag.Title</h1>
+        @if (ViewBag.Links.English.IsActive)
+        {
+            <div class="languages">
+                <a href="@ViewBag.Links.English.Link" class="tag selected">Eng</a>
+                @if (ViewBag.Links.Russian.IsActive)
+                {
+                    <a href="@ViewBag.Links.Russian.Link" class="tag">Rus</a>
+                }
+                else
+                {
+                    <a class="tag inactive" title="Translation not available">Rus</a>
+                }
+            </div>
+        }
+    </div>
 
     @RenderBody()
 </div>

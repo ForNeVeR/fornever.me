@@ -8,10 +8,9 @@ open Freya.Routers.Uri.Template
 open ForneverMind.Models
 
 type PostsModule (config : ConfigurationModule, markdown : MarkdownModule) =
-    let postFilePath =
+    let postFilePathForLanguage language =
         let htmlExtension = ".html"
         freya {
-            let! language = Common.routeLanguage
             let! maybeName = Route.atom_ "name" |> Freya.Optic.get
             let fileName = maybeName |> Option.defaultValue ""
             let name = Path.GetFileNameWithoutExtension fileName
@@ -22,12 +21,38 @@ type PostsModule (config : ConfigurationModule, markdown : MarkdownModule) =
                 else Path.Combine(config.PostsPath, language, "not-found.md")
             if not <| Common.pathIsInsideDirectory config.PostsPath filePath then failwith "Invalid file name"
             return filePath
+        }
+
+    let postFilePath =
+        freya {
+            let! language = Common.routeLanguage
+            return! postFilePathForLanguage language
         } |> Freya.memo
 
     let checkPostExists =
         freya {
             let! filePath = postFilePath
             return File.Exists filePath
+        }
+
+    let checkPostExistsForLanguage language =
+        freya {
+            let! filePath = postFilePathForLanguage language
+            return File.Exists filePath
+        }
+
+    let currentPostLinks =
+        let prepareLink language =
+            freya {
+                let! maybeName = Route.atom_ "name" |> Freya.Optic.get
+                let name = maybeName |> Option.defaultValue ""
+                let! active = checkPostExistsForLanguage language
+                return { IsActive = active; Link = sprintf "/%s/posts/%s" language name }
+            }
+        freya {
+            let! english = prepareLink "en"
+            let! russian = prepareLink "ru"
+            return { English = english; Russian = russian }
         }
 
     let postLastModified templateModificationDate =
@@ -53,5 +78,6 @@ type PostsModule (config : ConfigurationModule, markdown : MarkdownModule) =
 
     member __.PostFilePath = postFilePath
     member __.CheckPostExists = checkPostExists
+    member __.CurrentPostLinks : Freya<LanguageLinks> = currentPostLinks
     member __.PostLastModified = postLastModified
     member __.AllPosts = allPosts

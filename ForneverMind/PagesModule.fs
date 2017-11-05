@@ -13,11 +13,11 @@ open Freya.Optics.Http
 open ForneverMind.Models
 
 type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : MarkdownModule) =
-    let handlePage language templateName freyaModel _ =
+    let handlePage language templateName freyaModel links =
         freya {
             let! model = freyaModel
             let! language = language
-            let! content = Freya.fromAsync (templates.Render language templateName model)
+            let! content = Freya.fromAsync (templates.Render language templateName model links)
             return
                 {
                     Description =
@@ -29,6 +29,17 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
                         }
                     Data = Encoding.UTF8.GetBytes content
                 }
+        }
+
+    let handleStaticPage language templateName model active =
+        let produceLink (path : string) language = sprintf "/%s/%s" language (path.Substring("/en".Length + 1))
+        freya {
+            let! path = Freya.Optic.get Request.path_
+            let links = {
+                Russian = { IsActive = active; Link = produceLink path "ru" }
+                English = { IsActive = active; Link = produceLink path "en" }
+            }
+            return! handlePage language templateName model links
         }
 
     let lastModificationDate templateName =
@@ -47,14 +58,15 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
                               let! templateModificationDate = lastModificationDate templateName
                               return max templateModificationDate (Option.defaultValue DateTime.MinValue modificationDate)
                           })
-            handleOk (handlePage Common.routeLanguage templateName model)
+            handleOk (handleStaticPage Common.routeLanguage templateName model true)
         }
 
-    let handlePost state =
+    let handlePost =
         freya {
             let! fileName = posts.PostFilePath
             let! post = Freya.fromAsync (markdown.Render fileName)
-            return! handlePage Common.routeLanguage "Post" (Freya.init <| Some post) state
+            let! links = posts.CurrentPostLinks
+            return! handlePage Common.routeLanguage "Post" (Freya.init <| Some post) links
         }
 
     let indexPostCount = 20
@@ -93,7 +105,7 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
                 let! language = Common.routeLanguageOpt
                 return Option.defaultValue Common.defaultLanguage language
             }
-        handlePage language "404" (Freya.init None)
+        handleStaticPage language "404" (Freya.init None) false
 
     let notFound =
         let pageRequestedExplicitly =
