@@ -101,7 +101,6 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
             methods Common.methods
             exists shouldReturn404
             handleNotFound notFoundHandler
-            handleNotFound notFoundHandler
         }
 
     let error = page "Error" (Freya.init None) (Freya.init None)
