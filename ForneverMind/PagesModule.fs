@@ -5,10 +5,11 @@ open System.Text
 
 open Freya.Core
 open Freya.Machines.Http
-open Freya.Types.Http
+open Freya.Optics.Http
 open Freya.Routers.Uri
 open Freya.Routers.Uri.Template
-open Freya.Optics.Http
+open Freya.Types.Http
+open Freya.Types.Uri
 
 open ForneverMind.Models
 
@@ -136,6 +137,19 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
             handleNotFound notFoundHandler
         }
 
+    let redirectToDefaultLanguageIndex =
+        freyaMachine {
+            including Common.machine
+            methods Common.methods
+            exists false
+            movedPermanently true
+            handleMovedPermanently (freya {
+                let url = sprintf "/%s/" Common.defaultLanguage
+                do! Freya.Lens.setPartial Response.Headers.Location_ (Location(UriReference.parse url))
+                return Representation.empty
+            })
+        }
+
     member __.Post = post
     member __.Index = index
     member __.Archive = archive
@@ -143,3 +157,4 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
     member __.Error = error
     member __.Talks = talks
     member __.NotFound = notFound
+    member __.RedirectToDefaultLanguageIndex : HttpMachine = redirectToDefaultLanguageIndex
