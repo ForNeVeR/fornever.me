@@ -18,8 +18,15 @@ let methods = Freya.init [ GET; HEAD ]
 let defaultLanguage = "en"
 let supportedLanguages = [| "en"; "ru" |]
 
-let routeLanguage = Route.Atom_ "language" |> Freya.Lens.getPartial |> Freya.map Option.get |> Freya.memo
-let routeLanguageOpt = Route.Atom_ "language" |> Freya.Lens.getPartial |> Freya.memo
+let routeLanguage =
+    Route.atom_ "language"
+    |> Freya.Optic.get
+    |> Freya.map Option.get
+    |> Freya.memo
+let routeLanguageOpt =
+    Route.atom_ "language"
+    |> Freya.Optic.get
+    |> Freya.memo
 
 let machine =
     freyaMachine {
