@@ -14,6 +14,7 @@ type RoutesModule(pages : PagesModule, rss : RssModule) =
             resource "/{language}/talks.html" pages.Talks
             resource "/{language}/{q*}" pages.NotFound
             resource "/" pages.RedirectToDefaultLanguageIndex
+            resource "/rss.xml" rss.Feed
             resource "/{q*}" pages.NotFound
         }
 

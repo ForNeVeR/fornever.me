@@ -20,8 +20,8 @@ type RssModule(config : ConfigurationModule, posts : PostsModule) =
              Permalink = url,
              PublishDate = post.Date)
 
-    let feedContent language =
-        let items = posts.AllPosts language |> Seq.map sindicationItem
+    let feedContent posts =
+        let items = Seq.map sindicationItem posts
         let feed =
             Feed (
                 Title = "Engineer, programmer, gentleman",
@@ -32,18 +32,29 @@ type RssModule(config : ConfigurationModule, posts : PostsModule) =
         let text = feed.Serialize()
         Encoding.UTF8.GetBytes text
 
+    let getPosts =
+        freya {
+            let! languageOpt = Common.routeLanguageOpt
+            let posts =
+                languageOpt
+                |> Option.map Seq.singleton
+                |> Option.defaultValue (Seq.ofArray Common.supportedLanguages)
+                |> Seq.collect posts.AllPosts
+            return posts
+        }
+
     let lastModificationDateTime =
         freya {
-            let! language = Common.routeLanguage
-            return defaultArg (posts.AllPosts language
+            let! posts = getPosts
+            return defaultArg (posts
                                |> Seq.tryHead
                                |> Option.map (fun p -> p.Date)) DateTime.UtcNow
         }
 
-    let handleFeed _ =
+    let handleFeed =
         freya {
-            let! language = Common.routeLanguage
-            let content = feedContent language
+            let! posts = getPosts
+            let content = feedContent posts
             return
                 {
                     Description =
