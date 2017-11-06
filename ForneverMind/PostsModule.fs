@@ -68,13 +68,15 @@ type PostsModule (config : ConfigurationModule, markdown : MarkdownModule) =
     let allPosts language =
         let directory = Path.Combine (config.PostsPath, language)
         if not <| Common.pathIsInsideDirectory config.PostsPath directory then failwithf "Access error"
-        Directory.GetFiles directory
-        |> Seq.map (fun filePath ->
-            use stream = new FileStream(filePath, FileMode.Open)
-            use reader = new StreamReader(stream)
-            markdown.ProcessMetadata(filePath, reader))
-        |> Seq.sortByDescending (fun x -> x.Date)
-        |> Seq.toArray
+        if not (Directory.Exists directory) then Array.empty
+        else
+            Directory.GetFiles directory
+            |> Seq.map (fun filePath ->
+                use stream = new FileStream(filePath, FileMode.Open)
+                use reader = new StreamReader(stream)
+                markdown.ProcessMetadata(filePath, reader))
+            |> Seq.sortByDescending (fun x -> x.Date)
+            |> Seq.toArray
 
     member __.PostFilePath = postFilePath
     member __.CheckPostExists = checkPostExists
