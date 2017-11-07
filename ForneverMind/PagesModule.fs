@@ -33,7 +33,10 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
         }
 
     let handleStaticPage language templateName model active =
-        let produceLink (path : string) language = sprintf "/%s/%s" language (path.Substring("/en".Length + 1))
+        let produceLink (path : string) language =
+            if active
+            then sprintf "/%s/%s" language (path.Substring("/en".Length + 1))
+            else ""
         freya {
             let! path = Freya.Optic.get Request.path_
             let links = {
@@ -50,16 +53,44 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
             return Common.dateTimeToSeconds date
         }
 
+    let isKnownLanguage =
+        freya {
+            let! language = Common.routeLanguageOpt
+            let known =
+                match language with
+                | None -> false
+                | Some lang ->
+                    Array.contains lang Common.supportedLanguages
+            return known
+        }
+
+    let notFoundHandler =
+        let language =
+            freya {
+                let! language = Common.routeLanguageOpt
+                let language =
+                    language
+                    |> Option.map (fun lang ->
+                        if Array.contains lang Common.supportedLanguages
+                        then lang
+                        else Common.defaultLanguage)
+
+                return Option.defaultValue Common.defaultLanguage language
+            }
+        handleStaticPage language "404" (Freya.init None) false
+
     let page templateName model additionalModificationDate =
         freyaMachine {
             including Common.machine
             methods Common.methods
+            exists isKnownLanguage
             lastModified (freya {
                               let! modificationDate = additionalModificationDate
                               let! templateModificationDate = lastModificationDate templateName
                               return max templateModificationDate (Option.defaultValue DateTime.MinValue modificationDate)
                           })
             handleOk (handleStaticPage Common.routeLanguage templateName model true)
+            handleNotFound notFoundHandler
         }
 
     let handlePost =
@@ -100,14 +131,6 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
     let contact = page "Contact" (Freya.init None) (Freya.init None)
     let talks = page "Talks" (Freya.init None) (Freya.init None)
 
-    let notFoundHandler =
-        let language =
-            freya {
-                let! language = Common.routeLanguageOpt
-                return Option.defaultValue Common.defaultLanguage language
-            }
-        handleStaticPage language "404" (Freya.init None) false
-
     let notFound =
         let pageRequestedExplicitly =
             freya {
@@ -122,6 +145,7 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
             methods Common.methods
             exists pageRequestedExplicitly
             handleNotFound notFoundHandler
+            handleOk notFoundHandler
         }
 
     let error = page "Error" (Freya.init None) (Freya.init None)

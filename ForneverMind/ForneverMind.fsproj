@@ -7,8 +7,8 @@
     <PreserveCompilationContext>true</PreserveCompilationContext>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="models\PostModel.fs" />
-    <Compile Include="models\PostArchiveModel.fs" />
+    <Compile Include="models/PostModel.fs" />
+    <Compile Include="models/PostArchiveModel.fs" />
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="ConfigurationModule.fs" />
     <Compile Include="Common.fs" />
