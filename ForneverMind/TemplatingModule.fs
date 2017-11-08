@@ -18,7 +18,7 @@ type TemplatingModule (config: ConfigurationModule) =
     let razor = EngineFactory.CreatePhysical config.ViewsPath
 
     let templateName language name = sprintf "%s/%s.cshtml" language name
-    let templatePath language name = Path.Combine(config.ViewsPath, language, templateName language name)
+    let templatePath language name = Path.Combine(config.ViewsPath, templateName language name)
     let layoutPath language = templatePath language "_Layout"
 
     let prepareViewBag (links : LanguageLinks) =
