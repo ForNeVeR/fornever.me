@@ -22,7 +22,7 @@ RSS: the site now has _three_ RSS feeds.
 * [`/ru/rss.xml`](/ru/rss.xml) — Russian only posts
 
 Please, set up your RSS readers according to your language preferences. For a
-while, English part of the site will be pretty empty, bit I hope to eventually
+while, English part of the site will be pretty empty, but I hope to eventually
 bring the parity by translating all of my materials to both of the languages.
 
 If you found a bug or a flaw in a multilingual version of the site — please,
