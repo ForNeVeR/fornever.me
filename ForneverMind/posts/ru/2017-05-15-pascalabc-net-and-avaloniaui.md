@@ -287,7 +287,7 @@ $ bin/Application.exe
 Для удобства читателя исходный код тестового приложения со всеми скриптами, но
 без бинарников, [опубликован на GitHub][github].
 
-[screenshot]: images/2017-05-15-avaloniaui-pascalabc-net.png
+[screenshot]: ../images/2017-05-15-avaloniaui-pascalabc-net.png
 
 [avaloniaui]: https://github.com/AvaloniaUI/Avalonia
 [avaloniaui/0.5]: https://habrahabr.ru/post/328684/

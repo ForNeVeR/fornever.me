@@ -22,7 +22,7 @@ Studio справится!"_ — решил в своё время я. Ах, к�
 инструменты публикации.
 
 ![Вкладка Settings окна публикации Visual
-Studio](./images/2016-06-04-publish-settings.png)
+Studio](../images/2016-06-04-publish-settings.png)
 
 В настройках публикации есть две вот таких интересных галочки: "Remove
 additional files at destination" и "Exclude files from the App_Data folder". К
@@ -38,7 +38,7 @@ additional files at destination" и "Exclude files from the App_Data folder". К
 Deploy, а в Web Deploy Package:
 
 ![Вкладка Connection окна публикации Visual
-Studio](./images/2016-06-04-web-deploy-package.png)
+Studio](../images/2016-06-04-web-deploy-package.png)
 
 Теперь на билдсервере можно подготовить пакет такой командой:
 

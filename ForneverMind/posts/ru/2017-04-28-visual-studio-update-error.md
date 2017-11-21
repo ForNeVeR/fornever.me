@@ -31,4 +31,4 @@ $ vs14-kb3165756.exe /layout
 указанному пути (путь он запросит в UI после запуска). Этот полный пакет уже
 можно спокойно запускать, у него проблем при установке возникнуть не должно.
 
-[error-screenshot]: images/2017-04-28-error-screenshot.png
+[error-screenshot]: ../images/2017-04-28-error-screenshot.png

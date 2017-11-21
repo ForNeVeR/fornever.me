@@ -112,7 +112,7 @@ namespace ConsoleApplication3
 конкретным типам перед передачей куда-либо. На основании проведённых опытов пока
 можно сказать, что это гарантирует отсутствие описанной утечки.
 
-[dotmemory]: images/2017-02-12-dotmemory.png
+[dotmemory]: ../images/2017-02-12-dotmemory.png
 
 [com-post]: posts/2015-12-12-portable-com-usage_ru.html
 [pro.net]: https://telegram.me/joinchat/BYlFbD6uHawWMCImmbPIDw

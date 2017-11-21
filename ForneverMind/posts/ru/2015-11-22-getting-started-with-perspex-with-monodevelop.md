@@ -30,13 +30,13 @@ NixOS этой среды не оказалось. Зато есть MonoDevelop
 не установлен — его следует установить, он должен быть доступен в стандартном
 репозитории MonoDevelop.
 
-![Снимок окна Add-In Manager](images/2015-11-22-monodevelop-add-in-manager.png)
+![Снимок окна Add-In Manager](../images/2015-11-22-monodevelop-add-in-manager.png)
 
 Теперь создадим новый пустой проект, и добавить в него пакет при помощи
 соответствующего пункта в дереве проекта (не забудьте поставить галочку "Show
 pre-release packages", т.к. пакет Perspex пока что не является стабильным).
 
-![Снимок окна Add Packages](images/2015-11-22-monodevelop-add-packages.png)
+![Снимок окна Add Packages](../images/2015-11-22-monodevelop-add-packages.png)
 
 Через некоторое время пакет будет установлен. Достаточно приятно и неожиданно,
 что MonoDevelop, в отличие от Visual Studio, умеет устанавливать пакеты в
@@ -124,7 +124,7 @@ namespace TestProject
 названием и пространством имён соответствующего окну класса).
 
 ![Снимок панели свойств файла
-MainWindow.xaml](images/2015-11-22-monodevelop-resource-properties.png)
+MainWindow.xaml](../images/2015-11-22-monodevelop-resource-properties.png)
 
 Также не забудьте добавить ссылку на стандартную сборку `System`: почему-то моя
 версия MonoDevelop не делает этого самостоятельно, хотя это и было бы довольно
@@ -142,7 +142,7 @@ MainWindow.xaml](images/2015-11-22-monodevelop-resource-properties.png)
 Теперь уже можно нажать в MonoDevelop кнопочку Debug и насладиться, э,
 прекрасным видом нашего приложения.
 
-![Снимок окна запущенного приложения](images/2015-11-22-perspex-application.png)
+![Снимок окна запущенного приложения](../images/2015-11-22-perspex-application.png)
 
 На этом пока что всё, наслаждайтесь кроссплатформенным пользовательским
 интерфейсом нового поколения :)
