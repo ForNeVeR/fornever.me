@@ -78,8 +78,8 @@ Other components
    need to be installed separately.
 2. [fornever.me][] uses an easy-to-install [Disqus][disqus] comment system.
 
-[dockerfile]: scripts/docker/Dockerfile
-[compose.ps1]: scripts/docker/compose.ps1
+[dockerfile]: Scripts/docker/Dockerfile
+[compose.ps1]: Scripts/docker/compose.ps1
 
 [disqus]: https://disqus.com/
 [dotnet-core]: https://www.microsoft.com/net/core
