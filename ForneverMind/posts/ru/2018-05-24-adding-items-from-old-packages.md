@@ -2,19 +2,13 @@
     description: Включаем в проекты с PackageReference файлов из некоторых NuGet-пакетов, которые создавались без учёта особенностей нового SDK.
 ---
 
-> Земную жизнь пройдя до половины,
-> Я очутился в сумрачном лесу,
-> Утратив правый путь во тьме долины.
-
-— Dante Alighieri, La Divina Commedia, перевод М. Лозинского
-
 Не так давно мне при работе над одним из проектов с открытым кодом пришлось
 решать довольно нетипичную задачу: нужно было интегрировать очень старый
 NuGet-пакет ([2012 год, как-никак][activiz.net]), написанный на C++/CLI и
 адаптированный, понятное дело, только для большого .NET, в сборку, реализованную
-на базе .NET Core SDK. При этом я столкнулся с проблемами, которые помогли мне
-понять некоторые доселе неизвестные особенности работы MSBuild с NuGet-пакетами,
-и найти решение этих проблем в рамках современных технологий.
+на базе .NET Core SDK. При этом я столкнулся с проблемами, которые сподвигли
+меня исследовать некоторые доселе неизвестные особенности работы MSBuild с
+NuGet-пакетами, и найти решение этих проблем в рамках современных технологий.
 
 Рассматриваемый пакет включает в себя несколько нативных DLL, которые требуются
 для его работы. Поскольку они нативные, ссылок на них в .NET-проекте поставить
@@ -37,7 +31,34 @@ NuGet-пакет ([2012 год, как-никак][activiz.net]), написан
 написав немножко дополнительного XML. Мы вручную сформируем список файлов для
 копирования из пакета, и заставим MSBuild их за нас копировать.
 
-<!-- TODO: insert sample here -->
+Следующий код можно вставить внутрь элемента `<Project>` в `.csproj`-файле.
+
+```xml
+<PropertyGroup>
+    <ActivizNetPackage>Activiz.NET.x64</ActivizNetPackage>
+    <ActivizNetVersion>5.8.0</ActivizNetVersion>
+    <ActivizNetPackagePath>$(NuGetPackageRoot)\$(ActivizNetPackage)\$(ActivizNetVersion)</ActivizNetPackagePath>
+    <ActivizNetContents>$(ActivizNetPackagePath)\lib\net20\*.dll</ActivizNetContents>
+    <ActivizNetExclude>$(ActivizNetPackagePath)\lib\net20\msvc?90.dll</ActivizNetExclude>
+</PropertyGroup>
+<ItemGroup>
+<PackageReference Include="$(ActivizNetPackage)" Version="$(ActivizNetVersion)"/>
+    <Content CopyToOutputDirectory="Always" Include="$(ActivizNetContents)">
+        <Visible>false</Visible>
+    </Content>
+    <Content Remove="$(ActivizNetExclude)" />
+</ItemGroup>
+```
+
+Этот пример показывает, как можно получить путь к содержимому пакета,
+распакованному на диске после его установки (через переменную
+`NuGetPackageRoot`), а также добавить файлы из пакета в проект (опционально
+убрав те из них, которые копировать не требуется, с помощью атрибута `Remove`
+элемента `Content`).
+
+Таким образом можно получить проект на новом SDK, который будет использовать
+старые пакеты, которые полагались на обсуждаемый аспект поведения связки NuGet +
+MSBuild.
 
 [activiz.net]: https://www.nuget.org/packages/Activiz.NET.x64/
 [contentfiles]: https://blog.nuget.org/20160126/nuget-contentFiles-demystified.html
