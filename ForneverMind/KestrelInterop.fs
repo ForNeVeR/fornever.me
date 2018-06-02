@@ -12,7 +12,7 @@ open Microsoft.Extensions.Logging
 
 type ApplicationConfiguration =
     { application : IApplicationBuilder -> unit
-      logging : ILoggerFactory -> unit
+      logging : ILoggingBuilder -> unit
       services : IServiceCollection -> unit }
 
 module ApplicationBuilder =

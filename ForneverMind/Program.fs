@@ -44,7 +44,7 @@ let private configureApplication app =
 let private configureServices (services : IServiceCollection) =
     services.AddNodeServices()
 
-let private configureLogger (logger : ILoggerFactory) =
+let private configureLogger (logger : ILoggingBuilder) =
     logger.AddConsole()
 
 let configuration =

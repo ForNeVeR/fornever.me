@@ -100,7 +100,7 @@ type MarkdownModule(highlight : CodeHighlightModule) =
             formatter.WriteDocument doc
         settings
 
-    let getLanguageAndName path =
+    let getLanguageAndName (path : string) =
         let language = Path.GetFileName (Path.GetDirectoryName path)
         let name = Path.GetFileNameWithoutExtension path
         language, name

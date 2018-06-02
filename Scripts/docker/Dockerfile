@@ -1,4 +1,4 @@
-FROM microsoft/aspnetcore:1.1.5
+FROM microsoft/dotnet:2.1-aspnetcore-runtime
 RUN apt-get update && apt-get install -y nodejs-legacy
 
 WORKDIR /app
