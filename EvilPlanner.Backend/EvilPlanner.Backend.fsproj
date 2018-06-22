@@ -15,6 +15,7 @@
     <Name>EvilPlanner.Backend</Name>
     <UseIISExpress>true</UseIISExpress>
     <NameOfLastUsedPublishProfile>Production</NameOfLastUsedPublishProfile>
+    <LastActiveSolutionConfig>Debug|Any CPU</LastActiveSolutionConfig>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -86,7 +87,9 @@
   </ProjectExtensions>
   <ItemGroup>
     <Compile Include="Common.fs" />
+    <Compile Include="Configuration.fs" />
     <Compile Include="Quotes.fs" />
+    <Compile Include="Storage.fs" />
     <Compile Include="Application.fs" />
     <Compile Include="AssemblyInfo.fs" />
     <Content Include="Web.config" />
@@ -186,6 +189,10 @@
       <HintPath>..\packages\Hekate.1.0.0\lib\net40\Hekate.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="LiteDB, Version=4.1.4.0, Culture=neutral, PublicKeyToken=4ee40123013c9f27">
+      <HintPath>..\packages\LiteDB.4.1.4\lib\net40\LiteDB.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Owin">
       <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
       <Private>True</Private>
@@ -201,6 +208,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
   </ItemGroup>
