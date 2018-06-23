@@ -16,8 +16,7 @@ open Freya.Machine.Router
 open Freya.Router
 open Freya.Router.Lenses
 
-open EvilPlanner.Data
-open EvilPlanner.Data.Entities
+open EvilPlanner.Core
 open EvilPlanner.Logic
 
 type Quote (q : Quotation) =
@@ -26,10 +25,10 @@ type Quote (q : Quotation) =
     static member ToJson (quote : Quote) =
         let q = quote.Model
 
-        Json.write "id" q.Id
-        *> Json.write "text" q.Text
-        *> Json.write "sourceUrl" q.SourceUrl
-        *> Json.write "source" q.Source
+        Json.write "id" q.id
+        *> Json.write "text" q.text
+        *> Json.write "sourceUrl" q.sourceUrl
+        *> Json.write "source" q.source
 
 let private isoDateFormat = "yyyy-MM-dd"
 
@@ -39,35 +38,36 @@ let private date =
         return DateTime.ParseExact (Option.get value, isoDateFormat, CultureInfo.InvariantCulture)
     }
 
-let private findQuoteByDate =
+let private findQuoteByDate cfg =
     freya {
+        let getQuote = fun d -> async { return QuoteLogic.getQuote cfg d }
         let! date = date
-        let! dbQuote = (Freya.fromAsync QuoteLogic.getQuote) date
+        let! dbQuote = (Freya.fromAsync getQuote) date
         return dbQuote |> Option.map Quote
     } |> Freya.memo
 
-let private checkQuoteByDateExists =
+let private checkQuoteByDateExists cfg =
     freya {
-        let! quote = findQuoteByDate
+        let! quote = findQuoteByDate cfg
         return Option.isSome quote
     }
 
-let private handleQuoteFound _ =
+let private handleQuoteFound cfg _ =
     freya {
-        let! quote = findQuoteByDate
+        let! quote = findQuoteByDate cfg
         return Common.resource quote
     }
 
-let private quoteByDate =
+let private quoteByDate cfg =
     freyaMachine {
         including Common.machine
-        exists checkQuoteByDateExists
+        exists (checkQuoteByDateExists cfg)
         corsMethodsSupported Common.get
         methodsSupported Common.get
-        handleOk handleQuoteFound
+        handleOk (handleQuoteFound cfg)
     } |> FreyaMachine.toPipeline
 
-let router =
+let router(cfg : Configuration) : FreyaPipeline =
      freyaRouter {
-        resource (UriTemplate.Parse "/quote/{date}") quoteByDate
+        resource (UriTemplate.Parse "/quote/{date}") (quoteByDate cfg)
      } |> FreyaRouter.toPipeline

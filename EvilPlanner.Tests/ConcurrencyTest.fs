@@ -1,54 +1,50 @@
 ﻿namespace EvilPlanner.Tests
 
 open System
+open System.IO
+open System.Reflection
 open System.Threading.Tasks
 
+open LiteDB
 open Xunit
 
-open EvilPlanner.Data
-open EvilPlanner.Logic.DatabaseExtensions
+open EvilPlanner.Core
 open EvilPlanner.Logic.QuoteLogic
 
 type public ConcurrencyTest () =
-    do Migrations.Configuration.EnableAutoMigration ()
+    let config =
+        let directory = AssemblyUtils.assemblyDirectory(Assembly.GetExecutingAssembly())
+        { databasePath = Path.Combine(directory, "testDb.dat") }
+    do Migrations.migrateDatabase config
 
-    let getDailyQuotes (context : EvilPlannerContext) =
-        toListAsync context.DailyQuotes
+    let dailyQuotes(db : LiteDatabase) = db.GetCollection<DailyQuote>("dailyQuotes")
+    let getDailyQuotes(db : LiteDatabase) = (dailyQuotes db).FindAll()
 
     let clearDailyQuotes () =
-        async {
-            use context = new EvilPlannerContext ()
-            let! quotes = getDailyQuotes context
-
-            ignore <| context.DailyQuotes.RemoveRange quotes
-
-            do! saveChangesAsync context
-        }
+        use db = Storage.openDatabase config
+        let quotes = getDailyQuotes db
+        ignore <| (dailyQuotes db).Delete(Query.All())
 
     let executeTransaction () =
-        async {
-            let today = DateTime.UtcNow.Date
-            return! getQuote today
-        }
+        let today = DateTime.UtcNow.Date
+        getQuote config today
 
     let countDailyQuotes () =
-        async {
-            use context = new EvilPlannerContext ()
-            return! countAsync context.DailyQuotes
-        }
+        use db = Storage.openDatabase config
+        Seq.length(getDailyQuotes db)
 
     [<Fact>]
-    member __.ConcurrencyTest () : Task<unit> =
+    member __.ConcurrencyTest() : Task<unit> =
         let concurrencyLevel = 20
-        async {
-            do! clearDailyQuotes ()
+        clearDailyQuotes()
 
+        async {
             let tasks =
                 seq { 1 .. concurrencyLevel }
-                |> Seq.map (fun _ -> executeTransaction ())
+                |> Seq.map (fun _ -> async { return executeTransaction() })
             let! quotes = Async.Parallel tasks
 
-            let! count = countDailyQuotes ()
+            let count = countDailyQuotes()
             Assert.Equal (1, count)
 
             let successCount =

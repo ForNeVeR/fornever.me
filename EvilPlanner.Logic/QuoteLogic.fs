@@ -2,65 +2,45 @@
 
 open System
 open System.Data
-open System.Data.Entity
 open System.Data.SqlClient
 
-open EvilPlanner.Logic.DatabaseExtensions
-open EvilPlanner.Data
-open EvilPlanner.Data.Entities
-open System.Data.Entity.Core
-open System.Data.Entity.Infrastructure
+open FSharpx
+open LiteDB
 
-let private getDailyQuote (context : EvilPlannerContext) date =
-    query {
-        for q in context.DailyQuotes do
-        where (q.Date = date)
-        select q.Quotation
-    } |> singleOrDefaultAsync
+open EvilPlanner.Core
+
+let private dailyQuotes (db : LiteDatabase) = db.GetCollection<DailyQuote> "dailyQuotes"
+let private quotations (db : LiteDatabase) = db.GetCollection<Quotation> "quotations"
+
+let private toOption (x : 'T) : 'T option =
+    box x
+    |> Option.ofObj
+    |> Option.cast
+
+let private getDailyQuote db (date : DateTime) =
+    (dailyQuotes db).FindOne(Query.EQ("Date", BsonValue date))
+    |> toOption
+    |> Option.map (fun dq ->
+        (quotations db).FindById (BsonValue dq.quotationId))
 
 /// Creates quote for the current date. Can throw an UpdateException in case when the quote was
 /// already created by the concurrent query.
-let private createQuote (context : EvilPlannerContext) date =
-    async {
-        // TODO: Optimize this randomization
-        let count = query { for q in context.Quotations do count }
-        let toSkip = Random().Next count
-        let! quotation =
-            query {
-                for q in context.Quotations do
-                sortBy q.Id
-                skip toSkip
-            } |> headAsync
+let private createQuote db date =
+    // TODO: Optimize this randomization
+    let allQuotations = ResizeArray((quotations db).FindAll())
+    let index = Random().Next(allQuotations.Count - 1)
+    let quotation = allQuotations.[index]
+    let dailyQuote = { id = 0L; date = date; quotationId = quotation.id }
+    ignore <| (dailyQuotes db).Insert dailyQuote
+    quotation
 
-        let dailyQuote = DailyQuote(Date = date, Quotation = quotation)
-        context.DailyQuotes.Add dailyQuote |> ignore
-
-        do! saveChangesAsync context
-
-        return quotation
-    }
-
-let getQuote (date : DateTime) : Async<Quotation option> =
+let getQuote (config : Configuration) (date : DateTime) : Quotation option =
     let today = DateTime.UtcNow.Date
-    async {
-        use context = new EvilPlannerContext ()
-        let! existingQuote = getDailyQuote context date
-        if today <> date
-        then
-            return existingQuote
-        else
-            match existingQuote with
-            | Some(q) -> return Some q
-            | None    ->
-                let! quoteOrError = Async.Catch <| createQuote context today
-                let quote =
-                    match quoteOrError with
-                    | Choice1Of2 q -> async { return Some q }
-                    | Choice2Of2 (SqlException ex) ->
-                        // Retry the select in case another transaction has been already created
-                        // the quote:
-                        getDailyQuote context today
-                    | Choice2Of2 error -> raise error
+    use db = Storage.openDatabase config
+    let existingQuote = getDailyQuote db date
 
-                return! quote
-    }
+    if today <> date
+    then existingQuote
+    else match existingQuote with
+         | None -> Some (createQuote db today)
+         | _ -> existingQuote

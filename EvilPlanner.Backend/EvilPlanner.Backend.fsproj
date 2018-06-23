@@ -10,7 +10,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>EvilPlanner.Backend</RootNamespace>
     <AssemblyName>EvilPlanner.Backend</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Name>EvilPlanner.Backend</Name>
     <UseIISExpress>true</UseIISExpress>
@@ -87,13 +87,9 @@
   </ProjectExtensions>
   <ItemGroup>
     <Compile Include="Common.fs" />
-    <Compile Include="Configuration.fs" />
     <Compile Include="Quotes.fs" />
-    <Compile Include="Storage.fs" />
     <Compile Include="Application.fs" />
     <Compile Include="AssemblyInfo.fs" />
-    <EmbeddedResource Include="Data\DailyQuotes.csv" />
-    <EmbeddedResource Include="Data\Quotations.csv" />
     <Content Include="Web.config" />
     <None Include="Web.Release.config" />
     <Content Include="packages.config" />
@@ -129,18 +125,6 @@
     </Reference>
     <Reference Include="Chiron">
       <HintPath>..\packages\Chiron.4.1.0\lib\net45\Chiron.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="CsvHelper, Version=7.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823">
-      <HintPath>..\packages\CsvHelper.7.1.1\lib\net45\CsvHelper.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="FParsec">
@@ -195,10 +179,6 @@
       <HintPath>..\packages\Hekate.1.0.0\lib\net40\Hekate.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="LiteDB, Version=4.1.4.0, Culture=neutral, PublicKeyToken=4ee40123013c9f27">
-      <HintPath>..\packages\LiteDB.4.1.4\lib\net40\LiteDB.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.Owin">
       <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
       <Private>True</Private>
@@ -219,10 +199,9 @@
     <Reference Include="System.Numerics" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EvilPlanner.Data\EvilPlanner.Data.csproj">
-      <Name>EvilPlanner.Data</Name>
-      <Project>{885368a3-1091-4c5f-9d85-f6e0149f6087}</Project>
-      <Private>True</Private>
+    <ProjectReference Include="..\EvilPlanner.Core\EvilPlanner.Core.fsproj">
+      <Project>{4686d8b1-02c9-4659-9bea-9eec263ef14d}</Project>
+      <Name>EvilPlanner.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\EvilPlanner.Logic\EvilPlanner.Logic.fsproj">
       <Name>EvilPlanner.Logic</Name>
