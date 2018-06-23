@@ -92,6 +92,8 @@
     <Compile Include="Storage.fs" />
     <Compile Include="Application.fs" />
     <Compile Include="AssemblyInfo.fs" />
+    <EmbeddedResource Include="Data\DailyQuotes.csv" />
+    <EmbeddedResource Include="Data\Quotations.csv" />
     <Content Include="Web.config" />
     <None Include="Web.Release.config" />
     <Content Include="packages.config" />
@@ -127,6 +129,10 @@
     </Reference>
     <Reference Include="Chiron">
       <HintPath>..\packages\Chiron.4.1.0\lib\net45\Chiron.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CsvHelper, Version=7.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823">
+      <HintPath>..\packages\CsvHelper.7.1.1\lib\net45\CsvHelper.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework">

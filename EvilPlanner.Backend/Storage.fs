@@ -2,7 +2,9 @@ module EvilPlanner.Storage
 
 open System
 open System.IO
+open System.Reflection
 
+open CsvHelper
 open LiteDB
 
 open EvilPlanner.Data.Entities
@@ -12,9 +14,19 @@ type DailyQuote =
       date : DateTime
       quotationId : int64 }
 
+let private prepareHeader (s : string) = sprintf "%c%s" (Char.ToUpperInvariant s.[0]) (s.Substring 1)
+
+let private readCsv resourceName =
+    let assembly = Assembly.GetExecutingAssembly()
+    use resource = assembly.GetManifestResourceStream resourceName
+    use reader = new StreamReader(resource)
+    let config = Configuration.Configuration(Delimiter = ";", PrepareHeaderForMatch = Func<_, _> prepareHeader)
+    use csv = new CsvReader(reader, config)
+    ResizeArray(csv.GetRecords())
+
 let private seedDatabase(db : LiteDatabase) =
-    let quotationData = [| Quotation(Id = 1L, Text = "Text", Source = "Source", SourceUrl = "SourceUrl") |]
-    let dailyQuoteData = [| { id = 1L; date = DateTime.Today; quotationId = 1L } |]
+    let quotationData = readCsv "Quotations.csv"
+    let dailyQuoteData = readCsv "DailyQuotes.csv"
     let quotations = db.GetCollection<Quotation> "quotations"
     let dailyQuotes = db.GetCollection<DailyQuote> "dailyQuotes"
     ignore <| quotations.Insert quotationData
