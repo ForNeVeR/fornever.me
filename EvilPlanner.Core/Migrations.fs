@@ -23,13 +23,16 @@ let private seedDatabase(db : LiteDatabase) =
     let dailyQuoteData = readCsv "Migrations.DailyQuotes.csv"
     let quotations = db.GetCollection<Quotation> "quotations"
     let dailyQuotes = db.GetCollection<DailyQuote> "dailyQuotes"
+    ignore <| dailyQuotes.EnsureIndex "date"
     ignore <| quotations.Insert quotationData
     ignore <| dailyQuotes.Insert dailyQuoteData
 
 let migrateDatabase(configuration : Configuration) : unit =
     ignore <| Directory.CreateDirectory(Path.GetDirectoryName configuration.databasePath)
-    use db = Storage.openDatabase configuration
-    if db.Engine.UserVersion = 0us
-    then
-        seedDatabase db
-        db.Engine.UserVersion <- 1us
+    use database = Storage.openDatabase configuration
+    database.ReadWriteTransaction(fun db ->
+        if db.Engine.UserVersion = 0us
+        then
+            seedDatabase db
+            db.Engine.UserVersion <- 1us
+    )

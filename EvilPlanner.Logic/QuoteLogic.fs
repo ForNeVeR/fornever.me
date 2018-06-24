@@ -4,7 +4,6 @@ open System
 open System.Data
 open System.Data.SqlClient
 
-open FSharpx
 open LiteDB
 
 open EvilPlanner.Core
@@ -12,13 +11,13 @@ open EvilPlanner.Core
 let private dailyQuotes (db : LiteDatabase) = db.GetCollection<DailyQuote> "dailyQuotes"
 let private quotations (db : LiteDatabase) = db.GetCollection<Quotation> "quotations"
 
-let private toOption (x : 'T) : 'T option =
-    box x
-    |> Option.ofObj
-    |> Option.cast
+let private toOption(x : 'T) : 'T option =
+    if isNull (box x)
+    then None
+    else Some x
 
 let private getDailyQuote db (date : DateTime) =
-    (dailyQuotes db).FindOne(Query.EQ("Date", BsonValue date))
+    (dailyQuotes db).FindOne(Query.EQ("date", BsonValue date))
     |> toOption
     |> Option.map (fun dq ->
         (quotations db).FindById (BsonValue dq.quotationId))
@@ -34,13 +33,15 @@ let private createQuote db date =
     ignore <| (dailyQuotes db).Insert dailyQuote
     quotation
 
-let getQuote (config : Configuration) (date : DateTime) : Quotation option =
+let getQuote (database : Storage.Database) (date : DateTime) : Quotation option =
     let today = DateTime.UtcNow.Date
-    use db = Storage.openDatabase config
-    let existingQuote = getDailyQuote db date
+    database.ReadWriteTransaction(fun db ->
+        let existingQuote = getDailyQuote db date
 
-    if today <> date
-    then existingQuote
-    else match existingQuote with
-         | None -> Some (createQuote db today)
-         | _ -> existingQuote
+        if today <> date
+        then existingQuote
+        else
+            match existingQuote with
+            | None -> Some (createQuote db today)
+            | _ -> existingQuote
+    )

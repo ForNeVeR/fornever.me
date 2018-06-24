@@ -11,40 +11,47 @@ open Xunit
 open EvilPlanner.Core
 open EvilPlanner.Logic.QuoteLogic
 
-type public ConcurrencyTest () =
+type public ConcurrencyTest() =
     let config =
         let directory = AssemblyUtils.assemblyDirectory(Assembly.GetExecutingAssembly())
         { databasePath = Path.Combine(directory, "testDb.dat") }
-    do Migrations.migrateDatabase config
 
     let dailyQuotes(db : LiteDatabase) = db.GetCollection<DailyQuote>("dailyQuotes")
     let getDailyQuotes(db : LiteDatabase) = (dailyQuotes db).FindAll()
 
-    let clearDailyQuotes () =
-        use db = Storage.openDatabase config
+    let reinitializeDatabase() =
+        if File.Exists config.databasePath
+        then File.Delete config.databasePath
+
+        Migrations.migrateDatabase config
+
+    let clearDailyQuotes(db : LiteDatabase) =
         let quotes = getDailyQuotes db
         ignore <| (dailyQuotes db).Delete(Query.All())
 
-    let executeTransaction () =
+    let executeTransaction database =
         let today = DateTime.UtcNow.Date
-        getQuote config today
+        getQuote database today
 
-    let countDailyQuotes () =
-        use db = Storage.openDatabase config
+    let countDailyQuotes db =
         Seq.length(getDailyQuotes db)
 
     [<Fact>]
     member __.ConcurrencyTest() : Task<unit> =
-        let concurrencyLevel = 20
-        clearDailyQuotes()
+        do
+            reinitializeDatabase()
+            use database = Storage.openDatabase config
+            database.ReadWriteTransaction clearDailyQuotes
 
+        let concurrencyLevel = 20
         async {
+            use database = Storage.openDatabase config
             let tasks =
                 seq { 1 .. concurrencyLevel }
-                |> Seq.map (fun _ -> async { return executeTransaction() })
+                |> Seq.map (fun _ -> async { return executeTransaction database })
             let! quotes = Async.Parallel tasks
 
-            let count = countDailyQuotes()
+            let count = database.ReadOnlyTransaction countDailyQuotes
             Assert.Equal (1, count)
 
             let successCount =

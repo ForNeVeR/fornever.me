@@ -14,8 +14,9 @@
     <EmbeddedResource Include="Migrations\Quotations.csv" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FSharp.Core" Version="4.0.0.1" />
+    <PackageReference Include="FSharp.Core" Version="4.2.3" />
     <PackageReference Include="CsvHelper" Version="7.1.1" />
     <PackageReference Include="LiteDB" Version="4.1.4" />
+    <PackageReference Include="LiteDB.FSharp" Version="2.2.0" />
   </ItemGroup>
 </Project>

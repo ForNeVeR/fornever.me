@@ -38,9 +38,9 @@ let private date =
         return DateTime.ParseExact (Option.get value, isoDateFormat, CultureInfo.InvariantCulture)
     }
 
-let private findQuoteByDate cfg =
+let private findQuoteByDate database =
     freya {
-        let getQuote = fun d -> async { return QuoteLogic.getQuote cfg d }
+        let getQuote = fun d -> async { return QuoteLogic.getQuote database d }
         let! date = date
         let! dbQuote = (Freya.fromAsync getQuote) date
         return dbQuote |> Option.map Quote
@@ -52,22 +52,22 @@ let private checkQuoteByDateExists cfg =
         return Option.isSome quote
     }
 
-let private handleQuoteFound cfg _ =
+let private handleQuoteFound database _ =
     freya {
-        let! quote = findQuoteByDate cfg
+        let! quote = findQuoteByDate database
         return Common.resource quote
     }
 
-let private quoteByDate cfg =
+let private quoteByDate database =
     freyaMachine {
         including Common.machine
-        exists (checkQuoteByDateExists cfg)
+        exists (checkQuoteByDateExists database)
         corsMethodsSupported Common.get
         methodsSupported Common.get
-        handleOk (handleQuoteFound cfg)
+        handleOk (handleQuoteFound database)
     } |> FreyaMachine.toPipeline
 
-let router(cfg : Configuration) : FreyaPipeline =
+let router(database : Storage.Database) : FreyaPipeline =
      freyaRouter {
-        resource (UriTemplate.Parse "/quote/{date}") (quoteByDate cfg)
+        resource (UriTemplate.Parse "/quote/{date}") (quoteByDate database)
      } |> FreyaRouter.toPipeline
