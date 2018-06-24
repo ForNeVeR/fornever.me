@@ -24,10 +24,6 @@ settings.
 You'll probably want to change `databasePath` parameter and point it to a
 preferred location for the database.
 
-Frontend project configuration is stored inside of the `config.ts` file. It
-should point to an API endpoint and it will be applied on TypeScript
-compilation.
-
 Build and Deploy
 ----------------
 
