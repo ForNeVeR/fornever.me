@@ -8,7 +8,6 @@ open Chiron
 open Chiron.Operators
 open Freya.Core
 open Freya.Machines.Http
-open Freya.Machines.Http.Cors
 open Freya.Routers.Uri.Template
 
 open EvilPlanner.Core
@@ -61,10 +60,9 @@ let private quoteByDate database =
     freyaMachine {
         including Common.machine
         exists (checkQuoteByDateExists database)
-        corsMethodsSupported Common.get
-        methodsSupported Common.get
+        methods Common.get
         handleOk (handleQuoteFound database)
-    } |> FreyaMachine.toPipeline
+    }
 
 let router(database : Storage.Database) : UriTemplateRouter =
      freyaRouter {

@@ -1,15 +1,15 @@
 ﻿const path = require('path');
 
-const outputPath = path.join(__dirname, 'dist');
+const outputPath = path.join(__dirname, '../EvilPlanner.Backend/wwwroot');
 
 module.exports = {
-    resolve: { extensions: ['', '.css', '.js', '.html', '.ts', '.tsx'] },
+    resolve: { extensions: ['.css', '.js', '.html', '.ts', '.tsx'] },
     entry: { 'app': './app' },
     module: {
-        loaders: [
-            { test: /\.html$/, loader: 'file?name=[name].[ext]' },
-            { test: /\.css$/, loader: 'file?name=[name].[ext]' },
-            { test: /\.ts(x?)$/, loader: 'ts' }
+        rules: [
+            { test: /\.html$/, loader: 'file-loader?name=[name].[ext]' },
+            { test: /\.css$/, loader: 'file-loader?name=[name].[ext]' },
+            { test: /\.ts(x?)$/, loader: 'ts-loader' }
         ]
     },
     output: { path: outputPath, filename: '[name].js' }

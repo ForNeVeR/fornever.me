@@ -21,8 +21,8 @@ interface QuotationBlockState {
 }
 
 class QuotationBlock extends React.Component<{}, QuotationBlockState>{
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             text: 'Fetching quote...',
             source: '',

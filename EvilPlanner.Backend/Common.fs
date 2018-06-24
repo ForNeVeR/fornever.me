@@ -5,9 +5,7 @@ open System.Text
 open Chiron
 open Freya.Core
 open Freya.Machines.Http
-open Freya.Machines.Http.Cors
 open Freya.Types.Http
-open Freya.Types.Http.Cors
 open Freya.Types.Uri
 
 let private utf8 = Freya.init [ Charset.Utf8 ]
@@ -18,8 +16,6 @@ let get = Freya.init [ GET ]
 let machine =
     freyaMachine {
         availableCharsets utf8
-        cors
-        corsHeaders [ "accept"; "content-type" ]
         availableMediaTypes json
     }
 

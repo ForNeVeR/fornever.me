@@ -35,6 +35,8 @@ let private application config (app : IApplicationBuilder) =
     let func = OwinMidFunc.ofFreya(Quotes.router database)
     ignore <| app.UseOwin(fun p -> p.Invoke func)
 
+    ignore <| app.UseStaticFiles()
+
 [<EntryPoint>]
 let main (args : string[]) : int =
     let config = getConfig(Directory.GetCurrentDirectory())

@@ -1,7 +1,7 @@
 import React = require('react');
 import ReactDOM = require('react-dom');
 
-import QuotationBlock = require('./quotation-block.tsx');
+import QuotationBlock = require('./quotation-block');
 
 declare var require: (string) => void;
 require('./index');

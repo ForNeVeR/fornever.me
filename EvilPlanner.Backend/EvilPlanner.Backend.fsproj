@@ -16,11 +16,13 @@
     <PackageReference Include="LiteDB.FSharp" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Owin" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.1.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.1.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EvilPlanner.Core\EvilPlanner.Core.fsproj" />
+    <ProjectReference Include="..\EvilPlanner.Frontend\EvilPlanner.Frontend.csproj" ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\EvilPlanner.Logic\EvilPlanner.Logic.fsproj" />
   </ItemGroup>
 </Project>
