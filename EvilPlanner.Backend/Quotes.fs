@@ -50,9 +50,9 @@ let private findQuoteByDate database =
         return dbQuote |> Option.map Quote
     } |> Freya.memo
 
-let private checkQuoteByDateExists cfg =
+let private checkQuoteByDateExists database =
     freya {
-        let! quote = findQuoteByDate cfg
+        let! quote = findQuoteByDate database
         return Option.isSome quote
     }
 
