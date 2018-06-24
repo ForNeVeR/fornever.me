@@ -16,7 +16,7 @@ let private toOption(x : 'T) : 'T option =
     then None
     else Some x
 
-let private getDailyQuote db (date : DateTime) =
+let private getDailyQuote (date : DateTime) db =
     (dailyQuotes db).FindOne(Query.EQ("date", BsonValue date))
     |> toOption
     |> Option.map (fun dq ->
@@ -35,13 +35,14 @@ let private createQuote db date =
 
 let getQuote (database : Storage.Database) (date : DateTime) : Quotation option =
     let today = DateTime.UtcNow.Date
-    database.ReadWriteTransaction(fun db ->
-        let existingQuote = getDailyQuote db date
-
-        if today <> date
-        then existingQuote
-        else
+    let existingQuote = database.ReadOnlyTransaction (getDailyQuote date)
+    if today <> date || Option.isSome existingQuote
+    then existingQuote
+    else
+        database.ReadWriteTransaction(fun db ->
+            // Retry the select in case another transaction has already created the quote:
+            let existingQuote = getDailyQuote date db
             match existingQuote with
             | None -> Some (createQuote db today)
             | _ -> existingQuote
-    )
+        )
