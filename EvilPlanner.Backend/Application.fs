@@ -24,7 +24,7 @@ type Application() =
 
     member __.Configuration(app : IAppBuilder) : unit =
         let db = Storage.openDatabase config
-        let func = OwinAppFunc.ofFreya(Quotes.router db)
+        let func = OwinMidFunc.ofFreya(Quotes.router db)
         let appProperties = AppProperties app.Properties
 
         ignore <| appProperties.OnAppDisposing.Register(fun _ -> (db :> IDisposable).Dispose())

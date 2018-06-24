@@ -35,7 +35,11 @@ let private isoDateFormat = "yyyy-MM-dd"
 let private date =
     freya {
         let! value = Freya.getLensPartial <| Route.Atom_ "date"
-        return DateTime.ParseExact (Option.get value, isoDateFormat, CultureInfo.InvariantCulture)
+        return DateTime.ParseExact(
+            Option.get value,
+            isoDateFormat,
+            CultureInfo.InvariantCulture,
+            DateTimeStyles.AssumeUniversal ||| DateTimeStyles.AdjustToUniversal)
     }
 
 let private findQuoteByDate database =

@@ -6,7 +6,7 @@ open System.Reflection
 
 let assemblyDirectory(assembly : Assembly) : string =
     let absolutePath(uri : Uri) = uri.AbsolutePath
-    Assembly.GetExecutingAssembly().Location
+    assembly.CodeBase
     |> Uri
     |> absolutePath
     |> Path.GetDirectoryName

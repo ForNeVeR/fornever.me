@@ -9,6 +9,7 @@
 /EvilPlanner.Frontend/*.js.map
 /EvilPlanner.Frontend/dist/
 
+App_Data/
 bin/
 obj/
 
