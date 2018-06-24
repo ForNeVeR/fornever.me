@@ -27,9 +27,8 @@ preferred location for the database.
 Build and Deploy
 ----------------
 
-You may compile and publish the code from Visual Studio, or using `msbuild`
-(assuming that you have and `msbuild` in your `PATH` environment variable):
+You may compile the code using .NET Core SDK:
 
 ```console
-$ msbuild EvilPlanner.sln /p:Platform="Any CPU" /p:Configuration=Release /p:ProductionDeploy=true /p:PublishProfile=Production
+$ dotnet build -c Release
 ```

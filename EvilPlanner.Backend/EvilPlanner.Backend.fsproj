@@ -4,16 +4,14 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Common.fs" />
     <Compile Include="Quotes.fs" />
-    <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Application.fs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Chiron" Version="6.2.1" />
     <PackageReference Include="Freya" Version="4.0.0-alpha-170404" />
-    <PackageReference Include="LiteDB" Version="4.1.4" />
-    <PackageReference Include="LiteDB.FSharp" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Owin" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.1.0" />

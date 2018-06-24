@@ -1,8 +1,6 @@
 ﻿module EvilPlanner.Logic.QuoteLogic
 
 open System
-open System.Data
-open System.Data.SqlClient
 
 open LiteDB
 
