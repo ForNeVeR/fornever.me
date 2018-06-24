@@ -2,30 +2,25 @@
 
 open System.Text
 
-open Arachne.Http
-open Arachne.Http.Cors
 open Chiron
 open Freya.Core
-open Freya.Machine
-open Freya.Machine.Extensions.Http
-open Freya.Machine.Extensions.Http.Cors
+open Freya.Machines.Http
+open Freya.Machines.Http.Cors
+open Freya.Types.Http
+open Freya.Types.Http.Cors
+open Freya.Types.Uri
 
 let private utf8 = Freya.init [ Charset.Utf8 ]
 let private json = Freya.init [ MediaType.Json ]
-
-let private corsOrigins = Freya.init AccessControlAllowOriginRange.Any
-let private corsHeaders = Freya.init [ "accept"; "content-type" ]
 
 let get = Freya.init [ GET ]
 
 let machine =
     freyaMachine {
-        using http
-        using httpCors
-        charsetsSupported utf8
-        corsHeadersSupported corsHeaders
-        corsOriginsSupported corsOrigins
-        mediaTypesSupported json
+        availableCharsets utf8
+        cors
+        corsHeaders [ "accept"; "content-type" ]
+        availableMediaTypes json
     }
 
 let inline resource obj =

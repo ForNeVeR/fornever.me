@@ -4,17 +4,12 @@ open System
 open System.Globalization
 open System.Text
 
-open Arachne.Http
-open Arachne.Uri.Template
 open Chiron
 open Chiron.Operators
 open Freya.Core
-open Freya.Machine
-open Freya.Machine.Extensions.Http
-open Freya.Machine.Extensions.Http.Cors
-open Freya.Machine.Router
-open Freya.Router
-open Freya.Router.Lenses
+open Freya.Machines.Http
+open Freya.Machines.Http.Cors
+open Freya.Routers.Uri.Template
 
 open EvilPlanner.Core
 open EvilPlanner.Logic
@@ -46,7 +41,7 @@ let private findQuoteByDate database =
     freya {
         let getQuote = fun d -> async { return QuoteLogic.getQuote database d }
         let! date = date
-        let! dbQuote = (Freya.fromAsync getQuote) date
+        let! dbQuote = Freya.fromAsync (getQuote date)
         return dbQuote |> Option.map Quote
     } |> Freya.memo
 
@@ -71,7 +66,7 @@ let private quoteByDate database =
         handleOk (handleQuoteFound database)
     } |> FreyaMachine.toPipeline
 
-let router(database : Storage.Database) : FreyaPipeline =
+let router(database : Storage.Database) : UriTemplateRouter =
      freyaRouter {
-        resource (UriTemplate.Parse "/quote/{date}") (quoteByDate database)
-     } |> FreyaRouter.toPipeline
+        resource "/quote/{date}" (quoteByDate database)
+     }
