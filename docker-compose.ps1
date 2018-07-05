@@ -8,9 +8,6 @@ $ErrorActionPreference = 'Stop'
 
 Push-Location $PSScriptRoot
 try {
-    Remove-Item -Force -Recurse out -ErrorAction Ignore
-    Copy-Item -Recurse ../../ForneverMind/out
-
     $env:fornevermind_web_port = $HttpPort
     Write-Output "fornevermind_web_port = $HttpPort"
 

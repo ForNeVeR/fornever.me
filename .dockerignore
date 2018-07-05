@@ -1,0 +1,7 @@
+/ForneverMind/wwwroot/app/
+/ForneverMind/server.js
+
+bin/
+node_modules/
+obj/
+out/

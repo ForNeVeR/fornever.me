@@ -12,6 +12,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		appveyor.yml = appveyor.yml
 		License.md = License.md
 		Readme.md = Readme.md
+		docker-compose.ps1 = docker-compose.ps1
+		docker-compose.yml = docker-compose.yml
+		Dockerfile = Dockerfile
+		.dockerignore = .dockerignore
 	EndProjectSection
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ForneverMind.Tests", "ForneverMind.Tests\ForneverMind.Tests.fsproj", "{F66CD922-9216-401E-96DE-36263DF07726}"
@@ -23,6 +27,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{D993
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForneverMind.Frontend", "ForneverMind.Frontend\ForneverMind.Frontend.csproj", "{D96D3D8B-B311-49B1-8EB0-F1AA9F7F6F31}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deploy", "deploy", "{B96D0650-FCC6-456C-AE60-3BA955623C4F}"
+ProjectSection(SolutionItems) = preProject
+	deploy\appsettings.json = deploy\appsettings.json
+EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,5 +57,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D993AAA4-2B0E-4390-B6AB-61DD78732E56} = {89A0A63A-0C34-48DE-89AB-8FA26292A190}
+		{B96D0650-FCC6-456C-AE60-3BA955623C4F} = {89A0A63A-0C34-48DE-89AB-8FA26292A190}
 	EndGlobalSection
 EndGlobal
