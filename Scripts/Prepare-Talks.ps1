@@ -15,15 +15,7 @@ function log($text, $header) {
 function exec($command) {
     log "$command $args" 'Prepare-Talks.exec'
     & $command $args
-    if (!$?) {
-        throw "[build error] $command $args = $LASTEXITCODE"
-    }
-}
-
-function execIgnoreStdErr($command) {
-    log "$command $args" 'Prepare-Talks.execIgnoreStdErr'
-    cmd /c "$command $args 2>&1"
-    if (!$?) {
+    if ($LASTEXITCODE -ne 0) {
         throw "[build error] $command $args = $LASTEXITCODE"
     }
 }
@@ -44,7 +36,7 @@ function npmInstall($name) {
     Push-Location $output
     try {
         log "Installing $name"
-        execIgnoreStdErr npm install
+        exec npm install
     } finally {
         Pop-Location
     }
