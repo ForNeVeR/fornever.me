@@ -16,6 +16,7 @@
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="CommonTests.fs" />
     <Compile Include="MarkdownTests.fs" />
+    <Compile Include="Program.fs" />
     <Content Include="..\ForneverMind\server.js" CopyToOutputDirectory="Always" />
   </ItemGroup>
 </Project>

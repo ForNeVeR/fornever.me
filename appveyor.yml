@@ -5,4 +5,4 @@ install:
 build_script:
     - dotnet build
 test_script:
-    - cd ForneverMind.Tests && dotnet xunit
+    - cd ForneverMind.Tests && dotnet test
