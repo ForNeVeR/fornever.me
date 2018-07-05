@@ -35,7 +35,7 @@ script.
 
 ### Backend
 
-To compile the backend, you'll need a [.NET Core 2.0][dotnet-core] installation.
+To compile the backend, you'll need a [.NET Core 2.1][dotnet-core] installation.
 
 Here's a sample build script:
 
@@ -58,18 +58,12 @@ Publish
 To prepare the artifact for publishing, run the following:
 
 ```console
-$ dotnet publish --configuration Release --output out
+$ dotnet publish ./ForneverMind --configuration Release --output out
 ```
 
 The site is published as a Docker instance, see [Dockerfile][dockerfile].
-There's a [convenience script][compose.ps1] to publish the site via
-docker-compose. Sample publishing script:
-
-```console
-$ dotnet build --configuration Release ForneverMind.Frontend # see issue #57 about that
-$ dotnet publish --configuration Release --output out
-$ scripts/docker/compose.ps1
-```
+There's a [convenience script][docker-compose.ps1] to publish the site via
+`docker-compose`.
 
 Other components
 ----------------
@@ -78,8 +72,8 @@ Other components
    need to be installed separately.
 2. [fornever.me][] uses an easy-to-install [Disqus][disqus] comment system.
 
-[dockerfile]: Scripts/docker/Dockerfile
-[compose.ps1]: Scripts/docker/compose.ps1
+[dockerfile]: Dockerfile
+[docker-compose.ps1]: docker-compose.ps1
 
 [disqus]: https://disqus.com/
 [dotnet-core]: https://www.microsoft.com/net/core
