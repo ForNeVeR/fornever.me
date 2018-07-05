@@ -34,10 +34,12 @@ function yarnInstall($name, $flags) {
 function npmInstall($name) {
     $output = "$RepoPath/$name"
     Push-Location $output
+    $ErrorActionPreference = 'Continue'
     try {
         log "Installing $name"
         exec npm install
     } finally {
+        $ErrorActionPreference = 'Stop'
         Pop-Location
     }
 }
