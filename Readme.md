@@ -24,11 +24,21 @@ settings.
 You'll probably want to change `databasePath` parameter and point it to a
 preferred location for the database.
 
-Build and Deploy
-----------------
+Build
+-----
 
 You may compile the code using .NET Core SDK:
 
 ```console
 $ dotnet build -c Release
+```
+
+Deployment
+----------
+
+To deploy the project, check the `docker-compose.yml` and run the following
+script:
+
+```
+$ pwsh ./docker-compose.ps1
 ```

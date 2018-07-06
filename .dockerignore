@@ -1,11 +1,11 @@
 /.idea/
 /.vs/
 /EvilPlanner.Backend/wwwroot/
+/EvilPlanner.Backend/appsettings.json
 /EvilPlanner.Frontend/node_modules/
 
 App_Data/
 bin/
+node_modules/
 obj/
 out/
-
-*.user
