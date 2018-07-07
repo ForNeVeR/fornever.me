@@ -1,5 +1,6 @@
 /.idea/
 /.vs/
+/deploy-app-data/
 /EvilPlanner.Backend/wwwroot/
 /EvilPlanner.Backend/appsettings.json
 /EvilPlanner.Frontend/node_modules/
