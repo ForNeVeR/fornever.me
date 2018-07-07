@@ -1,5 +1,5 @@
-FROM microsoft/dotnet:2.1-sdk AS build-env
-RUN apt-get update && apt-get install -y nodejs-legacy
+FROM microsoft/dotnet:2.1.301-sdk-bionic AS build-env
+RUN apt-get update && apt-get install -y nodejs
 
 WORKDIR /app
 
@@ -14,7 +14,7 @@ RUN dotnet restore
 COPY . ./
 RUN dotnet publish ./EvilPlanner.Backend -c Release -o out
 
-FROM microsoft/dotnet:2.1-aspnetcore-runtime
+FROM microsoft/dotnet:2.1.1-aspnetcore-runtime-bionic
 
 WORKDIR /app
 
