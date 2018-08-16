@@ -7,7 +7,7 @@ problem: how to integrate an old C++/CLI NuGet package ([built in
 2012][activiz.net]) that's compatible only with full .NET Framework with the
 project built using .NET Core SDK. While solving the issue I encountered some
 interesting historical and engineering facts about MSBuild and NuGet, and
-filanny I've solved the problem.
+finally I've solved the problem.
 
 The package in question includes multiple native DLLs. That means that my
 project couldn't have any references to these DLLs, but I need these files in my
