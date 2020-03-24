@@ -20,7 +20,7 @@ This package works correctly with "old" .NET SDK, because for old SDK, MSBuild
 was copying everything from the `lib/net20` directory into the output directory.
 For new SDK (and actually for old SDK, too) package authors should've used
 [`contentFiles`][contentfiles], although, obviously, it's unlikely they will fix
-their C++/CLI package to be compoatible with _.NET Core_ SDK: it's not in fact
+their C++/CLI package to be compatible with _.NET Core_ SDK: it's not in fact
 compatible with .NET Core at all, so why bother?
 
 Fortunately, MSBuild is flexible enough to fix the issue from our side by
