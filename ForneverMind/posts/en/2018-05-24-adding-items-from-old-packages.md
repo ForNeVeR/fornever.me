@@ -39,7 +39,7 @@ The following code should be included into the `<Project>` element in your
     <ActivizNetExclude>$(ActivizNetPackagePath)\lib\net20\msvc?90.dll</ActivizNetExclude>
 </PropertyGroup>
 <ItemGroup>
-<PackageReference Include="$(ActivizNetPackage)" Version="$(ActivizNetVersion)"/>
+    <PackageReference Include="$(ActivizNetPackage)" Version="$(ActivizNetVersion)"/>
     <Content CopyToOutputDirectory="Always" Include="$(ActivizNetContents)">
         <Visible>false</Visible>
     </Content>

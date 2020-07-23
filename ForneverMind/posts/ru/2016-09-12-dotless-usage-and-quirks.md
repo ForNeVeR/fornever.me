@@ -137,9 +137,9 @@ Common Language Infrastructure (CLI)][ecma-335] — которая, к счас�
 не совместимый с моделью CIL (который, хоть и выполняется на Full CLR, но легко
 может отвалиться на .NET Core или Mono — такие случаи уже бывали).
 
-[comment]: posts/2015-11-08-using-dotless-api_ru.html#comment-2887368608
+[comment]: posts/2015-11-08-using-dotless-api.html#comment-2887368608
 [dotless-console]: https://github.com/ForNeVeR/Dotless.Console/blob/2c5af803056faa991ce16a1c9655eccfc73ec258/src/Dotless.Console/Program.cs#L20-L27
 [dotless-source]: https://github.com/dotless/dotless
 [ecma-335]: http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-335.pdf
 [issue-179]: https://github.com/dotless/dotless/issues/179
-[post-dotless]: posts/2015-11-08-using-dotless-api_ru.html
+[post-dotless]: posts/2015-11-08-using-dotless-api.html
