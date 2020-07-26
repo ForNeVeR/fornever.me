@@ -1,6 +1,6 @@
 FROM microsoft/powershell:6.0.2-ubuntu-16.04 AS talks-env
 RUN apt-get update && apt-get install -y nodejs-legacy npm
-RUN npm install -g yarn
+RUN npm install -g yarn@1.8.0
 
 WORKDIR /talks
 
