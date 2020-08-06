@@ -42,7 +42,7 @@ NuGet-пакетами, и найти решение этих проблем в 
     <ActivizNetExclude>$(ActivizNetPackagePath)\lib\net20\msvc?90.dll</ActivizNetExclude>
 </PropertyGroup>
 <ItemGroup>
-<PackageReference Include="$(ActivizNetPackage)" Version="$(ActivizNetVersion)"/>
+    <PackageReference Include="$(ActivizNetPackage)" Version="$(ActivizNetVersion)"/>
     <Content CopyToOutputDirectory="Always" Include="$(ActivizNetContents)">
         <Visible>false</Visible>
     </Content>
