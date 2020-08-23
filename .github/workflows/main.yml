@@ -1,0 +1,52 @@
+name: Build and Test
+on: [push, pull_request]
+
+jobs:
+    test:
+        runs-on: ${{ matrix.image }}
+        strategy:
+            matrix:
+                image: [macos-10.15, ubuntu-18.04, windows-2019]
+        env:
+            DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+            DOTNET_CLI_TELEMETRY_OPTOUT: 1
+            NUGET_PACKAGES: ${{ github.workspace }}/.github/nuget-packages
+            NPM_CACHE: ${{ github.workspace }}/.github/npm-cache
+        steps:
+            - uses: actions/checkout@v2
+              with:
+                  submodules: recursive
+
+            - name: NPM Cache
+              uses: actions/cache@v1.1.0
+              with:
+                  path: ${{ env.NPM_CACHE }}
+                  key: ${{ runner.os }}.npm.${{ hashFiles('**/package-lock.json') }}+${{ hashFiles('**/yarn.lock') }}
+            - name: NPM Cache Setup
+              run: npm config set cache ${{ env.NPM_CACHE }}
+
+            - name: Install Node.js
+              uses: actions/setup-node@v1
+              with:
+                  node-version: '12.x'
+            - name: Install Yarn
+              run: npm install -g yarn@1.8.0
+            - name: Prepare Talks
+              shell: pwsh
+              run: Scripts/Prepare-Talks.ps1 yarn
+
+            - name: Setup .NET Core SDK
+              uses: actions/setup-dotnet@v1.4.0
+              with:
+                  dotnet-version: '3.1.201'
+            - name: NuGet Cache
+              uses: actions/cache@v1.1.0
+              with:
+                  path: ${{ env.NUGET_PACKAGES }}
+                  key: ${{ runner.os }}.nuget.${{ hashFiles('**/*.fsproj') }}
+            - name: Build
+              run: dotnet build --configuration Release
+            - name: Test
+              run: dotnet test --configuration Release
+            - name: Publish
+              run: dotnet publish --configuration Release
