@@ -1,4 +1,4 @@
-fornever.me: Engineer, Programmer, Gentleman [![Status Ventis](https://img.shields.io/badge/status-ventis-yellow.svg)](https://github.com/ForNeVeR/andivionian-status-classifier)
+fornever.me: Engineer, Programmer, Gentleman [![Status Aquana][status-aquana]][andivionian-status-classifier]
 ============================================
 
 This is the [fornever.me][] site source code. It uses ForneverMind — a simple
@@ -83,9 +83,11 @@ Documentation
 [docker-compose.ps1]: docker-compose.ps1
 [license]: LICENSE.md
 
+[andivionian-status-classifier]: https://github.com/ForNeVeR/andivionian-status-classifier#status-aquana-
 [disqus]: https://disqus.com/
 [dotnet-core]: https://www.microsoft.com/net/core
 [evil-planner]: https://github.com/ForNeVeR/EvilPlanner
 [fornever.me]: https://fornever.me/
 [node-js]: https://nodejs.org/
+[status-aquana]: https://img.shields.io/badge/status-aquana-yellowgreen.svg
 [yarn]: https://yarnpkg.com/
