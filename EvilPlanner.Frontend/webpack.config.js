@@ -7,7 +7,7 @@ module.exports = {
     entry: { 'app': './app' },
     module: {
         rules: [
-            { test: /\.html$/, loader: 'file-loader?name=[name].[ext]' },
+            { test: /\.html$/, loader: 'file-loader?name=[path][name].[ext]' },
             { test: /\.css$/, loader: 'file-loader?name=[name].[ext]' },
             { test: /\.ts(x?)$/, loader: 'ts-loader' }
         ]
