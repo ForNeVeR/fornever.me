@@ -24,7 +24,7 @@ class QuotationBlock extends React.Component<{}, QuotationBlockState>{
     constructor(props) {
         super(props);
         this.state = {
-            text: 'Fetching quote...',
+            text: config.localization.fetchingQuote,
             source: '',
             sourceUrl: '#'
         };
@@ -32,7 +32,7 @@ class QuotationBlock extends React.Component<{}, QuotationBlockState>{
 
     render() {
         return <div>
-            <h1>Quote of the Day</h1>
+            <h1>{config.localization.quoteOfTheDay}</h1>
 
             <blockquote>{this.state.text}</blockquote>
             <a className="source-link" href={this.state.sourceUrl}>{this.state.source}</a>
