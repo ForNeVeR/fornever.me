@@ -15,5 +15,8 @@ function getLocalization(language: Language) {
 export = {
     // Converts a link like https://fornever.me/plans/en/index.html to https://fornever.me/plans
     api: window.location.pathname.split('/').slice(0, -2).join('/'),
-    localization: getLocalization(window.location.pathname.indexOf('/ru/') != -1 ? 'ru' : 'en')
+    language: window.location.pathname.indexOf('/ru/') != -1 ? 'ru' : 'en',
+    get localization() {
+        return getLocalization(this.language)
+    }
 };

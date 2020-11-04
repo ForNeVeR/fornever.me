@@ -31,6 +31,19 @@ div#header #navigation a, div#logo a {
 
 div#logo a { float: left }
 
+.header-group {
+    display: flex;
+}
+.header-group > .languages {
+    flex-grow: 0;
+    margin-top: 0.35em;
+    white-space: nowrap;
+}
+.header-group > .header {
+    flex-grow: 1;
+    margin: 0;
+}
+
 footer {
     border-top: 2px solid #000;
     color: #555;

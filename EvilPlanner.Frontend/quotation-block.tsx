@@ -31,8 +31,16 @@ class QuotationBlock extends React.Component<{}, QuotationBlockState>{
     }
 
     render() {
+        const otherLanguage = config.language == 'en' ? 'ru' : 'en';
+        const otherLanguageDisplayName = config.language == 'en' ? 'Rus' : 'Eng';
+        const otherLanguageLink = `../${otherLanguage}/index.html`;
         return <div>
-            <h1>{config.localization.quoteOfTheDay}</h1>
+            <div className="header-group">
+                <h1 className="header">{config.localization.quoteOfTheDay}</h1>
+                <div className="languages">
+                    <a href={otherLanguageLink} className="tag">{otherLanguageDisplayName}</a>
+                </div>
+            </div>
 
             <blockquote>{this.state.text}</blockquote>
             <a className="source-link" href={this.state.sourceUrl}>{this.state.source}</a>
