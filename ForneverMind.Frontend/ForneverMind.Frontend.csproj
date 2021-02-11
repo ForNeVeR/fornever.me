@@ -1,15 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+    <Sdk Name="Yarn.MSBuild" Version="1.22.0" />
     <PropertyGroup>
         <TargetFramework>netcoreapp2.1</TargetFramework>
-        <SuppressAutoYarn>true</SuppressAutoYarn>
         <IsPackable>false</IsPackable>
+        <YarnBuildCommand Condition="'$(Configuration)' == 'Debug'">run debug</YarnBuildCommand>
+        <YarnBuildCommand Condition="'$(Configuration)' == 'Release'">run release</YarnBuildCommand>
     </PropertyGroup>
-    <ItemGroup>
-        <PackageReference Include="Yarn.MSBuild" Version="0.21.3-beta"/>
-    </ItemGroup>
-    <Target Name="Yarn" AfterTargets="Build">
-        <Yarn/>
-        <Yarn Command="run debug" Condition="'$(Configuration)' == 'Debug'"/>
-        <Yarn Command="run release" Condition="'$(Configuration)' == 'Release'"/>
-    </Target>
 </Project>
