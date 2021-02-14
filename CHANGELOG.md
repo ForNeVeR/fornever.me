@@ -51,7 +51,8 @@ No notable changes.
 
 ## [2.1.0] - 2017-05-29
 ### Changed
-- Source highlighting engine now uses only server-side JavaScript (#58)
+- Source highlighting engine now uses only server-side JavaScript
+  ([#58](https://github.com/ForNeVeR/fornever.me/issues/58))
 
 ## [2.0.3] - 2017-05-15
 No notable changes.
@@ -92,7 +93,8 @@ No notable changes.
 
 ## [1.5.1] - 2016-12-03
 ### Added
-- `HEAD` HTTP method support (#37)
+- `HEAD` HTTP method support
+  ([#37](https://github.com/ForNeVeR/fornever.me/issues/37))
 
 ## [1.5.0] - 2016-11-21
 ### Added
