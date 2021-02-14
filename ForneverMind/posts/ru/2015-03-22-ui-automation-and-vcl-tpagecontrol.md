@@ -56,7 +56,7 @@ public static AutomationElement GetPageControlTab(AutomationElement pageControl,
 {
     var handle = (IntPtr)pageControl.Current.NativeWindowHandle;
     var results = new List<IntPtr>();
-    NativeHelper.EnumWindowsProc callback = (hwnd, lparam) =>
+    NativeHelper.EnumChildWindows(handle, (hwnd, lparam) =>
     {
         var className = NativeHelper.GetWindowClassName(hwnd);
         var tabName = NativeHelper.GetWindowText(hwnd);
@@ -66,10 +66,7 @@ public static AutomationElement GetPageControlTab(AutomationElement pageControl,
         }
 
         return false;
-    };
-
-    NativeHelper.EnumChildWindows(handle, callback, IntPtr.Zero);
-    GC.KeepAlive(callback);
+    }, IntPtr.Zero);
 
     var tabHandle = results.Single();
     return AutomationElement.FromHandle(tabHandle);
