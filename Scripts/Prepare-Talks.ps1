@@ -14,7 +14,7 @@ function log($text, $header) {
 
 function exec($command) {
     log "$command $args" 'Prepare-Talks.exec'
-    & $command $args
+    & $command @args
     if ($LASTEXITCODE -ne 0) {
         throw "[build error] $command $args = $LASTEXITCODE"
     }
