@@ -1,13 +1,15 @@
 ﻿module ForneverMind.Tests.CommonTests
 
+open System.IO
+
 open Xunit
 
 open ForneverMind
 
 [<Fact>]
 let ``Path checks are passed``() =
-    Assert.True(Common.pathIsInsideDirectory "aaa" "aaa\\bbb\\ccc")
-    Assert.False(Common.pathIsInsideDirectory "aaa" "aaa\\..\\bbb")
+    Assert.True(Common.pathIsInsideDirectory "aaa" (Path.Combine("aaa", "bbb", "ccc")))
+    Assert.False(Common.pathIsInsideDirectory "aaa" (Path.Combine("aaa", "..", "bbb")))
 
 [<Fact>]
 let ``Default language is English``() =
