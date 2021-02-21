@@ -5,12 +5,12 @@ on:
       - '*'
 
 jobs:
-  push:
+  docker-push:
     runs-on: 'ubuntu-20.04'
     steps:
       - uses: actions/checkout@v2
 
-      - name: Build and Push Docker Images
+      - name: Build and push Docker image
         uses: docker/build-push-action@v1
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
