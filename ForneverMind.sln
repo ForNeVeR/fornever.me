@@ -11,8 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 		LICENSE.md = LICENSE.md
 		README.md = README.md
-		docker-compose.ps1 = docker-compose.ps1
-		docker-compose.yml = docker-compose.yml
 		Dockerfile = Dockerfile
 		.dockerignore = .dockerignore
 		CHANGELOG.md = CHANGELOG.md
@@ -32,6 +30,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{CA44E9BC-EE9F-464A-857E-34F62E2C5D3A}"
 ProjectSection(SolutionItems) = preProject
 	.github\workflows\main.yml = .github\workflows\main.yml
+	.github\workflows\release.yml = .github\workflows\release.yml
 EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deploy", "deploy", "{6DE943A1-8E62-46E0-98B1-5B3FE332374A}"

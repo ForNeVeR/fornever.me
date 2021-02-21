@@ -55,15 +55,55 @@ $ dotnet test
 Publish
 -------
 
-To prepare the artifact for publishing, run the following:
+Prepare the production-ready distribution in the `publish` directory:
 
 ```console
-$ dotnet publish ./ForneverMind --configuration Release --output out
+$ dotnet publish --configuration Release --output publish ./ForneverMind
 ```
 
-The site is published as a Docker instance, see [Dockerfile][dockerfile].
-There's a [convenience script][docker-compose.ps1] to publish the site via
-`docker-compose`.
+This application uses Docker for deployment. To create a Docker image, use the
+following command:
+
+```console
+$ docker build -t revenrof/fornever.me:$FORNEVER_ME_VERSION -t revenrof/fornever.me:latest .
+```
+
+(where `$FORNEVER_ME_VERSION` is the version for the image to use)
+
+Then push the image to the Docker Hub:
+
+```console
+$ docker login
+$ docker push revenrof/fornever.me:$FORNEVER_ME_VERSION
+$ docker push revenrof/fornever.me:latest
+```
+
+Deploy
+------
+
+To install the application from Docker, run the following command:
+
+```console
+$ docker run -d --restart unless-stopped -p:$PORT:80 --name $NAME revenrof/fornever.me:$VERSION
+```
+
+Where
+- `$PORT` is the port you want to expose the application on
+- `$NAME` is the container name
+- `$VERSION` is the version you want to deploy, or `latest` for the latest
+  available one
+
+For example, a production server may use the following settings (note this
+command uses the Bash syntax; adapt for your shell if necessary):
+
+```bash
+PORT=5001
+NAME=fornevermind
+VERSION=latest
+docker pull revenrof/fornever.me:$VERSION
+docker rm -f $NAME
+docker run -d --restart unless-stopped -p $PORT:80 --name $NAME revenrof/fornever.me:$VERSION
+```
 
 Other components
 ----------------
@@ -79,8 +119,6 @@ Documentation
 - [License][license]
 
 [сhangelog]: CHANGELOG.md
-[dockerfile]: Dockerfile
-[docker-compose.ps1]: docker-compose.ps1
 [license]: LICENSE.md
 
 [andivionian-status-classifier]: https://github.com/ForNeVeR/andivionian-status-classifier#status-aquana-
