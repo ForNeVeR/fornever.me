@@ -20,11 +20,19 @@ function exec($command) {
     }
 }
 
+function assertNotEmpty() {
+    $items = Get-ChildItem .
+    if (-not $items) {
+        throw "[assertion error] Location $PWD is empty"
+    }
+}
+
 function yarnInstall($name, $flags) {
     $output = "$RepoPath/$name"
     Push-Location $output
     try {
         log "Installing $name"
+        assertNotEmpty
         exec $yarn install $flags
     } finally {
         Pop-Location
@@ -37,6 +45,7 @@ function npmInstall($name) {
     $ErrorActionPreference = 'Continue'
     try {
         log "Installing $name"
+        assertNotEmpty
         exec npm install
     } finally {
         $ErrorActionPreference = 'Stop'
