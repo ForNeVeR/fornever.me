@@ -7,6 +7,6 @@
         <YarnBuildCommand Condition="'$(Configuration)' == 'Release'">run release</YarnBuildCommand>
     </PropertyGroup>
     <Target Name="YarnInstall" BeforeTargets="YarnBuild">
-        <Yarn Command="install" Condition="!Exists('node_modules/')" />
+        <Yarn Command="install --ignore-optional" Condition="!Exists('node_modules/')" />
     </Target>
 </Project>
