@@ -49,7 +49,7 @@ Test
 ----
 
 ```console
-$ cd ForneverMind.Tests && dotnet test
+$ dotnet test
 ```
 
 Publish
