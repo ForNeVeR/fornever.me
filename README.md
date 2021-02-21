@@ -23,7 +23,7 @@ Build
 
 ### Frontend
 
-To compile frontend part, you'll need a recent (6.9.1+) [Node.js][node-js]
+To compile frontend part, you'll need a recent (12.0+) [Node.js][node-js]
 installation. The bundled [Yarn][yarn] package manager will be automatically
 executed on build.
 
