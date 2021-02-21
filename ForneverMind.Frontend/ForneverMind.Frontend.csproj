@@ -6,4 +6,7 @@
         <YarnBuildCommand Condition="'$(Configuration)' == 'Debug'">run debug</YarnBuildCommand>
         <YarnBuildCommand Condition="'$(Configuration)' == 'Release'">run release</YarnBuildCommand>
     </PropertyGroup>
+    <Target Name="YarnInstall" BeforeTargets="YarnBuild">
+        <Yarn Command="install" Condition="!Exists('node_modules/')" />
+    </Target>
 </Project>
