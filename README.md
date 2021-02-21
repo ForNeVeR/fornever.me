@@ -118,17 +118,16 @@ Documentation
 - [Changelog][changelog]
 - [License][license]
 
-[сhangelog]: CHANGELOG.md
-[license]: LICENSE.md
-
 [andivionian-status-classifier]: https://github.com/ForNeVeR/andivionian-status-classifier#status-aquana-
+[сhangelog]: CHANGELOG.md
 [disqus]: https://disqus.com/
 [docker-hub]: https://hub.docker.com/r/revenrof/fornever.me
 [dotnet-core]: https://www.microsoft.com/net/core
 [evil-planner]: https://github.com/ForNeVeR/EvilPlanner
 [fornever.me]: https://fornever.me/
+[license]: LICENSE.md
 [node-js]: https://nodejs.org/
 [status-aquana]: https://img.shields.io/badge/status-aquana-yellowgreen.svg
 [yarn]: https://yarnpkg.com/
 
-[badle.docker]: https://img.shields.io/docker/v/revenrof/fornever.me?label=docker&sort=semver
+[badge.docker]: https://img.shields.io/docker/v/revenrof/fornever.me?label=docker&sort=semver
