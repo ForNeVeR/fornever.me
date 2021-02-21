@@ -1,4 +1,4 @@
-name: Build and Test
+name: Main
 on:
     push:
         branches:
@@ -25,12 +25,12 @@ jobs:
               with:
                   submodules: recursive
 
-            - name: NPM Cache
+            - name: NPM cache
               uses: actions/cache@v1.1.0
               with:
                   path: ${{ env.NPM_CACHE }}
                   key: ${{ runner.os }}.npm.${{ hashFiles('**/package-lock.json') }}+${{ hashFiles('**/yarn.lock') }}
-            - name: NPM Cache Setup
+            - name: NPM cache setup
               run: npm config set cache ${{ env.NPM_CACHE }}
 
             - name: Install Node.js
@@ -39,15 +39,15 @@ jobs:
                   node-version: '12.x'
             - name: Install Yarn
               run: npm install -g yarn@1.8.0
-            - name: Prepare Talks
+            - name: Prepare talks
               shell: pwsh
               run: Scripts/Prepare-Talks.ps1 yarn
 
-            - name: Setup .NET Core SDK
+            - name: Set up .NET Core SDK
               uses: actions/setup-dotnet@v1
               with:
                   dotnet-version: '2.1.x'
-            - name: NuGet Cache
+            - name: NuGet cache
               uses: actions/cache@v1.1.0
               with:
                   path: ${{ env.NUGET_PACKAGES }}
