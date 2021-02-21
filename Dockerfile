@@ -8,8 +8,8 @@ COPY ./ForneverMind/wwwroot/talks ./ForneverMind/wwwroot/talks/
 COPY ./Scripts ./Scripts/
 RUN pwsh ./Scripts/Prepare-Talks.ps1
 
-FROM microsoft/dotnet:2.1-sdk AS build-env
-RUN apt-get update && apt-get install -y nodejs-legacy
+FROM mcr.microsoft.com/dotnet/sdk:2.1-bionic AS build-env
+RUN apt-get update && apt-get install -y nodejs
 
 WORKDIR /app
 
