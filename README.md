@@ -119,7 +119,7 @@ Documentation
 - [License][license]
 
 [andivionian-status-classifier]: https://github.com/ForNeVeR/andivionian-status-classifier#status-aquana-
-[сhangelog]: CHANGELOG.md
+[changelog]: CHANGELOG.md
 [disqus]: https://disqus.com/
 [docker-hub]: https://hub.docker.com/r/revenrof/fornever.me
 [dotnet-core]: https://www.microsoft.com/net/core
