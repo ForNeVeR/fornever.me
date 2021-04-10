@@ -108,15 +108,15 @@ docker run -d --restart unless-stopped -p $PORT:80 --name $NAME revenrof/forneve
 Other components
 ----------------
 
-1. [EvilPlanner][evil-planner] meant to be an integral part of the site, but it
-   need to be installed separately.
+1. [EvilPlanner][evil-planner] meant to be an integral part of the site, but it needs to be installed separately.
 2. [fornever.me][] uses an easy-to-install [Disqus][disqus] comment system.
 
 Documentation
 -------------
 
 - [Changelog][changelog]
-- [License][license]
+- [Maintainership][maintainership]
+- [License (MIT)][license]
 
 [andivionian-status-classifier]: https://github.com/ForNeVeR/andivionian-status-classifier#status-aquana-
 [changelog]: CHANGELOG.md
@@ -126,6 +126,7 @@ Documentation
 [evil-planner]: https://github.com/ForNeVeR/EvilPlanner
 [fornever.me]: https://fornever.me/
 [license]: LICENSE.md
+[maintainership]: ./MAINTAINERSHIP.md
 [node-js]: https://nodejs.org/
 [status-aquana]: https://img.shields.io/badge/status-aquana-yellowgreen.svg
 [yarn]: https://yarnpkg.com/
