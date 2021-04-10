@@ -10,7 +10,9 @@
     <Compile Include="ConfigurationModule.fs" />
     <Compile Include="Common.fs" />
     <Compile Include="CodeHighlightModule.fs" />
-    <Compile Include="MarkdownModule.fs" />
+    <Compile Include="Markdown\MarkdownUtils.fs" />
+    <Compile Include="Markdown\MarkdownHtmlRenderer.fs" />
+    <Compile Include="Markdown\MarkdownModule.fs" />
     <Compile Include="TemplatingModule.fs" />
     <Compile Include="PostsModule.fs" />
     <Compile Include="PagesModule.fs" />
@@ -24,8 +26,8 @@
     <Content Include="wwwroot\talks\*\node_modules\**" CopyToPublishDirectory="Always" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CommonMark.NET" Version="0.15.1" />
     <PackageReference Include="Freya" Version="4.0.0-alpha-170404" />
+    <PackageReference Include="Markdig" Version="0.24.0" />
     <PackageReference Include="Microsoft.AspNetCore.NodeServices" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Owin" Version="2.1.0" />

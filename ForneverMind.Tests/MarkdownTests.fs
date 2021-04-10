@@ -22,29 +22,25 @@ let private normalizeLineEndings (s : string) = s.Replace(Environment.NewLine, "
 let private normalizeHtmlContent ({ HtmlContent = content } as item) =
     { item with HtmlContent = normalizeLineEndings content }
 
-let compareResult fileName (input : string) expected =
+let private compareResult fileName (input: string) expected =
     use reader = new StringReader (normalizeLineEndings input)
     let actual = markdown.ProcessReader(fileName, reader)
 
     Assert.Equal (normalizeHtmlContent expected, normalizeHtmlContent actual)
 
+let private defaultFileName = "/ru/posts/0001-01-01.html"
+
+let private compareResultHtml input output =
+    use reader = new StringReader (normalizeLineEndings input)
+    let actual = markdown.ProcessReader(defaultFileName, reader)
+    Assert.Equal(normalizeLineEndings output, normalizeLineEndings actual.HtmlContent)
+
 [<Fact>]
 let ``Empty document should be parsed`` () =
-    compareResult "ru/0001-01-01"
-        "
+    let input = "
 ---
 "
-        {
-            Meta =
-                {
-                    Url = "/ru/posts/0001-01-01.html"
-                    Title = ""
-                    Description = ""
-                    Date = DateTime.MinValue
-                    CommentUrl = ""
-                }
-            HtmlContent = ""
-        }
+    compareResultHtml input ""
 
 [<Fact>]
 let ``Simple metadata should be parsed`` () =
@@ -86,48 +82,26 @@ let ``Legacy comment id should be parsed`` () =
         }
 
 [<Fact>]
-let ``Code block should be rendered with microlight class`` () =
-    compareResult "ru/0001-01-01"
-        "
+let ``Code block should be rendered with hljs class``(): unit =
+    let input = "
 ---
     test
     code"
-        {
-            Meta =
-                {
-                    Url = "/ru/posts/0001-01-01.html"
-                    Title = ""
-                    Description = ""
-                    Date = DateTime.MinValue
-                    CommentUrl = ""
-                }
-            HtmlContent = "<pre><code class=\"hljs\"><span class=\"hljs-keyword\">test
+    compareResultHtml input "<pre><code class=\"hljs\"><span class=\"hljs-keyword\">test
 </span>code
 </code></pre>
 "
-        }
 
 [<Fact>]
 let ``Code language should be included as class`` () =
-    compareResult "ru/0001-01-01"
-        "
+    let input = "
 ---
 ```fsharp
 let x = x
 ```"
-        {
-            Meta =
-                {
-                    Url = "/ru/posts/0001-01-01.html"
-                    Title = ""
-                    Description = ""
-                    Date = DateTime.MinValue
-                    CommentUrl = ""
-                }
-            HtmlContent = "<pre><code class=\"hljs\"><span class=\"hljs-keyword\">let</span> x = x
+    compareResultHtml input "<pre><code class=\"hljs\"><span class=\"hljs-keyword\">let</span> x = x
 </code></pre>
 "
-        }
 
 [<Fact>]
 let ``Identifier is extracted from the metadata`` () =
@@ -150,3 +124,32 @@ content
                 }
             HtmlContent = "<p>content</p>" + Environment.NewLine
         }
+
+[<Fact>]
+let ``Table is properly processed``(): unit =
+    let input = "
+---
+| Header | Header |
+|--------|--------|
+| Body   | Body   |
+| Body   | Body   |
+"
+    compareResultHtml input "<table>
+<thead>
+<tr>
+<th>Header</th>
+<th>Header</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Body</td>
+<td>Body</td>
+</tr>
+<tr>
+<td>Body</td>
+<td>Body</td>
+</tr>
+</tbody>
+</table>
+"

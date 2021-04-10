@@ -10,6 +10,13 @@ due to content-only changes (this is one of the reasons a version may be listed
 here as having "no notable changes"); currently, no version increment is
 performed in such case.
 
+## [Unreleased]
+### Changed
+- Migrated to Markdig library for Markdown parsing
+
+### Added
+- Table support for Markdown posts
+
 ## [3.2.0] - 2021-02-12
 ### Changed
 - Minor site layout changes: links to localized versions are now less confusing
