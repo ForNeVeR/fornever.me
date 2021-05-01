@@ -10,7 +10,7 @@ due to content-only changes (this is one of the reasons a version may be listed
 here as having "no notable changes"); currently, no version increment is
 performed in such case.
 
-## [3.4.0]
+## [3.4.0] - 2021-05-01
 ### Changed
 - Node.js used in the container is updated to v8.10.0
 
