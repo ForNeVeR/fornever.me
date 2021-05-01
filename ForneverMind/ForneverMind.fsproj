@@ -2,7 +2,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <Version>3.3.0</Version>
+    <Version>3.4.0</Version>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="models/PostModel.fs" />

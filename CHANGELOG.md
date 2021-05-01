@@ -10,7 +10,7 @@ due to content-only changes (this is one of the reasons a version may be listed
 here as having "no notable changes"); currently, no version increment is
 performed in such case.
 
-## [Unreleased]
+## [3.4.0]
 ### Changed
 - Node.js used in the container is updated to v8.10.0
 
@@ -230,4 +230,5 @@ Initial version of the site, written in Python using Django framework.
 [3.1.0]: https://github.com/ForNeVeR/fornever.me/compare/3.0.1...3.1.0
 [3.2.0]: https://github.com/ForNeVeR/fornever.me/compare/3.1.0...v3.2.0
 [3.3.0]: https://github.com/ForNeVeR/fornever.me/compare/v3.2.0...v3.3.0
-[Unreleased]: https://github.com/ForNeVeR/fornever.me/compare/v3.3.0...HEAD
+[3.4.0]: https://github.com/ForNeVeR/fornever.me/compare/v3.3.0...v3.4.0
+[Unreleased]: https://github.com/ForNeVeR/fornever.me/compare/v3.4.0...HEAD
