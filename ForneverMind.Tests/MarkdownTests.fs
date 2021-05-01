@@ -10,6 +10,8 @@ open Xunit
 open ForneverMind
 open ForneverMind.Models
 
+#nowarn "0044" // TODO: Remove after dealing with NodeServices
+
 let markdown =
     let services = ServiceCollection()
     services.AddNodeServices(fun o -> o.ProjectPath <- Directory.GetCurrentDirectory())

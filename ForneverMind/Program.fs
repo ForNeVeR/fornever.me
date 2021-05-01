@@ -11,6 +11,8 @@ open Microsoft.Extensions.Logging
 
 open ForneverMind.KestrelInterop
 
+#nowarn "0044" // TODO: Remove after dealing with NodeServices
+
 let private fuseApplication (app : IApplicationBuilder) cfg env =
     let node = app.ApplicationServices.GetService<INodeServices>()
     let configuration = ConfigurationModule(env, cfg)
@@ -23,7 +25,7 @@ let private fuseApplication (app : IApplicationBuilder) cfg env =
     RoutesModule(pages, rss)
 
 let private createRouter (builder : IApplicationBuilder) =
-    let env = downcast builder.ApplicationServices.GetService typeof<IHostingEnvironment>
+    let env = downcast builder.ApplicationServices.GetService typeof<IWebHostEnvironment>
     let cfg =
         ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
@@ -53,7 +55,7 @@ let configuration =
       services = configureServices >> ignore }
 
 [<EntryPoint>]
-let main argv =
+let main _ =
     WebHost.create ()
     |> WebHost.configure configuration
     |> WebHost.buildAndRun

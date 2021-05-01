@@ -5,7 +5,7 @@ open System.IO
 open Microsoft.AspNetCore.Hosting
 open Microsoft.Extensions.Configuration
 
-type ConfigurationModule(app : IHostingEnvironment, config : IConfigurationRoot) =
+type ConfigurationModule(app: IWebHostEnvironment, config: IConfigurationRoot) =
     let root = app.ContentRootPath
 
     member __.BaseUrl = config.["baseUrl"]

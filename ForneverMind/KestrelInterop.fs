@@ -6,7 +6,6 @@ open System.IO
 open Freya.Core
 open Microsoft.AspNetCore.Builder
 open Microsoft.AspNetCore.Hosting
-open Microsoft.AspNetCore.Http
 open Microsoft.Extensions.DependencyInjection
 open Microsoft.Extensions.Logging
 
@@ -30,6 +29,7 @@ module WebHost =
         b.ConfigureServices(Action<_> services)
             .ConfigureLogging(Action<_> logging)
             .Configure(Action<_> application)
+            .ConfigureKestrel(fun opts -> opts.AllowSynchronousIO <- true)
     let build (b:IWebHostBuilder) = b.Build()
     let run (wh:IWebHost) = wh.Run()
     let buildAndRun : IWebHostBuilder -> unit = build >> run
