@@ -6,8 +6,6 @@ open System.Text
 open Freya.Core
 open Freya.Machines.Http
 open Freya.Optics.Http
-open Freya.Routers.Uri
-open Freya.Routers.Uri.Template
 open Freya.Types.Http
 open Freya.Types.Uri
 
@@ -169,7 +167,7 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
             movedPermanently true
             handleMovedPermanently (freya {
                 let url = sprintf "/%s/" Common.defaultLanguage
-                do! Freya.Lens.setPartial Response.Headers.Location_ (Location(UriReference.parse url))
+                do! Freya.Optic.set Response.Headers.location_ (Some(Location(UriReference.parse url)))
                 return Representation.empty
             })
         }
