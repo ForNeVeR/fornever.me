@@ -25,8 +25,8 @@ COPY ./ForneverMind.Tests ./ForneverMind.Tests/
 COPY --from=talks-env /talks/ForneverMind/wwwroot/talks/ ./ForneverMind/wwwroot/talks/
 RUN dotnet publish ./ForneverMind -c Release -o out
 
-FROM microsoft/dotnet:2.1-aspnetcore-runtime
-RUN apt-get update && apt-get install -y nodejs-legacy
+FROM mcr.microsoft.com/dotnet/aspnet:2.1-bionic
+RUN apt-get update && apt-get install -y nodejs
 
 WORKDIR /app
 

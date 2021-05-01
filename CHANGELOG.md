@@ -10,6 +10,10 @@ due to content-only changes (this is one of the reasons a version may be listed
 here as having "no notable changes"); currently, no version increment is
 performed in such case.
 
+## [Unreleased]
+### Changed
+- Node.js used in the container is updated to v8.10.0
+
 ## [3.3.0] - 2021-04-10
 ### Changed
 - Migrated to Markdig library for Markdown parsing
