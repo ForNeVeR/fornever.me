@@ -23,7 +23,7 @@ Build
 
 ### Frontend
 
-To compile frontend part, you'll need a recent (8.0+) [Node.js][node-js]
+To compile frontend part, you'll need a recent (16.0+) [Node.js][node-js]
 installation. The bundled [Yarn][yarn] package manager will be automatically
 executed on build.
 
@@ -31,11 +31,11 @@ executed on build.
 
 There's an additional talks archive included as a git submodule in this
 repository. To prepare tasks for build, use the `Scripts/Prepare-Talks.ps1`
-script.
+script. Talks require external [Yarn][yarn] installation of v1.22.0 or higher.
 
 ### Backend
 
-To compile the backend, you'll need a [.NET Core 2.1][dotnet-core] installation.
+To compile the backend, you'll need a [.NET 5 SDK][dotnet] installation.
 
 Here's a sample build script:
 
@@ -122,7 +122,7 @@ Documentation
 [changelog]: CHANGELOG.md
 [disqus]: https://disqus.com/
 [docker-hub]: https://hub.docker.com/r/revenrof/fornever.me
-[dotnet-core]: https://www.microsoft.com/net/core
+[dotnet]: https://dotnet.microsoft.com/
 [evil-planner]: https://github.com/ForNeVeR/EvilPlanner
 [fornever.me]: https://fornever.me/
 [license]: LICENSE.md

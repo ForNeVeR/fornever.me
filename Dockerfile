@@ -1,6 +1,14 @@
-FROM microsoft/powershell:6.0.2-ubuntu-16.04 AS talks-env
-RUN apt-get update && apt-get install -y nodejs-legacy npm
-RUN npm install -g yarn@1.8.0
+FROM mcr.microsoft.com/powershell:7.1.3-debian-10 AS talks-env
+
+# First, install curl to be able to install Node.js, and then install Node.js itself:
+RUN apt-get update \
+    && apt-get install -y curl \
+    && curl -fsSL https://deb.nodesource.com/setup_16.x | bash - \
+    && apt-get install -y \
+        nodejs \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN npm install -g yarn@1.22.0
 
 WORKDIR /talks
 
@@ -8,8 +16,13 @@ COPY ./ForneverMind/wwwroot/talks ./ForneverMind/wwwroot/talks/
 COPY ./Scripts ./Scripts/
 RUN pwsh ./Scripts/Prepare-Talks.ps1
 
-FROM mcr.microsoft.com/dotnet/sdk:2.1-bionic AS build-env
-RUN apt-get update && apt-get install -y nodejs
+FROM mcr.microsoft.com/dotnet/sdk:5.0.202 AS build-env
+
+# Install Node.js:
+RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - \
+    && apt-get install -y \
+        nodejs \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
@@ -23,14 +36,21 @@ COPY ./ForneverMind ./ForneverMind/
 COPY ./ForneverMind.Frontend ./ForneverMind.Frontend/
 COPY ./ForneverMind.Tests ./ForneverMind.Tests/
 COPY --from=talks-env /talks/ForneverMind/wwwroot/talks/ ./ForneverMind/wwwroot/talks/
-RUN dotnet publish ./ForneverMind -c Release -o out
+RUN dotnet publish ./ForneverMind -c Release -o /app/out
 
-FROM mcr.microsoft.com/dotnet/aspnet:2.1-bionic
-RUN apt-get update && apt-get install -y nodejs
+FROM mcr.microsoft.com/dotnet/aspnet:5.0.5
+
+# First, install curl to be able to install Node.js, and then install Node.js itself:
+RUN apt-get update \
+    && apt-get install -y curl \
+    && curl -fsSL https://deb.nodesource.com/setup_16.x | bash - \
+    && apt-get install -y \
+        nodejs \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
-COPY --from=build-env /app/ForneverMind/out .
+COPY --from=build-env /app/out .
 COPY ./deploy/appsettings.json ./
 
 ENTRYPOINT ["dotnet", "ForneverMind.dll"]
