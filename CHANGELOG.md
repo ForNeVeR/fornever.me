@@ -13,6 +13,7 @@ performed in such case.
 ## [3.5.0] - 2021-05-02
 ### Changed
 - Project updated to .NET 5
+- Project now has a runtime dependency on Node.js 16+
 
 ## [3.4.0] - 2021-05-01
 ### Changed
