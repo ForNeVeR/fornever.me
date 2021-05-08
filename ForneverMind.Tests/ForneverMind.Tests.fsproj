@@ -13,7 +13,6 @@
     <ProjectReference Include="..\ForneverMind\ForneverMind.fsproj" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInfo.fs" />
     <Compile Include="CommonTests.fs" />
     <Compile Include="MarkdownTests.fs" />
     <Compile Include="Program.fs" />
