@@ -28,7 +28,9 @@
     <Compile Include="Program.fs" />
     <Content Include="posts\**" CopyToPublishDirectory="Always" />
     <Content Include="server.js" CopyToPublishDirectory="Always" />
-    <!-- node_modules is ignored by default, so we need to fix that manually -->
+    <!-- node_modules are ignored by default, so we need to fix that manually -->
+    <!-- The first line is a hack; see https://github.com/dotnet/sdk/issues/17976 for details -->
+    <Content Remove="wwwroot\talks\*\node_modules\**" />
     <Content Include="wwwroot\talks\*\node_modules\**" CopyToPublishDirectory="Always" />
   </ItemGroup>
   <ItemGroup>
