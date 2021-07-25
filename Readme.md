@@ -1,4 +1,4 @@
-EvilPlanner [![Status Ventis](https://img.shields.io/badge/status-ventis-yellow.svg)](https://github.com/ForNeVeR/andivionian-status-classifier) [![Build status](https://ci.appveyor.com/api/projects/status/7h5slaytywuhshp6/branch/develop?svg=true)](https://ci.appveyor.com/project/ForNeVeR/evilplanner/branch/develop)
+EvilPlanner [![Status Ventis](https://img.shields.io/badge/status-ventis-yellow.svg)](https://github.com/ForNeVeR/andivionian-status-classifier)
 ===========
 
 EvilPlanner is a small lab application.
