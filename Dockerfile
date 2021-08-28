@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:2.1.301-sdk-bionic AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:2.1-bionic AS build-env
 RUN apt-get update && apt-get install -y nodejs
 
 WORKDIR /app
@@ -14,7 +14,7 @@ RUN dotnet restore
 COPY . ./
 RUN dotnet publish ./EvilPlanner.Backend -c Release -o out
 
-FROM microsoft/dotnet:2.1.1-aspnetcore-runtime-bionic
+FROM mcr.microsoft.com/dotnet/aspnet:2.1-bionic
 
 WORKDIR /app
 
