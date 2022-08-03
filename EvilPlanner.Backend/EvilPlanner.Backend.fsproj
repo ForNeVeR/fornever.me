@@ -12,7 +12,7 @@
   <ItemGroup>
     <PackageReference Include="Chiron" Version="6.2.1" />
     <PackageReference Include="Freya" Version="4.0.0-alpha-170404" />
-    <PackageReference Include="Microsoft.AspNetCore.Owin" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Owin" Version="3.1.8" />
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.1.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.0" />
