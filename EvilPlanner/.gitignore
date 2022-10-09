@@ -1,0 +1,12 @@
+/.idea/
+/.vs/
+/deploy-app-data/
+/EvilPlanner.Backend/wwwroot/
+/EvilPlanner.Frontend/node_modules/
+
+App_Data/
+bin/
+obj/
+out/
+
+*.user

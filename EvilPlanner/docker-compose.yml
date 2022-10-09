@@ -1,0 +1,9 @@
+version: '2'
+services:
+  web:
+    build: .
+    restart: always
+    ports:
+      - ${evilplanner_web_port}:80
+    volumes:
+      - ./deploy-app-data:/app/App_Data
