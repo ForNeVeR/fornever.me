@@ -3,8 +3,8 @@
   "version": "0.1.13",
   "description": "EvilPlanner Frontend",
   "scripts": {
-    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider webpack -d",
-    "deploy": "cross-env NODE_OPTIONS=--openssl-legacy-provider webpack -p"
+    "build": "webpack -d",
+    "deploy": "webpack -p"
   },
   "repository": {
     "type": "git",
@@ -22,7 +22,6 @@
   "devDependencies": {
     "@types/react": "^16.4.1",
     "@types/react-dom": "^16.0.6",
-    "cross-env": "^7.0.3",
     "file-loader": "^1.1.11",
     "react": "^16.4.1",
     "react-dom": "^16.4.2",

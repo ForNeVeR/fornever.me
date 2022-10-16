@@ -7,8 +7,15 @@ homemade blog engine mainly written in F# programming language.
 Dependencies
 ------------
 
-ForneverMind requires recent [Node.js][node-js] installation both for building
-and for running.
+ForneverMind requires recent [Node.js][node-js] 16 installation both for building and for running. It is recommended to use [nvm-windows][] on Windows:
+
+```console
+$ nvm install 16
+Installation complete. If you want to use this version, type
+
+nvm use 16.18.0
+# nvm use 16.18.0
+```
 
 Configuration
 -------------
@@ -23,9 +30,7 @@ Build
 
 ### Frontend
 
-To compile frontend part, you'll need a recent (16.0+) [Node.js][node-js]
-installation. The bundled [Yarn][yarn] package manager will be automatically
-executed on build.
+To compile frontend part, you'll need a [Node.js][node-js] 16 installation. The bundled [Yarn][yarn] package manager will be automatically executed on build.
 
 ### Talks
 
@@ -119,6 +124,7 @@ Documentation
 - [License (MIT)][license]
 
 [andivionian-status-classifier]: https://github.com/ForNeVeR/andivionian-status-classifier#status-aquana-
+[badge.docker]: https://img.shields.io/docker/v/revenrof/fornever.me?label=docker&sort=semver
 [changelog]: CHANGELOG.md
 [disqus]: https://disqus.com/
 [docker-hub]: https://hub.docker.com/r/revenrof/fornever.me
@@ -128,7 +134,6 @@ Documentation
 [license]: LICENSE.md
 [maintainership]: ./MAINTAINERSHIP.md
 [node-js]: https://nodejs.org/
+[nvm-windows]: https://github.com/coreybutler/nvm-windows
 [status-aquana]: https://img.shields.io/badge/status-aquana-yellowgreen.svg
 [yarn]: https://yarnpkg.com/
-
-[badge.docker]: https://img.shields.io/docker/v/revenrof/fornever.me?label=docker&sort=semver
