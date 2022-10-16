@@ -2,6 +2,7 @@
 /.vs/
 /ForneverMind/out/
 /ForneverMind/wwwroot/app/
+/ForneverMind/wwwroot/plans/
 /ForneverMind/server.js*
 
 App_Data/

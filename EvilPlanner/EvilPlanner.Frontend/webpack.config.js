@@ -1,6 +1,6 @@
 ﻿const path = require('path');
 
-const outputPath = path.join(__dirname, '../EvilPlanner.Backend/wwwroot');
+const outputPath = path.join(__dirname, '../../ForneverMind/wwwroot/plans');
 
 module.exports = {
     resolve: { extensions: ['.css', '.js', '.html', '.ts', '.tsx'] },
