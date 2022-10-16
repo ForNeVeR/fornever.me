@@ -30,6 +30,6 @@ type Database internal (connection : LiteDatabase) =
 
 let private mapper = FSharpBsonMapper()
 let openDatabase (config : Configuration) : Database =
-    let connectionString = sprintf "Filename=%s; Exclusive=true" config.databasePath
+    let connectionString = sprintf "Filename=%s; Exclusive=true; mode=Exclusive" config.databasePath
     let connection = new LiteDatabase(connectionString, mapper)
     new Database(connection)
