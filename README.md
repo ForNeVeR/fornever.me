@@ -41,7 +41,7 @@ script. Talks require external [Yarn][yarn] installation of v1.22.0 or higher.
 
 ### Backend
 
-To compile the backend, you'll need a [.NET 5 SDK][dotnet] installation.
+To compile the backend, you'll need a [.NET SDK][dotnet] 6 (or later) installation.
 
 Here's a sample build script:
 
