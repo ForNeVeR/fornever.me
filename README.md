@@ -24,6 +24,7 @@ Backend reads its settings from the standard `appsettings.json` file. The
 available settings are:
 
 - `baseUrl`: URL to listen when started
+- `databasePath`: path to the database file, use `~` as an alias to the application's binary directory
 
 Build
 -----

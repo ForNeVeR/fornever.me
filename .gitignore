@@ -4,6 +4,7 @@
 /ForneverMind/wwwroot/app/
 /ForneverMind/server.js*
 
+App_Data/
 bin/
 node_modules/
 obj/

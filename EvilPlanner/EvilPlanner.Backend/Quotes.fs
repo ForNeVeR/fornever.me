@@ -11,6 +11,7 @@ open Freya.Machines.Http
 open Freya.Routers.Uri.Template
 
 open EvilPlanner.Core
+open EvilPlanner.Core.Storage
 open EvilPlanner.Logic
 
 type Quote (q : Quotation) =
@@ -56,15 +57,10 @@ let private handleQuoteFound database _ =
         return Common.resource quote
     }
 
-let private quoteByDate database =
+let quoteByDate(database: Database): HttpMachine =
     freyaMachine {
         including Common.machine
         exists (checkQuoteByDateExists database)
         methods Common.get
         handleOk (handleQuoteFound database)
     }
-
-let router(database : Storage.Database) : UriTemplateRouter =
-     freyaRouter {
-        resource "/quote/{date}" (quoteByDate database)
-     }
