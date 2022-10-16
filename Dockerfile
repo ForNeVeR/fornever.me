@@ -29,6 +29,11 @@ WORKDIR /app
 COPY ./ForneverMind/ForneverMind.fsproj ./ForneverMind/
 COPY ./ForneverMind.Frontend/ForneverMind.Frontend.csproj ./ForneverMind.Frontend/
 COPY ./ForneverMind.Tests/ForneverMind.Tests.fsproj ./ForneverMind.Tests/
+COPY ./EvilPlanner/EvilPlanner.Backend/EvilPlanner.Backend.fsproj ./EvilPlanner/EvilPlanner.Backend/
+COPY ./EvilPlanner/EvilPlanner.Core/EvilPlanner.Core.fsproj ./EvilPlanner/EvilPlanner.Core/
+COPY ./EvilPlanner/EvilPlanner.Frontend/EvilPlanner.Frontend.csproj ./EvilPlanner/EvilPlanner.Frontend/
+COPY ./EvilPlanner/EvilPlanner.Logic/EvilPlanner.Logic.fsproj ./EvilPlanner/EvilPlanner.Logic/
+COPY ./EvilPlanner/EvilPlanner.Tests/EvilPlanner.Tests.fsproj ./EvilPlanner/EvilPlanner.Tests/
 COPY ./ForneverMind.sln ./.
 RUN dotnet restore
 
