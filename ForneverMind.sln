@@ -52,6 +52,11 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "EvilPlanner.Logic", "EvilPl
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "EvilPlanner.Tests", "EvilPlanner\EvilPlanner.Tests\EvilPlanner.Tests.fsproj", "{543D84AE-65E2-4E82-BCC3-6A47CC5F3B66}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{EEF302B2-6DEB-492A-ABCD-56E52ADF7B7C}"
+	ProjectSection(SolutionItems) = preProject
+		docs\CHANGELOG.EvilPlanner.md = docs\CHANGELOG.EvilPlanner.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
