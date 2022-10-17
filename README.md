@@ -4,10 +4,21 @@ fornever.me: Engineer, Programmer, Gentleman [![Status Aquana][status-aquana]][a
 This is the [fornever.me][] site source code. It uses ForneverMind — a simple
 homemade blog engine mainly written in F# programming language.
 
+Features
+--------
+
+- ASP.NET Core web engine.
+- Main pages layout in Razor.
+- Blog posts are written in Markdown.
+- Source code highlighting is provided by [highlight.js][] on the server side.
+- There's a Plans page that provides a daily quote from [the Evil Overlord List][evil-overlord-list].
+  - A quote for each day is stored in a LiteDB database.
+- [Disqus][disqus] comment system.
+
 Dependencies
 ------------
 
-ForneverMind requires recent [Node.js][node-js] 16 installation both for building and for running. It is recommended to use [nvm-windows][] on Windows:
+ForneverMind requires a [Node.js][node-js] 16 installation both for building and for running. It is recommended to use [nvm-windows][] on Windows:
 
 ```console
 $ nvm install 16
@@ -123,12 +134,6 @@ docker run -d \
     revenrof/fornever.me:$VERSION
 ```
 
-Other components
-----------------
-
-1. [EvilPlanner][evil-planner] meant to be an integral part of the site, but it needs to be installed separately.
-2. [fornever.me][] uses an easy-to-install [Disqus][disqus] comment system.
-
 Documentation
 -------------
 
@@ -142,8 +147,10 @@ Documentation
 [disqus]: https://disqus.com/
 [docker-hub]: https://hub.docker.com/r/revenrof/fornever.me
 [dotnet]: https://dotnet.microsoft.com/
+[evil-overlord-list]: https://legendspbem.angelfire.com/eviloverlordlist.html
 [evil-planner]: https://github.com/ForNeVeR/EvilPlanner
 [fornever.me]: https://fornever.me/
+[highlight.js]: https://highlightjs.org/
 [license]: LICENSE.md
 [maintainership]: ./MAINTAINERSHIP.md
 [node-js]: https://nodejs.org/
