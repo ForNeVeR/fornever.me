@@ -90,7 +90,12 @@ Deploy
 To install the application from Docker, run the following command:
 
 ```console
-$ docker run -d --restart unless-stopped -p:$PORT:80 --name $NAME revenrof/fornever.me:$VERSION
+$ docker run -d \
+    --restart unless-stopped \
+    -p:$PORT:80 \
+    --name $NAME \
+    -v $DATA:/data \
+    revenrof/fornever.me:$VERSION
 ```
 
 Where
@@ -98,6 +103,7 @@ Where
 - `$NAME` is the container name
 - `$VERSION` is the version you want to deploy, or `latest` for the latest
   available one
+- `$DATA` is the database directory
 
 For example, a production server may use the following settings (note this
 command uses the Bash syntax; adapt for your shell if necessary):
@@ -106,9 +112,15 @@ command uses the Bash syntax; adapt for your shell if necessary):
 PORT=5001
 NAME=fornevermind
 VERSION=latest
+DATA=/opt/fornever/fornever.me/data
 docker pull revenrof/fornever.me:$VERSION
 docker rm -f $NAME
-docker run -d --restart unless-stopped -p $PORT:80 --name $NAME revenrof/fornever.me:$VERSION
+docker run -d \
+    --restart unless-stopped \
+    -p $PORT:80 \
+    --name $NAME \
+    -v $DATA:/data \
+    revenrof/fornever.me:$VERSION
 ```
 
 Other components
