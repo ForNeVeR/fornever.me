@@ -4,7 +4,6 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInfo.fs" />
     <Compile Include="QuoteLogic.fs" />
   </ItemGroup>
   <ItemGroup>

@@ -4,7 +4,6 @@
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInfo.fs" />
     <Compile Include="ConcurrencyTest.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
