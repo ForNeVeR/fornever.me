@@ -29,7 +29,7 @@ let private isoDateFormat = "yyyy-MM-dd"
 
 let private date =
     freya {
-        let! value = Freya.getLensPartial <| Route.Atom_ "date"
+        let! value = Freya.Optic.get <| Route.atom_ "date"
         return DateTime.ParseExact(
             Option.get value,
             isoDateFormat,

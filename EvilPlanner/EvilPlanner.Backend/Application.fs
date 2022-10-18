@@ -4,11 +4,11 @@ open System
 open System.IO
 open System.Reflection
 
-open EvilPlanner.Core.Storage
 open Microsoft.AspNetCore.Builder
-open Microsoft.AspNetCore.Hosting
+open Microsoft.Extensions.Hosting
 
 open EvilPlanner.Core
+open EvilPlanner.Core.Storage
 
 let getConfig(databasePath: string): Configuration =
     let basePath = lazy AssemblyUtils.assemblyDirectory(Assembly.GetExecutingAssembly())
@@ -20,7 +20,7 @@ let getConfig(databasePath: string): Configuration =
 
 let initDatabase(config: Configuration) (app: IApplicationBuilder): Database =
     Migrations.migrateDatabase config
-    let lifetime = app.ApplicationServices.GetService(typeof<IApplicationLifetime>) :?> IApplicationLifetime
+    let lifetime = app.ApplicationServices.GetService(typeof<IHostApplicationLifetime>) :?> IHostApplicationLifetime
     let database = openDatabase config
     let atExit() = (database :> IDisposable).Dispose()
     ignore <| lifetime.ApplicationStopped.Register(Action atExit)
