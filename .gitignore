@@ -2,8 +2,10 @@
 /.vs/
 /ForneverMind/out/
 /ForneverMind/wwwroot/app/
+/ForneverMind/wwwroot/plans/
 /ForneverMind/server.js*
 
+App_Data/
 bin/
 node_modules/
 obj/

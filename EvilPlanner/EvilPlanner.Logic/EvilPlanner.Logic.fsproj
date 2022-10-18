@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="QuoteLogic.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EvilPlanner.Core\EvilPlanner.Core.fsproj" />
+  </ItemGroup>
+</Project>

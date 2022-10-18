@@ -1,0 +1,14 @@
+﻿<Project>
+  <Sdk Name="Microsoft.NET.Sdk.Web" />
+  <Sdk Name="Yarn.MSBuild" Version="1.5.1" />
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <OutputType>Library</OutputType>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+  </PropertyGroup>
+  <Target Name="Yarn" AfterTargets="Build" DependsOnTargets="Build">
+    <Yarn />
+    <Yarn Command="run build" Condition="'$(Configuration)' == 'Debug'" />
+    <Yarn Command="run deploy" Condition="'$(Configuration)' == 'Release'" />
+  </Target>
+</Project>

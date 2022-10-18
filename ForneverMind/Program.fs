@@ -14,15 +14,17 @@ open ForneverMind.KestrelInterop
 #nowarn "0044" // TODO: Remove after dealing with NodeServices
 
 let private fuseApplication (app : IApplicationBuilder) cfg env =
-    let node = app.ApplicationServices.GetService<INodeServices>()
     let configuration = ConfigurationModule(env, cfg)
+    let database = EvilPlanner.Backend.Application.initDatabase configuration.EvilPlannerConfig app
+    let node = app.ApplicationServices.GetService<INodeServices>()
     let highlight = CodeHighlightModule(node)
     let markdown = MarkdownModule(highlight)
     let posts = PostsModule(configuration, markdown)
     let rss = RssModule(configuration, posts)
     let templates = TemplatingModule(configuration)
     let pages = PagesModule(posts, templates, markdown)
-    RoutesModule(pages, rss)
+    let quotes = QuotesModule database
+    RoutesModule(pages, rss, quotes)
 
 let private createRouter (builder : IApplicationBuilder) =
     let env = downcast builder.ApplicationServices.GetService typeof<IWebHostEnvironment>

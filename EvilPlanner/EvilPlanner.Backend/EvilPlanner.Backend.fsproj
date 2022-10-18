@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Common.fs" />
+    <Compile Include="Quotes.fs" />
+    <Compile Include="Application.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Chiron" Version="6.3.1" />
+    <PackageReference Include="Freya" Version="4.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EvilPlanner.Core\EvilPlanner.Core.fsproj" />
+    <ProjectReference Include="..\EvilPlanner.Frontend\EvilPlanner.Frontend.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\EvilPlanner.Logic\EvilPlanner.Logic.fsproj" />
+  </ItemGroup>
+</Project>
