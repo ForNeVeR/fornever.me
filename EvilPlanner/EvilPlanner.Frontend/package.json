@@ -1,6 +1,7 @@
 {
   "name": "evil-planner",
   "version": "0.1.13",
+  "private": true,
   "description": "EvilPlanner Frontend",
   "scripts": {
     "build": "webpack -d",
@@ -8,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ForNeVeR/EvilPlanner.git"
+    "url": "git+https://github.com/ForNeVeR/fornever.me.git"
   },
   "keywords": [
     "frontend"
@@ -16,9 +17,9 @@
   "author": "F. von Never",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ForNeVeR/EvilPlanner/issues"
+    "url": "https://github.com/ForNeVeR/fornever.me/issues"
   },
-  "homepage": "https://github.com/ForNeVeR/EvilPlanner#readme",
+  "homepage": "https://fornever.me/",
   "devDependencies": {
     "@types/react": "^16.4.1",
     "@types/react-dom": "^16.0.6",
