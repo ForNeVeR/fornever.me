@@ -23,7 +23,7 @@ let private getDailyQuote (date : DateTime) db =
 /// Creates quote for the current date. Can throw an UpdateException in case when the quote was
 /// already created by the concurrent query.
 let private createQuote db date =
-    // TODO: Optimize this randomization
+    // TODO[#141]: Optimize this randomization
     let allQuotations = ResizeArray((quotations db).FindAll())
     let index = Random().Next(allQuotations.Count - 1)
     let quotation = allQuotations.[index]

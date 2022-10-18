@@ -41,6 +41,9 @@ ProjectSection(SolutionItems) = preProject
 EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EvilPlanner", "EvilPlanner", "{1C1DC271-8B82-4B50-AF61-B9942E98D55A}"
+	ProjectSection(SolutionItems) = preProject
+		EvilPlanner\Directory.Build.props = EvilPlanner\Directory.Build.props
+	EndProjectSection
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "EvilPlanner.Backend", "EvilPlanner\EvilPlanner.Backend\EvilPlanner.Backend.fsproj", "{AFDDF457-354D-4787-A737-5EE1C2E6630B}"
 EndProject

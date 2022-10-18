@@ -1,5 +1,5 @@
 <Project>
     <PropertyGroup>
-        <TreatWarningsAsErrors>false</TreatWarningsAsErrors> <!-- TODO: Temporary solution for package issues -->
+        <TreatWarningsAsErrors>false</TreatWarningsAsErrors> <!-- TODO[#140]: Temporary solution for package issues -->
     </PropertyGroup>
 </Project>
