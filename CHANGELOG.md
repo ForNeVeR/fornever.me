@@ -17,6 +17,12 @@ The main changes link for this version will show the changes relative to the pre
 
 The changelog below will list all the changes since the previous releases of both applications.
 
+### Added
+- Localization for the **Plans** page.
+
+### Fixed
+- Links from the **Plans** page back to the main site were leading to nonexistent pages.
+
 ## [3.5.0] - 2021-05-02
 ### Changed
 - Project updated to .NET 5
