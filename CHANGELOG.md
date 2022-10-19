@@ -10,7 +10,7 @@ due to content-only changes (this is one of the reasons a version may be listed
 here as having "no notable changes"); currently, no version increment is
 performed in such case.
 
-## [Unreleased] (4.0.0)
+## [4.0.0] - 2022-10-19
 EvilPlanner project, which was a separate application (but always was a part of the fornever.me site structure), was merged into fornever.me. It used to have [a separate changelog](docs/CHANGELOG.EvilPlanner.md).
 
 The main changes link for this version will show the changes relative to the previous version of fornever.me, and [here's the link](https://github.com/ForNeVeR/fornever.me/compare/EvilPlanner/1.0...v4.0.0) to see the changes relative to the previous version of EvilPlanner.
@@ -250,4 +250,5 @@ Initial version of the site, written in Python using Django framework.
 [3.3.0]: https://github.com/ForNeVeR/fornever.me/compare/v3.2.0...v3.3.0
 [3.4.0]: https://github.com/ForNeVeR/fornever.me/compare/v3.3.0...v3.4.0
 [3.5.0]: https://github.com/ForNeVeR/fornever.me/compare/v3.4.0...v3.5.0
-[Unreleased]: https://github.com/ForNeVeR/fornever.me/compare/v3.5.0...HEAD
+[4.0.0]: https://github.com/ForNeVeR/fornever.me/compare/v3.5.0...v4.0.0
+[Unreleased]: https://github.com/ForNeVeR/fornever.me/compare/v4.0.0...HEAD
