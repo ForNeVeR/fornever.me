@@ -16,8 +16,9 @@ open ForneverMind.KestrelInterop
 let private fuseApplication (app : IApplicationBuilder) cfg env =
     let configuration = ConfigurationModule(env, cfg)
     let database = EvilPlanner.Backend.Application.initDatabase configuration.EvilPlannerConfig app
-    let node = app.ApplicationServices.GetService<INodeServices>()
-    let highlight = CodeHighlightModule(node)
+    let node = app.ApplicationServices.GetRequiredService<INodeServices>()
+    let logger = app.ApplicationServices.GetRequiredService<ILogger<CodeHighlightModule>>()
+    let highlight = CodeHighlightModule(logger, node)
     let markdown = MarkdownModule(highlight)
     let posts = PostsModule(configuration, markdown)
     let rss = RssModule(configuration, posts)

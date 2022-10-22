@@ -5,6 +5,7 @@ open System.IO
 
 open Microsoft.AspNetCore.NodeServices
 open Microsoft.Extensions.DependencyInjection
+open Microsoft.Extensions.Logging.Abstractions
 open Xunit
 
 open ForneverMind
@@ -17,7 +18,7 @@ let markdown =
     services.AddNodeServices(fun o -> o.ProjectPath <- Directory.GetCurrentDirectory())
     let serviceProvider = services.BuildServiceProvider()
     let node = serviceProvider.GetRequiredService<INodeServices>()
-    let highlight = CodeHighlightModule(node)
+    let highlight = CodeHighlightModule(NullLogger.Instance, node)
     MarkdownModule(highlight)
 
 let private normalizeLineEndings (s : string) = s.Replace(Environment.NewLine, "\n")
