@@ -3,7 +3,9 @@ namespace ForneverMind
 open System
 open System.Diagnostics
 open System.IO
+open System.Threading.Tasks
 
+open JetBrains.Collections.Viewable
 open JetBrains.Lifetimes
 open Jint
 open Jint.Native
@@ -28,6 +30,7 @@ type CodeHighlightModule(lifetime: Lifetime, logger: ILogger) =
         result
 
     let server = engine.Evaluate "server"
+    let scheduler = SingleThreadScheduler.RunOnSeparateThread(lifetime, "CodeHighlightModule.scheduler")
 
     member _.Highlight(language: string option, code: string): Async<string> = async {
         let languageName = Option.defaultValue "<none>" language
@@ -39,7 +42,18 @@ type CodeHighlightModule(lifetime: Lifetime, logger: ILogger) =
             JsValue.op_Implicit code
         |]
 
-        let result = (server.Call args).AsString()
+        let! ct = Async.CancellationToken
+        let tcs = TaskCompletionSource<string>()
+        use _ = ct.Register(tcs.TrySetCanceled >> ignore)
+
+        scheduler.Queue(fun () ->
+            try
+                tcs.SetResult <| (server.Call args).AsString()
+            with
+                e -> tcs.TrySetException e |> ignore
+        )
+
+        let! result = Async.AwaitTask tcs.Task
         logger.LogInformation $"Finish processing request for {code.Length} characters in language {languageName}: {sw.Elapsed}."
         return result
     }
