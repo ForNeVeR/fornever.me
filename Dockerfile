@@ -46,14 +46,6 @@ RUN dotnet publish ./ForneverMind -c Release -o /app/out
 
 FROM mcr.microsoft.com/dotnet/aspnet:5.0.5
 
-# First, install curl to be able to install Node.js, and then install Node.js itself:
-RUN apt-get update \
-    && apt-get install -y curl \
-    && curl -fsSL https://deb.nodesource.com/setup_16.x | bash - \
-    && apt-get install -y \
-        nodejs \
-    && rm -rf /var/lib/apt/lists/*
-
 WORKDIR /app
 
 COPY --from=build-env /app/out .
