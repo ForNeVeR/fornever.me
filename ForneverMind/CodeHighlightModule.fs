@@ -1,6 +1,5 @@
 namespace ForneverMind
 
-open System
 open System.Diagnostics
 open System.IO
 open System.Threading.Tasks
@@ -11,8 +10,8 @@ open Jint
 open Jint.Native
 open Microsoft.Extensions.Logging
 
-type JintConsole() =
-    member _.Log(s: string) = Console.WriteLine s
+type JintConsole(logger: ILogger) =
+    member _.Log(s: string) = logger.LogInformation s
 
 type CodeHighlightModule(lifetime: Lifetime, logger: ILogger) =
     let engine =
@@ -24,7 +23,7 @@ type CodeHighlightModule(lifetime: Lifetime, logger: ILogger) =
 
         let result =
             e
-                .SetValue("console", JintConsole())
+                .SetValue("console", JintConsole logger)
                 .Execute serverCode
         logger.LogInformation $"Jint engine initialized in {sw.Elapsed}."
         result
