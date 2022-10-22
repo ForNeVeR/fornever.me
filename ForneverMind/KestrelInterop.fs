@@ -7,13 +7,11 @@ open Freya.Core
 open JetBrains.Lifetimes
 open Microsoft.AspNetCore.Builder
 open Microsoft.AspNetCore.Hosting
-open Microsoft.Extensions.DependencyInjection
 open Microsoft.Extensions.Logging
 
 type ApplicationConfiguration =
     { application : Lifetime -> IApplicationBuilder -> unit
-      logging : ILoggingBuilder -> unit
-      services : IServiceCollection -> unit }
+      logging : ILoggingBuilder -> unit }
 
 module ApplicationBuilder =
     let inline useFreya f (app:IApplicationBuilder)=
@@ -24,11 +22,11 @@ module WebHost =
     let private root = Directory.GetCurrentDirectory()
     let private webRoot = Path.Combine(root, "wwwroot")
     let create () = WebHostBuilder().UseContentRoot(root).UseWebRoot(webRoot).UseKestrel()
-    let configure (lifetime: Lifetime) ({ application = application
-                                          logging = logging
-                                          services = services }) (b: IWebHostBuilder): IWebHostBuilder =
-        b.ConfigureServices(Action<_> services)
-            .ConfigureLogging(Action<_> logging)
+    let configure (lifetime: Lifetime)
+                  ({ application = application
+                     logging = logging }: ApplicationConfiguration)
+                  (b: IWebHostBuilder): IWebHostBuilder =
+        b.ConfigureLogging(Action<_> logging)
             .Configure(Action<_>(application lifetime))
             .ConfigureKestrel(fun opts -> opts.AllowSynchronousIO <- true)
     let build (b:IWebHostBuilder) = b.Build()
