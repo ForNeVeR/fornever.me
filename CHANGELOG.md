@@ -10,6 +10,10 @@ due to content-only changes (this is one of the reasons a version may be listed
 here as having "no notable changes"); currently, no version increment is
 performed in such case.
 
+## [Unreleased] (4.1.0)
+### Changed
+- Instead of Node.js, the application now uses [Jint](https://github.com/sebastienros/jint) embedded JavaScript engine. This removes a requirement of having Node.js installed in runtime.
+
 ## [4.0.0] - 2022-10-19
 EvilPlanner project, which was a separate application (but always was a part of the fornever.me site structure), was merged into fornever.me. It used to have [a separate changelog](docs/CHANGELOG.EvilPlanner.md).
 
