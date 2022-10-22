@@ -14,12 +14,12 @@ open ForneverMind.KestrelInterop
 
 #nowarn "0044" // TODO: Remove after dealing with NodeServices
 
-let private fuseApplication (app : IApplicationBuilder) cfg env =
+let private fuseApplication lifetime (app: IApplicationBuilder) cfg env =
     let configuration = ConfigurationModule(env, cfg)
     let database = EvilPlanner.Backend.Application.initDatabase configuration.EvilPlannerConfig app
     let node = app.ApplicationServices.GetRequiredService<INodeServices>() // TODO: Drop this
     let logger = app.ApplicationServices.GetRequiredService<ILogger<CodeHighlightModule>>()
-    let highlight = CodeHighlightModule(Lifetime.Eternal, logger) // TODO: Get rid of Lifetime.Eternal here
+    let highlight = CodeHighlightModule(lifetime, logger)
     let markdown = MarkdownModule(highlight)
     let posts = PostsModule(configuration, markdown)
     let rss = RssModule(configuration, posts)
@@ -28,7 +28,7 @@ let private fuseApplication (app : IApplicationBuilder) cfg env =
     let quotes = QuotesModule database
     RoutesModule(pages, rss, quotes)
 
-let private createRouter (builder : IApplicationBuilder) =
+let private createRouter lifetime (builder : IApplicationBuilder) =
     let env = downcast builder.ApplicationServices.GetService typeof<IWebHostEnvironment>
     let cfg =
         ConfigurationBuilder()
@@ -36,16 +36,17 @@ let private createRouter (builder : IApplicationBuilder) =
             .AddJsonFile("appsettings.json")
             .Build()
 
-    let routesModule = fuseApplication builder cfg env
+    let routesModule = fuseApplication lifetime builder cfg env
     routesModule.Router
 
 let private useStaticFiles (app : IApplicationBuilder) =
     app.UseStaticFiles()
 
-let private configureApplication app =
-    let router = createRouter app
+let private configureApplication lt app =
+    let router = createRouter lt app
     useStaticFiles app
     |> ApplicationBuilder.useFreya router
+    |> ignore
 
 let private configureServices (services : IServiceCollection) =
     services.AddNodeServices()
@@ -54,14 +55,15 @@ let private configureLogger (logger : ILoggingBuilder) =
     logger.AddConsole()
 
 let configuration =
-    { application = configureApplication >> ignore
+    { application = configureApplication
       logging = configureLogger >> ignore
       services = configureServices >> ignore }
 
 [<EntryPoint>]
 let main _ =
+    use ld = new LifetimeDefinition()
     WebHost.create ()
-    |> WebHost.configure configuration
-    |> WebHost.buildAndRun
+    |> WebHost.configure ld.Lifetime configuration
+    |> WebHost.buildAndRun ld
 
     0
