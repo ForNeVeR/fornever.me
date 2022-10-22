@@ -3,6 +3,7 @@
 open System
 open System.IO
 
+open JetBrains.Lifetimes
 open Microsoft.AspNetCore.NodeServices
 open Microsoft.Extensions.DependencyInjection
 open Microsoft.Extensions.Logging.Abstractions
@@ -17,8 +18,8 @@ let markdown =
     let services = ServiceCollection()
     services.AddNodeServices(fun o -> o.ProjectPath <- Directory.GetCurrentDirectory())
     let serviceProvider = services.BuildServiceProvider()
-    let node = serviceProvider.GetRequiredService<INodeServices>()
-    let highlight = CodeHighlightModule(NullLogger.Instance, node)
+    let node = serviceProvider.GetRequiredService<INodeServices>() // TODO: Remove this
+    let highlight = CodeHighlightModule(Lifetime.Eternal, NullLogger.Instance)
     MarkdownModule(highlight)
 
 let private normalizeLineEndings (s : string) = s.Replace(Environment.NewLine, "\n")
