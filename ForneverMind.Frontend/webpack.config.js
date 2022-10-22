@@ -16,7 +16,7 @@ const client = {
 const server = {
     resolve: { extensions: ['', '.js'] },
     entry: './server',
-    output: { path: outputPath, filename: 'server.js', libraryTarget: 'umd' }
+    output: { path: outputPath, filename: 'server.js', libraryTarget: 'var', library: 'server' }
 };
 
 module.exports = [client, server];
