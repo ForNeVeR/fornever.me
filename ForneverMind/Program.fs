@@ -47,14 +47,36 @@ let private configureApplication lt app =
 let private configureLogger (logger : ILoggingBuilder) =
     logger.AddConsole()
 
-let configuration =
+let private configuration =
     { application = configureApplication
       logging = configureLogger >> ignore }
 
+let private readArgs(args: string seq) =
+    // TODO[#135]: This is temporary until we are able to work with this directly in ASP.NET Core 6.
+    let map =
+        args
+        |> Seq.map(fun a ->
+            let components = a.Split("=", 2)
+            components[0], components[1]
+        )
+        |> Map.ofSeq
+
+    let argOrDefault key def =
+        map
+        |> Map.tryFind key
+        |> Option.defaultValue def
+
+    { Configuration = argOrDefault "--configuration" "Development"
+      ContentRoot = argOrDefault "--contentRoot" (Directory.GetCurrentDirectory())
+      ApplicationName = argOrDefault "--contentRoot" "ForneverMind" }
+
+
 [<EntryPoint>]
-let main _ =
+let main(args: string[]): int =
+    let args = readArgs args
+
     use ld = new LifetimeDefinition()
-    WebHost.create ()
+    WebHost.create args
     |> WebHost.configure ld.Lifetime configuration
     |> WebHost.buildAndRun ld
 

@@ -9,6 +9,12 @@ open Microsoft.AspNetCore.Builder
 open Microsoft.AspNetCore.Hosting
 open Microsoft.Extensions.Logging
 
+type WebHostConfiguration = {
+    Configuration: string
+    ContentRoot: string
+    ApplicationName: string
+}
+
 type ApplicationConfiguration =
     { application : Lifetime -> IApplicationBuilder -> unit
       logging : ILoggingBuilder -> unit }
@@ -19,9 +25,9 @@ module ApplicationBuilder =
         app.UseOwin(fun p -> p.Invoke owin)
 
 module WebHost =
-    let private root = Directory.GetCurrentDirectory()
-    let private webRoot = Path.Combine(root, "wwwroot")
-    let create () = WebHostBuilder().UseContentRoot(root).UseWebRoot(webRoot).UseKestrel()
+    let create(args: WebHostConfiguration) =
+        let webRoot = Path.Combine(args.ContentRoot, "wwwroot")
+        WebHostBuilder().UseContentRoot(args.ContentRoot).UseWebRoot(webRoot).UseKestrel()
     let configure (lifetime: Lifetime)
                   ({ application = application
                      logging = logging }: ApplicationConfiguration)

@@ -17,7 +17,7 @@ type LanguageLinks =
 type TemplatingModule (config: ConfigurationModule) =
     let razor =
         RazorLightEngineBuilder()
-            .UseFilesystemProject(config.ViewsPath)
+            .UseFileSystemProject(config.ViewsPath)
             .Build()
 
     let templateName language name = sprintf "%s/%s.cshtml" language name

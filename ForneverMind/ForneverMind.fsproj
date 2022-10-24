@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <Version>4.1.0</Version>
   </PropertyGroup>
   <PropertyGroup>
@@ -13,6 +13,7 @@
     <Compile Include="models/PostModel.fs" />
     <Compile Include="models/PostArchiveModel.fs" />
     <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="Controllers\QuotesController.fs" />
     <Compile Include="ConfigurationModule.fs" />
     <Compile Include="Common.fs" />
     <Compile Include="CodeHighlightModule.fs" />
@@ -40,12 +41,12 @@
     <PackageReference Include="Jint" Version="3.0.0-beta-2042" />
     <PackageReference Include="Markdig" Version="0.24.0" />
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Owin" Version="5.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Owin" Version="6.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="5.0.0" />
-    <PackageReference Include="RazorLight" Version="2.0.0-beta1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
+    <PackageReference Include="RazorLight" Version="2.3.0" />
     <PackageReference Include="WilderMinds.RssSyndication" Version="1.1.0" />
     <ProjectReference Include="..\EvilPlanner\EvilPlanner.Backend\EvilPlanner.Backend.fsproj" />
     <ProjectReference Include="..\ForneverMind.Frontend\ForneverMind.Frontend.csproj" />
