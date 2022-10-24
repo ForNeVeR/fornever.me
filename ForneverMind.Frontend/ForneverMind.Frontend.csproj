@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <Sdk Name="Yarn.MSBuild" Version="1.22.0"/>
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <YarnBuildCommand Condition="'$(Configuration)' == 'Debug'">run debug</YarnBuildCommand>
     <YarnBuildCommand Condition="'$(Configuration)' == 'Release'">run release</YarnBuildCommand>

@@ -44,7 +44,7 @@ COPY ./ForneverMind.Tests ./ForneverMind.Tests/
 COPY --from=talks-env /talks/ForneverMind/wwwroot/talks/ ./ForneverMind/wwwroot/talks/
 RUN dotnet publish ./ForneverMind -c Release -o /app/out
 
-FROM mcr.microsoft.com/dotnet/aspnet:5.0.5
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
 
 WORKDIR /app
 

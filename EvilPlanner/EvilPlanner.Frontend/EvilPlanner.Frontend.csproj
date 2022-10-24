@@ -2,7 +2,7 @@
   <Sdk Name="Microsoft.NET.Sdk.Web" />
   <Sdk Name="Yarn.MSBuild" Version="1.5.1" />
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <OutputType>Library</OutputType>
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
   </PropertyGroup>
