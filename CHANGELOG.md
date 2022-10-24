@@ -10,6 +10,10 @@ due to content-only changes (this is one of the reasons a version may be listed
 here as having "no notable changes"); currently, no version increment is
 performed in such case.
 
+## [Unreleased] (4.2.0)
+### Changed
+- The project runtime has been upgraded to .NET 6.
+
 ## [4.1.0] - 2022-10-22
 ### Changed
 - Instead of Node.js, the application now uses [Jint](https://github.com/sebastienros/jint) embedded JavaScript engine. This removes a requirement of having Node.js installed in runtime.
