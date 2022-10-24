@@ -5,13 +5,14 @@ open System.Threading.Tasks
 open Microsoft.AspNetCore.Mvc.Testing
 open Xunit
 
-open ForneverMind.Controllers
+open ForneverMind
 
 [<Fact>]
-let ``Quotes controller should resolve correctly``(): Task = task {
-    use app = (new WebApplicationFactory<QuotesController>()).WithWebHostBuilder(fun _ -> ())
+let ``Index page should resolve correctly``(): Task = task {
+    use app = new WebApplicationFactory<RoutesModule>()
+    app.Server.AllowSynchronousIO <- true
+
     use client = app.CreateClient()
-    let! result = client.GetAsync("/plans/quote/123")
-    let! content = result.EnsureSuccessStatusCode().Content.ReadAsStringAsync()
-    Assert.Equal("123", content)
+    let! result = client.GetAsync "/"
+    Assert.Equal("text/html", result.Content.Headers.ContentType.MediaType)
 }
