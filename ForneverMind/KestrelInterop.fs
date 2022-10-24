@@ -1,23 +1,15 @@
 namespace ForneverMind.KestrelInterop
 
-open System
-open System.IO
-
 open Freya.Core
 open JetBrains.Lifetimes
 open Microsoft.AspNetCore.Builder
 open Microsoft.AspNetCore.Hosting
 open Microsoft.Extensions.Logging
 
-type WebHostConfiguration = {
-    Configuration: string
-    ContentRoot: string
-    ApplicationName: string
+type ApplicationConfiguration = {
+      Application: Lifetime -> IApplicationBuilder -> unit
+      Logging: ILoggingBuilder -> unit
 }
-
-type ApplicationConfiguration =
-    { application : Lifetime -> IApplicationBuilder -> unit
-      logging : ILoggingBuilder -> unit }
 
 module ApplicationBuilder =
     let inline useFreya f (app:IApplicationBuilder)=
@@ -25,20 +17,19 @@ module ApplicationBuilder =
         app.UseOwin(fun p -> p.Invoke owin)
 
 module WebHost =
-    let create(args: WebHostConfiguration) =
-        let webRoot = Path.Combine(args.ContentRoot, "wwwroot")
-        WebHostBuilder().UseContentRoot(args.ContentRoot).UseWebRoot(webRoot).UseKestrel()
+    let create(args: string[]) =
+        WebApplication.CreateBuilder(args)
     let configure (lifetime: Lifetime)
-                  ({ application = application
-                     logging = logging }: ApplicationConfiguration)
-                  (b: IWebHostBuilder): IWebHostBuilder =
-        b.ConfigureLogging(Action<_> logging)
-            .Configure(Action<_>(application lifetime))
-            .ConfigureKestrel(fun opts -> opts.AllowSynchronousIO <- true)
-    let build (b:IWebHostBuilder) = b.Build()
-    let run (ld: LifetimeDefinition) (wh: IWebHost) =
+                  ({ Application = application
+                     Logging = logging }: ApplicationConfiguration)
+                  (b: WebApplicationBuilder): WebApplication =
+        logging b.Logging
+        b.WebHost.ConfigureKestrel(fun opts -> opts.AllowSynchronousIO <- true) |> ignore
+        let app = b.Build()
+        application lifetime app
+        app
+    let run (ld: LifetimeDefinition) (app: WebApplication): unit =
         try
-            wh.Run()
+            app.Run()
         finally
             ld.Terminate()
-    let buildAndRun(ld: LifetimeDefinition): IWebHostBuilder -> unit = build >> run ld
