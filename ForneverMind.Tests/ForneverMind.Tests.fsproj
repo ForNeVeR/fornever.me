@@ -16,6 +16,7 @@
     <ProjectReference Include="..\ForneverMind\ForneverMind.fsproj" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IntegrationTestUtil.fs" />
     <Compile Include="CodeHighlightTests.fs" />
     <Compile Include="CommonTests.fs" />
     <Compile Include="MarkdownTests.fs" />
