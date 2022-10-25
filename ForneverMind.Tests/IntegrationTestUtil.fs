@@ -7,6 +7,9 @@ open Microsoft.AspNetCore.Mvc.Testing
 
 open ForneverMind
 
+[<Literal>]
+let IntegrationTests = "IntegrationTests"
+
 let withWebApp(test: HttpClient -> Task): Task = task {
     use app = new WebApplicationFactory<RoutesModule>()
     app.Server.AllowSynchronousIO <- true
