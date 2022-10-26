@@ -1,11 +1,9 @@
 ﻿module EvilPlanner.Backend.Application
 
-open System
 open System.IO
 open System.Reflection
 
-open Microsoft.AspNetCore.Builder
-open Microsoft.Extensions.Hosting
+open JetBrains.Lifetimes
 
 open EvilPlanner.Core
 open EvilPlanner.Core.Storage
@@ -18,10 +16,8 @@ let getConfig(databasePath: string): Configuration =
         else path
     { databasePath = mapPath databasePath }
 
-let initDatabase(config: Configuration) (app: IApplicationBuilder): Database =
+let initDatabase (lifetime: Lifetime) (config: Configuration): Database =
     Migrations.migrateDatabase config
-    let lifetime = app.ApplicationServices.GetService(typeof<IHostApplicationLifetime>) :?> IHostApplicationLifetime
     let database = openDatabase config
-    let atExit() = (database :> IDisposable).Dispose()
-    ignore <| lifetime.ApplicationStopped.Register(Action atExit)
+    lifetime.AddDispose database |> ignore
     database

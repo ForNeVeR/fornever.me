@@ -14,7 +14,7 @@ let private toOption(x : 'T) : 'T option =
     then None
     else Some x
 
-let private getDailyQuote (date : DateTime) db =
+let internal getDailyQuote (date : DateTime) db =
     (dailyQuotes db).FindOne(Query.EQ("date", BsonValue date))
     |> toOption
     |> Option.map (fun dq ->

@@ -25,7 +25,6 @@
     <Compile Include="RssModule.fs" />
     <Compile Include="QuotesModule.fs" />
     <Compile Include="RoutesModule.fs" />
-    <Compile Include="KestrelInterop.fs" />
     <Compile Include="Program.fs" />
     <Content Include="posts\**" CopyToPublishDirectory="Always" />
     <Content Include="server.js" CopyToPublishDirectory="Always" />

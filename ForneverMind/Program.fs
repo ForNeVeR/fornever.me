@@ -1,7 +1,9 @@
 ﻿module ForneverMind.Program
 
+open System
 open System.IO
 
+open Freya.Core
 open JetBrains.Lifetimes
 open Microsoft.AspNetCore.Builder
 open Microsoft.AspNetCore.Hosting
@@ -9,12 +11,13 @@ open Microsoft.Extensions.Configuration
 open Microsoft.Extensions.DependencyInjection
 open Microsoft.Extensions.Logging
 
-open ForneverMind.KestrelInterop
+open EvilPlanner.Core.Storage
 
-let private fuseApplication lifetime (app: IApplicationBuilder) cfg env =
-    let configuration = ConfigurationModule(env, cfg)
-    let database = EvilPlanner.Backend.Application.initDatabase configuration.EvilPlannerConfig app
-    let logger = app.ApplicationServices.GetRequiredService<ILogger<CodeHighlightModule>>()
+let private fuseApplication lifetime (services: IServiceProvider) =
+    let configuration = services.GetRequiredService<ConfigurationModule>()
+    let database = services.GetRequiredService<Database>()
+    let logger = services.GetRequiredService<ILogger<CodeHighlightModule>>()
+
     let highlight = CodeHighlightModule(lifetime, logger)
     let markdown = MarkdownModule(highlight)
     let posts = PostsModule(configuration, markdown)
@@ -22,40 +25,57 @@ let private fuseApplication lifetime (app: IApplicationBuilder) cfg env =
     let templates = TemplatingModule(configuration)
     let pages = PagesModule(posts, templates, markdown)
     let quotes = QuotesModule database
+
     RoutesModule(pages, rss, quotes)
 
-let private createRouter lifetime (builder : IApplicationBuilder) =
-    let env = downcast builder.ApplicationServices.GetService typeof<IWebHostEnvironment>
+let private createRouter lifetime services =
+    let routesModule = fuseApplication lifetime services
+    routesModule.Router
+
+let private useStaticFiles (app : IApplicationBuilder) =
+    app.UseStaticFiles()
+
+let inline private useFreya f (app: IApplicationBuilder) =
+    let owin = OwinMidFunc.ofFreya f
+    app.UseOwin(fun p -> p.Invoke owin)
+    |> ignore
+
+let private configure (lifetime: Lifetime) (configuration: IConfigurationRoot) (builder: WebApplicationBuilder) =
+    builder.Logging.AddConsole() |> ignore
+    builder.WebHost.ConfigureKestrel(fun opts -> opts.AllowSynchronousIO <- true) |> ignore
+
+    let configModule = ConfigurationModule(builder.Environment, configuration)
+    builder.Services.AddSingleton configModule
+    |> ignore
+
+    EvilPlanner.Backend.Application.initDatabase lifetime configModule.EvilPlannerConfig
+    |> builder.Services.AddSingleton
+    |> ignore
+
+    builder
+
+let private build lifetime (builder: WebApplicationBuilder) =
+    let app = builder.Build()
+    app.UseStaticFiles() |> ignore
+    let router = createRouter lifetime app.Services
+    useFreya router app
+    app
+
+let private run(app: WebApplication) = app.Run()
+
+[<EntryPoint>]
+let main(args: string[]): int =
+    use appLifetime = new LifetimeDefinition()
+    let lt = appLifetime.Lifetime
     let cfg =
         ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json")
             .Build()
 
-    let routesModule = fuseApplication lifetime builder cfg env
-    routesModule.Router
-
-let private useStaticFiles (app : IApplicationBuilder) =
-    app.UseStaticFiles()
-
-let private configureApplication lt app =
-    let router = createRouter lt app
-    useStaticFiles app
-    |> ApplicationBuilder.useFreya router
-    |> ignore
-
-let private configureLogger(logger: ILoggingBuilder) =
-    logger.AddConsole()
-
-let private configuration =
-    { Application = configureApplication
-      Logging = configureLogger >> ignore }
-
-[<EntryPoint>]
-let main(args: string[]): int =
-    use ld = new LifetimeDefinition()
-    WebHost.create args
-    |> WebHost.configure ld.Lifetime configuration
-    |> WebHost.run ld
+    WebApplication.CreateBuilder(args)
+    |> (configure lt cfg)
+    |> (build lt)
+    |> run
 
     0
