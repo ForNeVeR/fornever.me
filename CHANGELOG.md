@@ -13,6 +13,7 @@ performed in such case.
 ## [Unreleased] (4.2.0)
 ### Changed
 - The project runtime has been upgraded to .NET 6.
+- The **Plans** page has migrated from the Freya web framework to the ASP.NET Core MVC framework.
 
 ## [4.1.0] - 2022-10-22
 ### Changed
