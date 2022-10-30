@@ -5,7 +5,7 @@ open System
 [<CLIMutable>]
 type DailyQuote =
     { id : int64
-      date : DateTime // TODO: Convert to DateOnly
+      date : DateTime // TODO[#165]: Convert to DateOnly
       quotationId : int64 }
 
 [<CLIMutable>]
