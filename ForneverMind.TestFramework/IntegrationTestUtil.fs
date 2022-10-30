@@ -1,4 +1,4 @@
-module ForneverMind.Tests.IntegrationTestUtil
+module ForneverMind.TestFramework.IntegrationTestUtil
 
 open System
 open System.Net.Http
@@ -18,7 +18,6 @@ let IntegrationTests = "IntegrationTests"
 let private withWebAppBuilder (configure: IWebHostBuilder -> unit)
                               (customize: IServiceProvider -> 'a)
                               (test: 'a -> HttpClient -> Task): Task = task {
-    // TODO: Mock the database to have a separate data directory for each test.
     use app = (new WebApplicationFactory<RoutesModule>()).WithWebHostBuilder configure
     app.Server.AllowSynchronousIO <- true
 
@@ -39,4 +38,8 @@ let withWebAppData (today: DateOnly) (test: Database -> HttpClient -> Task): Tas
             member _.Today() = today
         }
         builder.ConfigureServices(fun sc -> sc.AddSingleton clock |> ignore) |> ignore
-    ) (fun services -> services.GetRequiredService<Database>()) test
+    ) (fun services ->
+        let database = services.GetRequiredService<Database>()
+        database.ReadWriteTransaction StorageUtils.clearDailyQuotes
+        database
+    ) test

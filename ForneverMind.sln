@@ -58,6 +58,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{EEF302B2-6
 		docs\CHANGELOG.EvilPlanner.md = docs\CHANGELOG.EvilPlanner.md
 	EndProjectSection
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ForneverMind.TestFramework", "ForneverMind.TestFramework\ForneverMind.TestFramework.fsproj", "{CC92AD22-D198-46B2-8F33-45F6B5BF1EEE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -96,6 +98,10 @@ Global
 		{543D84AE-65E2-4E82-BCC3-6A47CC5F3B66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{543D84AE-65E2-4E82-BCC3-6A47CC5F3B66}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{543D84AE-65E2-4E82-BCC3-6A47CC5F3B66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC92AD22-D198-46B2-8F33-45F6B5BF1EEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC92AD22-D198-46B2-8F33-45F6B5BF1EEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC92AD22-D198-46B2-8F33-45F6B5BF1EEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC92AD22-D198-46B2-8F33-45F6B5BF1EEE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

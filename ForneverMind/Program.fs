@@ -3,7 +3,6 @@
 open System
 open System.IO
 
-open EvilPlanner.Core
 open Freya.Core
 open JetBrains.Lifetimes
 open Microsoft.AspNetCore.Builder
@@ -12,6 +11,7 @@ open Microsoft.Extensions.Configuration
 open Microsoft.Extensions.DependencyInjection
 open Microsoft.Extensions.Logging
 
+open EvilPlanner.Core
 open EvilPlanner.Core.Storage
 
 let private fuseApplication lifetime (services: IServiceProvider) =
@@ -34,9 +34,6 @@ let private createRouter lifetime services =
     let routesModule = fuseApplication lifetime services
     routesModule.Router
 
-let private useStaticFiles (app : IApplicationBuilder) =
-    app.UseStaticFiles()
-
 let inline private useFreya f (app: IApplicationBuilder) =
     let owin = OwinMidFunc.ofFreya f
     app.UseOwin(fun p -> p.Invoke owin)
@@ -56,12 +53,16 @@ let private configure (lifetime: Lifetime) (configuration: IConfigurationRoot) (
         .AddSingleton<IClock>(clock)
     |> ignore
 
+    builder.Services.AddMvc() |> ignore
+
     builder
 
 let private build lifetime (builder: WebApplicationBuilder) =
     let app = builder.Build()
     app.UseStaticFiles() |> ignore
     let router = createRouter lifetime app.Services
+    app.UseRouting() |> ignore
+    app.MapControllers() |> ignore
     useFreya router app
     app
 

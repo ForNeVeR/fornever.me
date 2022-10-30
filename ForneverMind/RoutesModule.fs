@@ -5,7 +5,7 @@ open Freya.Routers.Uri.Template
 type RoutesModule(pages: PagesModule, rss: RssModule, quotes: QuotesModule) =
     let router =
         freyaRouter {
-            resource "/plans/quote/{date}" quotes.QuoteByDate
+            //resource "/plans/quote/{date}" quotes.QuoteByDate
             resource "/{language}/posts/{name}" pages.Post
             resource "/{language}/" pages.Index
             resource "/{language}/archive.html" pages.Archive

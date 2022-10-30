@@ -14,6 +14,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\ForneverMind.TestFramework\ForneverMind.TestFramework.fsproj" />
     <ProjectReference Include="..\EvilPlanner.Core\EvilPlanner.Core.fsproj" />
     <ProjectReference Include="..\EvilPlanner.Logic\EvilPlanner.Logic.fsproj" />
   </ItemGroup>

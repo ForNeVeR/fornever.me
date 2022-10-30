@@ -1,11 +1,11 @@
-[<Xunit.Collection(ForneverMind.Tests.IntegrationTestUtil.IntegrationTests)>]
+[<Xunit.Collection(ForneverMind.TestFramework.IntegrationTestUtil.IntegrationTests)>]
 module ForneverMind.Tests.RouteTests
 
 open System.Threading.Tasks
 
 open Xunit
 
-open ForneverMind.Tests.IntegrationTestUtil
+open ForneverMind.TestFramework.IntegrationTestUtil
 
 [<Fact>]
 let ``Index page should resolve correctly``(): Task = withWebApp(fun client -> task {

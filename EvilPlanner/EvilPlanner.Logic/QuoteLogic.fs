@@ -14,7 +14,11 @@ let private toOption(x : 'T) : 'T option =
     then None
     else Some x
 
-let internal getDailyQuote (date : DateTime) db =
+let private toDateTime(date: DateOnly) =
+    date.ToDateTime(TimeOnly.FromTimeSpan(TimeSpan.Zero), DateTimeKind.Utc)
+
+let internal getDailyQuote (date: DateOnly) (db: LiteDatabase): Quotation option =
+    let date = toDateTime date
     (dailyQuotes db).FindOne(Query.EQ("date", BsonValue date))
     |> toOption
     |> Option.map (fun dq ->
@@ -22,6 +26,7 @@ let internal getDailyQuote (date : DateTime) db =
 
 /// Creates quote for the current date.
 let private createQuote db date =
+    let date = toDateTime date
     // TODO[#141]: Optimize this randomization
     let allQuotations = ResizeArray((quotations db).FindAll())
     let index = Random().Next(allQuotations.Count - 1)
@@ -30,8 +35,8 @@ let private createQuote db date =
     ignore <| (dailyQuotes db).Insert dailyQuote
     quotation
 
-let getQuote (clock: IClock) (database: Storage.Database) (date: DateTime): Quotation option =
-    let today = clock.Today().ToDateTime(TimeOnly.FromTimeSpan(TimeSpan.Zero), DateTimeKind.Utc)
+let getQuote (clock: IClock) (database: Storage.Database) (date: DateOnly): Quotation option =
+    let today = clock.Today()
     let existingQuote = database.ReadOnlyTransaction (getDailyQuote date)
     if today <> date || Option.isSome existingQuote
     then existingQuote
