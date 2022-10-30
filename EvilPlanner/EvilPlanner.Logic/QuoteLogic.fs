@@ -30,8 +30,8 @@ let private createQuote db date =
     ignore <| (dailyQuotes db).Insert dailyQuote
     quotation
 
-let getQuote (database : Storage.Database) (date : DateTime) : Quotation option =
-    let today = DateTime.UtcNow.Date
+let getQuote (clock: IClock) (database: Storage.Database) (date: DateTime): Quotation option =
+    let today = clock.Today().ToDateTime(TimeOnly.FromTimeSpan(TimeSpan.Zero), DateTimeKind.Utc)
     let existingQuote = database.ReadOnlyTransaction (getDailyQuote date)
     if today <> date || Option.isSome existingQuote
     then existingQuote

@@ -11,10 +11,12 @@ open Xunit
 open EvilPlanner.Core
 open EvilPlanner.Logic.QuoteLogic
 
-type public ConcurrencyTest() =
+type ConcurrencyTest() =
     let config =
         let directory = AssemblyUtils.assemblyDirectory(Assembly.GetExecutingAssembly())
         { databasePath = Path.Combine(directory, "testDb.dat") }
+
+    let clock = SystemClock() // TODO: Replace with static clock
 
     let dailyQuotes(db : LiteDatabase) = db.GetCollection<DailyQuote>("dailyQuotes")
     let getDailyQuotes(db : LiteDatabase) = (dailyQuotes db).FindAll()
@@ -30,7 +32,7 @@ type public ConcurrencyTest() =
 
     let executeTransaction database =
         let today = DateTime.UtcNow.Date
-        getQuote database today
+        getQuote clock database today
 
     let countDailyQuotes db =
         Seq.length(getDailyQuotes db)

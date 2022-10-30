@@ -42,8 +42,9 @@ let ``Quote controller should return an old quote``(): Task = withWebApp(fun cli
 
 [<Fact>]
 let ``Quote controller should return an new quote for today even if it wasn't set beforehand``(): Task =
-    withWebAppData(fun database client -> task {
-        let today = DateTime.UtcNow.Date // TODO: Mock the clock in the tests
+    let today = DateOnly(2022, 10, 5)
+    withWebAppData today (fun database client -> task {
+        let today = today.ToDateTime(TimeOnly.FromTimeSpan TimeSpan.Zero, DateTimeKind.Utc)
 
         // Check that there's no quote in the database:
         let quote = database.ReadOnlyTransaction(QuoteLogic.getDailyQuote today)

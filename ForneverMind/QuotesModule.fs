@@ -1,10 +1,12 @@
 namespace ForneverMind
 
-open EvilPlanner.Backend
-open EvilPlanner.Core.Storage
 open Freya.Machines
 open Freya.Machines.Http
 
-type QuotesModule(database: Database) =
+open EvilPlanner.Backend
+open EvilPlanner.Core
+open EvilPlanner.Core.Storage
+
+type QuotesModule(clock: IClock, database: Database) =
     member val QuoteByDate: HttpMachine =
-        Quotes.quoteByDate database
+        Quotes.quoteByDate clock database

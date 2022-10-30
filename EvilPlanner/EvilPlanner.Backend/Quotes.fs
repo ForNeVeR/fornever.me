@@ -37,30 +37,30 @@ let private date =
             DateTimeStyles.AssumeUniversal ||| DateTimeStyles.AdjustToUniversal)
     }
 
-let private findQuoteByDate database =
+let private findQuoteByDate clock database =
     freya {
-        let getQuote = fun d -> async { return QuoteLogic.getQuote database d }
+        let getQuote = fun d -> async { return QuoteLogic.getQuote clock database d }
         let! date = date
         let! dbQuote = Freya.fromAsync (getQuote date)
         return dbQuote |> Option.map Quote
     } |> Freya.memo
 
-let private checkQuoteByDateExists database =
+let private checkQuoteByDateExists clock database =
     freya {
-        let! quote = findQuoteByDate database
+        let! quote = findQuoteByDate clock database
         return Option.isSome quote
     }
 
-let private handleQuoteFound database _ =
+let private handleQuoteFound clock database _ =
     freya {
-        let! quote = findQuoteByDate database
+        let! quote = findQuoteByDate clock database
         return Common.resource quote
     }
 
-let quoteByDate(database: Database): HttpMachine =
+let quoteByDate (clock: IClock) (database: Database): HttpMachine =
     freyaMachine {
         including Common.machine
-        exists (checkQuoteByDateExists database)
+        exists (checkQuoteByDateExists clock database)
         methods Common.get
-        handleOk (handleQuoteFound database)
+        handleOk (handleQuoteFound clock database)
     }

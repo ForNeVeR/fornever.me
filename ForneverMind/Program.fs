@@ -3,6 +3,7 @@
 open System
 open System.IO
 
+open EvilPlanner.Core
 open Freya.Core
 open JetBrains.Lifetimes
 open Microsoft.AspNetCore.Builder
@@ -15,6 +16,7 @@ open EvilPlanner.Core.Storage
 
 let private fuseApplication lifetime (services: IServiceProvider) =
     let configuration = services.GetRequiredService<ConfigurationModule>()
+    let clock = services.GetRequiredService<IClock>()
     let database = services.GetRequiredService<Database>()
     let logger = services.GetRequiredService<ILogger<CodeHighlightModule>>()
 
@@ -24,7 +26,7 @@ let private fuseApplication lifetime (services: IServiceProvider) =
     let rss = RssModule(configuration, posts)
     let templates = TemplatingModule(configuration)
     let pages = PagesModule(posts, templates, markdown)
-    let quotes = QuotesModule database
+    let quotes = QuotesModule(clock, database)
 
     RoutesModule(pages, rss, quotes)
 
@@ -45,11 +47,13 @@ let private configure (lifetime: Lifetime) (configuration: IConfigurationRoot) (
     builder.WebHost.ConfigureKestrel(fun opts -> opts.AllowSynchronousIO <- true) |> ignore
 
     let configModule = ConfigurationModule(builder.Environment, configuration)
-    builder.Services.AddSingleton configModule
-    |> ignore
+    let database = EvilPlanner.Backend.Application.initDatabase lifetime configModule.EvilPlannerConfig
+    let clock = SystemClock()
 
-    EvilPlanner.Backend.Application.initDatabase lifetime configModule.EvilPlannerConfig
-    |> builder.Services.AddSingleton
+    builder.Services
+        .AddSingleton(configModule)
+        .AddSingleton(database)
+        .AddSingleton<IClock>(clock)
     |> ignore
 
     builder
