@@ -21,6 +21,9 @@ let private withWebAppBuilder (configure: IWebHostBuilder -> unit)
     use app = (new WebApplicationFactory<RoutesModule>()).WithWebHostBuilder configure
     app.Server.AllowSynchronousIO <- true
 
+    let config = app.Services.GetRequiredService<ConfigurationModule>()
+    StorageUtils.reinitializeDatabase config.EvilPlannerConfig
+
     let services = customize app.Services
 
     use client = app.CreateClient()
@@ -38,8 +41,4 @@ let withWebAppData (today: DateOnly) (test: Database -> HttpClient -> Task): Tas
             member _.Today() = today
         }
         builder.ConfigureServices(fun sc -> sc.AddSingleton clock |> ignore) |> ignore
-    ) (fun services ->
-        let database = services.GetRequiredService<Database>()
-        database.ReadWriteTransaction StorageUtils.clearDailyQuotes
-        database
-    ) test
+    ) (fun services -> services.GetRequiredService<Database>()) test

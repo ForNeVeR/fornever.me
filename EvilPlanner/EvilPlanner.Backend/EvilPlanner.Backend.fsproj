@@ -4,18 +4,13 @@
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Common.fs" />
-    <Compile Include="Quotes.fs" />
     <Compile Include="Application.fs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Chiron" Version="6.3.1" />
-    <PackageReference Include="Freya" Version="4.0.0" />
     <PackageReference Include="JetBrains.Lifetimes" Version="2022.3.3" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EvilPlanner.Core\EvilPlanner.Core.fsproj" />
-    <ProjectReference Include="..\EvilPlanner.Frontend\EvilPlanner.Frontend.csproj" ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\EvilPlanner.Logic\EvilPlanner.Logic.fsproj" />
   </ItemGroup>
 </Project>

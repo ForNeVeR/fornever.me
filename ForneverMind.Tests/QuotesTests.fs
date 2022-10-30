@@ -7,6 +7,7 @@ open System.Net
 open System.Net.Http
 open System.Threading.Tasks
 
+open ForneverMind.TestFramework
 open Newtonsoft.Json
 open Xunit
 
@@ -52,11 +53,13 @@ let ``Quote controller should return an old quote``(): Task = withWebApp(fun cli
 let ``Quote controller should return an new quote for today even if it wasn't set beforehand``(): Task =
     let today = DateOnly(2022, 10, 5)
     withWebAppData today (fun database client -> task {
+        database.ReadWriteTransaction StorageUtils.clearDailyQuotes
+
         // Check that there's no quote in the database:
         let quote = database.ReadOnlyTransaction(QuoteLogic.getDailyQuote today)
         Assert.Equal(None, quote)
 
-        let! response = (getQuote client today)
+        let! response = getQuote client today
         response.EnsureSuccessStatusCode() |> ignore
 
         let quote = database.ReadOnlyTransaction(QuoteLogic.getDailyQuote today)

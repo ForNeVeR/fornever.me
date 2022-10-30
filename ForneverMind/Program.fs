@@ -12,12 +12,9 @@ open Microsoft.Extensions.DependencyInjection
 open Microsoft.Extensions.Logging
 
 open EvilPlanner.Core
-open EvilPlanner.Core.Storage
 
 let private fuseApplication lifetime (services: IServiceProvider) =
     let configuration = services.GetRequiredService<ConfigurationModule>()
-    let clock = services.GetRequiredService<IClock>()
-    let database = services.GetRequiredService<Database>()
     let logger = services.GetRequiredService<ILogger<CodeHighlightModule>>()
 
     let highlight = CodeHighlightModule(lifetime, logger)
@@ -26,9 +23,8 @@ let private fuseApplication lifetime (services: IServiceProvider) =
     let rss = RssModule(configuration, posts)
     let templates = TemplatingModule(configuration)
     let pages = PagesModule(posts, templates, markdown)
-    let quotes = QuotesModule(clock, database)
 
-    RoutesModule(pages, rss, quotes)
+    RoutesModule(pages, rss)
 
 let private createRouter lifetime services =
     let routesModule = fuseApplication lifetime services
