@@ -7,12 +7,12 @@ open System.Net
 open System.Net.Http
 open System.Threading.Tasks
 
-open ForneverMind.TestFramework
 open Newtonsoft.Json
 open Xunit
 
 open EvilPlanner.Core
 open EvilPlanner.Logic
+open ForneverMind.TestFramework
 open ForneverMind.TestFramework.IntegrationTestUtil
 
 let private getQuote (client: HttpClient) (date: DateOnly) =

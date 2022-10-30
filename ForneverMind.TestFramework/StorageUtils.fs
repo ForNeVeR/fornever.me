@@ -2,10 +2,10 @@ module ForneverMind.TestFramework.StorageUtils
 
 open System.IO
 
-open EvilPlanner.Core.Storage
 open LiteDB
 
 open EvilPlanner.Core
+open EvilPlanner.Core.Storage
 open EvilPlanner.Logic.QuoteLogic
 
 let private dailyQuotes(db: LiteDatabase) = db.GetCollection<DailyQuote>("dailyQuotes")
