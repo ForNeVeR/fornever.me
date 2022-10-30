@@ -14,6 +14,7 @@ performed in such case.
 ### Changed
 - The project runtime has been upgraded to .NET 6.
 - The **Plans** page has migrated from the Freya web framework to the ASP.NET Core MVC framework.
+- The **Plans** page's footer is synchronized with the rest of the site.
 
 ## [4.1.0] - 2022-10-22
 ### Changed
