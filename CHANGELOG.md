@@ -10,7 +10,7 @@ due to content-only changes (this is one of the reasons a version may be listed
 here as having "no notable changes"); currently, no version increment is
 performed in such case.
 
-## [Unreleased] (4.2.0)
+## [4.2.0] - 2022-10-30
 ### Changed
 - The project runtime has been upgraded to .NET 6.
 - The **Plans** page has migrated from the Freya web framework to the ASP.NET Core MVC framework.
@@ -262,4 +262,5 @@ Initial version of the site, written in Python using Django framework.
 [3.5.0]: https://github.com/ForNeVeR/fornever.me/compare/v3.4.0...v3.5.0
 [4.0.0]: https://github.com/ForNeVeR/fornever.me/compare/v3.5.0...v4.0.0
 [4.1.0]: https://github.com/ForNeVeR/fornever.me/compare/v4.0.0...v4.1.0
-[Unreleased]: https://github.com/ForNeVeR/fornever.me/compare/v4.1.0...HEAD
+[4.2.0]: https://github.com/ForNeVeR/fornever.me/compare/v4.1.0...v4.2.0
+[Unreleased]: https://github.com/ForNeVeR/fornever.me/compare/v4.2.0...HEAD
