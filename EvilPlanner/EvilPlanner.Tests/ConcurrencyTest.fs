@@ -14,7 +14,7 @@ type ConcurrencyTest() =
         let directory = AssemblyUtils.assemblyDirectory(Assembly.GetExecutingAssembly())
         { databasePath = Path.Combine(directory, "testDb.dat") }
 
-    let clock: IClock = SystemClock() // TODO: Replace with static clock
+    let clock: IClock = SystemClock() // TODO[#163]: Replace with static clock
 
     [<Fact>]
     member __.ConcurrencyTest() : Task<unit> =
