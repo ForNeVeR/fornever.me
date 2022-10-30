@@ -20,8 +20,7 @@ let internal getDailyQuote (date : DateTime) db =
     |> Option.map (fun dq ->
         (quotations db).FindById (BsonValue dq.quotationId))
 
-/// Creates quote for the current date. Can throw an UpdateException in case when the quote was
-/// already created by the concurrent query.
+/// Creates quote for the current date.
 let private createQuote db date =
     // TODO[#141]: Optimize this randomization
     let allQuotations = ResizeArray((quotations db).FindAll())

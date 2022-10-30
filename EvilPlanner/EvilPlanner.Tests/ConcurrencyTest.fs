@@ -26,7 +26,6 @@ type public ConcurrencyTest() =
         Migrations.migrateDatabase config
 
     let clearDailyQuotes(db : LiteDatabase) =
-        let quotes = getDailyQuotes db
         ignore <| (dailyQuotes db).Delete(Query.All())
 
     let executeTransaction database =
