@@ -1,14 +1,9 @@
-﻿<Project>
-  <Sdk Name="Microsoft.NET.Sdk.Web" />
-  <Sdk Name="Yarn.MSBuild" Version="1.5.1" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Sdk Name="Yarn.MSBuild" Version="1.22.0"/>
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <OutputType>Library</OutputType>
-    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <IsPackable>false</IsPackable>
+    <YarnBuildCommand Condition="'$(Configuration)' == 'Debug'">run build</YarnBuildCommand>
+    <YarnBuildCommand Condition="'$(Configuration)' == 'Release'">run deploy</YarnBuildCommand>
   </PropertyGroup>
-  <Target Name="Yarn" AfterTargets="Build" DependsOnTargets="Build">
-    <Yarn />
-    <Yarn Command="run build" Condition="'$(Configuration)' == 'Debug'" />
-    <Yarn Command="run deploy" Condition="'$(Configuration)' == 'Release'" />
-  </Target>
 </Project>
