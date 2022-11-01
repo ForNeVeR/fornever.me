@@ -3,10 +3,12 @@
 open System
 open System.IO
 
+open System.Threading.Tasks
 open Freya.Core
 open JetBrains.Lifetimes
 open Microsoft.AspNetCore.Builder
 open Microsoft.AspNetCore.Hosting
+open Microsoft.AspNetCore.Http
 open Microsoft.Extensions.Configuration
 open Microsoft.Extensions.DependencyInjection
 open Microsoft.Extensions.Logging
@@ -58,9 +60,17 @@ let private build lifetime (builder: WebApplicationBuilder) =
     let app = builder.Build()
     app.UseStaticFiles() |> ignore
     let router = createRouter lifetime app.Services
-    app.UseRouting() |> ignore
-    app.MapControllers() |> ignore
     useFreya router app
+    app.UseRouting() |> ignore
+
+    app.Use(fun (context: HttpContext) (next: RequestDelegate) ->
+                (task {
+                    Console.WriteLine  $"Found: {context.GetEndpoint().DisplayName}"
+                    return! next.Invoke context
+                }) : Task
+    ) |> ignore
+
+    app.MapControllers() |> ignore
     app
 
 let private run(app: WebApplication) =

@@ -1,28 +1,27 @@
 namespace ForneverMind.Controllers
 
-open System
-open System.Globalization
-open EvilPlanner.Core
-open EvilPlanner.Core.Storage
-open EvilPlanner.Logic
+
 open Microsoft.AspNetCore.Mvc
 open Microsoft.Extensions.Logging
 
-[<Route("/plans/quote/")>]
-type QuotesController(logger: ILogger<QuotesController>, clock: IClock, database: Database) =
+open EvilPlanner.Core
+open EvilPlanner.Core.Storage
+
+[<Route("/")>]
+type PagesController(logger: ILogger<QuotesController>, clock: IClock, database: Database) =
     inherit Controller()
 
-    [<Route("{dateString}")>]
-    member this.Get(dateString: string): IActionResult =
-        let success, date = DateOnly.TryParseExact(
+    // [<Route("")>]
+    member this.Get(): IActionResult =
+        (*let success, date = DateOnly.TryParseExact(
             dateString,
             "yyyy-MM-dd",
             CultureInfo.InvariantCulture,
             DateTimeStyles.None)
         if success then
             match QuoteLogic.getQuote clock database date with
-            | None -> this.NotFound()
+            | None ->*) this.Json "xxx" (*
             | Some quote -> this.Json quote
         else
             logger.LogWarning($"Invalid date in request: {dateString}")
-            this.BadRequest()
+            this.BadRequest() *)
