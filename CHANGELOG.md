@@ -10,6 +10,10 @@ due to content-only changes (this is one of the reasons a version may be listed
 here as having "no notable changes"); currently, no version increment is
 performed in such case.
 
+# [4.2.2] - 2022-12-25
+### Changed
+- Update several frontend libraries.
+
 ## [4.2.1] - 2022-10-31
 ### Fixed
 - [#167: 404 on the Plans page](https://github.com/ForNeVeR/fornever.me/issues/167).
@@ -39,23 +43,23 @@ The changelog below will list all the changes since the previous releases of bot
 
 ## [3.5.0] - 2021-05-02
 ### Changed
-- Project updated to .NET 5
-- Project now has a runtime dependency on Node.js 16+
+- Project updated to .NET 5.
+- Project now has a runtime dependency on Node.js 16+.
 
 ## [3.4.0] - 2021-05-01
 ### Changed
-- Node.js used in the container is updated to v8.10.0
+- Node.js used in the container is updated to v8.10.0.
 
 ## [3.3.0] - 2021-04-10
 ### Changed
-- Migrated to Markdig library for Markdown parsing
+- Migrated to Markdig library for Markdown parsing.
 
 ### Added
-- Table support for Markdown posts
+- Table support for Markdown posts.
 
 ## [3.2.0] - 2021-02-12
 ### Changed
-- Minor site layout changes: links to localized versions are now less confusing
+- Minor site layout changes: links to localized versions are now less confusing.
 
 ## [3.1.0] - 2018-06-02
 ### Changed
@@ -66,7 +70,7 @@ No notable changes.
 
 ## [3.0.0] - 2017-11-09
 ### Added
-- English localization
+- English localization.
 
 ## [2.1.7] - 2017-10-30
 No notable changes.
@@ -76,7 +80,7 @@ No notable changes.
 
 ## [2.1.5] - 2017-10-16
 ### Changed
-- Migrate to .NET Core 2.0 SDK
+- Migrate to .NET Core 2.0 SDK.
 
 ## [2.1.4] - 2017-09-23
 No notable changes.
@@ -87,7 +91,7 @@ No notable changes.
 ## [2.1.2] - 2017-09-20
 ### Changed
 - RssSyndication library update after [a bug
-  fix](https://github.com/shawnwildermuth/RssSyndication/issues/2)
+  fix](https://github.com/shawnwildermuth/RssSyndication/issues/2).
 
 ## [2.1.1] - 2017-06-08
 No notable changes.
@@ -95,7 +99,7 @@ No notable changes.
 ## [2.1.0] - 2017-05-29
 ### Changed
 - Source highlighting engine now uses only server-side JavaScript
-  ([#58](https://github.com/ForNeVeR/fornever.me/issues/58))
+  ([#58](https://github.com/ForNeVeR/fornever.me/issues/58)).
 
 ## [2.0.3] - 2017-05-15
 No notable changes.
@@ -103,14 +107,14 @@ No notable changes.
 ## [2.0.2] - 2017-05-10
 ### Security
 - Fix for a vulnerability [Microsoft Security Advisory
-  4021279](https://github.com/dotnet/announcements/issues/12)
+  4021279](https://github.com/dotnet/announcements/issues/12).
 
 ## [2.0.1] - 2017-05-07
 No notable changes.
 
 ## [2.0.0] - 2017-05-07
 ### Changed
-- Migrate the application to .NET Core 1.1
+- Migrate the application to .NET Core 1.1.
 
 ## [1.6.2] - 2017-05-01
 No notable changes.
@@ -120,7 +124,7 @@ No notable changes.
 
 ## [1.6.0] - 2017-03-30
 ### Changed
-- Migrate to highlight.js instead of microlight.js
+- Migrate to highlight.js instead of microlight.js.
 
 ## [1.5.5] - 2017-03-18
 No notable changes.
@@ -137,11 +141,11 @@ No notable changes.
 ## [1.5.1] - 2016-12-03
 ### Added
 - `HEAD` HTTP method support
-  ([#37](https://github.com/ForNeVeR/fornever.me/issues/37))
+  ([#37](https://github.com/ForNeVeR/fornever.me/issues/37)).
 
 ## [1.5.0] - 2016-11-21
 ### Added
-- The **Talks** page (projected into the repository as Git submodules)
+- The **Talks** page (projected into the repository as Git submodules).
 
 ## [1.4.7] - 2016-10-03
 No notable changes.
@@ -166,18 +170,18 @@ No notable changes.
 
 ## [1.4.0] - 2016-08-13
 ### Added
-- Custom site error pages
+- Custom site error pages.
 
 ## [1.3.2] - 2016-08-08
 ### Changed
-- HTML5 is now used instead of XHTML 1.0 Strict
+- HTML5 is now used instead of XHTML 1.0 Strict.
 
 ## [1.3.1] - 2016-07-09
 No notable changes.
 
 ## [1.3.0] - 2016-06-11
 ### Added
-- Source code highlighting using the microlight.js library
+- Source code highlighting using the microlight.js library.
 
 ## [1.2.1] - 2016-06-11
 No notable changes.
@@ -190,23 +194,23 @@ No notable changes.
 
 ## [1.0.2] - 2015-12-26
 ### Added
-- `Last-Modified` header support
+- `Last-Modified` header support.
 
 ## [1.0.1] - 2015-11-09
 ### Removed
-- The compatibility mode with old Disqus comments
+- The compatibility mode with old Disqus comments.
 
 ## [1.0.0] - 2015-11-08
 ### Changed
-- Completely rewritten the blog in F#, using Freya web framework
+- Completely rewritten the blog in F#, using Freya web framework.
 
 ## [unversioned-4] - 2015-11-01
 Last known released version using Hakyll. Contains only minor changes.
 
 ## [unversioned-3] - circa 2014-08-17
 ### Changed
-- Completely rewritten the site in Haskell, using Hakyll static site generator
-- It is now a blog
+- Completely rewritten the site in Haskell, using Hakyll static site generator.
+- It is now a blog.
 
 ## [unversioned-2] - 2010-03-02
 Last known released version using Django. Contains only minor changes. Was shut
@@ -268,4 +272,5 @@ Initial version of the site, written in Python using Django framework.
 [4.1.0]: https://github.com/ForNeVeR/fornever.me/compare/v4.0.0...v4.1.0
 [4.2.0]: https://github.com/ForNeVeR/fornever.me/compare/v4.1.0...v4.2.0
 [4.2.1]: https://github.com/ForNeVeR/fornever.me/compare/v4.2.0...v4.2.1
-[Unreleased]: https://github.com/ForNeVeR/fornever.me/compare/v4.2.1...HEAD
+[4.2.2]: https://github.com/ForNeVeR/fornever.me/compare/v4.2.1...v4.2.2
+[Unreleased]: https://github.com/ForNeVeR/fornever.me/compare/v4.2.2...HEAD
