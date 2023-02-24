@@ -18,7 +18,7 @@ let reinitializeDatabase(config: Configuration): unit =
     Migrations.migrateDatabase config
 
 let clearDailyQuotes(db: LiteDatabase): unit =
-    ignore <| (dailyQuotes db).Delete(Query.All())
+    ignore <| (dailyQuotes db).DeleteAll()
 
 let executeTransaction (clock: IClock) (database: Database): Quotation option =
     let today = clock.Today()

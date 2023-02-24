@@ -4,7 +4,6 @@ open System
 open System.Threading
 
 open LiteDB
-open LiteDB.FSharp
 
 type Database internal (connection : LiteDatabase) =
     let lock = new ReaderWriterLockSlim()
@@ -24,12 +23,12 @@ type Database internal (connection : LiteDatabase) =
             lock.ExitWriteLock()
 
     interface IDisposable with
-        member __.Dispose() =
+        member _.Dispose() =
             connection.Dispose()
             lock.Dispose()
 
-let private mapper = FSharpBsonMapper()
 let openDatabase (config : Configuration) : Database =
-    let connectionString = sprintf "Filename=%s; Exclusive=true; mode=Exclusive" config.databasePath
-    let connection = new LiteDatabase(connectionString, mapper)
+    // TODO: Figure out how to escape the quotes in the path.
+    let connectionString = $"Filename=%s{config.databasePath}; Exclusive=true; mode=Exclusive; upgrade=true"
+    let connection = new LiteDatabase(connectionString)
     new Database(connection)

@@ -31,8 +31,8 @@ let migrateDatabase(configuration : Configuration) : unit =
     ignore <| Directory.CreateDirectory(Path.GetDirectoryName configuration.databasePath)
     use database = Storage.openDatabase configuration
     database.ReadWriteTransaction(fun db ->
-        if db.Engine.UserVersion = 0us
+        if db.UserVersion = 0
         then
             seedDatabase db
-            db.Engine.UserVersion <- 1us
+            db.UserVersion <- 1
     )
