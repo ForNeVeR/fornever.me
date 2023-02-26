@@ -1,5 +1,6 @@
 ﻿namespace EvilPlanner.Tests
 
+open System
 open System.IO
 open System.Reflection
 open System.Threading.Tasks
@@ -14,7 +15,10 @@ type ConcurrencyTest() =
         let directory = AssemblyUtils.assemblyDirectory(Assembly.GetExecutingAssembly())
         { databasePath = Path.Combine(directory, "testDb.dat") }
 
-    let clock: IClock = SystemClock() // TODO[#163]: Replace with static clock
+    let clock: IClock = {
+        new IClock with
+            member _.Today() = DateOnly(2023, 2, 26)
+    }
 
     [<Fact>]
     member __.ConcurrencyTest() : Task<unit> =
