@@ -10,7 +10,7 @@ due to content-only changes (this is one of the reasons a version may be listed
 here as having "no notable changes"); currently, no version increment is
 performed in such case.
 
-## [Unreleased] (4.3.0)
+## [4.3.0] - 2023-02-26
 ### Changed
 - Update to LiteDB v5.
 
@@ -279,4 +279,5 @@ Initial version of the site, written in Python using Django framework.
 [4.2.0]: https://github.com/ForNeVeR/fornever.me/compare/v4.1.0...v4.2.0
 [4.2.1]: https://github.com/ForNeVeR/fornever.me/compare/v4.2.0...v4.2.1
 [4.2.2]: https://github.com/ForNeVeR/fornever.me/compare/v4.2.1...v4.2.2
-[Unreleased]: https://github.com/ForNeVeR/fornever.me/compare/v4.2.2...HEAD
+[4.3.0]: https://github.com/ForNeVeR/fornever.me/compare/v4.2.2...v4.3.0
+[Unreleased]: https://github.com/ForNeVeR/fornever.me/compare/v4.3.0...HEAD
