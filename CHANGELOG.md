@@ -14,6 +14,8 @@ performed in such case.
 ### Changed
 - Update to LiteDB v5.
 
+  The old database will be updated automatically on the first run.
+
 ## [4.2.2] - 2022-12-25
 ### Changed
 - Update several frontend libraries.
