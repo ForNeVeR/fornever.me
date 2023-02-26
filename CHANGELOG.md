@@ -10,7 +10,11 @@ due to content-only changes (this is one of the reasons a version may be listed
 here as having "no notable changes"); currently, no version increment is
 performed in such case.
 
-# [4.2.2] - 2022-12-25
+## [Unreleased] (4.3.0)
+### Changed
+- Update to LiteDB v5.
+
+## [4.2.2] - 2022-12-25
 ### Changed
 - Update several frontend libraries.
 
