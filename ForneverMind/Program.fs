@@ -12,6 +12,7 @@ open Microsoft.Extensions.DependencyInjection
 open Microsoft.Extensions.Logging
 
 open EvilPlanner.Core
+open EvilPlanner.Core.Storage
 
 let private fuseApplication lifetime (services: IServiceProvider) =
     let configuration = services.GetRequiredService<ConfigurationModule>()
@@ -40,12 +41,12 @@ let private configure (lifetime: Lifetime) (configuration: IConfigurationRoot) (
     builder.WebHost.ConfigureKestrel(fun opts -> opts.AllowSynchronousIO <- true) |> ignore
 
     let configModule = ConfigurationModule(builder.Environment, configuration)
-    let database = EvilPlanner.Backend.Application.initDatabase lifetime configModule.EvilPlannerConfig
     let clock = SystemClock()
 
     builder.Services
         .AddSingleton(configModule)
-        .AddSingleton(database)
+        .AddSingleton<Database>(fun _ -> EvilPlanner.Backend.Application.initDatabase lifetime configModule.EvilPlannerConfig) // TODO: Get rid of Lifetime and rely on container dispose management
+        // .AddSingleton<Database>(fun _ -> database)
         .AddSingleton<IClock>(clock)
     |> ignore
 

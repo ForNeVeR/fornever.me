@@ -31,4 +31,5 @@ let openDatabase (config : Configuration) : Database =
     // TODO: Figure out how to escape the quotes in the path.
     let connectionString = $"Filename=%s{config.databasePath}; Exclusive=true; mode=Exclusive; upgrade=true"
     let connection = new LiteDatabase(connectionString)
+    connection.Pragma("UTC_DATE", true) |> ignore
     new Database(connection)
