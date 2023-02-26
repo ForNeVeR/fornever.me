@@ -5,6 +5,7 @@ open System.IO
 open System.Reflection
 open System.Threading.Tasks
 
+open EvilPlanner.Core.Storage
 open Xunit
 
 open EvilPlanner.Core
@@ -24,12 +25,12 @@ type ConcurrencyTest() =
     member __.ConcurrencyTest() : Task<unit> =
         do
             reinitializeDatabase config
-            use database = Storage.openDatabase config
+            use database = new Database(config)
             database.ReadWriteTransaction clearDailyQuotes
 
         let concurrencyLevel = 20
         async {
-            use database = Storage.openDatabase config
+            use database = new Database(config)
             let tasks =
                 seq { 1 .. concurrencyLevel }
                 |> Seq.map (fun _ -> async { return executeTransaction clock database })

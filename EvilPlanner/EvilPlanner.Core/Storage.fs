@@ -5,8 +5,15 @@ open System.Threading
 
 open LiteDB
 
-type Database internal (connection : LiteDatabase) =
+type Database(config: Configuration) =
     let lock = new ReaderWriterLockSlim()
+
+    // TODO[#179]: Figure out how to escape the quotes in the path.
+    let connectionString = $"Filename={config.databasePath}; Exclusive=true; mode=Exclusive; upgrade=true"
+    let connection =
+        let c = new LiteDatabase(connectionString)
+        c.Pragma("UTC_DATE", true) |> ignore
+        c
 
     member __.ReadOnlyTransaction<'T>(action : LiteDatabase -> 'T) : 'T =
         lock.EnterReadLock()
@@ -26,10 +33,3 @@ type Database internal (connection : LiteDatabase) =
         member _.Dispose() =
             connection.Dispose()
             lock.Dispose()
-
-let openDatabase (config : Configuration) : Database =
-    // TODO[#179]: Figure out how to escape the quotes in the path.
-    let connectionString = $"Filename=%s{config.databasePath}; Exclusive=true; mode=Exclusive; upgrade=true"
-    let connection = new LiteDatabase(connectionString)
-    connection.Pragma("UTC_DATE", true) |> ignore
-    new Database(connection)

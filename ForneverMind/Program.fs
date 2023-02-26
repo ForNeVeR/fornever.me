@@ -36,7 +36,7 @@ let inline private useFreya f (app: IApplicationBuilder) =
     app.UseOwin(fun p -> p.Invoke owin)
     |> ignore
 
-let private configure (lifetime: Lifetime) (configuration: IConfigurationRoot) (builder: WebApplicationBuilder) =
+let private configure (configuration: IConfigurationRoot) (builder: WebApplicationBuilder) =
     builder.Logging.AddConsole() |> ignore
     builder.WebHost.ConfigureKestrel(fun opts -> opts.AllowSynchronousIO <- true) |> ignore
 
@@ -45,8 +45,8 @@ let private configure (lifetime: Lifetime) (configuration: IConfigurationRoot) (
 
     builder.Services
         .AddSingleton(configModule)
-        .AddSingleton<Database>(fun _ -> EvilPlanner.Backend.Application.initDatabase lifetime configModule.EvilPlannerConfig) // TODO: Get rid of Lifetime and rely on container dispose management
-        // .AddSingleton<Database>(fun _ -> database)
+        .AddSingleton(configModule.EvilPlannerConfig)
+        .AddSingleton<Database>()
         .AddSingleton<IClock>(clock)
     |> ignore
 
@@ -63,7 +63,9 @@ let private build lifetime (builder: WebApplicationBuilder) =
     useFreya router app
     app
 
-let private run(app: WebApplication) = app.Run()
+let private run(app: WebApplication) =
+    Migrations.migrateDatabase <| app.Services.GetRequiredService<Configuration>()
+    app.Run()
 
 [<EntryPoint>]
 let main(args: string[]): int =
@@ -76,8 +78,8 @@ let main(args: string[]): int =
             .Build()
 
     WebApplication.CreateBuilder(args)
-    |> (configure lt cfg)
-    |> (build lt)
+    |> configure cfg
+    |> build lt
     |> run
 
     0

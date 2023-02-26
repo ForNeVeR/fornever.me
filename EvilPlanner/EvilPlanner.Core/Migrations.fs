@@ -7,6 +7,8 @@ open System.Reflection
 open CsvHelper
 open LiteDB
 
+open EvilPlanner.Core.Storage
+
 let private prepareHeader (s : string) = sprintf "%c%s" (Char.ToUpperInvariant s.[0]) (s.Substring 1)
 
 let private readCsv resourceFileName =
@@ -29,7 +31,7 @@ let private seedDatabase(db : LiteDatabase) =
 
 let migrateDatabase(configuration : Configuration) : unit =
     ignore <| Directory.CreateDirectory(Path.GetDirectoryName configuration.databasePath)
-    use database = Storage.openDatabase configuration
+    use database = new Database(configuration)
     database.ReadWriteTransaction(fun db ->
         if db.UserVersion = 0
         then
