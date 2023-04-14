@@ -10,6 +10,10 @@ due to content-only changes (this is one of the reasons a version may be listed
 here as having "no notable changes"); currently, no version increment is
 performed in such case.
 
+## [Unreleased]
+### Changed
+- Docker images now pack less dependencies, thanks to @grosa1.
+
 ## [4.3.0] - 2023-02-26
 ### Changed
 - Update to LiteDB v5.
