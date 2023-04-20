@@ -12,10 +12,8 @@ Releasing a New Version
 3. Update the `<Version>` element contents in the `ForneverMind/ForneverMind.fsproj` file.
 4. Update the `version` property in the `EvilPlanner/EvilPlanner.Frontend/package.json` file.
 5. Update the `version` property in the `ForneverMind.Frontend/package.json` file.
-6. Make sure there's a properly formed version entry in [the changelog][changelog].
+6. Make sure there's a properly formed version entry in the `CHANGELOG.md` file.
 7. Merge the changes via a pull request.
 8. Push a tag named `v<VERSION>` to GitHub.
 
-[changelog]: ./CHANGELOG.md
-[license]: ./LICENSE.md
 [semver]: https://semver.org/spec/v2.0.0.html
