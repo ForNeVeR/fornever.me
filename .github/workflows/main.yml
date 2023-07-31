@@ -58,7 +58,7 @@ jobs:
       - name: Test
         run: dotnet test --configuration Release
       - name: Publish
-        run: dotnet publish --configuration Release --output publish
+        run: dotnet publish ForneverMind --configuration Release --output publish
   docker-build:
     runs-on: 'ubuntu-20.04'
     steps:
