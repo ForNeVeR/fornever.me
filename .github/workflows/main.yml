@@ -22,12 +22,12 @@ jobs:
       NUGET_PACKAGES: ${{ github.workspace }}/.github/nuget-packages
       NPM_CACHE: ${{ github.workspace }}/.github/npm-cache
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           submodules: recursive
 
       - name: NPM cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ${{ env.NPM_CACHE }}
           key: ${{ runner.os }}.npm.${{ hashFiles('**/package-lock.json') }}+${{ hashFiles('**/yarn.lock') }}
@@ -35,7 +35,7 @@ jobs:
         run: npm config set cache ${{ env.NPM_CACHE }}
 
       - name: Install Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: '16.x'
       - name: Install Yarn
@@ -45,11 +45,11 @@ jobs:
         run: Scripts/Prepare-Talks.ps1 yarn
 
       - name: Set up .NET SDK
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '6.0.x'
       - name: NuGet cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ${{ env.NUGET_PACKAGES }}
           key: ${{ runner.os }}.nuget.${{ hashFiles('**/*.fsproj') }}
@@ -62,7 +62,7 @@ jobs:
   docker-build:
     runs-on: 'ubuntu-20.04'
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           submodules: recursive
 
