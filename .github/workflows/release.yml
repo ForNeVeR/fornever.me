@@ -27,4 +27,4 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: revenrof/fornever.me:latest,revenrof/fornever.me:${{ steps.version.outputs.version }}
+          tags: revenrof/fornever.me:latest,revenrof/fornever.me:v${{ steps.version.outputs.version }}
