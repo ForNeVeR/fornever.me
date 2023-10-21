@@ -1,6 +1,7 @@
 ﻿namespace ForneverMind
 
 open System
+open System.Collections.Concurrent
 open System.Text
 
 open Freya.Core
@@ -91,10 +92,15 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
             handleNotFound notFoundHandler
         }
 
+    let postCache = ConcurrentDictionary()
     let handlePost =
         freya {
             let! fileName = posts.PostFilePath
-            let! post = Freya.fromAsync (markdown.Render fileName)
+            let! post =
+                match postCache.TryGetValue fileName with
+                | true, cached -> Freya.init cached
+                | false, _ -> Freya.fromAsync (markdown.Render fileName)
+            postCache.TryAdd(fileName, post) |> ignore
             let! links = posts.CurrentPostLinks
             return! handlePage Common.routeLanguage "Post" (Freya.init <| Some post) links
         }
