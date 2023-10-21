@@ -10,6 +10,10 @@ due to content-only changes (this is one of the reasons a version may be listed
 here as having "no notable changes"); currently, no version increment is
 performed in such case.
 
+## [4.5.0] - 2023-10-21
+### Added
+- Pages are now cached in memory.
+
 ## [4.4.0] - 2023-10-21
 ### Changed
 - Translation tags no longer shown for the posts where there's no translations.
@@ -295,4 +299,5 @@ Initial version of the site, written in Python using Django framework.
 [4.3.1]: https://github.com/ForNeVeR/fornever.me/compare/v4.3.0...v4.3.1
 [4.3.2]: https://github.com/ForNeVeR/fornever.me/compare/v4.3.1...v4.3.2
 [4.4.0]: https://github.com/ForNeVeR/fornever.me/compare/v4.3.2...v4.4.0
-[Unreleased]: https://github.com/ForNeVeR/fornever.me/compare/v4.4.0...HEAD
+[4.5.0]: https://github.com/ForNeVeR/fornever.me/compare/v4.4.0...v4.5.0
+[Unreleased]: https://github.com/ForNeVeR/fornever.me/compare/v4.5.0...HEAD
