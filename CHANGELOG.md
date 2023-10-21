@@ -10,6 +10,10 @@ due to content-only changes (this is one of the reasons a version may be listed
 here as having "no notable changes"); currently, no version increment is
 performed in such case.
 
+## [4.4.0] - 2023-10-21
+### Changed
+- Translation tags no longer shown for the posts where there's no translations.
+
 ## [4.3.2] - 2023-09-10
 ### Changed
 - Minor frontend library version updates.
