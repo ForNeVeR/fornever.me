@@ -65,6 +65,7 @@ let private build lifetime (builder: WebApplicationBuilder) =
 
     app.Use(fun (context: HttpContext) (next: RequestDelegate) ->
                 (task {
+                    // TODO: Debug purpose only. Remove this.
                     Console.WriteLine  $"Found: {context.GetEndpoint().DisplayName}"
                     return! next.Invoke context
                 }) : Task
