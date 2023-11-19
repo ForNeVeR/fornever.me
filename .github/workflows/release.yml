@@ -1,8 +1,15 @@
 name: Release
 on:
   push:
+    branches:
+      - master
     tags:
-      - '*'
+      - 'v*'
+  pull_request:
+    branches:
+      - master
+  schedule:
+    - cron: '0 0 * * 0' # every Sunday
 
 jobs:
   docker-push:
@@ -26,5 +33,5 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
-          push: true
+          push: ${{ github.event_name == 'push' && contains(github.ref, 'refs/tags/') && 'true' || 'false' }}
           tags: revenrof/fornever.me:latest,revenrof/fornever.me:v${{ steps.version.outputs.version }}
