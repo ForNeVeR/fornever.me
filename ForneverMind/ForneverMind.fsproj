@@ -24,7 +24,8 @@
     <Compile Include="PagesModule.fs" />
     <Compile Include="RssModule.fs" />
     <Compile Include="RoutesModule.fs" />
-    <Compile Include="Controllers\QuoteController.fs" />
+    <Compile Include="Controllers\QuotesController.fs" />
+    <Compile Include="Controllers\PagesController.fs" />
     <Compile Include="Program.fs" />
     <Content Include="posts\**" CopyToPublishDirectory="Always" />
     <Content Include="server.js" CopyToPublishDirectory="Always" />
@@ -48,8 +49,7 @@
     <PackageReference Include="WilderMinds.RssSyndication" Version="1.1.0" />
     <ProjectReference Include="..\EvilPlanner\EvilPlanner.Backend\EvilPlanner.Backend.fsproj" />
     <ProjectReference Include="..\ForneverMind.Frontend\ForneverMind.Frontend.csproj" />
-    <ProjectReference Include="..\EvilPlanner\EvilPlanner.Frontend\EvilPlanner.Frontend.csproj"
-                      ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\EvilPlanner\EvilPlanner.Frontend\EvilPlanner.Frontend.csproj" ReferenceOutputAssembly="false" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>

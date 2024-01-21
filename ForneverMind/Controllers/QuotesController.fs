@@ -2,11 +2,13 @@ namespace ForneverMind.Controllers
 
 open System
 open System.Globalization
+
+open Microsoft.AspNetCore.Mvc
+open Microsoft.Extensions.Logging
+
 open EvilPlanner.Core
 open EvilPlanner.Core.Storage
 open EvilPlanner.Logic
-open Microsoft.AspNetCore.Mvc
-open Microsoft.Extensions.Logging
 
 [<Route("/plans/quote/")>]
 type QuotesController(logger: ILogger<QuotesController>, clock: IClock, database: Database) =
