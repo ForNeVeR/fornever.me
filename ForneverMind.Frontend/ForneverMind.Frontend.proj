@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.Build.NoTargets/3.7.56">
+
+    <ItemGroup>
+        <None Remove="**\*"/>
+        <Content Include="**\*.less"/>
+        <Content Include="**\*.json" Exclude="bin\**; obj\**"/>
+        <Content Include="**\*.js"/>
+        <Content Remove="node_modules\**\*"/>
+    </ItemGroup>
+
+    <PropertyGroup>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <Target Name="NpmInstall"
+            BeforeTargets="NpmBuild"
+            Inputs="package.json;package-lock.json"
+            Outputs="$(IntermediateOutputPath)\npm-install.timestamp">
+        <Exec Command="npm install"/>
+        <Touch Files="$(IntermediateOutputPath)\npm-install.timestamp" AlwaysCreate="true"/>
+    </Target>
+
+    <Target Name="NpmBuild" BeforeTargets="Build"
+            Inputs="@(Content)"
+            Outputs="$(IntermediateOutputPath)\npm-build.timestamp">
+        <Exec Command="npm run debug" Condition="'$(Configuration)' == 'Debug'"/>
+        <Exec Command="npm run release" Condition="'$(Configuration)' == 'Release'"/>
+        <Touch Files="$(IntermediateOutputPath)\npm-build.timestamp" AlwaysCreate="true"/>
+    </Target>
+</Project>

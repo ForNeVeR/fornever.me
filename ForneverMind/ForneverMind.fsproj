@@ -46,7 +46,8 @@
     <PackageReference Include="RazorLight" Version="2.3.0" />
     <PackageReference Include="WilderMinds.RssSyndication" Version="1.1.0" />
     <ProjectReference Include="..\EvilPlanner\EvilPlanner.Backend\EvilPlanner.Backend.fsproj" />
-    <ProjectReference Include="..\ForneverMind.Frontend\ForneverMind.Frontend.csproj" />
+    <ProjectReference Include="..\ForneverMind.Frontend\ForneverMind.Frontend.proj"
+                      ReferenceOutputAssembly="false"/>
     <ProjectReference Include="..\EvilPlanner\EvilPlanner.Frontend\EvilPlanner.Frontend.proj"
                       ReferenceOutputAssembly="false" />
   </ItemGroup>

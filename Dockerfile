@@ -32,7 +32,7 @@ COPY ./EvilPlanner/EvilPlanner.Frontend/EvilPlanner.Frontend.proj ./EvilPlanner/
 COPY ./EvilPlanner/EvilPlanner.Logic/EvilPlanner.Logic.fsproj ./EvilPlanner/EvilPlanner.Logic/
 COPY ./EvilPlanner/EvilPlanner.Tests/EvilPlanner.Tests.fsproj ./EvilPlanner/EvilPlanner.Tests/
 COPY ./ForneverMind/ForneverMind.fsproj ./ForneverMind/
-COPY ./ForneverMind.Frontend/ForneverMind.Frontend.csproj ./ForneverMind.Frontend/
+COPY ./ForneverMind.Frontend/ForneverMind.Frontend.proj ./ForneverMind.Frontend/
 COPY ./ForneverMind.TestFramework/ForneverMind.TestFramework.fsproj ./ForneverMind.TestFramework/
 COPY ./ForneverMind.Tests/ForneverMind.Tests.fsproj ./ForneverMind.Tests/
 COPY ./ForneverMind.sln ./

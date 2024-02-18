@@ -27,7 +27,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{D993
 		Scripts\Get-Version.ps1 = Scripts\Get-Version.ps1
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForneverMind.Frontend", "ForneverMind.Frontend\ForneverMind.Frontend.csproj", "{D96D3D8B-B311-49B1-8EB0-F1AA9F7F6F31}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForneverMind.Frontend", "ForneverMind.Frontend\ForneverMind.Frontend.proj", "{D96D3D8B-B311-49B1-8EB0-F1AA9F7F6F31}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{5FEA0255-DAF1-4A37-8F1E-3EA4D19F60A7}"
 EndProject
