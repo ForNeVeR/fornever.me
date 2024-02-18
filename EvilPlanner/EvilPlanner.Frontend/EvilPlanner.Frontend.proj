@@ -5,10 +5,10 @@
         <Content Include="**\*.css"/>
         <Content Include="**\*.html"/>
         <Content Include="**\*.js"/>
-        <Content Include="**\*.json"/>
+        <Content Include="**\*.json" Exclude="bin\**; obj\**"/>
         <Content Include="**\*.ts"/>
         <Content Include="**\*.tsx"/>
-        <Context Remove="node_modules\**\*"/>
+        <Content Remove="node_modules\**\*"/>
     </ItemGroup>
 
     <PropertyGroup>
@@ -23,17 +23,11 @@
         <Touch Files="$(IntermediateOutputPath)\npm-install.timestamp" AlwaysCreate="true"/>
     </Target>
 
-    <ItemGroup>
-        <NpmBuildTimestampFile Include="$(IntermediateOutputPath)\npm-build.timestamp"
-                               Condition="'$(Configuration)' == 'Debug'"/>
-        <NpmBuildTimestampFile Include="$(IntermediateOutputPath)\npm-deploy.timestamp"
-                               Condition="'$(Configuration)' == 'Release'"/>
-    </ItemGroup>
     <Target Name="NpmBuild" BeforeTargets="Build"
             Inputs="@(Content)"
-            Outputs="@(NpmBuildTimestampFile)">
+            Outputs="$(IntermediateOutputPath)\npm-build.timestamp">
         <Exec Command="npm run build" Condition="'$(Configuration)' == 'Debug'"/>
         <Exec Command="npm run deploy" Condition="'$(Configuration)' == 'Release'"/>
-        <Touch Files="@(NpmBuildTimestampFile)" AlwaysCreate="true"/>
+        <Touch Files="$(IntermediateOutputPath)\npm-build.timestamp" AlwaysCreate="true"/>
     </Target>
 </Project>
