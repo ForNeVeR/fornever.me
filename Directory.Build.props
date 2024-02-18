@@ -1,5 +1,6 @@
 <Project>
     <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     </PropertyGroup>
 </Project>

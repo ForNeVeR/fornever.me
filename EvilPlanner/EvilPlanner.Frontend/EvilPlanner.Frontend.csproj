@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <Sdk Name="Yarn.MSBuild" Version="1.22.0"/>
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <YarnBuildCommand Condition="'$(Configuration)' == 'Debug'">run build</YarnBuildCommand>
     <YarnBuildCommand Condition="'$(Configuration)' == 'Release'">run deploy</YarnBuildCommand>
