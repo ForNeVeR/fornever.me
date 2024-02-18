@@ -24,6 +24,7 @@
     "@types/react": "^16.4.1",
     "@types/react-dom": "^16.0.6",
     "file-loader": "^1.1.11",
+    "loader-utils": "^3.2.1",
     "react": "^16.4.1",
     "react-dom": "^16.4.2",
     "ts-loader": "^4.4.1",

@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.Build.NoTargets/3.7.56">
+
+    <ItemGroup>
+        <None Remove="**\*"/>
+        <Content Include="**\*.css"/>
+        <Content Include="**\*.html"/>
+        <Content Include="**\*.js"/>
+        <Content Include="**\*.json"/>
+        <Content Include="**\*.ts"/>
+        <Content Include="**\*.tsx"/>
+        <Context Remove="node_modules\**\*"/>
+    </ItemGroup>
+
+    <PropertyGroup>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <Target Name="NpmInstall"
+            BeforeTargets="NpmBuild"
+            Inputs="package.json;package-lock.json"
+            Outputs="$(IntermediateOutputPath)\npm-install.timestamp">
+        <Exec Command="npm install"/>
+        <Touch Files="$(IntermediateOutputPath)\npm-install.timestamp" AlwaysCreate="true"/>
+    </Target>
+
+    <ItemGroup>
+        <NpmBuildTimestampFile Include="$(IntermediateOutputPath)\npm-build.timestamp"
+                               Condition="'$(Configuration)' == 'Debug'"/>
+        <NpmBuildTimestampFile Include="$(IntermediateOutputPath)\npm-deploy.timestamp"
+                               Condition="'$(Configuration)' == 'Release'"/>
+    </ItemGroup>
+    <Target Name="NpmBuild" BeforeTargets="Build"
+            Inputs="@(Content)"
+            Outputs="@(NpmBuildTimestampFile)">
+        <Exec Command="npm run build" Condition="'$(Configuration)' == 'Debug'"/>
+        <Exec Command="npm run deploy" Condition="'$(Configuration)' == 'Release'"/>
+        <Touch Files="@(NpmBuildTimestampFile)" AlwaysCreate="true"/>
+    </Target>
+</Project>

@@ -48,7 +48,7 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "EvilPlanner.Backend", "Evil
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "EvilPlanner.Core", "EvilPlanner\EvilPlanner.Core\EvilPlanner.Core.fsproj", "{467E2289-91DF-4038-8483-2745761B0CA4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvilPlanner.Frontend", "EvilPlanner\EvilPlanner.Frontend\EvilPlanner.Frontend.csproj", "{F319E172-E273-4DBF-B4BA-CF4F2318726A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvilPlanner.Frontend", "EvilPlanner\EvilPlanner.Frontend\EvilPlanner.Frontend.proj", "{F319E172-E273-4DBF-B4BA-CF4F2318726A}"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "EvilPlanner.Logic", "EvilPlanner\EvilPlanner.Logic\EvilPlanner.Logic.fsproj", "{6A1368A7-884A-4E50-8E1C-0B21781FA6DC}"
 EndProject
