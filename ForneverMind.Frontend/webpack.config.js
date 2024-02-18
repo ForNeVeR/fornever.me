@@ -22,7 +22,10 @@ const client = {
 const server = {
     resolve: {extensions: ['', '.js']},
     entry: './server',
-    output: {path: outputPath, filename: 'server.js', libraryTarget: 'var', library: 'server'}
+    output: {path: outputPath, filename: 'server.js', libraryTarget: 'var', library: 'server'},
+    performance: {
+        hints: false
+    }
 };
 
 module.exports = [client, server];
