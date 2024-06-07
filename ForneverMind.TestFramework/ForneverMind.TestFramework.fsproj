@@ -13,7 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\EvilPlanner\EvilPlanner.Core\EvilPlanner.Core.fsproj" />
     <ProjectReference Include="..\EvilPlanner\EvilPlanner.Logic\EvilPlanner.Logic.fsproj" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.31" />
     <ProjectReference Include="..\ForneverMind\ForneverMind.fsproj" />
   </ItemGroup>
 
