@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/powershell:7.1.3-debian-10 AS talks-env
+FROM mcr.microsoft.com/powershell:7.2.2-debian-10 AS talks-env
 
 # First, install curl to be able to install Node.js, and then install Node.js itself:
 RUN apt-get update \
