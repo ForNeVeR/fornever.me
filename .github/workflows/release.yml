@@ -32,7 +32,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
           push: ${{ github.event_name == 'push' && contains(github.ref, 'refs/tags/') && 'true' || 'false' }}
           tags: revenrof/fornever.me:latest,revenrof/fornever.me:v${{ steps.version.outputs.version }}
