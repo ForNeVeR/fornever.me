@@ -27,7 +27,7 @@ jobs:
           submodules: recursive
 
       - name: NPM cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ env.NPM_CACHE }}
           key: ${{ runner.os }}.npm.${{ hashFiles('**/package-lock.json') }}+${{ hashFiles('**/yarn.lock') }}
@@ -49,7 +49,7 @@ jobs:
         with:
           dotnet-version: '6.0.x'
       - name: NuGet cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ env.NUGET_PACKAGES }}
           key: ${{ runner.os }}.nuget.${{ hashFiles('**/*.fsproj') }}
