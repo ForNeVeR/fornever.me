@@ -23,7 +23,7 @@
   "devDependencies": {
     "@types/react": "^16.4.1",
     "@types/react-dom": "^16.0.6",
-    "file-loader": "^1.1.11",
+    "file-loader": "^6.0.0",
     "loader-utils": "^3.2.1",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
