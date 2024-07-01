@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "release": "webpack --mode production",
-    "debug": "webpack --mode development"
+    "debug": "webpack --mode production"
   },
   "repository": {
     "type": "git",
