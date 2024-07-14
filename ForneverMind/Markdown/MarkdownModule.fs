@@ -83,7 +83,7 @@ type MarkdownModule(highlight : CodeHighlightModule) =
         let metadata, _ = readMetadata language name document
         metadata
 
-    member __.ProcessReader(filePath : string, reader : TextReader) =
+    member _.ProcessReader(filePath : string, reader : TextReader) =
         use target = new StringWriter ()
         let document = Markdown.Parse(reader.ReadToEnd(), markdownPipeline)
         let (language, name) = getLanguageAndName filePath
@@ -93,7 +93,8 @@ type MarkdownModule(highlight : CodeHighlightModule) =
         let documentWithoutMetadata = MarkdownDocument()
         remainingBlocks |> Seq.iter documentWithoutMetadata.Add
 
-        let renderer = MarkdownHtmlRenderer(target, highlight)
+        use server = highlight.StartServer()
+        let renderer = MarkdownHtmlRenderer(server, target, highlight)
         renderer.Render documentWithoutMetadata |> ignore
 
         {

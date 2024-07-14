@@ -1,11 +1,9 @@
 namespace ForneverMind
 
+open System
 open System.Diagnostics
 open System.IO
-open System.Threading.Tasks
 
-open JetBrains.Collections.Viewable
-open JetBrains.Lifetimes
 open Jint
 open Jint.Native
 open Microsoft.Extensions.Logging
@@ -13,13 +11,19 @@ open Microsoft.Extensions.Logging
 type JintConsole(logger: ILogger) =
     member _.Log(s: string) = logger.LogInformation s
 
-type CodeHighlightModule(lifetime: Lifetime, logger: ILogger) =
-    let engine =
+type Server =
+    | Server of Engine * JsValue
+    interface IDisposable with
+        member this.Dispose() =
+            let (Server(engine, _)) = this
+            engine.Dispose()
+
+type CodeHighlightModule(logger: ILogger) =
+    let createEngine(): Engine =
         let sw = Stopwatch.StartNew()
         logger.LogInformation "Initializing Jint engine…"
         let serverCode = File.ReadAllText "server.js"
         let e = new Engine()
-        lifetime.AddDispose e |> ignore
 
         let result =
             e
@@ -28,31 +32,21 @@ type CodeHighlightModule(lifetime: Lifetime, logger: ILogger) =
         logger.LogInformation $"Jint engine initialized in {sw.Elapsed}."
         result
 
-    let server = engine.Evaluate "server"
-    let scheduler = SingleThreadScheduler.RunOnSeparateThread(lifetime, "CodeHighlightModule.scheduler")
+    member _.StartServer(): Server =
+        let engine = createEngine()
+        Server(engine, engine.Evaluate "server")
 
-    member _.Highlight(language: string option, code: string): Async<string> = async {
-        let languageName = Option.defaultValue "<none>" language
+    member _.Highlight(Server(engine, server), language: string option, code: string): Async<string> = async {
         let sw = Stopwatch.StartNew()
+        let languageName = Option.defaultValue "<none>" language
         logger.LogInformation $"Start processing request for {code.Length} characters in language {languageName}."
 
         let args = [|
             JsValue.FromObject(engine, Option.toObj language)
             JsValue.op_Implicit code
         |]
+        let result = server.Call(args).AsString()
 
-        let! ct = Async.CancellationToken
-        let tcs = TaskCompletionSource<string>()
-        use _ = ct.Register(tcs.TrySetCanceled >> ignore)
-
-        scheduler.Queue(fun () ->
-            try
-                tcs.SetResult <| (server.Call args).AsString()
-            with
-                e -> tcs.TrySetException e |> ignore
-        )
-
-        let! result = Async.AwaitTask tcs.Task
         logger.LogInformation $"Finish processing request for {code.Length} characters in language {languageName}: {sw.Elapsed}."
         return result
     }

@@ -4,7 +4,6 @@ open System
 open System.IO
 
 open Freya.Core
-open JetBrains.Lifetimes
 open Microsoft.AspNetCore.Builder
 open Microsoft.AspNetCore.Hosting
 open Microsoft.Extensions.Configuration
@@ -14,11 +13,11 @@ open Microsoft.Extensions.Logging
 open EvilPlanner.Core
 open EvilPlanner.Core.Storage
 
-let private fuseApplication lifetime (services: IServiceProvider) =
+let private fuseApplication (services: IServiceProvider) =
     let configuration = services.GetRequiredService<ConfigurationModule>()
     let logger = services.GetRequiredService<ILogger<CodeHighlightModule>>()
 
-    let highlight = CodeHighlightModule(lifetime, logger)
+    let highlight = CodeHighlightModule(logger)
     let markdown = MarkdownModule(highlight)
     let posts = PostsModule(configuration, markdown)
     let rss = RssModule(configuration, posts)
@@ -27,8 +26,8 @@ let private fuseApplication lifetime (services: IServiceProvider) =
 
     RoutesModule(pages, rss)
 
-let private createRouter lifetime services =
-    let routesModule = fuseApplication lifetime services
+let private createRouter services =
+    let routesModule = fuseApplication services
     routesModule.Router
 
 let inline private useFreya f (app: IApplicationBuilder) =
@@ -54,10 +53,10 @@ let private configure (configuration: IConfigurationRoot) (builder: WebApplicati
 
     builder
 
-let private build lifetime (builder: WebApplicationBuilder) =
+let private build (builder: WebApplicationBuilder) =
     let app = builder.Build()
     app.UseStaticFiles() |> ignore
-    let router = createRouter lifetime app.Services
+    let router = createRouter app.Services
     app.UseRouting() |> ignore
     app.MapControllers() |> ignore
     useFreya router app
@@ -69,8 +68,6 @@ let private run(app: WebApplication) =
 
 [<EntryPoint>]
 let main(args: string[]): int =
-    use appLifetime = new LifetimeDefinition()
-    let lt = appLifetime.Lifetime
     let cfg =
         ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
@@ -79,7 +76,7 @@ let main(args: string[]): int =
 
     WebApplication.CreateBuilder(args)
     |> configure cfg
-    |> build lt
+    |> build
     |> run
 
     0

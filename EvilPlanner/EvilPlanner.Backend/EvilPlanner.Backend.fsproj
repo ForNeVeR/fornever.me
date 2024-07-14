@@ -6,9 +6,6 @@
     <Compile Include="Application.fs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="JetBrains.Lifetimes" Version="2024.1.1" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\EvilPlanner.Core\EvilPlanner.Core.fsproj" />
     <ProjectReference Include="..\EvilPlanner.Logic\EvilPlanner.Logic.fsproj" />
   </ItemGroup>

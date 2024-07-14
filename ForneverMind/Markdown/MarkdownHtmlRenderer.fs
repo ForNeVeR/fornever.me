@@ -8,7 +8,7 @@ open Markdig.Renderers
 open Markdig.Renderers.Html
 open Markdig.Syntax
 
-type HighlightJsCodeBlockRenderer(highlight: CodeHighlightModule) =
+type HighlightJsCodeBlockRenderer(server: Server, highlight: CodeHighlightModule) =
     inherit HtmlObjectRenderer<CodeBlock>()
 
     let getCodeLanguage: CodeBlock -> string option = function
@@ -18,7 +18,7 @@ type HighlightJsCodeBlockRenderer(highlight: CodeHighlightModule) =
     override this.Write(renderer: HtmlRenderer, obj: CodeBlock): unit =
         let language = getCodeLanguage obj
         let sourceCode = MarkdownUtils.extractCode obj
-        let renderedCode: string = Async.RunSynchronously <| highlight.Highlight(language, sourceCode)
+        let renderedCode: string = Async.RunSynchronously <| highlight.Highlight(server, language, sourceCode)
 
         renderer
             .EnsureLine()
@@ -27,9 +27,9 @@ type HighlightJsCodeBlockRenderer(highlight: CodeHighlightModule) =
             .WriteLine("</code></pre>")
         |> ignore
 
-type MarkdownHtmlRenderer(writer: TextWriter, highlight: CodeHighlightModule) as this =
+type MarkdownHtmlRenderer(server: Server, writer: TextWriter, highlight: CodeHighlightModule) as this =
     inherit HtmlRenderer(writer)
 
     do this.ObjectRenderers.RemoveAll(fun x -> x :? CodeBlockRenderer) |> ignore
-    do this.ObjectRenderers.Add(HighlightJsCodeBlockRenderer highlight)
+    do this.ObjectRenderers.Add(HighlightJsCodeBlockRenderer(server, highlight))
     do this.ObjectRenderers.Add(HtmlTableRenderer())
