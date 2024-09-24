@@ -10,6 +10,10 @@ due to content-only changes (this is one of the reasons a version may be listed
 here as having "no notable changes"); currently, no version increment is
 performed in such a case.
 
+## [4.6.2] - 2024-09-25
+### Changed
+- Used library updates.
+
 ## [4.6.1] - 2024-07-14
 ### Fixed
 - [#278: RSS feed reports invalid encoding: UTF-16](https://github.com/ForNeVeR/fornever.me/issues/278).
@@ -320,4 +324,5 @@ Initial version of the site, written in Python using Django framework.
 [4.5.1]: https://github.com/ForNeVeR/fornever.me/compare/v4.5.0...v4.5.1
 [4.6.0]: https://github.com/ForNeVeR/fornever.me/compare/v4.5.1...v4.6.0
 [4.6.1]: https://github.com/ForNeVeR/fornever.me/compare/v4.6.0...v4.6.1
-[Unreleased]: https://github.com/ForNeVeR/fornever.me/compare/v4.6.1...HEAD
+[4.6.2]: https://github.com/ForNeVeR/fornever.me/compare/v4.6.1...v4.6.2
+[Unreleased]: https://github.com/ForNeVeR/fornever.me/compare/v4.6.2...HEAD
