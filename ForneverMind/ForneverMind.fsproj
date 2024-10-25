@@ -36,7 +36,7 @@
   <ItemGroup>
     <PackageReference Include="Freya" Version="4.0.0" />
     <PackageReference Include="Jint" Version="4.0.3" />
-    <PackageReference Include="Markdig" Version="0.37.0" />
+    <PackageReference Include="Markdig" Version="0.38.0" />
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Owin" Version="6.0.35" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
