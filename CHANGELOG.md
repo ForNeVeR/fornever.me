@@ -329,5 +329,5 @@ Initial version of the site, written in Python using Django framework.
 [4.6.0]: https://github.com/ForNeVeR/fornever.me/compare/v4.5.1...v4.6.0
 [4.6.1]: https://github.com/ForNeVeR/fornever.me/compare/v4.6.0...v4.6.1
 [4.6.2]: https://github.com/ForNeVeR/fornever.me/compare/v4.6.1...v4.6.2
-[4.6.2]: https://github.com/ForNeVeR/fornever.me/compare/v4.6.2...v4.6.3
+[4.6.3]: https://github.com/ForNeVeR/fornever.me/compare/v4.6.2...v4.6.3
 [Unreleased]: https://github.com/ForNeVeR/fornever.me/compare/v4.6.3...HEAD
