@@ -11,8 +11,6 @@ Features
 - Main pages layout in Razor.
 - Blog posts are written in Markdown.
 - Source code highlighting is provided by [highlight.js][] on the server side.
-- There's a Plans page that provides a daily quote from [the Evil Overlord List][evil-overlord-list].
-  - A quote for each day is stored in a LiteDB database.
 - [Disqus][disqus] comment system.
 
 Contributing

@@ -19,7 +19,6 @@
     <Compile Include="CommonTests.fs" />
     <Compile Include="MarkdownTests.fs" />
     <Compile Include="RouteTests.fs" />
-    <Compile Include="QuotesTests.fs" />
     <Content Include="..\ForneverMind\server.js" CopyToOutputDirectory="Always" />
   </ItemGroup>
 </Project>

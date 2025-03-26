@@ -10,9 +10,6 @@ open Microsoft.Extensions.Configuration
 open Microsoft.Extensions.DependencyInjection
 open Microsoft.Extensions.Logging
 
-open EvilPlanner.Core
-open EvilPlanner.Core.Storage
-
 let private fuseApplication (services: IServiceProvider) =
     let configuration = services.GetRequiredService<ConfigurationModule>()
     let logger = services.GetRequiredService<ILogger<CodeHighlightModule>>()
@@ -40,13 +37,9 @@ let private configure (configuration: IConfigurationRoot) (builder: WebApplicati
     builder.WebHost.ConfigureKestrel(fun opts -> opts.AllowSynchronousIO <- true) |> ignore
 
     let configModule = ConfigurationModule(builder.Environment, configuration)
-    let clock = SystemClock()
 
     builder.Services
         .AddSingleton(configModule)
-        .AddSingleton(configModule.EvilPlannerConfig)
-        .AddSingleton<Database>()
-        .AddSingleton<IClock>(clock)
     |> ignore
 
     builder.Services.AddMvc() |> ignore
@@ -63,7 +56,6 @@ let private build (builder: WebApplicationBuilder) =
     app
 
 let private run(app: WebApplication) =
-    Migrations.migrateDatabase <| app.Services.GetRequiredService<Configuration>()
     app.Run()
 
 [<EntryPoint>]

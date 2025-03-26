@@ -10,6 +10,15 @@ due to content-only changes (this is one of the reasons a version may be listed
 here as having "no notable changes"); currently, no version increment is
 performed in such a case.
 
+## [Unreleased] (5.0.0)
+### Removed
+- EvilPlanner functionality, including everything (server API, pages) related to daily quotes.
+
+### Upgrade Notes
+When upgrading from previous versions,
+- drop `databasePath` from the configuration file,
+- drop the data by the path, it's no longer used by the application.
+
 ## [4.6.3] - 2024-10-21
 ### Changed
 - Used library updates.
