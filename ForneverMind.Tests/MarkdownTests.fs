@@ -1,4 +1,8 @@
-﻿module ForneverMind.Tests.MarkdownTests
+﻿// SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
+//
+// SPDX-License-Identifier: MIT
+
+module ForneverMind.Tests.MarkdownTests
 
 open System
 open System.IO

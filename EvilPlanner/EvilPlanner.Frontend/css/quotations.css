@@ -1,4 +1,10 @@
-﻿blockquote {
+/*
+ * SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+blockquote {
 	border: 1px solid black;
 	border-radius: 2px;
 	margin: 1em 5%;

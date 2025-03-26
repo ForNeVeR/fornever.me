@@ -1,4 +1,8 @@
-﻿const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+﻿// SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
+//
+// SPDX-License-Identifier: MIT
+
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
 const outputPath = path.join(__dirname, '..', 'ForneverMind');

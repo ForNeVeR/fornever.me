@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
+#
+# SPDX-License-Identifier: MIT
+
 FROM mcr.microsoft.com/powershell:7.2.2-debian-10 AS talks-env
 
 # First, install curl to be able to install Node.js, and then install Node.js itself:

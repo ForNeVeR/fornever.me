@@ -1,4 +1,8 @@
-﻿namespace EvilPlanner.Tests
+﻿// SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
+//
+// SPDX-License-Identifier: MIT
+
+namespace EvilPlanner.Tests
 
 open System
 open System.IO

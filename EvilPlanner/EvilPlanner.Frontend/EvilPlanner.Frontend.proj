@@ -1,4 +1,10 @@
-﻿<Project Sdk="Microsoft.Build.NoTargets/3.7.56">
+﻿<!--
+SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
+
+SPDX-License-Identifier: MIT
+-->
+
+<Project Sdk="Microsoft.Build.NoTargets/3.7.56">
 
     <ItemGroup>
         <None Remove="**\*"/>

@@ -1,4 +1,8 @@
-﻿module ForneverMind.Tests.CommonTests
+// SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
+//
+// SPDX-License-Identifier: MIT
+
+module ForneverMind.Tests.CommonTests
 
 open System.IO
 

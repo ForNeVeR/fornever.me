@@ -1,4 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<!--
+SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
+
+SPDX-License-Identifier: MIT
+-->
+
+<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <Version>4.6.3</Version>

@@ -1,4 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<!--
+SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
+
+SPDX-License-Identifier: MIT
+-->
+
+<Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
     <Compile Include="Configuration.fs" />
     <Compile Include="IClock.fs" />

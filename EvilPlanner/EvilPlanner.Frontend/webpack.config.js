@@ -1,4 +1,8 @@
-﻿const path = require('path');
+﻿// SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
+//
+// SPDX-License-Identifier: MIT
+
+const path = require('path');
 
 const outputPath = path.join(__dirname, '../../ForneverMind/wwwroot/plans');
 
