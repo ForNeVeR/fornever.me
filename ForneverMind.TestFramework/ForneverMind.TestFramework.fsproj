@@ -12,13 +12,10 @@ SPDX-License-Identifier: MIT
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="StorageUtils.fs" />
     <Compile Include="IntegrationTestUtil.fs" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EvilPlanner\EvilPlanner.Core\EvilPlanner.Core.fsproj" />
-    <ProjectReference Include="..\EvilPlanner\EvilPlanner.Logic\EvilPlanner.Logic.fsproj" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.35" />
     <ProjectReference Include="..\ForneverMind\ForneverMind.fsproj" />
   </ItemGroup>
