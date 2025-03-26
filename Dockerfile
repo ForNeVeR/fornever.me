@@ -27,11 +27,6 @@ RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - \
 WORKDIR /app
 
 COPY ./Directory.Build.props ./
-COPY ./EvilPlanner/EvilPlanner.Backend/EvilPlanner.Backend.fsproj ./EvilPlanner/EvilPlanner.Backend/
-COPY ./EvilPlanner/EvilPlanner.Core/EvilPlanner.Core.fsproj ./EvilPlanner/EvilPlanner.Core/
-COPY ./EvilPlanner/EvilPlanner.Frontend/EvilPlanner.Frontend.proj ./EvilPlanner/EvilPlanner.Frontend/
-COPY ./EvilPlanner/EvilPlanner.Logic/EvilPlanner.Logic.fsproj ./EvilPlanner/EvilPlanner.Logic/
-COPY ./EvilPlanner/EvilPlanner.Tests/EvilPlanner.Tests.fsproj ./EvilPlanner/EvilPlanner.Tests/
 COPY ./ForneverMind.Frontend/ForneverMind.Frontend.proj ./ForneverMind.Frontend/
 COPY ./ForneverMind.TestFramework/ForneverMind.TestFramework.fsproj ./ForneverMind.TestFramework/
 COPY ./ForneverMind.Tests/ForneverMind.Tests.fsproj ./ForneverMind.Tests/
@@ -39,7 +34,6 @@ COPY ./ForneverMind.sln ./
 COPY ./ForneverMind/ForneverMind.fsproj ./ForneverMind/
 RUN dotnet restore
 
-COPY ./EvilPlanner ./EvilPlanner/
 COPY ./ForneverMind ./ForneverMind/
 COPY ./ForneverMind.Frontend ./ForneverMind.Frontend/
 COPY ./ForneverMind.Tests ./ForneverMind.Tests/
