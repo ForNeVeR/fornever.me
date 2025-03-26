@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2024-2025 Friedrich von Never <friedrich@fornever.me>
+
+SPDX-License-Identifier: MIT
+-->
+
 fornever.me: Engineer, Programmer, Gentleman [![Status Aquana][status-aquana]][andivionian-status-classifier] [![Docker Image][badge.docker]][docker-hub]
 ============================================
 
@@ -65,7 +71,12 @@ Documentation
 - [The Contributor Guide][docs.contributor-guide]
 - [Changelog][docs.changelog]
 - [Maintainership][docs.maintainership]
-- [License (MIT)][docs.license]
+
+License
+-------
+The project is distributed under the terms of [the MIT license][docs.license].
+
+The license indication in the project's sources is compliant with the [REUSE specification v3.3][reuse.spec].
 
 [andivionian-status-classifier]: https://github.com/ForNeVeR/andivionian-status-classifier#status-aquana-
 [badge.docker]: https://img.shields.io/docker/v/revenrof/fornever.me?label=docker&sort=semver
@@ -73,9 +84,10 @@ Documentation
 [docker-hub]: https://hub.docker.com/r/revenrof/fornever.me
 [docs.changelog]: CHANGELOG.md
 [docs.contributor-guide]: CONTRIBUTING.md
-[docs.license]: LICENSE.md
+[docs.license]: LICENSE.txt
 [docs.maintainership]: ./MAINTAINERSHIP.md
 [evil-overlord-list]: https://legendspbem.angelfire.com/eviloverlordlist.html
 [fornever.me]: https://fornever.me/
 [highlight.js]: https://highlightjs.org/
+[reuse.spec]: https://reuse.software/spec-3.3/
 [status-aquana]: https://img.shields.io/badge/status-aquana-yellowgreen.svg

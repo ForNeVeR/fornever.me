@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
+#
+# SPDX-License-Identifier: MIT
+
 name: Main
 on:
   push:
@@ -59,3 +63,11 @@ jobs:
         run: dotnet test --configuration Release
       - name: Publish
         run: dotnet publish ForneverMind --configuration Release --output publish
+
+  licenses:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out the sources
+        uses: actions/checkout@v4
+      - name: REUSE license check
+        uses: fsfe/reuse-action@v5
