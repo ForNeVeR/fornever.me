@@ -11,7 +11,7 @@ Releasing a New Version
 -----------------------
 
 1. Update the copyright year in the following places, if required:
-    - `LICENSE.md`,
+    - `LICENSE.txt`,
     - the `_Layout.cshtml` files in the `ForneverMind` project (there are two of them).
 2. Choose the new version according to [Semantic Versioning][semver]. It should consist of three numbers (i.e. `1.0.0`).
 3. Update the `<Version>` element contents in the `ForneverMind/ForneverMind.fsproj` file.
