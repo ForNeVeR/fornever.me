@@ -2,5 +2,15 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": ["^\\.github/workflows/.+\\.yml$"],
+      "matchStrings": [
+        "# renovate:\\s*\\n\\s*- (?<depName>\\S+?)-(?<currentValue>\\S+)"
+      ],
+      "datasourceTemplate": "github-runners"
+    }
   ]
 }

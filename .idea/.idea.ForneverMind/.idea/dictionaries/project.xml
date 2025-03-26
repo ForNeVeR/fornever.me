@@ -2,6 +2,9 @@
   <dictionary name="project">
     <words>
       <w>buildx</w>
+      <w>fsfe</w>
+      <w>nologo</w>
+      <w>optout</w>
     </words>
   </dictionary>
 </component>
