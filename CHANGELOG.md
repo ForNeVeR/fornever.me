@@ -16,9 +16,12 @@ due to content-only changes (this is one of the reasons a version may be listed
 here as having "no notable changes"); currently, no version increment is
 performed in such a case.
 
-## [Unreleased] (5.0.0)
+## [5.0.0] - 2025-03-27
 ### Removed
-- EvilPlanner functionality, including everything (server API, pages) related to daily quotes.
+- **Breaking change:** removed the EvilPlanner functionality, including everything (server API, pages, resources) related to daily quotes.
+
+### Changed
+- Minor dependency upgrades.
 
 ### Upgrade Notes
 When upgrading from previous versions,
@@ -345,4 +348,5 @@ Initial version of the site, written in Python using Django framework.
 [4.6.1]: https://github.com/ForNeVeR/fornever.me/compare/v4.6.0...v4.6.1
 [4.6.2]: https://github.com/ForNeVeR/fornever.me/compare/v4.6.1...v4.6.2
 [4.6.3]: https://github.com/ForNeVeR/fornever.me/compare/v4.6.2...v4.6.3
-[Unreleased]: https://github.com/ForNeVeR/fornever.me/compare/v4.6.3...HEAD
+[5.0.0]: https://github.com/ForNeVeR/fornever.me/compare/v4.6.3...v5.0.0
+[Unreleased]: https://github.com/ForNeVeR/fornever.me/compare/v5.0.0...HEAD
