@@ -6,7 +6,7 @@ Dependencies
 
 To build ForneverMind, the following is required:
 - [.NET SDK][dotnet] 6 or later,
-- [Node.js][node-js] 16.
+- [Node.js][node-js] 22 or later.
 
 It is recommended to use [nvm-windows][] on Windows:
 
