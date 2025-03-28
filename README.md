@@ -19,10 +19,11 @@ Features
 - Source code highlighting is provided by [highlight.js][] on the server side.
 - [Disqus][disqus] comment system.
 
-Contributing
-------------
+Configuration
+-------------
+Backend reads its settings from the standard `appsettings.json` file. The available settings are:
 
-To know how to develop the application locally, read [the contributor guide][docs.contributor-guide].
+- `baseUrl`: URL to listen when started.
 
 Deployment
 ----------
@@ -50,9 +51,8 @@ This will deploy the Docker container version `v5.0.0` and make it to listen por
 
 Documentation
 -------------
-
-- [The Contributor Guide][docs.contributor-guide]
 - [Changelog][docs.changelog]
+- [Contributor Guide][docs.contributor-guide]
 - [Maintainership][docs.maintainership]
 
 License

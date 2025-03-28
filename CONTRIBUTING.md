@@ -4,8 +4,8 @@ SPDX-FileCopyrightText: 2024-2025 Friedrich von Never <friedrich@fornever.me>
 SPDX-License-Identifier: MIT
 -->
 
-The Contributor Guide
-=====================
+Contributor Guide
+=================
 
 Dependencies
 ------------
@@ -14,22 +14,11 @@ To build ForneverMind, the following is required:
 - [.NET SDK][dotnet] 6 or later,
 - [Node.js][node-js] 22 or later.
 
-It is recommended to use [nvm-windows][] on Windows:
+To set the Node-related prerequisites up, you may use [Volta][volta]:
 
 ```console
-$ nvm install 16
-Installation complete. If you want to use this version, type
-
-nvm use 16.18.0
-# nvm use 16.18.0
+$ volta install node@22
 ```
-
-Configuration
--------------
-
-Backend reads its settings from the standard `appsettings.json` file. The available settings are:
-
-- `baseUrl`: URL to listen when started.
 
 Build
 -----
@@ -38,7 +27,11 @@ Build
 
 There's an additional talks archive included as a git submodule in this
 repository. To prepare tasks for build, use the `Scripts/Prepare-Talks.ps1`
-script. Talks require external [Yarn][yarn] installation of v1.22.0 or higher.
+script. Talks require external [Yarn][yarn] installation of v1.22.0 or higher. Again, you may set it up using [Volta][volta]:
+
+```console
+$ volta install yarn@1
+```
 
 ### Frontend and Backend
 
@@ -113,4 +106,5 @@ or if you don't want your name to be mentioned in the project's source: this doe
 [node-js]: https://nodejs.org/
 [nvm-windows]: https://github.com/coreybutler/nvm-windows
 [reuse]: https://reuse.software/
+[volta]: https://volta.sh/
 [yarn]: https://yarnpkg.com/
