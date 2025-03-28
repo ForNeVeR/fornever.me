@@ -8,7 +8,7 @@ fornever.me: Engineer, Programmer, Gentleman [![Status Aquana][status-aquana]][a
 ============================================
 
 This is the [fornever.me][] site source code. It uses ForneverMind — a simple
-homemade blog engine mainly written in F# programming language.
+homemade blog engine mainly written in the F# programming language.
 
 Features
 --------
@@ -61,7 +61,7 @@ The project is distributed under the terms of [the MIT license][docs.license].
 
 The license indication in the project's sources is compliant with the [REUSE specification v3.3][reuse.spec].
 
-[andivionian-status-classifier]: https://github.com/ForNeVeR/andivionian-status-classifier#status-aquana-
+[andivionian-status-classifier]: https://andivionian.fornever.me/v1/#status-aquana-
 [ansible]: https://docs.ansible.com/
 [badge.docker]: https://img.shields.io/docker/v/revenrof/fornever.me?label=docker&sort=semver
 [disqus]: https://disqus.com/
