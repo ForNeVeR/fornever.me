@@ -10,7 +10,7 @@ SPDX-License-Identifier: MIT
     <Version>5.0.0</Version>
   </PropertyGroup>
   <PropertyGroup>
-    <!-- TODO: Get rid of RazorLight and delete these props -->
+    <!-- TODO[#116]: Get rid of RazorLight and delete these props -->
     <PreserveCompilationReferences>true</PreserveCompilationReferences>
     <PreserveCompilationContext>true</PreserveCompilationContext>
     <ServerGarbageCollection>false</ServerGarbageCollection>
