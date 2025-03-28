@@ -26,42 +26,27 @@ To know how to develop the application locally, read [the contributor guide][doc
 
 Deployment
 ----------
+Consider using the following [Ansible][ansible] task for deployment:
+```yaml
+- name: Deploy fornever.me website
+  hosts: fornever_me
+  vars:
+    fornever_me_version: v5.0.0
+    fornever_me_port: 5001
 
-To install the application from Docker, run the following command:
-
-```console
-$ docker run -d \
-    --restart unless-stopped \
-    -p:$PORT:80 \
-    --name $NAME \
-    -v $DATA:/data \
-    revenrof/fornever.me:$VERSION
+  tasks:
+    - name: Install fornever.me
+      community.docker.docker_container:
+        name: fornevermind
+        image_name_mismatch: recreate
+        image: revenrof/fornever.me:{{ fornever_me_version }}
+        published_ports:
+          - {{ fornever_me_port }}:80
+        restart_policy: unless-stopped
+        default_host_ip: ''
 ```
 
-Where
-- `$PORT` is the port you want to expose the application on
-- `$NAME` is the container name
-- `$VERSION` is the version you want to deploy, or `latest` for the latest
-  available one
-- `$DATA` is the database directory
-
-For example, a production server may use the following settings (note this
-command uses the Bash syntax; adapt for your shell if necessary):
-
-```bash
-PORT=5001
-NAME=fornevermind
-VERSION=latest
-DATA=/opt/fornever/fornever.me/data
-docker pull revenrof/fornever.me:$VERSION
-docker rm -f $NAME
-docker run -d \
-    --restart unless-stopped \
-    -p $PORT:80 \
-    --name $NAME \
-    -v $DATA:/data \
-    revenrof/fornever.me:$VERSION
-```
+This will deploy the Docker container version `v5.0.0` and make it to listen port `5001` on the host.
 
 Documentation
 -------------
@@ -77,6 +62,7 @@ The project is distributed under the terms of [the MIT license][docs.license].
 The license indication in the project's sources is compliant with the [REUSE specification v3.3][reuse.spec].
 
 [andivionian-status-classifier]: https://github.com/ForNeVeR/andivionian-status-classifier#status-aquana-
+[ansible]: https://docs.ansible.com/
 [badge.docker]: https://img.shields.io/docker/v/revenrof/fornever.me?label=docker&sort=semver
 [disqus]: https://disqus.com/
 [docker-hub]: https://hub.docker.com/r/revenrof/fornever.me
