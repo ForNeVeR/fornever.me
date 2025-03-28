@@ -6,15 +6,10 @@ SPDX-License-Identifier: MIT
 
 # Changelog
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic
-Versioning](https://semver.org/spec/v2.0.0.html).
+The format is based on [Keep a Changelog v1.1.0][keep-a-changelog]. See [the README file][docs.readme] for more details on how the project is versioned.
 
 This file only documents changes in the site engine, not any changes in the
-content or the hosting infrastructure. In the past, some versions were created
-due to content-only changes (this is one of the reasons a version may be listed
-here as having "no notable changes"); currently, no version increment is
-performed in such a case.
+content or the hosting infrastructure.
 
 ## [5.0.0] - 2025-03-27
 ### Removed
@@ -283,6 +278,9 @@ down somewhere between this date and the next release.
 
 ## [unversioned-1] - circa 2010-01-04
 Initial version of the site, written in Python using Django framework.
+
+[docs.readme]: README.md
+[keep-a-changelog]: https://keepachangelog.com/en/1.1.0/
 
 [unversioned-1]: https://github.com/ForNeVeR/fornever.me/commit/ed4797da69402f572794544a94202f5bc9b640d8
 [unversioned-2]: https://github.com/ForNeVeR/fornever.me/compare/ed4797da69402f572794544a94202f5bc9b640d8...legacy
