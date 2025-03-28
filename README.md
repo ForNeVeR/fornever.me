@@ -70,7 +70,6 @@ The license indication in the project's sources is compliant with the [REUSE spe
 [docs.contributor-guide]: CONTRIBUTING.md
 [docs.license]: LICENSE.txt
 [docs.maintainership]: ./MAINTAINERSHIP.md
-[evil-overlord-list]: https://legendspbem.angelfire.com/eviloverlordlist.html
 [fornever.me]: https://fornever.me/
 [highlight.js]: https://highlightjs.org/
 [reuse.spec]: https://reuse.software/spec-3.3/
