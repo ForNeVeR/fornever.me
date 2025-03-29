@@ -1,4 +1,8 @@
-﻿param (
+﻿# SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
+#
+# SPDX-License-Identifier: MIT
+
+param (
     [string] $yarn = 'yarn',
     [string] $RepoPath = "$PSScriptRoot/../ForneverMind/wwwroot/talks"
 )

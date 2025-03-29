@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
+#
+# SPDX-License-Identifier: MIT
+
 [submodule "ForneverMind/talks/modern-programming"]
 	path = ForneverMind/wwwroot/talks/modern-programming
 	url = https://github.com/ForNeVeR/modern-programming.git

@@ -9,7 +9,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
-		LICENSE.md = LICENSE.md
 		README.md = README.md
 		Dockerfile = Dockerfile
 		.dockerignore = .dockerignore
@@ -17,6 +16,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		MAINTAINERSHIP.md = MAINTAINERSHIP.md
 		Directory.Build.props = Directory.Build.props
 		CONTRIBUTING.md = CONTRIBUTING.md
+		global.json = global.json
+		LICENSE.txt = LICENSE.txt
+		REUSE.toml = REUSE.toml
+		renovate.json = renovate.json
 	EndProjectSection
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ForneverMind.Tests", "ForneverMind.Tests\ForneverMind.Tests.fsproj", "{F66CD922-9216-401E-96DE-36263DF07726}"
@@ -27,7 +30,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{D993
 		Scripts\Get-Version.ps1 = Scripts\Get-Version.ps1
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForneverMind.Frontend", "ForneverMind.Frontend\ForneverMind.Frontend.csproj", "{D96D3D8B-B311-49B1-8EB0-F1AA9F7F6F31}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForneverMind.Frontend", "ForneverMind.Frontend\ForneverMind.Frontend.proj", "{D96D3D8B-B311-49B1-8EB0-F1AA9F7F6F31}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{5FEA0255-DAF1-4A37-8F1E-3EA4D19F60A7}"
 EndProject
@@ -41,18 +44,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deploy", "deploy", "{6DE943
 ProjectSection(SolutionItems) = preProject
 	deploy\appsettings.json = deploy\appsettings.json
 EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EvilPlanner", "EvilPlanner", "{1C1DC271-8B82-4B50-AF61-B9942E98D55A}"
-EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "EvilPlanner.Backend", "EvilPlanner\EvilPlanner.Backend\EvilPlanner.Backend.fsproj", "{AFDDF457-354D-4787-A737-5EE1C2E6630B}"
-EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "EvilPlanner.Core", "EvilPlanner\EvilPlanner.Core\EvilPlanner.Core.fsproj", "{467E2289-91DF-4038-8483-2745761B0CA4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvilPlanner.Frontend", "EvilPlanner\EvilPlanner.Frontend\EvilPlanner.Frontend.csproj", "{F319E172-E273-4DBF-B4BA-CF4F2318726A}"
-EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "EvilPlanner.Logic", "EvilPlanner\EvilPlanner.Logic\EvilPlanner.Logic.fsproj", "{6A1368A7-884A-4E50-8E1C-0B21781FA6DC}"
-EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "EvilPlanner.Tests", "EvilPlanner\EvilPlanner.Tests\EvilPlanner.Tests.fsproj", "{543D84AE-65E2-4E82-BCC3-6A47CC5F3B66}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{EEF302B2-6DEB-492A-ABCD-56E52ADF7B7C}"
 	ProjectSection(SolutionItems) = preProject
@@ -79,26 +70,6 @@ Global
 		{D96D3D8B-B311-49B1-8EB0-F1AA9F7F6F31}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D96D3D8B-B311-49B1-8EB0-F1AA9F7F6F31}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D96D3D8B-B311-49B1-8EB0-F1AA9F7F6F31}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AFDDF457-354D-4787-A737-5EE1C2E6630B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AFDDF457-354D-4787-A737-5EE1C2E6630B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AFDDF457-354D-4787-A737-5EE1C2E6630B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AFDDF457-354D-4787-A737-5EE1C2E6630B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{467E2289-91DF-4038-8483-2745761B0CA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{467E2289-91DF-4038-8483-2745761B0CA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{467E2289-91DF-4038-8483-2745761B0CA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{467E2289-91DF-4038-8483-2745761B0CA4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F319E172-E273-4DBF-B4BA-CF4F2318726A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F319E172-E273-4DBF-B4BA-CF4F2318726A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F319E172-E273-4DBF-B4BA-CF4F2318726A}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{F319E172-E273-4DBF-B4BA-CF4F2318726A}.Release|Any CPU.Build.0 = Debug|Any CPU
-		{6A1368A7-884A-4E50-8E1C-0B21781FA6DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6A1368A7-884A-4E50-8E1C-0B21781FA6DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6A1368A7-884A-4E50-8E1C-0B21781FA6DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6A1368A7-884A-4E50-8E1C-0B21781FA6DC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{543D84AE-65E2-4E82-BCC3-6A47CC5F3B66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{543D84AE-65E2-4E82-BCC3-6A47CC5F3B66}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{543D84AE-65E2-4E82-BCC3-6A47CC5F3B66}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{543D84AE-65E2-4E82-BCC3-6A47CC5F3B66}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CC92AD22-D198-46B2-8F33-45F6B5BF1EEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CC92AD22-D198-46B2-8F33-45F6B5BF1EEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC92AD22-D198-46B2-8F33-45F6B5BF1EEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -109,10 +80,5 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{CA44E9BC-EE9F-464A-857E-34F62E2C5D3A} = {5FEA0255-DAF1-4A37-8F1E-3EA4D19F60A7}
-		{AFDDF457-354D-4787-A737-5EE1C2E6630B} = {1C1DC271-8B82-4B50-AF61-B9942E98D55A}
-		{467E2289-91DF-4038-8483-2745761B0CA4} = {1C1DC271-8B82-4B50-AF61-B9942E98D55A}
-		{F319E172-E273-4DBF-B4BA-CF4F2318726A} = {1C1DC271-8B82-4B50-AF61-B9942E98D55A}
-		{6A1368A7-884A-4E50-8E1C-0B21781FA6DC} = {1C1DC271-8B82-4B50-AF61-B9942E98D55A}
-		{543D84AE-65E2-4E82-BCC3-6A47CC5F3B66} = {1C1DC271-8B82-4B50-AF61-B9942E98D55A}
 	EndGlobalSection
 EndGlobal

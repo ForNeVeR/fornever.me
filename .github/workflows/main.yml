@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
+#
+# SPDX-License-Identifier: MIT
+
 name: Main
 on:
   push:
@@ -14,7 +18,13 @@ jobs:
     runs-on: ${{ matrix.image }}
     strategy:
       matrix:
-        image: [ macos-11, ubuntu-20.04, windows-2019 ]
+        image:
+          # renovate:
+          - macos-14
+          # renovate:
+          - ubuntu-24.04
+          # renovate:
+          - windows-2022
       fail-fast: false
     env:
       DOTNET_NOLOGO: 1
@@ -22,12 +32,12 @@ jobs:
       NUGET_PACKAGES: ${{ github.workspace }}/.github/nuget-packages
       NPM_CACHE: ${{ github.workspace }}/.github/npm-cache
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
 
       - name: NPM cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ env.NPM_CACHE }}
           key: ${{ runner.os }}.npm.${{ hashFiles('**/package-lock.json') }}+${{ hashFiles('**/yarn.lock') }}
@@ -35,9 +45,9 @@ jobs:
         run: npm config set cache ${{ env.NPM_CACHE }}
 
       - name: Install Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '16.x'
+          node-version: '22.x'
       - name: Install Yarn
         run: npm install -g yarn@1.22.0
       - name: Prepare talks
@@ -45,11 +55,9 @@ jobs:
         run: Scripts/Prepare-Talks.ps1 yarn
 
       - name: Set up .NET SDK
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '6.0.x'
+        uses: actions/setup-dotnet@v4
       - name: NuGet cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ env.NUGET_PACKAGES }}
           key: ${{ runner.os }}.nuget.${{ hashFiles('**/*.fsproj') }}
@@ -59,12 +67,11 @@ jobs:
         run: dotnet test --configuration Release
       - name: Publish
         run: dotnet publish ForneverMind --configuration Release --output publish
-  docker-build:
-    runs-on: 'ubuntu-20.04'
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          submodules: recursive
 
-      - name: Build Docker image
-        uses: docker/build-push-action@v1
+  licenses:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out the sources
+        uses: actions/checkout@v4
+      - name: REUSE license check
+        uses: fsfe/reuse-action@v5

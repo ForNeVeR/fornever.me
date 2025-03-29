@@ -1,17 +1,18 @@
-﻿module ForneverMind.Tests.MarkdownTests
+﻿// SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
+//
+// SPDX-License-Identifier: MIT
+
+module ForneverMind.Tests.MarkdownTests
 
 open System
 open System.IO
-
-open JetBrains.Lifetimes
 open Microsoft.Extensions.Logging.Abstractions
 open Xunit
-
 open ForneverMind
 open ForneverMind.Models
 
-let private markdown lt =
-    let highlight = CodeHighlightModule(lt, NullLogger.Instance)
+let private markdown() =
+    let highlight = CodeHighlightModule(NullLogger.Instance)
     MarkdownModule(highlight)
 
 let private normalizeLineEndings (s : string) = s.Replace(Environment.NewLine, "\n")
@@ -19,21 +20,17 @@ let private normalizeHtmlContent ({ HtmlContent = content } as item) =
     { item with HtmlContent = normalizeLineEndings content }
 
 let private compareResult fileName (input: string) expected =
-    Lifetime.Using(fun lt ->
-        use reader = new StringReader (normalizeLineEndings input)
-        let actual = (markdown lt).ProcessReader(fileName, reader)
+    use reader = new StringReader (normalizeLineEndings input)
+    let actual = markdown().ProcessReader(fileName, reader)
 
-        Assert.Equal (normalizeHtmlContent expected, normalizeHtmlContent actual)
-    )
+    Assert.Equal (normalizeHtmlContent expected, normalizeHtmlContent actual)
 
 let private defaultFileName = "/ru/posts/0001-01-01.html"
 
 let private compareResultHtml input output =
-    Lifetime.Using(fun lt ->
-        use reader = new StringReader (normalizeLineEndings input)
-        let actual = (markdown lt).ProcessReader(defaultFileName, reader)
-        Assert.Equal(normalizeLineEndings output, normalizeLineEndings actual.HtmlContent)
-    )
+    use reader = new StringReader (normalizeLineEndings input)
+    let actual = markdown().ProcessReader(defaultFileName, reader)
+    Assert.Equal(normalizeLineEndings output, normalizeLineEndings actual.HtmlContent)
 
 [<Fact>]
 let ``Empty document should be parsed`` () =

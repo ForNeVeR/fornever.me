@@ -1,11 +1,10 @@
 {
   "name": "fornever.me",
-  "version": "4.5.0",
+  "version": "5.0.0",
   "private": true,
   "scripts": {
-    "release": "webpack -p",
-    "watch": "webpack -d --watch",
-    "debug": "webpack -d"
+    "release": "webpack --mode production",
+    "debug": "webpack --mode production"
   },
   "repository": {
     "type": "git",
@@ -18,12 +17,9 @@
   },
   "homepage": "https://fornever.me/",
   "devDependencies": {
-    "css-loader": "^0.25.0",
-    "extract-text-webpack-plugin": "^1.0.1",
+    "css-loader": "^7.0.0",
     "highlight.js": "^10.4.1",
-    "less": "^2.7.1",
-    "less-loader": "^2.2.3",
-    "style-loader": "^0.13.1",
-    "webpack": "^1.13.1"
+    "mini-css-extract-plugin": "^2.8.0",
+    "webpack-cli": "^6.0.0"
   }
 }

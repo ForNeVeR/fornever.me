@@ -1,4 +1,8 @@
-﻿namespace ForneverMind
+﻿// SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
+//
+// SPDX-License-Identifier: MIT
+
+namespace ForneverMind
 
 open System
 open System.Text
@@ -12,7 +16,7 @@ open ForneverMind.Models
 
 type RssModule(config : ConfigurationModule, posts : PostsModule) =
 
-    let sindicationItem (post : PostMetadata) : Item =
+    let syndicationItem(post : PostMetadata): Item =
         let url = config.BaseUrl + post.Url
         Item(Title = post.Title,
              Body = post.Description,
@@ -21,15 +25,14 @@ type RssModule(config : ConfigurationModule, posts : PostsModule) =
              PublishDate = post.Date)
 
     let feedContent posts =
-        let items = Seq.map sindicationItem posts
-        let feed =
-            Feed (
-                Title = "Engineer, programmer, gentleman",
-                Description = "Friedrich von Never: Engineer, Programmer, Gentleman.",
-                Link = Uri config.BaseUrl
-            )
+        let items = Seq.map syndicationItem posts
+        let feed = Feed (
+            Title = "Engineer, programmer, gentleman",
+            Description = "Friedrich von Never: Engineer, Programmer, Gentleman.",
+            Link = Uri config.BaseUrl
+        )
         Seq.iter feed.Items.Add items
-        let text = feed.Serialize()
+        let text = feed.Serialize(SerializeOption(Encoding = Encoding.UTF8))
         Encoding.UTF8.GetBytes text
 
     let getPosts =
