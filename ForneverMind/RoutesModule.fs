@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
+﻿// SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
 //
 // SPDX-License-Identifier: MIT
 
@@ -16,9 +16,9 @@ type RoutesModule(pages: PagesModule, rss: RssModule) =
             resource "/{language}/error.html" pages.Error
             resource "/{language}/rss.xml" rss.Feed
             resource "/{language}/talks.html" pages.Talks
-            resource "/{language}/{q*}" pages.NotFound
+            // resource "/{language}/{q*}" pages.NotFound // TODO: Migrate this to 404
             resource "/rss.xml" rss.Feed
-            // resource "/{q*}" pages.NotFound // TODO: Migrate this
+            // resource "/{q*}" pages.NotFound // TODO: Migrate this to 404
         }
 
     member __.Router = router

@@ -11,9 +11,4 @@
         <FrameworkReference Include="Microsoft.AspNetCore.App" />
     </ItemGroup>
 
-    <ItemGroup>
-      <AdditionalFiles Include="Pages\404.cshtml" />
-    </ItemGroup>
-
-
 </Project>
