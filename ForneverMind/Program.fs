@@ -7,11 +7,9 @@ module ForneverMind.Program
 open System
 open System.IO
 
-open System.Threading.Tasks
 open Freya.Core
 open Microsoft.AspNetCore.Builder
 open Microsoft.AspNetCore.Hosting
-open Microsoft.AspNetCore.Http
 open Microsoft.Extensions.Configuration
 open Microsoft.Extensions.DependencyInjection
 open Microsoft.Extensions.Logging
@@ -48,6 +46,7 @@ let private configure (configuration: IConfigurationRoot) (builder: WebApplicati
         .AddSingleton(configModule)
     |> ignore
 
+    builder.Services.AddRazorPages() |> ignore
     builder.Services.AddMvc() |> ignore
 
     builder
@@ -59,15 +58,17 @@ let private build (builder: WebApplicationBuilder) =
     useFreya router app
     app.UseRouting() |> ignore
 
-    app.Use(fun (context: HttpContext) (next: RequestDelegate) ->
-                (task {
-                    // TODO: Debug purpose only. Remove this.
-                    Console.WriteLine  $"Found: {context.GetEndpoint().DisplayName}"
-                    return! next.Invoke context
-                }) : Task
-    ) |> ignore
+    // app.Use(fun (context: HttpContext) (next: RequestDelegate) ->
+    //             (task {
+    //                 // TODO: Debug purpose only. Remove this.
+    //                 Console.WriteLine  $"Found: {context.GetEndpoint().DisplayName}"
+    //                 return! next.Invoke context
+    //             }) : Task
+    // ) |> ignore
 
+    // app.UseRouting() |> ignore
     app.MapControllers() |> ignore
+    app.MapRazorPages() |> ignore
     app
 
 let private run(app: WebApplication) =
