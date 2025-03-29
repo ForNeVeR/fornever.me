@@ -7,9 +7,12 @@ module ForneverMind.Program
 open System
 open System.IO
 
+open System.Threading.Tasks
 open Freya.Core
 open Microsoft.AspNetCore.Builder
+open Microsoft.AspNetCore.Diagnostics
 open Microsoft.AspNetCore.Hosting
+open Microsoft.AspNetCore.Http
 open Microsoft.Extensions.Configuration
 open Microsoft.Extensions.DependencyInjection
 open Microsoft.Extensions.Logging
@@ -54,19 +57,28 @@ let private configure (configuration: IConfigurationRoot) (builder: WebApplicati
 let private build (builder: WebApplicationBuilder) =
     let app = builder.Build()
     app.UseStaticFiles() |> ignore
+
+    // To use custom error page addresses, first apply StatusCodePagesWithReExecute and then read the original routing
+    // data from IStatusCodeReExecuteFeature.
+    app
+        .UseStatusCodePagesWithReExecute("/error/{0}")
+        .Use(fun (context: HttpContext) (next: RequestDelegate) ->
+            (task {
+                let statusCode = context.Features.Get<IStatusCodeReExecuteFeature>()
+                if statusCode = null || context.Response.StatusCode <> 404 then return! next.Invoke context
+                else
+
+                let language =
+                    if statusCode.OriginalPath.StartsWith "/ru/" then "ru"
+                    else "en"
+                context.Response.Redirect $"/{language}/404"
+            }) : Task
+    ) |> ignore
+
     let router = createRouter app.Services
     useFreya router app
+
     app.UseRouting() |> ignore
-
-    // app.Use(fun (context: HttpContext) (next: RequestDelegate) ->
-    //             (task {
-    //                 // TODO: Debug purpose only. Remove this.
-    //                 Console.WriteLine  $"Found: {context.GetEndpoint().DisplayName}"
-    //                 return! next.Invoke context
-    //             }) : Task
-    // ) |> ignore
-
-    // app.UseRouting() |> ignore
     app.MapControllers() |> ignore
     app.MapRazorPages() |> ignore
     app

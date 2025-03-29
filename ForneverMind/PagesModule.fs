@@ -68,21 +68,6 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
             return known
         }
 
-    let notFoundHandler =
-        let language =
-            freya {
-                let! language = Common.routeLanguageOpt
-                let language =
-                    language
-                    |> Option.map (fun lang ->
-                        if Array.contains lang Common.supportedLanguages
-                        then lang
-                        else Common.defaultLanguage)
-
-                return Option.defaultValue Common.defaultLanguage language
-            }
-        handleStaticPage language "404" (Freya.init None) false
-
     let page templateName model additionalModificationDate =
         freyaMachine {
             including Common.machine
@@ -94,7 +79,6 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
                               return max templateModificationDate (Option.defaultValue DateTime.MinValue modificationDate)
                           })
             handleOk (handleStaticPage Common.routeLanguage templateName model true)
-            handleNotFound notFoundHandler
         }
 
     let postCache = ConcurrentDictionary()
@@ -140,23 +124,6 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
     let contact = page "Contact" (Freya.init None) (Freya.init None)
     let talks = page "Talks" (Freya.init None) (Freya.init None)
 
-    let notFound =
-        let pageRequestedExplicitly =
-            freya {
-                let supportedUrls =
-                    Common.supportedLanguages
-                    |> Seq.map (sprintf "/%s/404.html")
-                let! url = Request.path_ |> Freya.Optic.get
-                return Seq.contains url supportedUrls
-            }
-        freyaMachine {
-            including Common.machine
-            methods Common.methods
-            exists pageRequestedExplicitly
-            handleNotFound notFoundHandler
-            handleOk notFoundHandler
-        }
-
     let error = page "Error" (Freya.init None) (Freya.init None)
 
     let post =
@@ -167,7 +134,6 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
             lastModified (posts.PostLastModified <| lastModificationDate "Post")
 
             handleOk handlePost
-            handleNotFound notFoundHandler
         }
 
     let redirectToDefaultLanguageIndex =
@@ -189,5 +155,4 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
     member __.Contact = contact
     member __.Error = error
     member __.Talks = talks
-    member __.NotFound = notFound
     member __.RedirectToDefaultLanguageIndex : HttpMachine = redirectToDefaultLanguageIndex

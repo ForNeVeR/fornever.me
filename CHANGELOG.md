@@ -13,7 +13,7 @@ content or the hosting infrastructure.
 
 ## [Unreleased]
 ### Changed
-- Minor text update.
+- Minor text updates.
 
 ## [5.0.0] - 2025-03-27
 ### Removed
