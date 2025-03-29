@@ -13,7 +13,6 @@ type RoutesModule(pages: PagesModule, rss: RssModule) =
             resource "/{language}/" pages.Index // TODO: Migrate this
             resource "/{language}/archive.html" pages.Archive
             resource "/{language}/contact.html" pages.Contact
-            resource "/{language}/error.html" pages.Error
             resource "/{language}/rss.xml" rss.Feed
             resource "/{language}/talks.html" pages.Talks
             resource "/rss.xml" rss.Feed

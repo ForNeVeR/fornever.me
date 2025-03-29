@@ -64,14 +64,19 @@ let private build (builder: WebApplicationBuilder) =
         .UseStatusCodePagesWithReExecute("/error/{0}")
         .Use(fun (context: HttpContext) (next: RequestDelegate) ->
             (task {
-                let statusCode = context.Features.Get<IStatusCodeReExecuteFeature>()
-                if statusCode = null || context.Response.StatusCode <> 404 then return! next.Invoke context
+                let statusCode = context.Response.StatusCode
+                if statusCode = 404 then
+                    let errorInfo = context.Features.Get<IStatusCodeReExecuteFeature>() |> ValueOption.ofObj
+                    match errorInfo with
+                    | ValueSome error ->
+                        let language =
+                            if error.OriginalPath.StartsWith "/ru/" then "ru"
+                            else "en"
+                        context.Response.Redirect $"/{language}/404"
+                        return ()
+                    | ValueNone -> return! next.Invoke context
                 else
-
-                let language =
-                    if statusCode.OriginalPath.StartsWith "/ru/" then "ru"
-                    else "en"
-                context.Response.Redirect $"/{language}/404"
+                    return! next.Invoke context
             }) : Task
     ) |> ignore
 

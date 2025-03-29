@@ -124,8 +124,6 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
     let contact = page "Contact" (Freya.init None) (Freya.init None)
     let talks = page "Talks" (Freya.init None) (Freya.init None)
 
-    let error = page "Error" (Freya.init None) (Freya.init None)
-
     let post =
         freyaMachine {
             including Common.machine
@@ -153,6 +151,5 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
     member __.Index = index
     member __.Archive = archive
     member __.Contact = contact
-    member __.Error = error
     member __.Talks = talks
     member __.RedirectToDefaultLanguageIndex : HttpMachine = redirectToDefaultLanguageIndex
