@@ -52,6 +52,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{EEF302B2-6
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ForneverMind.TestFramework", "ForneverMind.TestFramework\ForneverMind.TestFramework.fsproj", "{CC92AD22-D198-46B2-8F33-45F6B5BF1EEE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForneverMind.Razor", "ForneverMind.Razor\ForneverMind.Razor.csproj", "{41A78B9F-701F-41A2-B776-185780EBE19D}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ForneverMind.Core", "ForneverMind.Core\ForneverMind.Core.fsproj", "{AAFD0512-7132-45E1-A91A-BFCAD532EA4F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -74,6 +78,14 @@ Global
 		{CC92AD22-D198-46B2-8F33-45F6B5BF1EEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC92AD22-D198-46B2-8F33-45F6B5BF1EEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC92AD22-D198-46B2-8F33-45F6B5BF1EEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41A78B9F-701F-41A2-B776-185780EBE19D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41A78B9F-701F-41A2-B776-185780EBE19D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41A78B9F-701F-41A2-B776-185780EBE19D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41A78B9F-701F-41A2-B776-185780EBE19D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAFD0512-7132-45E1-A91A-BFCAD532EA4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAFD0512-7132-45E1-A91A-BFCAD532EA4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAFD0512-7132-45E1-A91A-BFCAD532EA4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAFD0512-7132-45E1-A91A-BFCAD532EA4F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
