@@ -54,6 +54,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ForneverMind.TestFramework"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForneverMind.Razor", "ForneverMind.Razor\ForneverMind.Razor.csproj", "{41A78B9F-701F-41A2-B776-185780EBE19D}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ForneverMind.Core", "ForneverMind.Core\ForneverMind.Core.fsproj", "{AAFD0512-7132-45E1-A91A-BFCAD532EA4F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -80,6 +82,10 @@ Global
 		{41A78B9F-701F-41A2-B776-185780EBE19D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{41A78B9F-701F-41A2-B776-185780EBE19D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{41A78B9F-701F-41A2-B776-185780EBE19D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAFD0512-7132-45E1-A91A-BFCAD532EA4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAFD0512-7132-45E1-A91A-BFCAD532EA4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAFD0512-7132-45E1-A91A-BFCAD532EA4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAFD0512-7132-45E1-A91A-BFCAD532EA4F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

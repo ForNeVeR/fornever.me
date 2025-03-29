@@ -1,14 +1,65 @@
+<!--
+SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
+
+SPDX-License-Identifier: MIT
+-->
+
+@model ForneverMind.Razor.BasePageModel
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>@ViewData["Title"]</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>F. von Never — @ViewBag.Title</title>
+    <base href="/en/"/>
+    <link rel="alternate" type="application/rss+xml" href="./rss.xml" title="RSS Feed"/>
+    <link rel="stylesheet" type="text/css" href="../app/app.css"/>
 </head>
 <body>
 
-TEST EN LAYOUT
+<div id="header">
+    <div id="logo">
+        <a href="./">Engineer, Programmer, Gentleman</a>
+    </div>
+    <div id="navigation">
+        <a href="./archive.html">Posts</a>
+        <a href="./talks.html">Talks</a>
+        <a href="./contact.html">Contacts</a>
+    </div>
+</div>
 
-@RenderBody()
+<div id="content">
+    <div class="header-group">
+        <h1 class="header">@ViewBag.Title</h1>
+        @if (Model.Links.English.IsActive)
+        {
+            <div class="languages">
+                @if (Model.Links.Russian.IsActive)
+                {
+                    <a href="@Model.Links.Russian.Link" class="tag">Rus</a>
+                }
+            </div>
+        }
+    </div>
+
+    @RenderBody()
+</div>
+<footer>
+    <div>
+        RSS:
+        <a class="tag" href="./rss.xml">Eng</a>
+        <a class="tag" href="/rss.xml">Eng+Rus</a>
+    </div>
+    <div>
+        <!-- REUSE-IgnoreStart -->
+        © fornever.me contributors 2025
+        <!-- REUSE-IgnoreEnd -->
+    </div>
+    <div>
+        <a class="tag" href="https://github.com/ForNeVeR/fornever.me">GitHub</a>
+    </div>
+</footer>
+@RenderSection("scripts", false)
 
 </body>
 </html>
-

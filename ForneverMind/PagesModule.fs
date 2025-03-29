@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
+﻿// SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
 //
 // SPDX-License-Identifier: MIT
 
@@ -14,6 +14,7 @@ open Freya.Optics.Http
 open Freya.Types.Http
 open Freya.Types.Uri
 
+open ForneverMind.Core
 open ForneverMind.Models
 
 type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : MarkdownModule) =
