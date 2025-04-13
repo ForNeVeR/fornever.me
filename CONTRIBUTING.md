@@ -104,9 +104,9 @@ or if you don't want your name to be mentioned in the project's source: this doe
 
 File Encoding Changes
 ---------------------
-If the automation asks you to update the file encoding (line endings or UTF-8 BOM) in certain files, run the following PowerShell script ([PowerShell Core][powershell] is recommended to run this script):
+If the automation asks you to update the file encoding (line endings or UTF-8 BOM) in certain files, either fix the files manually, or run [the VerifyEncoding script][verify-encoding] in [PowerShell Core][powershell] with the `-Autofix` argument:
 ```console
-$ pwsh -File scripts/Test-Encoding.ps1 -AutoFix
+$ pwsh -Command 'Install-Module VerifyEncoding && Test-Encoding -Autofix'
 ```
 
 The `-AutoFix` switch will automatically fix the encoding issues, and you'll only need to commit and push the changes.
@@ -116,5 +116,6 @@ The `-AutoFix` switch will automatically fix the encoding issues, and you'll onl
 [nvm-windows]: https://github.com/coreybutler/nvm-windows
 [powershell]: https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell
 [reuse]: https://reuse.software/
+[verify-encoding]: https://github.com/ForNeVeR/VerifyEncoding
 [volta]: https://volta.sh/
 [yarn]: https://yarnpkg.com/

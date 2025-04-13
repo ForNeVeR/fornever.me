@@ -83,4 +83,6 @@ jobs:
         uses: actions/checkout@v4
       - name: Verify encoding
         shell: pwsh
-        run: scripts/Test-Encoding.ps1
+        # for Renovate test
+        # run: Install-Module VerifyEncoding -RequiredVersion 2.1.0 && Test-Encoding
+        run: Install-Module VerifyEncoding -RequiredVersion 2.2.0 && Test-Encoding
