@@ -1,3 +1,6 @@
+@page
+@model ForneverMind.Razor.BasePageModel
+
 <!--
 SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
 
@@ -5,8 +8,8 @@ SPDX-License-Identifier: MIT
 -->
 
 @{
-    Layout = "ru/_Layout.cshtml";
     ViewBag.Title = "Страница не найдена";
+    Model.Response.StatusCode = 404;
 }
 
-<p>Страница по этому адресу не существует.</p>
+<p>Страницы по этому адресу не существует.</p>
