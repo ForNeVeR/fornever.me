@@ -6,6 +6,7 @@ namespace ForneverMind
 
 open System.IO
 
+open ForneverMind.Core
 open Freya.Core
 open Freya.Routers.Uri.Template
 
