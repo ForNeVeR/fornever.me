@@ -30,6 +30,7 @@ SPDX-License-Identifier: MIT
     <Compile Include="PagesModule.fs" />
     <Compile Include="RssModule.fs" />
     <Compile Include="RoutesModule.fs" />
+    <Compile Include="Controllers\PagesController.fs" />
     <Compile Include="Program.fs" />
     <Content Include="posts\**" CopyToPublishDirectory="Always" />
     <Content Include="server.js" CopyToPublishDirectory="Always" />
@@ -50,8 +51,8 @@ SPDX-License-Identifier: MIT
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
     <PackageReference Include="RazorLight" Version="2.3.1" />
     <PackageReference Include="WilderMinds.RssSyndication" Version="1.7.1" />
-    <ProjectReference Include="..\ForneverMind.Frontend\ForneverMind.Frontend.proj"
-                      ReferenceOutputAssembly="false"/>
+    <ProjectReference Include="..\ForneverMind.Frontend\ForneverMind.Frontend.proj" ReferenceOutputAssembly="false"/>
+    <ProjectReference Include="..\ForneverMind.Razor\ForneverMind.Razor.csproj" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>

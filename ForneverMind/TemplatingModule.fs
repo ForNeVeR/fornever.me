@@ -8,15 +8,8 @@ open System
 open System.Collections.Generic
 open System.IO
 
+open ForneverMind.Core
 open RazorLight
-
-type LanguageLink =
-    { IsActive : bool
-      Link : string }
-
-type LanguageLinks =
-    { English : LanguageLink
-      Russian : LanguageLink }
 
 type TemplatingModule (config: ConfigurationModule) =
     let razor =

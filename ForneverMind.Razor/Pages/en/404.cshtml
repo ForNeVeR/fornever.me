@@ -1,3 +1,6 @@
+﻿@page
+@model ForneverMind.Razor.BasePageModel
+
 <!--
 SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
 
@@ -5,8 +8,8 @@ SPDX-License-Identifier: MIT
 -->
 
 @{
-    Layout = "en/_Layout.cshtml";
     ViewBag.Title = "Page Not Found";
+    Model.Response.StatusCode = 404;
 }
 
 <p>The requested page does not exist.</p>
