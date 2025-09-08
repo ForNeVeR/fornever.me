@@ -55,6 +55,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".config", ".config", "{E0D59AC4-EC2A-47AC-B830-65D111EF90A6}"
 	ProjectSection(SolutionItems) = preProject
 		.config\dotnet-tools.json = .config\dotnet-tools.json
+		.config\dotnet-tools.json.license = .config\dotnet-tools.json.license
 	EndProjectSection
 EndProject
 Global
