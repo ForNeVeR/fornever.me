@@ -12,8 +12,12 @@ This file only documents changes in the site engine, not any changes in the
 content or the hosting infrastructure.
 
 ## [5.1.0] - 2025-09-08
-### Removed
+### Added
 - New post on ICFPC-2025.
+
+### Changed
+- Dependency updates.
+- Minor post proofreading.
 
 ## [5.0.0] - 2025-03-27
 ### Removed
