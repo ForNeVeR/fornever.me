@@ -44,19 +44,20 @@ jobs:
       - name: NPM cache setup
         run: npm config set cache ${{ env.NPM_CACHE }}
 
+      - name: Set up .NET SDK
+        uses: actions/setup-dotnet@v4
+      - name: Install .NET tools
+        run: dotnet tool restore
+
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22.x'
       - name: Install Yarn
         run: npm install -g yarn@1.22.0
-      - name: Install .NET tools
-        run: dotnet tool restore
       - name: Prepare talks
         run: dotnet tool run pwsh Scripts/Prepare-Talks.ps1 yarn
 
-      - name: Set up .NET SDK
-        uses: actions/setup-dotnet@v4
       - name: NuGet cache
         uses: actions/cache@v4
         with:
