@@ -2,12 +2,10 @@
 #
 # SPDX-License-Identifier: MIT
 
-FROM mcr.microsoft.com/powershell:7.2.2-debian-10 AS talks-env
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS talks-env
 
-# First, install curl to be able to install Node.js, and then install Node.js itself:
-RUN apt-get update \
-    && apt-get install --no-install-recommends -y curl \
-    && curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
+# Install Node.js:
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
     && apt-get install --no-install-recommends -y \
         nodejs \
     && rm -rf /var/lib/apt/lists/*
