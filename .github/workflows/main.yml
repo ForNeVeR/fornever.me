@@ -50,9 +50,10 @@ jobs:
           node-version: '22.x'
       - name: Install Yarn
         run: npm install -g yarn@1.22.0
+      - name: Install .NET tools
+        run: dotnet tool restore
       - name: Prepare talks
-        shell: pwsh
-        run: Scripts/Prepare-Talks.ps1 yarn
+        run: dotnet tool run pwsh Scripts/Prepare-Talks.ps1 yarn
 
       - name: Set up .NET SDK
         uses: actions/setup-dotnet@v4
