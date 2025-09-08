@@ -11,6 +11,10 @@ The format is based on [Keep a Changelog v1.1.0][keep-a-changelog]. See [the REA
 This file only documents changes in the site engine, not any changes in the
 content or the hosting infrastructure.
 
+## [5.1.0] - 2025-09-08
+### Removed
+- New post on ICFPC-2025.
+
 ## [5.0.0] - 2025-03-27
 ### Removed
 - **Breaking change:** removed the EvilPlanner functionality, including everything (server API, pages, resources) related to daily quotes.
@@ -462,4 +466,5 @@ Initial version of the site, written in Python using the Django framework.
 [4.6.2]: https://github.com/ForNeVeR/fornever.me/compare/v4.6.1...v4.6.2
 [4.6.3]: https://github.com/ForNeVeR/fornever.me/compare/v4.6.2...v4.6.3
 [5.0.0]: https://github.com/ForNeVeR/fornever.me/compare/v4.6.3...v5.0.0
-[Unreleased]: https://github.com/ForNeVeR/fornever.me/compare/v5.0.0...HEAD
+[5.1.0]: https://github.com/ForNeVeR/fornever.me/compare/v5.0.0...v5.1.0
+[Unreleased]: https://github.com/ForNeVeR/fornever.me/compare/v5.1.0...HEAD
