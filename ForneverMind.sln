@@ -52,6 +52,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{EEF302B2-6
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ForneverMind.TestFramework", "ForneverMind.TestFramework\ForneverMind.TestFramework.fsproj", "{CC92AD22-D198-46B2-8F33-45F6B5BF1EEE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".config", ".config", "{E0D59AC4-EC2A-47AC-B830-65D111EF90A6}"
+	ProjectSection(SolutionItems) = preProject
+		.config\dotnet-tools.json = .config\dotnet-tools.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
