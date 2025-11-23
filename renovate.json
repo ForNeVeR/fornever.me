@@ -5,10 +5,13 @@
   ],
   "customManagers": [
     {
+      "description": "Update the GitHub Actions runners.",
       "customType": "regex",
-      "fileMatch": ["^\\.github/workflows/.+\\.yml$"],
+      "managerFilePatterns": [
+        ".github/workflows/*.yml"
+      ],
       "matchStrings": [
-        "# renovate:\\s*\\n\\s*- (?<depName>\\S+?)-(?<currentValue>\\S+)"
+        "(?<depName>macos|ubuntu|windows)-(?<currentValue>[-\\w.\\d]+)"
       ],
       "datasourceTemplate": "github-runners"
     },
