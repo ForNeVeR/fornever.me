@@ -35,7 +35,7 @@ jobs:
 
       - if: runner.os != 'macOS' # TODO[#378]: Restore after actions/runner-images#13341 is fixed.
         name: NPM cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ${{ env.NPM_CACHE }}
           key: ${{ runner.os }}.npm.${{ hashFiles('**/package-lock.json') }}+${{ hashFiles('**/yarn.lock') }}
@@ -58,7 +58,7 @@ jobs:
 
       - if: runner.os != 'macOS' # TODO[#378]: Restore after actions/runner-images#13341 is fixed.
         name: NuGet cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ${{ env.NUGET_PACKAGES }}
           key: ${{ runner.os }}.nuget.${{ hashFiles('**/*.fsproj') }}
