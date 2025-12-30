@@ -43,6 +43,7 @@ type RssModule(config : ConfigurationModule, posts : PostsModule) =
                 |> Option.map Seq.singleton
                 |> Option.defaultValue (Seq.ofArray Common.supportedLanguages)
                 |> Seq.collect posts.AllPosts
+                |> Seq.sortByDescending (fun p -> p.Date)
             return posts
         }
 
