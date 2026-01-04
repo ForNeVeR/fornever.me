@@ -1,5 +1,5 @@
 <!--
-SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
+SPDX-FileCopyrightText: 2021-2026 Friedrich von Never <friedrich@fornever.me>
 
 SPDX-License-Identifier: MIT
 -->
@@ -11,7 +11,18 @@ The format is based on [Keep a Changelog v1.1.0][keep-a-changelog]. See [the REA
 This file only documents changes in the site engine, not any changes in the
 content or the hosting infrastructure.
 
-## [5.2.2] - 2025-09-13
+## [5.2.0] - 2026-01-04
+### Added
+- A new post: **AutoHotKey Debugger for IntelliJ Platform**.
+
+### Fixed
+- [#124](https://github.com/ForNeVeR/fornever.me/issues/124): Rus+Eng RSS should properly order posts.
+- Fix style of `code` elements in lists.
+
+### Changed
+- Update some dependencies to the latest versions.
+
+## [5.1.2] - 2025-09-13
 ### Fixed
 - Minor typo fix in a post.
 
@@ -481,4 +492,5 @@ Initial version of the site, written in Python using the Django framework.
 [5.1.0]: https://github.com/ForNeVeR/fornever.me/compare/v5.0.0...v5.1.0
 [5.1.1]: https://github.com/ForNeVeR/fornever.me/compare/v5.1.0...v5.1.1
 [5.1.2]: https://github.com/ForNeVeR/fornever.me/compare/v5.1.1...v5.1.2
-[Unreleased]: https://github.com/ForNeVeR/fornever.me/compare/v5.1.2...HEAD
+[5.2.0]: https://github.com/ForNeVeR/fornever.me/compare/v5.1.2...v5.2.0
+[Unreleased]: https://github.com/ForNeVeR/fornever.me/compare/v5.2.0...HEAD
