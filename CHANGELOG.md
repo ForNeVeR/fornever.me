@@ -11,6 +11,13 @@ The format is based on [Keep a Changelog v1.1.0][keep-a-changelog]. See [the REA
 This file only documents changes in the site engine, not any changes in the
 content or the hosting infrastructure.
 
+## [5.3.0] - 2026-02-01
+### Added
+- A new post: **Configuring Programs Using FSX scripts**.
+
+### Changed
+- Update some dependencies.
+
 ## [5.2.0] - 2026-01-04
 ### Added
 - A new post: **AutoHotKey Debugger for IntelliJ Platform**.
@@ -493,4 +500,5 @@ Initial version of the site, written in Python using the Django framework.
 [5.1.1]: https://github.com/ForNeVeR/fornever.me/compare/v5.1.0...v5.1.1
 [5.1.2]: https://github.com/ForNeVeR/fornever.me/compare/v5.1.1...v5.1.2
 [5.2.0]: https://github.com/ForNeVeR/fornever.me/compare/v5.1.2...v5.2.0
-[Unreleased]: https://github.com/ForNeVeR/fornever.me/compare/v5.2.0...HEAD
+[5.3.0]: https://github.com/ForNeVeR/fornever.me/compare/v5.2.0...v5.3.0
+[Unreleased]: https://github.com/ForNeVeR/fornever.me/compare/v5.3.0...HEAD
