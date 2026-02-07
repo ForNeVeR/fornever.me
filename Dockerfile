@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: MIT
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS talks-env
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS talks-env
 
 # Install Node.js:
 RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
@@ -18,7 +18,7 @@ COPY ./ForneverMind/wwwroot/talks ./ForneverMind/wwwroot/talks/
 COPY ./Scripts ./Scripts/
 RUN pwsh ./Scripts/Prepare-Talks.ps1
 
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build-env
 
 # Install Node.js:
 RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
@@ -42,7 +42,7 @@ COPY ./ForneverMind.Tests ./ForneverMind.Tests/
 COPY --from=talks-env /talks/ForneverMind/wwwroot/talks/ ./ForneverMind/wwwroot/talks/
 RUN dotnet publish ./ForneverMind -c Release -o /app/out
 
-FROM mcr.microsoft.com/dotnet/aspnet:6.0
+FROM mcr.microsoft.com/dotnet/aspnet:10.0
 
 WORKDIR /app
 
