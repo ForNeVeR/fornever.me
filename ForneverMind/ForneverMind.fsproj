@@ -42,12 +42,12 @@ SPDX-License-Identifier: MIT
     <PackageReference Include="Freya" Version="4.0.0" />
     <PackageReference Include="Jint" Version="4.6.0" />
     <PackageReference Include="Markdig" Version="0.45.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Owin" Version="6.0.35" />
-    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.3.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Owin" Version="6.0.36" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.3.9" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.1" />
     <PackageReference Include="RazorLight" Version="2.3.1" />
     <PackageReference Include="WilderMinds.RssSyndication" Version="1.7.1" />
     <ProjectReference Include="..\ForneverMind.Frontend\ForneverMind.Frontend.proj"
