@@ -1,7 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <ItemGroup>
+        <Compile Include="PostMetadata.fs" />
         <Compile Include="LanguageLinks.fs" />
+        <Compile Include="IPostsProvider.fs" />
     </ItemGroup>
 
 </Project>

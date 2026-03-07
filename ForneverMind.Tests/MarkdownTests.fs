@@ -1,4 +1,4 @@
-﻿// SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
+﻿// SPDX-FileCopyrightText: 2025-2026 Friedrich von Never <friedrich@fornever.me>
 //
 // SPDX-License-Identifier: MIT
 
@@ -12,7 +12,7 @@ open ForneverMind
 open ForneverMind.Models
 
 let private markdown() =
-    let highlight = CodeHighlightModule(NullLogger.Instance)
+    let highlight = CodeHighlightModule(NullLogger<CodeHighlightModule>.Instance)
     MarkdownModule(highlight)
 
 let private normalizeLineEndings (s : string) = s.Replace(Environment.NewLine, "\n")

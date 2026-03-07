@@ -1,4 +1,4 @@
-﻿// SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
+﻿// SPDX-FileCopyrightText: 2025-2026 Friedrich von Never <friedrich@fornever.me>
 //
 // SPDX-License-Identifier: MIT
 
@@ -120,7 +120,6 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
         let posts = latestPosts indexPostCount
         pageWithPosts "Index" posts
 
-    let archive = pageWithPosts "Archive" getPosts
     let contact = page "Contact" (Freya.init None) (Freya.init None)
     let talks = page "Talks" (Freya.init None) (Freya.init None)
 
@@ -149,7 +148,6 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
 
     member __.Post = post
     member __.Index = index
-    member __.Archive = archive
     member __.Contact = contact
     member __.Talks = talks
     member __.RedirectToDefaultLanguageIndex : HttpMachine = redirectToDefaultLanguageIndex

@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
+// SPDX-FileCopyrightText: 2025-2026 Friedrich von Never <friedrich@fornever.me>
 //
 // SPDX-License-Identifier: MIT
 
@@ -22,7 +22,7 @@ type Server =
             let (Server(engine, _)) = this
             engine.Dispose()
 
-type CodeHighlightModule(logger: ILogger) =
+type CodeHighlightModule(logger: ILogger<CodeHighlightModule>) =
     let createEngine(): Engine =
         let sw = Stopwatch.StartNew()
         logger.LogInformation "Initializing Jint engine…"

@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
+// SPDX-FileCopyrightText: 2025-2026 Friedrich von Never <friedrich@fornever.me>
 //
 // SPDX-License-Identifier: MIT
 
@@ -17,6 +17,21 @@ let ``Index page should resolve correctly``(): Task = withWebApp(fun client -> t
     let! result = client.GetAsync "/"
     Assert.Equal("/en/", result.RequestMessage.RequestUri.PathAndQuery)
     Assert.Equal("text/html", result.Content.Headers.ContentType.MediaType)
+})
+
+[<Fact>]
+let ``Archive page should be resolved``(): Task = withWebApp(fun client -> task {
+    let doTest (url: string) title = task {
+        let! result = client.GetAsync url
+        let! content = result.Content.ReadAsStringAsync()
+
+        Assert.Equal(HttpStatusCode.OK, result.StatusCode)
+        Assert.Equal("text/html", result.Content.Headers.ContentType.MediaType)
+        Assert.Contains(title, content)
+    }
+
+    do! doTest "/en/archive.html" "Posts"
+    do! doTest "/ru/archive.html" "Посты"
 })
 
 [<Fact>]

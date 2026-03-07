@@ -1,4 +1,4 @@
-﻿// SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
+﻿// SPDX-FileCopyrightText: 2025-2026 Friedrich von Never <friedrich@fornever.me>
 //
 // SPDX-License-Identifier: MIT
 
@@ -16,6 +16,8 @@ open Microsoft.AspNetCore.Http
 open Microsoft.Extensions.Configuration
 open Microsoft.Extensions.DependencyInjection
 open Microsoft.Extensions.Logging
+
+open ForneverMind.Core
 
 let private fuseApplication (services: IServiceProvider) =
     let configuration = services.GetRequiredService<ConfigurationModule>()
@@ -47,6 +49,10 @@ let private configure (configuration: IConfigurationRoot) (builder: WebApplicati
 
     builder.Services
         .AddSingleton(configModule)
+        .AddSingleton<CodeHighlightModule>()
+        .AddSingleton<MarkdownModule>()
+        .AddSingleton<PostsModule>()
+        .AddSingleton<IPostsProvider, PostsModule>()
     |> ignore
 
     builder.Services.AddRazorPages() |> ignore

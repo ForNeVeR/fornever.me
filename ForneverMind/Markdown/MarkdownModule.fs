@@ -1,4 +1,4 @@
-﻿// SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
+﻿// SPDX-FileCopyrightText: 2025-2026 Friedrich von Never <friedrich@fornever.me>
 //
 // SPDX-License-Identifier: MIT
 
@@ -13,6 +13,7 @@ open ForneverMind.Markdown
 open Markdig
 open Markdig.Syntax
 
+open ForneverMind.Core
 open ForneverMind.Models
 
 type MarkdownModule(highlight : CodeHighlightModule) =
