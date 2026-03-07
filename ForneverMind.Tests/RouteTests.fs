@@ -35,6 +35,21 @@ let ``Archive page should be resolved``(): Task = withWebApp(fun client -> task 
 })
 
 [<Fact>]
+let ``Contact page should be resolved``(): Task = withWebApp(fun client -> task {
+    let doTest (url: string) title = task {
+        let! result = client.GetAsync url
+        let! content = result.Content.ReadAsStringAsync()
+
+        Assert.Equal(HttpStatusCode.OK, result.StatusCode)
+        Assert.Equal("text/html", result.Content.Headers.ContentType.MediaType)
+        Assert.Contains(title, content)
+    }
+
+    do! doTest "/en/contact.html" "Contacts"
+    do! doTest "/ru/contact.html" "Контакты"
+})
+
+[<Fact>]
 let ``404 page should be resolved``(): Task = withWebApp(fun client -> task {
     let doTest (url: string) message = task {
         let! result = client.GetAsync url
