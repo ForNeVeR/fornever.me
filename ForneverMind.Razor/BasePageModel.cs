@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2025-2026 Friedrich von Never <friedrich@fornever.me>
+//
+// SPDX-License-Identifier: MIT
+
 using ForneverMind.Core;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
