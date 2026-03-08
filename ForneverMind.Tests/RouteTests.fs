@@ -74,6 +74,8 @@ let ``RSS feeds should return valid XML with items``(): Task = withWebApp(fun cl
         Assert.Equal(HttpStatusCode.OK, result.StatusCode)
         Assert.Equal("application/rss+xml", result.Content.Headers.ContentType.MediaType)
 
+        Assert.True(result.Content.Headers.LastModified.HasValue)
+
         let doc = XDocument.Parse content
         let items = doc.Descendants(XName.Get "item")
         Assert.NotEmpty items

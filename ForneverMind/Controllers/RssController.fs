@@ -7,6 +7,7 @@ namespace ForneverMind.Controllers
 open System
 open System.Text
 
+open Microsoft.AspNetCore.Http
 open Microsoft.AspNetCore.Mvc
 open WilderMinds.RssSyndication
 
@@ -34,12 +35,21 @@ type RssController(config: ConfigurationModule, posts: IPostsProvider) =
         for item in Seq.map syndicationItem posts do feed.Items.Add item
         feed.Serialize(SerializeOption(Encoding = Encoding.UTF8))
 
+    member private this.ServeFeed(allPosts: PostMetadata seq): IActionResult =
+        let allPosts = Seq.toArray allPosts
+        let lastModified =
+            allPosts
+            |> Array.tryHead
+            |> Option.map (fun p -> p.Date)
+            |> Option.defaultValue DateTime.UtcNow
+        this.Response.GetTypedHeaders().LastModified <- DateTimeOffset lastModified
+        let content = generateFeed allPosts
+        this.Content(content, "application/rss+xml", Encoding.UTF8)
+
     [<Route("{language}/rss.xml")>]
     member this.LanguageFeed(language: string): IActionResult =
-        let content = posts.AllPosts(language) |> generateFeed
-        this.Content(content, "application/rss+xml", Encoding.UTF8)
+        posts.AllPosts(language) |> this.ServeFeed
 
     [<Route("rss.xml")>]
     member this.CombinedFeed(): IActionResult =
-        let content = ["en"; "ru"] |> Seq.collect posts.AllPosts |> generateFeed
-        this.Content(content, "application/rss+xml", Encoding.UTF8)
+        ["en"; "ru"] |> Seq.collect posts.AllPosts |> this.ServeFeed
