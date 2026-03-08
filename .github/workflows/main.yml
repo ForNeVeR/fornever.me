@@ -84,3 +84,14 @@ jobs:
       - name: Verify encoding
         shell: pwsh
         run: Install-Module VerifyEncoding -RequiredVersion 2.2.1 -Force && Test-Encoding
+
+  todos:
+    runs-on: ubuntu-24.04
+    steps:
+    - name: Check out the sources
+      uses: actions/checkout@v6
+    - name: Check TODOs
+      uses: ForNeVeR/Todosaurus/action@v1
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        strict: 'true'
