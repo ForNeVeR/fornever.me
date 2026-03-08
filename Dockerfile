@@ -29,7 +29,9 @@ RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
 WORKDIR /app
 
 COPY ./Directory.Build.props ./
+COPY ./ForneverMind.Core/ForneverMind.Core.fsproj ./ForneverMind.Core/
 COPY ./ForneverMind.Frontend/ForneverMind.Frontend.proj ./ForneverMind.Frontend/
+COPY ./ForneverMind.Razor/ForneverMind.Razor.csproj ./ForneverMind.Razor/
 COPY ./ForneverMind.TestFramework/ForneverMind.TestFramework.fsproj ./ForneverMind.TestFramework/
 COPY ./ForneverMind.Tests/ForneverMind.Tests.fsproj ./ForneverMind.Tests/
 COPY ./ForneverMind.sln ./
@@ -37,7 +39,9 @@ COPY ./ForneverMind/ForneverMind.fsproj ./ForneverMind/
 RUN dotnet restore
 
 COPY ./ForneverMind ./ForneverMind/
+COPY ./ForneverMind.Core ./ForneverMind.Core/
 COPY ./ForneverMind.Frontend ./ForneverMind.Frontend/
+COPY ./ForneverMind.Razor ./ForneverMind.Razor/
 COPY ./ForneverMind.Tests ./ForneverMind.Tests/
 COPY --from=talks-env /talks/ForneverMind/wwwroot/talks/ ./ForneverMind/wwwroot/talks/
 RUN dotnet publish ./ForneverMind -c Release -o /app/out
