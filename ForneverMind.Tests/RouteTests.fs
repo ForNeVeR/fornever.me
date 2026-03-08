@@ -7,6 +7,7 @@ module ForneverMind.Tests.RouteTests
 
 open System.Net
 open System.Threading.Tasks
+open System.Xml.Linq
 
 open Xunit
 
@@ -62,6 +63,25 @@ let ``Talks page should be resolved``(): Task = withWebApp(fun client -> task {
 
     do! doTest "/en/talks.html" "Talks"
     do! doTest "/ru/talks.html" "Доклады"
+})
+
+[<Fact>]
+let ``RSS feeds should return valid XML with items``(): Task = withWebApp(fun client -> task {
+    let doTest (url: string) = task {
+        let! result = client.GetAsync url
+        let! content = result.Content.ReadAsStringAsync()
+
+        Assert.Equal(HttpStatusCode.OK, result.StatusCode)
+        Assert.Equal("application/rss+xml", result.Content.Headers.ContentType.MediaType)
+
+        let doc = XDocument.Parse content
+        let items = doc.Descendants(XName.Get "item")
+        Assert.NotEmpty items
+    }
+
+    do! doTest "/en/rss.xml"
+    do! doTest "/ru/rss.xml"
+    do! doTest "/rss.xml"
 })
 
 [<Fact>]
