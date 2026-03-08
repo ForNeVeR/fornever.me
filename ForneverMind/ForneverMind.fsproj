@@ -21,10 +21,8 @@ SPDX-License-Identifier: MIT
     <Compile Include="Markdown\MarkdownUtils.fs" />
     <Compile Include="Markdown\MarkdownHtmlRenderer.fs" />
     <Compile Include="Markdown\MarkdownModule.fs" />
-    <Compile Include="PostsModule.fs" />
+    <Compile Include="PostsProvider.fs" />
     <Compile Include="PostRenderer.fs" />
-    <Compile Include="PagesModule.fs" />
-    <Compile Include="RoutesModule.fs" />
     <Compile Include="Controllers\PagesController.fs" />
     <Compile Include="Controllers\RssController.fs" />
     <Compile Include="Program.fs" />
@@ -36,11 +34,9 @@ SPDX-License-Identifier: MIT
     <Content Include="wwwroot\talks\*\node_modules\**" CopyToPublishDirectory="Always" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Freya" Version="4.0.0" />
     <PackageReference Include="Jint" Version="4.6.2" />
     <PackageReference Include="Markdig" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Owin" Version="6.0.35" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />

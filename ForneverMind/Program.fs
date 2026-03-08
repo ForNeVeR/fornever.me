@@ -8,7 +8,7 @@ open System
 open System.IO
 
 open System.Threading.Tasks
-open Freya.Core
+open ForneverMind.Core
 open Microsoft.AspNetCore.Builder
 open Microsoft.AspNetCore.Diagnostics
 open Microsoft.AspNetCore.Hosting
@@ -18,28 +18,6 @@ open Microsoft.Extensions.Configuration
 open Microsoft.Extensions.DependencyInjection
 open Microsoft.Extensions.Logging
 open Microsoft.Extensions.WebEncoders
-
-open ForneverMind.Core
-
-let private fuseApplication (services: IServiceProvider) =
-    let configuration = services.GetRequiredService<ConfigurationModule>()
-    let logger = services.GetRequiredService<ILogger<CodeHighlightModule>>()
-
-    let highlight = CodeHighlightModule(logger)
-    let markdown = MarkdownModule(highlight)
-    let posts = PostsModule(configuration, markdown)
-    let pages = PagesModule(posts, markdown)
-
-    RoutesModule(pages)
-
-let private createRouter services =
-    let routesModule = fuseApplication services
-    routesModule.Router
-
-let inline private useFreya f (app: IApplicationBuilder) =
-    let owin = OwinMidFunc.ofFreya f
-    app.UseOwin(fun p -> p.Invoke owin)
-    |> ignore
 
 let private configure (configuration: IConfigurationRoot) (builder: WebApplicationBuilder) =
     builder.Logging.AddConsole() |> ignore
@@ -51,8 +29,7 @@ let private configure (configuration: IConfigurationRoot) (builder: WebApplicati
         .AddSingleton(configModule)
         .AddSingleton<CodeHighlightModule>()
         .AddSingleton<MarkdownModule>()
-        .AddSingleton<PostsModule>()
-        .AddSingleton<IPostsProvider, PostsModule>()
+        .AddSingleton<IPostsProvider, PostsProvider>()
         .AddSingleton<IPostRenderer, PostRenderer>()
     |> ignore
 
@@ -92,9 +69,6 @@ let private build (builder: WebApplicationBuilder) =
             }) : Task
     ) |> ignore
 
-    let router = createRouter app.Services
-    useFreya router app
-
     app.UseRouting() |> ignore
     app.MapControllers() |> ignore
     app.MapRazorPages() |> ignore
@@ -102,6 +76,8 @@ let private build (builder: WebApplicationBuilder) =
 
 let private run(app: WebApplication) =
     app.Run()
+
+type internal IntegrationTestMarker = class end
 
 [<EntryPoint>]
 let main(args: string[]): int =

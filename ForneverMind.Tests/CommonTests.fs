@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
+// SPDX-FileCopyrightText: 2025-2026 Friedrich von Never <friedrich@fornever.me>
 //
 // SPDX-License-Identifier: MIT
 
@@ -18,7 +18,3 @@ let ``Path checks are passed``() =
 [<Fact>]
 let ``Default language is English``() =
     Assert.Equal("en", Common.defaultLanguage)
-
-[<Fact>]
-let ``Supported languages are English and Russian``() =
-    Assert.Equal<string>([| "en"; "ru" |], Common.supportedLanguages)

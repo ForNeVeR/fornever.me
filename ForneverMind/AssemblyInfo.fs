@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
+// SPDX-FileCopyrightText: 2025-2026 Friedrich von Never <friedrich@fornever.me>
 //
 // SPDX-License-Identifier: MIT
 
@@ -6,5 +6,6 @@ namespace ForneverMind.AssemblyInfo
 
 open System.Runtime.CompilerServices
 
+[<assembly: InternalsVisibleTo("ForneverMind.TestFramework")>]
 [<assembly: InternalsVisibleTo("ForneverMind.Tests")>]
 ()

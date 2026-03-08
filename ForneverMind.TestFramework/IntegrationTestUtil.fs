@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
+// SPDX-FileCopyrightText: 2025-2026 Friedrich von Never <friedrich@fornever.me>
 //
 // SPDX-License-Identifier: MIT
 
@@ -19,7 +19,7 @@ let IntegrationTests = "IntegrationTests"
 let private withWebAppBuilder (configure: IWebHostBuilder -> unit)
                               (customize: IServiceProvider -> 'a)
                               (test: 'a -> HttpClient -> Task): Task = task {
-    use app = (new WebApplicationFactory<RoutesModule>()).WithWebHostBuilder configure
+    use app = (new WebApplicationFactory<Program.IntegrationTestMarker>()).WithWebHostBuilder configure
     app.Server.AllowSynchronousIO <- true
 
     let services = customize app.Services
