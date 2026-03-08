@@ -28,8 +28,7 @@ let private fuseApplication (services: IServiceProvider) =
     let highlight = CodeHighlightModule(logger)
     let markdown = MarkdownModule(highlight)
     let posts = PostsModule(configuration, markdown)
-    let templates = TemplatingModule(configuration)
-    let pages = PagesModule(posts, templates, markdown)
+    let pages = PagesModule(posts, markdown)
 
     RoutesModule(pages)
 
