@@ -15,6 +15,7 @@ hosting infrastructure.
 ### Changed
 - Minor text updates.
 - Huge internal changes: migrate from Freya to default ASP.NET Core + Razor Pages.
+- Migrate to .NET 10.
 
 ## [5.3.0] - 2026-02-01
 ### Added
