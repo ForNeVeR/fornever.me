@@ -12,10 +12,11 @@ open ForneverMind.Core
 open RazorLight
 
 type TemplatingModule (config: ConfigurationModule) =
-    let razor =
+    let razor = lazy(
         RazorLightEngineBuilder()
             .UseFileSystemProject(config.ViewsPath)
             .Build()
+    )
 
     let templateName language name = sprintf "%s/%s.cshtml" language name
     let templatePath language name = Path.Combine(config.ViewsPath, templateName language name)
@@ -43,6 +44,6 @@ type TemplatingModule (config: ConfigurationModule) =
                 | Some(v) -> v
                 | None -> Unchecked.defaultof<'a>
             let viewBag = prepareViewBag links
-            let! result = Async.AwaitTask <| razor.CompileRenderAsync(templateName language name, value, viewBag)
+            let! result = Async.AwaitTask <| razor.Value.CompileRenderAsync(templateName language name, value, viewBag)
             return result
         }

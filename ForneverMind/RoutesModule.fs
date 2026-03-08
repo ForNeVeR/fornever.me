@@ -9,7 +9,7 @@ open Freya.Routers.Uri.Template
 type RoutesModule(pages: PagesModule) =
     let router =
         freyaRouter {
-            resource "/{language}/" pages.Index // TODO: Migrate this
+            () // All routes have been migrated to ASP.NET Core
         }
 
     member __.Router = router

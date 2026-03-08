@@ -21,6 +21,22 @@ let ``Index page should resolve correctly``(): Task = withWebApp(fun client -> t
 })
 
 [<Fact>]
+let ``Index page should have correct titles``(): Task = withWebApp(fun client -> task {
+    let doTest (url: string) = task {
+        let! result = client.GetAsync url
+        let! content = result.Content.ReadAsStringAsync()
+
+        Assert.Equal(HttpStatusCode.OK, result.StatusCode)
+        Assert.Equal("text/html", result.Content.Headers.ContentType.MediaType)
+        Assert.Contains("int 20h", content)
+        Assert.True(result.Content.Headers.LastModified.HasValue)
+    }
+
+    do! doTest "/en/"
+    do! doTest "/ru/"
+})
+
+[<Fact>]
 let ``Archive page should be resolved``(): Task = withWebApp(fun client -> task {
     let doTest (url: string) title = task {
         let! result = client.GetAsync url
