@@ -9,7 +9,7 @@ Changelog
 The format is based on [Keep a Changelog v1.1.0][keep-a-changelog]. See [the README file][docs.readme] for more details on how the project is versioned.
 
 This file only documents changes in the site engine, not any changes in the
-content or the hosting infrastructure.
+hosting infrastructure.
 
 ## [Unreleased]
 ### Changed
