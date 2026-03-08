@@ -120,8 +120,6 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
         let posts = latestPosts indexPostCount
         pageWithPosts "Index" posts
 
-    let talks = page "Talks" (Freya.init None) (Freya.init None)
-
     let post =
         freyaMachine {
             including Common.machine
@@ -147,5 +145,4 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
 
     member __.Post = post
     member __.Index = index
-    member __.Talks = talks
     member __.RedirectToDefaultLanguageIndex : HttpMachine = redirectToDefaultLanguageIndex

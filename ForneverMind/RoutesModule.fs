@@ -12,7 +12,6 @@ type RoutesModule(pages: PagesModule, rss: RssModule) =
             resource "/{language}/posts/{name}" pages.Post
             resource "/{language}/" pages.Index // TODO: Migrate this
             resource "/{language}/rss.xml" rss.Feed
-            resource "/{language}/talks.html" pages.Talks
             resource "/rss.xml" rss.Feed
         }
 
