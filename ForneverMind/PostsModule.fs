@@ -1,4 +1,4 @@
-﻿// SPDX-FileCopyrightText: 2025-2026 Friedrich von Never <friedrich@fornever.me>
+// SPDX-FileCopyrightText: 2025-2026 Friedrich von Never <friedrich@fornever.me>
 //
 // SPDX-License-Identifier: MIT
 
@@ -9,8 +9,6 @@ open System.IO
 open ForneverMind.Core
 open Freya.Core
 open Freya.Routers.Uri.Template
-
-open ForneverMind.Models
 
 type PostsModule (config : ConfigurationModule, markdown : MarkdownModule) =
     let postFilePathForLanguage language =

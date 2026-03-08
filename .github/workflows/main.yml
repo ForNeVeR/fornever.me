@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
+# SPDX-FileCopyrightText: 2025-2026 Friedrich von Never <friedrich@fornever.me>
 #
 # SPDX-License-Identifier: MIT
 
@@ -7,6 +7,7 @@ on:
   push:
     branches:
       - master
+      - renovate/**
   pull_request:
     branches:
       - master
@@ -19,12 +20,9 @@ jobs:
     strategy:
       matrix:
         image:
-          # renovate:
-          - macos-14
-          # renovate:
+          - macos-15
           - ubuntu-24.04
-          # renovate:
-          - windows-2022
+          - windows-2025
       fail-fast: false
     env:
       DOTNET_NOLOGO: 1
@@ -32,32 +30,34 @@ jobs:
       NUGET_PACKAGES: ${{ github.workspace }}/.github/nuget-packages
       NPM_CACHE: ${{ github.workspace }}/.github/npm-cache
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           submodules: recursive
 
       - name: NPM cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ${{ env.NPM_CACHE }}
           key: ${{ runner.os }}.npm.${{ hashFiles('**/package-lock.json') }}+${{ hashFiles('**/yarn.lock') }}
       - name: NPM cache setup
         run: npm config set cache ${{ env.NPM_CACHE }}
 
+      - name: Set up .NET SDK
+        uses: actions/setup-dotnet@v5
+      - name: Install .NET tools
+        run: dotnet tool restore
+
       - name: Install Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '22.x'
+          node-version: '24.x'
       - name: Install Yarn
         run: npm install -g yarn@1.22.0
       - name: Prepare talks
-        shell: pwsh
-        run: Scripts/Prepare-Talks.ps1 yarn
+        run: dotnet tool run pwsh Scripts/Prepare-Talks.ps1 yarn
 
-      - name: Set up .NET SDK
-        uses: actions/setup-dotnet@v4
       - name: NuGet cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ${{ env.NUGET_PACKAGES }}
           key: ${{ runner.os }}.nuget.${{ hashFiles('**/*.fsproj') }}
@@ -72,6 +72,15 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Check out the sources
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: REUSE license check
-        uses: fsfe/reuse-action@v5
+        uses: fsfe/reuse-action@v6
+
+  encoding:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out the sources
+        uses: actions/checkout@v6
+      - name: Verify encoding
+        shell: pwsh
+        run: Install-Module VerifyEncoding -RequiredVersion 2.2.1 -Force && Test-Encoding

@@ -3,14 +3,30 @@
   "extends": [
     "config:recommended"
   ],
+  "automerge": true,
+  "automergeType": "branch",
   "customManagers": [
     {
+      "description": "Update the GitHub Actions runners.",
       "customType": "regex",
-      "fileMatch": ["^\\.github/workflows/.+\\.yml$"],
+      "managerFilePatterns": [
+        ".github/workflows/*.yml"
+      ],
       "matchStrings": [
-        "# renovate:\\s*\\n\\s*- (?<depName>\\S+?)-(?<currentValue>\\S+)"
+        "(?<depName>macos|ubuntu|windows)-(?<currentValue>[-\\w.\\d]+)"
       ],
       "datasourceTemplate": "github-runners"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "^\\.github/workflows/.+\\.yml$"
+      ],
+      "matchStrings": [
+        "Install-Module (?<depName>\\S+?) -RequiredVersion (?<currentValue>\\S+)"
+      ],
+      "datasourceTemplate": "nuget",
+      "registryUrlTemplate": "https://www.powershellgallery.com/api/v2/"
     }
   ]
 }

@@ -1,5 +1,5 @@
 <!--
-SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
+SPDX-FileCopyrightText: 2021-2026 Friedrich von Never <friedrich@fornever.me>
 
 SPDX-License-Identifier: MIT
 -->
@@ -14,6 +14,40 @@ content or the hosting infrastructure.
 ## [Unreleased]
 ### Changed
 - Minor text updates.
+
+## [5.3.0] - 2026-02-01
+### Added
+- A new post: **Configuring Programs Using FSX scripts**.
+
+### Changed
+- Update some dependencies.
+
+## [5.2.0] - 2026-01-04
+### Added
+- A new post: **AutoHotKey Debugger for IntelliJ Platform**.
+
+### Fixed
+- [#124](https://github.com/ForNeVeR/fornever.me/issues/124): Rus+Eng RSS should properly order posts.
+- Fix style of `code` elements in lists.
+
+### Changed
+- Update some dependencies to the latest versions.
+
+## [5.1.2] - 2025-09-13
+### Fixed
+- Minor typo fix in a post.
+
+## [5.1.1] - 2025-09-08
+### Fixed
+- Minor factual correction in the latest post.
+
+## [5.1.0] - 2025-09-08
+### Added
+- New post on ICFPC-2025.
+
+### Changed
+- Dependency updates.
+- Minor post proofreading.
 
 ## [5.0.0] - 2025-03-27
 ### Removed
@@ -466,4 +500,9 @@ Initial version of the site, written in Python using the Django framework.
 [4.6.2]: https://github.com/ForNeVeR/fornever.me/compare/v4.6.1...v4.6.2
 [4.6.3]: https://github.com/ForNeVeR/fornever.me/compare/v4.6.2...v4.6.3
 [5.0.0]: https://github.com/ForNeVeR/fornever.me/compare/v4.6.3...v5.0.0
-[Unreleased]: https://github.com/ForNeVeR/fornever.me/compare/v5.0.0...HEAD
+[5.1.0]: https://github.com/ForNeVeR/fornever.me/compare/v5.0.0...v5.1.0
+[5.1.1]: https://github.com/ForNeVeR/fornever.me/compare/v5.1.0...v5.1.1
+[5.1.2]: https://github.com/ForNeVeR/fornever.me/compare/v5.1.1...v5.1.2
+[5.2.0]: https://github.com/ForNeVeR/fornever.me/compare/v5.1.2...v5.2.0
+[5.3.0]: https://github.com/ForNeVeR/fornever.me/compare/v5.2.0...v5.3.0
+[Unreleased]: https://github.com/ForNeVeR/fornever.me/compare/v5.3.0...HEAD

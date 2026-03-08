@@ -52,4 +52,7 @@ type RssController(config: ConfigurationModule, posts: IPostsProvider) =
 
     [<Route("rss.xml")>]
     member this.CombinedFeed(): IActionResult =
-        ["en"; "ru"] |> Seq.collect posts.AllPosts |> this.ServeFeed
+        ["en"; "ru"]
+        |> Seq.collect posts.AllPosts
+        |> Seq.sortByDescending _.Date
+        |> this.ServeFeed

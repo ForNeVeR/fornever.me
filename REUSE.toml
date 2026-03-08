@@ -6,7 +6,7 @@ SPDX-PackageDownloadLocation = "https://github.com/ForNeVeR/fornever.me"
 [[annotations]]
 path = "ForneverMind/posts/*/*.md"
 precedence = "aggregate"
-SPDX-FileCopyrightText = "2013-2025 Friedrich von Never <friedrich@fornever.me>"
+SPDX-FileCopyrightText = "2013-2026 Friedrich von Never <friedrich@fornever.me>"
 SPDX-License-Identifier = "MIT"
 
 [[annotations]]

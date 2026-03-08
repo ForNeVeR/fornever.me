@@ -102,9 +102,20 @@ or if you don't want your name to be mentioned in the project's source: this doe
 
 <!-- REUSE-IgnoreEnd -->
 
+File Encoding Changes
+---------------------
+If the automation asks you to update the file encoding (line endings or UTF-8 BOM) in certain files, either fix the files manually, or run [the VerifyEncoding script][verify-encoding] in [PowerShell Core][powershell] with the `-Autofix` argument:
+```console
+$ pwsh -Command 'Install-Module VerifyEncoding && Test-Encoding -Autofix'
+```
+
+The `-AutoFix` switch will automatically fix the encoding issues, and you'll only need to commit and push the changes.
+
 [dotnet]: https://dotnet.microsoft.com/
 [node-js]: https://nodejs.org/
 [nvm-windows]: https://github.com/coreybutler/nvm-windows
+[powershell]: https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell
 [reuse]: https://reuse.software/
+[verify-encoding]: https://github.com/ForNeVeR/VerifyEncoding
 [volta]: https://volta.sh/
 [yarn]: https://yarnpkg.com/

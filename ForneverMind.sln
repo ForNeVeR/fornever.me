@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26403.7
@@ -51,6 +51,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{EEF302B2-6
 	EndProjectSection
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ForneverMind.TestFramework", "ForneverMind.TestFramework\ForneverMind.TestFramework.fsproj", "{CC92AD22-D198-46B2-8F33-45F6B5BF1EEE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".config", ".config", "{E0D59AC4-EC2A-47AC-B830-65D111EF90A6}"
+	ProjectSection(SolutionItems) = preProject
+		.config\dotnet-tools.json = .config\dotnet-tools.json
+		.config\dotnet-tools.json.license = .config\dotnet-tools.json.license
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForneverMind.Razor", "ForneverMind.Razor\ForneverMind.Razor.csproj", "{41A78B9F-701F-41A2-B776-185780EBE19D}"
 EndProject
