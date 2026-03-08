@@ -1,5 +1,5 @@
 <!--
-SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
+SPDX-FileCopyrightText: 2025-2026 Friedrich von Never <friedrich@fornever.me>
 
 SPDX-License-Identifier: MIT
 -->
@@ -13,7 +13,7 @@ Releasing a New Version
 1. Update the project's status in the `README.md` file, if required.
 2. Update the copyright year in the following places, if required:
     - `LICENSE.txt`,
-    - the `_Layout.cshtml` files in the `ForneverMind` project (there are two of them).
+    - the `_Layout.cshtml` files in the `ForneverMind.Razor` project (there are two of them).
 3. Choose the new version according to [Semantic Versioning][semver]. It should consist of three numbers (i.e. `1.0.0`).
 4. Update the `<Version>` element contents in the `ForneverMind/ForneverMind.fsproj` file.
 5. Update the `version` property in the `ForneverMind.Frontend/package.json` file.
