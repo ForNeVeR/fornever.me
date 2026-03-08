@@ -11,6 +11,10 @@ The format is based on [Keep a Changelog v1.1.0][keep-a-changelog]. See [the REA
 This file only documents changes in the site engine, not any changes in the
 content or the hosting infrastructure.
 
+## [Unreleased]
+### Changed
+- Minor text updates.
+
 ## [5.3.0] - 2026-02-01
 ### Added
 - A new post: **Configuring Programs Using FSX scripts**.

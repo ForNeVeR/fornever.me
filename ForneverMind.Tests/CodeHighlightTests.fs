@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
+// SPDX-FileCopyrightText: 2025-2026 Friedrich von Never <friedrich@fornever.me>
 //
 // SPDX-License-Identifier: MIT
 
@@ -24,5 +24,5 @@ let ``CodeHighlightModule should work with parallel queries``(): Task =
             Assert.Equal("<span class=\"hljs-built_in\">printf</span>();", r)
     }
 
-    let highlight = CodeHighlightModule(NullLogger.Instance)
+    let highlight = CodeHighlightModule(NullLogger<CodeHighlightModule>.Instance)
     doTest highlight

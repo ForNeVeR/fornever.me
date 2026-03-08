@@ -1,8 +1,8 @@
-// SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
+// SPDX-FileCopyrightText: 2025-2026 Friedrich von Never <friedrich@fornever.me>
 //
 // SPDX-License-Identifier: MIT
 
-namespace ForneverMind.Models
+namespace ForneverMind.Core
 
 open System
 
@@ -13,10 +13,4 @@ type PostMetadata =
         Description : string
         Date : DateTime
         CommentUrl : string
-    }
-
-type PostModel =
-    {
-        Meta : PostMetadata
-        HtmlContent : string
     }

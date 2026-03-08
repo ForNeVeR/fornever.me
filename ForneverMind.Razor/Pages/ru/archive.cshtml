@@ -1,0 +1,24 @@
+@page "/ru/archive.html"
+@using ForneverMind.Core
+@model ForneverMind.Razor.BasePageModel
+@inject IPostsProvider PostsProvider
+
+<!--
+SPDX-FileCopyrightText: 2025-2026 Friedrich von Never <friedrich@fornever.me>
+
+SPDX-License-Identifier: MIT
+-->
+
+@{
+    ViewBag.Title = "Посты";
+    Model.LinksActive = true;
+}
+
+<ul>
+    @foreach (var post in PostsProvider.AllPosts("ru"))
+    {
+        <li>
+            <a href="..@post.Url">@post.Title</a> — @post.Date.ToString("yyyy-MM-dd")
+        </li>
+    }
+</ul>

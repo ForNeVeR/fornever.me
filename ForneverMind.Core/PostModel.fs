@@ -2,11 +2,10 @@
 //
 // SPDX-License-Identifier: MIT
 
-namespace ForneverMind.Models
+namespace ForneverMind.Core
 
-open ForneverMind.Core
-
-type PostArchiveModel =
+type PostModel =
     {
-        Posts : PostMetadata[]
+        Meta : PostMetadata
+        HtmlContent : string
     }

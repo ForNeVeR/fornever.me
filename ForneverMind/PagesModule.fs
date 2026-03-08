@@ -1,11 +1,10 @@
-// SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
+﻿// SPDX-FileCopyrightText: 2025-2026 Friedrich von Never <friedrich@fornever.me>
 //
 // SPDX-License-Identifier: MIT
 
 namespace ForneverMind
 
 open System
-open System.Collections.Concurrent
 open System.Text
 
 open Freya.Core
@@ -14,6 +13,7 @@ open Freya.Optics.Http
 open Freya.Types.Http
 open Freya.Types.Uri
 
+open ForneverMind.Core
 open ForneverMind.Models
 
 type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : MarkdownModule) =
@@ -67,21 +67,6 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
             return known
         }
 
-    let notFoundHandler =
-        let language =
-            freya {
-                let! language = Common.routeLanguageOpt
-                let language =
-                    language
-                    |> Option.map (fun lang ->
-                        if Array.contains lang Common.supportedLanguages
-                        then lang
-                        else Common.defaultLanguage)
-
-                return Option.defaultValue Common.defaultLanguage language
-            }
-        handleStaticPage language "404" (Freya.init None) false
-
     let page templateName model additionalModificationDate =
         freyaMachine {
             including Common.machine
@@ -93,20 +78,6 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
                               return max templateModificationDate (Option.defaultValue DateTime.MinValue modificationDate)
                           })
             handleOk (handleStaticPage Common.routeLanguage templateName model true)
-            handleNotFound notFoundHandler
-        }
-
-    let postCache = ConcurrentDictionary()
-    let handlePost =
-        freya {
-            let! fileName = posts.PostFilePath
-            let! post =
-                match postCache.TryGetValue fileName with
-                | true, cached -> Freya.init cached
-                | false, _ -> Freya.fromAsync (markdown.Render fileName)
-            postCache.TryAdd(fileName, post) |> ignore
-            let! links = posts.CurrentPostLinks
-            return! handlePage Common.routeLanguage "Post" (Freya.init <| Some post) links
         }
 
     let indexPostCount = 20
@@ -135,40 +106,6 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
         let posts = latestPosts indexPostCount
         pageWithPosts "Index" posts
 
-    let archive = pageWithPosts "Archive" getPosts
-    let contact = page "Contact" (Freya.init None) (Freya.init None)
-    let talks = page "Talks" (Freya.init None) (Freya.init None)
-
-    let notFound =
-        let pageRequestedExplicitly =
-            freya {
-                let supportedUrls =
-                    Common.supportedLanguages
-                    |> Seq.map (sprintf "/%s/404.html")
-                let! url = Request.path_ |> Freya.Optic.get
-                return Seq.contains url supportedUrls
-            }
-        freyaMachine {
-            including Common.machine
-            methods Common.methods
-            exists pageRequestedExplicitly
-            handleNotFound notFoundHandler
-            handleOk notFoundHandler
-        }
-
-    let error = page "Error" (Freya.init None) (Freya.init None)
-
-    let post =
-        freyaMachine {
-            including Common.machine
-            methods Common.methods
-            exists posts.CheckPostExists
-            lastModified (posts.PostLastModified <| lastModificationDate "Post")
-
-            handleOk handlePost
-            handleNotFound notFoundHandler
-        }
-
     let redirectToDefaultLanguageIndex =
         freyaMachine {
             including Common.machine
@@ -182,11 +119,5 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
             })
         }
 
-    member __.Post = post
     member __.Index = index
-    member __.Archive = archive
-    member __.Contact = contact
-    member __.Error = error
-    member __.Talks = talks
-    member __.NotFound = notFound
     member __.RedirectToDefaultLanguageIndex : HttpMachine = redirectToDefaultLanguageIndex
