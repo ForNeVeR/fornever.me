@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2025-2026 Friedrich von Never <friedrich@fornever.me>
+// SPDX-FileCopyrightText: 2017-2026 Friedrich von Never <friedrich@fornever.me>
 //
 // SPDX-License-Identifier: MIT
 
@@ -14,7 +14,6 @@ open WilderMinds.RssSyndication
 open ForneverMind
 open ForneverMind.Core
 
-[<Route("")>]
 type RssController(config: ConfigurationModule, posts: IPostsProvider) =
     inherit Controller()
 
