@@ -5,7 +5,8 @@
 namespace ForneverMind.Core
 
 open System.Threading.Tasks
+open TruePath
 
 type IPostRenderer =
-    abstract Render: filePath: string -> Task<PostModel>
-    abstract PostsPath: string
+    abstract Render: filePath: AbsolutePath -> Task<PostModel>
+    abstract PostsPath: AbsolutePath

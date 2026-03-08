@@ -1,18 +1,17 @@
-// SPDX-FileCopyrightText: 2025 Friedrich von Never <friedrich@fornever.me>
+// SPDX-FileCopyrightText: 2025-2026 Friedrich von Never <friedrich@fornever.me>
 //
 // SPDX-License-Identifier: MIT
 
 namespace ForneverMind
 
-open System.IO
-
 open Microsoft.AspNetCore.Hosting
 open Microsoft.Extensions.Configuration
+open TruePath
 
 type ConfigurationModule(app: IWebHostEnvironment, config: IConfigurationRoot) =
-    let root = app.ContentRootPath
+    let root = AbsolutePath app.ContentRootPath
 
-    member __.BaseUrl = config.["baseUrl"]
-    member __.PostsPath = Path.Combine(root, "posts")
-    member __.ViewsPath = Path.Combine(root, "views")
-    member __.ServerJsPath = Path.Combine(root, "server.js")
+    member _.BaseUrl = config["baseUrl"]
+    member _.PostsPath = root / "posts"
+    member _.ViewsPath = root / "views"
+    member _.ServerJsPath = root / "server.js"

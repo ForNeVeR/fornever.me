@@ -14,12 +14,13 @@ open Markdig
 open Markdig.Syntax
 
 open ForneverMind.Core
+open TruePath
 
 type MarkdownModule(highlight : CodeHighlightModule) =
     let getMetadata block =
         match block with
         | None -> Map.empty
-        | Some (b) ->
+        | Some b ->
             let meta = MarkdownUtils.extractCode b
             meta.Split '\n'
             |> Seq.map (fun s -> s.Trim ())
@@ -71,9 +72,9 @@ type MarkdownModule(highlight : CodeHighlightModule) =
             CommentUrl = getMeta "commentUrl" ""
         }, rest
 
-    let getLanguageAndName (path : string) =
-        let language = Path.GetFileName (Path.GetDirectoryName path)
-        let name = Path.GetFileNameWithoutExtension path
+    let getLanguageAndName(path: LocalPath) =
+        let language = path.Parent.Value.FileName
+        let name = path.GetFilenameWithoutExtension()
         language, name
 
     let markdownPipeline =
@@ -81,16 +82,16 @@ type MarkdownModule(highlight : CodeHighlightModule) =
             .UsePipeTables()
             .Build()
 
-    member __.ProcessMetadata(filePath : string, reader : TextReader): PostMetadata =
+    member _.ProcessMetadata(filePath: LocalPath, reader: TextReader): PostMetadata =
         let document = Markdown.Parse(reader.ReadToEnd(), markdownPipeline)
-        let (language, name) = getLanguageAndName filePath
+        let language, name = getLanguageAndName filePath
         let metadata, _ = readMetadata language name document
         metadata
 
-    member _.ProcessReader(filePath : string, reader : TextReader) =
+    member _.ProcessReader(filePath: LocalPath, reader: TextReader): PostModel =
         use target = new StringWriter ()
         let document = Markdown.Parse(reader.ReadToEnd(), markdownPipeline)
-        let (language, name) = getLanguageAndName filePath
+        let language, name = getLanguageAndName filePath
         let metadata, remainingBlocks = readMetadata language name document
         document.Clear() // to detach the blocks from it
 
@@ -106,11 +107,11 @@ type MarkdownModule(highlight : CodeHighlightModule) =
             HtmlContent = target.ToString()
         }
 
-    member this.Render(filePath : string): Async<PostModel> =
+    member this.Render(filePath: AbsolutePath): Async<PostModel> =
         async {
-            do! Async.SwitchToThreadPool ()
+            do! Async.SwitchToThreadPool()
 
-            use stream = new FileStream(filePath, FileMode.Open)
+            use stream = new FileStream(filePath.Value, FileMode.Open)
             use reader = new StreamReader(stream, Encoding.UTF8)
             return this.ProcessReader(filePath, reader)
         }

@@ -6,6 +6,11 @@
         <Compile Include="LanguageLinks.fs" />
         <Compile Include="IPostsProvider.fs" />
         <Compile Include="IPostRenderer.fs" />
+        <Compile Include="FileSystem.fs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="TruePath" Version="1.11.0" />
     </ItemGroup>
 
 </Project>

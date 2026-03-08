@@ -24,6 +24,7 @@ SPDX-License-Identifier: MIT
   <ItemGroup>
     <Compile Include="CodeHighlightTests.fs" />
     <Compile Include="CommonTests.fs" />
+    <Compile Include="FileSystemTests.fs" />
     <Compile Include="MarkdownTests.fs" />
     <Compile Include="RouteTests.fs" />
     <Content Include="..\ForneverMind\server.js" CopyToOutputDirectory="Always" />

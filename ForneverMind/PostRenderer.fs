@@ -9,14 +9,15 @@ open System.Text
 open System.Threading.Tasks
 
 open ForneverMind.Core
+open TruePath
 
 type PostRenderer(config: ConfigurationModule, markdown: MarkdownModule) =
     interface IPostRenderer with
         member _.PostsPath = config.PostsPath
-        member _.Render(filePath: string): Task<PostModel> =
+        member _.Render(filePath: AbsolutePath): Task<PostModel> =
             task {
                 do! Task.Yield()
-                use stream = new FileStream(filePath, FileMode.Open)
+                use stream = new FileStream(filePath.Value, FileMode.Open)
                 use reader = new StreamReader(stream, Encoding.UTF8)
                 return markdown.ProcessReader(filePath, reader)
             }

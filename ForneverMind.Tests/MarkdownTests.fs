@@ -7,6 +7,7 @@ module ForneverMind.Tests.MarkdownTests
 open System
 open System.IO
 open Microsoft.Extensions.Logging.Abstractions
+open TruePath
 open Xunit
 open ForneverMind
 open ForneverMind.Core
@@ -25,7 +26,7 @@ let private compareResult fileName (input: string) expected =
 
     Assert.Equal (normalizeHtmlContent expected, normalizeHtmlContent actual)
 
-let private defaultFileName = "/ru/posts/0001-01-01.html"
+let private defaultFileName = LocalPath "/ru/posts/0001-01-01.html"
 
 let private compareResultHtml input output =
     use reader = new StringReader (normalizeLineEndings input)
@@ -41,7 +42,7 @@ let ``Empty document should be parsed`` () =
 
 [<Fact>]
 let ``Simple metadata should be parsed`` () =
-    compareResult "ru/2015-01-01"
+    compareResult (LocalPath "ru/2015-01-01")
             "
     title: Фильтры исключений в CLR
     description: Описание механизма фильтров исключений, доступного для некоторых языков CLR.
@@ -62,7 +63,7 @@ content
 
 [<Fact>]
 let ``Legacy comment id should be parsed`` () =
-    compareResult "ru/0001-01-01_File_Name"
+    compareResult (LocalPath "ru/0001-01-01_File_Name")
         "
 ---
 "
@@ -102,7 +103,7 @@ let x = x
 
 [<Fact>]
 let ``Identifier is extracted from the metadata`` () =
-    compareResult "/something/en/2017-01-01.html"
+    compareResult (LocalPath "/something/en/2017-01-01.html")
             "
     title: Фильтры исключений в CLR
     description: Описание механизма фильтров исключений, доступного для некоторых языков CLR.
