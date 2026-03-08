@@ -1,0 +1,32 @@
+@page "/en/posts/{name}"
+@model ForneverMind.Razor.PostPageModel
+
+<!--
+SPDX-FileCopyrightText: 2025-2026 Friedrich von Never <friedrich@fornever.me>
+
+SPDX-License-Identifier: MIT
+-->
+
+@{
+    ViewBag.Title = Model.Post.Meta.Title;
+}
+
+<div class="info">
+    Publication date: @Model.Post.Meta.Date.ToString("yyyy-MM-dd")
+</div>
+
+@Html.Raw(Model.Post.HtmlContent)
+
+<div id="disqus_thread"></div>
+
+@section scripts {
+    @if (!string.IsNullOrEmpty(Model.Post.Meta.CommentUrl))
+    {
+        <script>
+            var disqus_config = function() {
+                this.page.url = '@Model.Post.Meta.CommentUrl';
+            }
+        </script>
+    }
+    <script src="//fornever.disqus.com/embed.js"></script>
+}

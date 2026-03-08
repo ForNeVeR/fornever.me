@@ -7,10 +7,16 @@ public class BasePageModel : PageModel
 {
     public bool LinksActive { get; set; }
 
-    public LanguageLinks Links => new(
-        english: new LanguageLink(isActive: LinksActive, link: ProduceLink(PageContext, "en")),
-        russian: new LanguageLink(isActive: LinksActive, link: ProduceLink(PageContext, "ru"))
-    );
+    private LanguageLinks? _links;
+
+    public LanguageLinks Links
+    {
+        get => _links ?? new LanguageLinks(
+            english: new LanguageLink(isActive: LinksActive, link: ProduceLink(PageContext, "en")),
+            russian: new LanguageLink(isActive: LinksActive, link: ProduceLink(PageContext, "ru"))
+        );
+        set => _links = value;
+    }
 
     private static string ProduceLink(PageContext context, string newLanguage)
     {

@@ -14,7 +14,6 @@ open Markdig
 open Markdig.Syntax
 
 open ForneverMind.Core
-open ForneverMind.Models
 
 type MarkdownModule(highlight : CodeHighlightModule) =
     let getMetadata block =

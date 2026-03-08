@@ -5,7 +5,6 @@
 namespace ForneverMind
 
 open System
-open System.Collections.Concurrent
 open System.Text
 
 open Freya.Core
@@ -81,19 +80,6 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
             handleOk (handleStaticPage Common.routeLanguage templateName model true)
         }
 
-    let postCache = ConcurrentDictionary()
-    let handlePost =
-        freya {
-            let! fileName = posts.PostFilePath
-            let! post =
-                match postCache.TryGetValue fileName with
-                | true, cached -> Freya.init cached
-                | false, _ -> Freya.fromAsync (markdown.Render fileName)
-            postCache.TryAdd(fileName, post) |> ignore
-            let! links = posts.CurrentPostLinks
-            return! handlePage Common.routeLanguage "Post" (Freya.init <| Some post) links
-        }
-
     let indexPostCount = 20
 
     let postsModificationDate posts =
@@ -120,16 +106,6 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
         let posts = latestPosts indexPostCount
         pageWithPosts "Index" posts
 
-    let post =
-        freyaMachine {
-            including Common.machine
-            methods Common.methods
-            exists posts.CheckPostExists
-            lastModified (posts.PostLastModified <| lastModificationDate "Post")
-
-            handleOk handlePost
-        }
-
     let redirectToDefaultLanguageIndex =
         freyaMachine {
             including Common.machine
@@ -143,6 +119,5 @@ type PagesModule(posts : PostsModule, templates : TemplatingModule, markdown : M
             })
         }
 
-    member __.Post = post
     member __.Index = index
     member __.RedirectToDefaultLanguageIndex : HttpMachine = redirectToDefaultLanguageIndex

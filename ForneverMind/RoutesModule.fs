@@ -9,7 +9,6 @@ open Freya.Routers.Uri.Template
 type RoutesModule(pages: PagesModule) =
     let router =
         freyaRouter {
-            resource "/{language}/posts/{name}" pages.Post
             resource "/{language}/" pages.Index // TODO: Migrate this
         }
 

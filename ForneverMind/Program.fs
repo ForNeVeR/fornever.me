@@ -13,9 +13,11 @@ open Microsoft.AspNetCore.Builder
 open Microsoft.AspNetCore.Diagnostics
 open Microsoft.AspNetCore.Hosting
 open Microsoft.AspNetCore.Http
+open System.Text.Unicode
 open Microsoft.Extensions.Configuration
 open Microsoft.Extensions.DependencyInjection
 open Microsoft.Extensions.Logging
+open Microsoft.Extensions.WebEncoders
 
 open ForneverMind.Core
 
@@ -52,7 +54,13 @@ let private configure (configuration: IConfigurationRoot) (builder: WebApplicati
         .AddSingleton<MarkdownModule>()
         .AddSingleton<PostsModule>()
         .AddSingleton<IPostsProvider, PostsModule>()
+        .AddSingleton<IPostRenderer, PostRenderer>()
     |> ignore
+
+    // Avoid mangling Cyrillic characters in raw HTML:
+    builder.Services.Configure<WebEncoderOptions>(fun (opts: WebEncoderOptions) ->
+        opts.TextEncoderSettings <- Text.Encodings.Web.TextEncoderSettings(UnicodeRanges.All)
+    ) |> ignore
 
     builder.Services.AddRazorPages() |> ignore
     builder.Services.AddMvc() |> ignore

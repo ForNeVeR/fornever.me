@@ -2,9 +2,7 @@
 //
 // SPDX-License-Identifier: MIT
 
-namespace ForneverMind.Models
-
-open ForneverMind.Core
+namespace ForneverMind.Core
 
 type PostModel =
     {

@@ -66,6 +66,28 @@ let ``Talks page should be resolved``(): Task = withWebApp(fun client -> task {
 })
 
 [<Fact>]
+let ``Post page should be resolved``(): Task = withWebApp(fun client -> task {
+    let doTest (url: string) title = task {
+        let! result = client.GetAsync url
+        let! content = result.Content.ReadAsStringAsync()
+
+        Assert.Equal(HttpStatusCode.OK, result.StatusCode)
+        Assert.Equal("text/html", result.Content.Headers.ContentType.MediaType)
+        Assert.Contains(title, content)
+    }
+
+    // This post exists in both languages
+    do! doTest "/en/posts/2017-11-07-multilingual-support.html" "Multilingual support"
+    do! doTest "/ru/posts/2017-11-07-multilingual-support.html" "Поддержка нескольких языков"
+})
+
+[<Fact>]
+let ``Non-existent post should return 404``(): Task = withWebApp(fun client -> task {
+    let! result = client.GetAsync "/en/posts/9999-01-01-does-not-exist.html"
+    Assert.Equal(HttpStatusCode.NotFound, result.StatusCode)
+})
+
+[<Fact>]
 let ``RSS feeds should return valid XML with items``(): Task = withWebApp(fun client -> task {
     let doTest (url: string) = task {
         let! result = client.GetAsync url

@@ -9,7 +9,7 @@ open System.IO
 open Microsoft.Extensions.Logging.Abstractions
 open Xunit
 open ForneverMind
-open ForneverMind.Models
+open ForneverMind.Core
 
 let private markdown() =
     let highlight = CodeHighlightModule(NullLogger<CodeHighlightModule>.Instance)
