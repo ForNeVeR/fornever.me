@@ -11,11 +11,12 @@ The format is based on [Keep a Changelog v1.1.0][keep-a-changelog]. See [the REA
 This file only documents changes in the site engine, not any changes in the
 hosting infrastructure.
 
-## [Unreleased]
+## [5.4.0] - 2026-03-09
 ### Changed
 - Minor text updates.
-- Huge internal changes: migrate from Freya to default ASP.NET Core + Razor Pages.
+- [#115](https://github.com/ForNeVeR/fornever.me/issues/115): huge internal changes: migrate from Freya to default ASP.NET Core + Razor Pages.
 - Migrate to .NET 10.
+- Update the dependencies.
 
 ## [5.3.0] - 2026-02-01
 ### Added
@@ -507,4 +508,5 @@ Initial version of the site, written in Python using the Django framework.
 [5.1.2]: https://github.com/ForNeVeR/fornever.me/compare/v5.1.1...v5.1.2
 [5.2.0]: https://github.com/ForNeVeR/fornever.me/compare/v5.1.2...v5.2.0
 [5.3.0]: https://github.com/ForNeVeR/fornever.me/compare/v5.2.0...v5.3.0
-[Unreleased]: https://github.com/ForNeVeR/fornever.me/compare/v5.3.0...HEAD
+[5.3.0]: https://github.com/ForNeVeR/fornever.me/compare/v5.3.0...v5.4.0
+[Unreleased]: https://github.com/ForNeVeR/fornever.me/compare/v5.4.0...HEAD
