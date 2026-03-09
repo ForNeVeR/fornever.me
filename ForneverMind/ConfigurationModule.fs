@@ -11,7 +11,7 @@ open TruePath
 type ConfigurationModule(app: IWebHostEnvironment, config: IConfigurationRoot) =
     let root = AbsolutePath app.ContentRootPath
 
-    member _.BaseUrl = config["baseUrl"]
+    member _.BaseUrl = config["baseUrl"] |> Option.ofObj |> Option.defaultWith(fun () -> failwith "baseUrl is not configured")
     member _.PostsPath = root / "posts"
     member _.ViewsPath = root / "views"
     member _.ServerJsPath = root / "server.js"
