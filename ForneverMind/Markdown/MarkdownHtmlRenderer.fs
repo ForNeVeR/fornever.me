@@ -16,7 +16,7 @@ type HighlightJsCodeBlockRenderer(server: Server, highlight: CodeHighlightModule
     inherit HtmlObjectRenderer<CodeBlock>()
 
     let getCodeLanguage: CodeBlock -> string option = function
-    | :? FencedCodeBlock as block -> Some block.Info
+    | :? FencedCodeBlock as block -> Option.ofObj block.Info
     | _ -> None
 
     override this.Write(renderer: HtmlRenderer, obj: CodeBlock): unit =

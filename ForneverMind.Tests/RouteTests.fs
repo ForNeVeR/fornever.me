@@ -16,8 +16,8 @@ open ForneverMind.TestFramework.IntegrationTestUtil
 [<Fact>]
 let ``Index page should resolve correctly``(): Task = withWebApp(fun client -> task {
     let! result = client.GetAsync "/"
-    Assert.Equal("/en/", result.RequestMessage.RequestUri.PathAndQuery)
-    Assert.Equal("text/html", result.Content.Headers.ContentType.MediaType)
+    Assert.Equal("/en/", (nonNull (nonNull result.RequestMessage).RequestUri).PathAndQuery)
+    Assert.Equal("text/html", (nonNull result.Content.Headers.ContentType).MediaType)
 })
 
 [<Fact>]
@@ -27,7 +27,7 @@ let ``Index page should have correct titles``(): Task = withWebApp(fun client ->
         let! content = result.Content.ReadAsStringAsync()
 
         Assert.Equal(HttpStatusCode.OK, result.StatusCode)
-        Assert.Equal("text/html", result.Content.Headers.ContentType.MediaType)
+        Assert.Equal("text/html", (nonNull result.Content.Headers.ContentType).MediaType)
         Assert.Contains("int 20h", content)
         Assert.True(result.Content.Headers.LastModified.HasValue)
     }
@@ -43,7 +43,7 @@ let ``Archive page should be resolved``(): Task = withWebApp(fun client -> task 
         let! content = result.Content.ReadAsStringAsync()
 
         Assert.Equal(HttpStatusCode.OK, result.StatusCode)
-        Assert.Equal("text/html", result.Content.Headers.ContentType.MediaType)
+        Assert.Equal("text/html", (nonNull result.Content.Headers.ContentType).MediaType)
         Assert.Contains(title, content)
     }
 
@@ -58,7 +58,7 @@ let ``Contact page should be resolved``(): Task = withWebApp(fun client -> task 
         let! content = result.Content.ReadAsStringAsync()
 
         Assert.Equal(HttpStatusCode.OK, result.StatusCode)
-        Assert.Equal("text/html", result.Content.Headers.ContentType.MediaType)
+        Assert.Equal("text/html", (nonNull result.Content.Headers.ContentType).MediaType)
         Assert.Contains(title, content)
     }
 
@@ -73,7 +73,7 @@ let ``Talks page should be resolved``(): Task = withWebApp(fun client -> task {
         let! content = result.Content.ReadAsStringAsync()
 
         Assert.Equal(HttpStatusCode.OK, result.StatusCode)
-        Assert.Equal("text/html", result.Content.Headers.ContentType.MediaType)
+        Assert.Equal("text/html", (nonNull result.Content.Headers.ContentType).MediaType)
         Assert.Contains(title, content)
     }
 
@@ -88,7 +88,7 @@ let ``Post page should be resolved``(): Task = withWebApp(fun client -> task {
         let! content = result.Content.ReadAsStringAsync()
 
         Assert.Equal(HttpStatusCode.OK, result.StatusCode)
-        Assert.Equal("text/html", result.Content.Headers.ContentType.MediaType)
+        Assert.Equal("text/html", (nonNull result.Content.Headers.ContentType).MediaType)
         Assert.Contains(title, content)
     }
 
@@ -110,7 +110,7 @@ let ``RSS feeds should return valid XML with items``(): Task = withWebApp(fun cl
         let! content = result.Content.ReadAsStringAsync()
 
         Assert.Equal(HttpStatusCode.OK, result.StatusCode)
-        Assert.Equal("application/rss+xml", result.Content.Headers.ContentType.MediaType)
+        Assert.Equal("application/rss+xml", (nonNull result.Content.Headers.ContentType).MediaType)
 
         Assert.True(result.Content.Headers.LastModified.HasValue)
 
@@ -131,7 +131,7 @@ let ``404 page should be resolved``(): Task = withWebApp(fun client -> task {
         let! content = result.Content.ReadAsStringAsync()
 
         Assert.Equal(HttpStatusCode.NotFound, result.StatusCode)
-        Assert.Equal("text/html", result.Content.Headers.ContentType.MediaType)
+        Assert.Equal("text/html", (nonNull result.Content.Headers.ContentType).MediaType)
         Assert.Contains(message, content)
     }
 
