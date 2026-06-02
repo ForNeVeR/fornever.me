@@ -11,6 +11,13 @@ The format is based on [Keep a Changelog v1.1.0][keep-a-changelog]. See [the REA
 This file only documents changes in the site engine, not any changes in the
 hosting infrastructure.
 
+## [5.5.0] - 2026-06-03
+### Added
+- A new post: **Symlink issues in ReFS on Windows**.
+
+### Changed
+- Update the dependencies.
+
 ## [5.4.0] - 2026-03-09
 ### Changed
 - Minor text updates.
@@ -508,5 +515,6 @@ Initial version of the site, written in Python using the Django framework.
 [5.1.2]: https://github.com/ForNeVeR/fornever.me/compare/v5.1.1...v5.1.2
 [5.2.0]: https://github.com/ForNeVeR/fornever.me/compare/v5.1.2...v5.2.0
 [5.3.0]: https://github.com/ForNeVeR/fornever.me/compare/v5.2.0...v5.3.0
-[5.3.0]: https://github.com/ForNeVeR/fornever.me/compare/v5.3.0...v5.4.0
-[Unreleased]: https://github.com/ForNeVeR/fornever.me/compare/v5.4.0...HEAD
+[5.4.0]: https://github.com/ForNeVeR/fornever.me/compare/v5.3.0...v5.4.0
+[5.5.0]: https://github.com/ForNeVeR/fornever.me/compare/v5.4.0...v5.5.0
+[Unreleased]: https://github.com/ForNeVeR/fornever.me/compare/v5.5.0...HEAD
