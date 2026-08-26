@@ -20,7 +20,7 @@ jobs:
     strategy:
       matrix:
         image:
-          - macos-15
+          - macos-26
           - ubuntu-24.04
           - windows-2025
       fail-fast: false
