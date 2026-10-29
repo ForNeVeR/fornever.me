@@ -11,6 +11,17 @@ The format is based on [Keep a Changelog v1.1.0][keep-a-changelog]. See [the REA
 This file only documents changes in the site engine, not any changes in the
 hosting infrastructure.
 
+## [5.7.0] - 2026-10-30
+### Added
+- A new post: **File Paths and Their Combinations**.
+
+### Changed
+- Update the dependencies.
+- Minor updates to an older post.
+
+### Fixed
+- The link to UNESCO documentation (ISCED 2011).
+
 ## [5.6.0] - 2026-07-27
 ### Added
 - A new post: **ICFP Contest 2026**.
@@ -522,4 +533,5 @@ Initial version of the site, written in Python using the Django framework.
 [5.4.0]: https://github.com/ForNeVeR/fornever.me/compare/v5.3.0...v5.4.0
 [5.5.0]: https://github.com/ForNeVeR/fornever.me/compare/v5.4.0...v5.5.0
 [5.6.0]: https://github.com/ForNeVeR/fornever.me/compare/v5.5.0...v5.6.0
-[Unreleased]: https://github.com/ForNeVeR/fornever.me/compare/v5.6.0...HEAD
+[5.7.0]: https://github.com/ForNeVeR/fornever.me/compare/v5.6.0...v5.7.0
+[Unreleased]: https://github.com/ForNeVeR/fornever.me/compare/v5.7.0...HEAD
