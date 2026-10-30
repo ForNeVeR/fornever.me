@@ -11,6 +11,10 @@ The format is based on [Keep a Changelog v1.1.0][keep-a-changelog]. See [the REA
 This file only documents changes in the site engine, not any changes in the
 hosting infrastructure.
 
+## [5.7.2] - 2026-10-30
+### Fixed
+- Re-introduce the post cache.
+
 ## [5.7.1] - 2026-10-30
 ### Fixed
 - Corrected the Docker image (.NET 10) used for the site.
@@ -539,4 +543,5 @@ Initial version of the site, written in Python using the Django framework.
 [5.6.0]: https://github.com/ForNeVeR/fornever.me/compare/v5.5.0...v5.6.0
 [5.7.0]: https://github.com/ForNeVeR/fornever.me/compare/v5.6.0...v5.7.0
 [5.7.1]: https://github.com/ForNeVeR/fornever.me/compare/v5.7.0...v5.7.1
-[Unreleased]: https://github.com/ForNeVeR/fornever.me/compare/v5.7.1...HEAD
+[5.7.2]: https://github.com/ForNeVeR/fornever.me/compare/v5.7.1...v5.7.2
+[Unreleased]: https://github.com/ForNeVeR/fornever.me/compare/v5.7.3...HEAD
